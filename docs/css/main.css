@@ -13456,7 +13456,8 @@ textarea.form-control-lg {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #00695C;
+  /* Color de la barra de navegacion headler */
+  background-color: #eae0c8;
   z-index: 1030;
   padding-right: 15px;
 }
@@ -13475,7 +13476,7 @@ textarea.form-control-lg {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto;
-  color: #fff;
+  color: #000000;
   text-align: center;
   font-family: "Niconne";
   padding: 0 15px;
@@ -13491,7 +13492,8 @@ textarea.form-control-lg {
             flex: 0 0 auto;
     display: block;
     width: 230px;
-    background-color: #005046;
+    /* color de fondo del color */
+    background-color: #d1c694;
   }
 }
 .app-header__logo:focus, .app-header__logo:hover {
@@ -13502,7 +13504,8 @@ textarea.form-control-lg {
 .app-sidebar__toggle {
   padding: 0 15px;
   font-family: bootstrap-icons !important;
-  color: #fff;
+  /* color del icono del menu interactivo */
+  color: #000000;
   line-height: 2.4;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
@@ -13521,11 +13524,14 @@ textarea.form-control-lg {
 }
 .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
   color: #fff;
-  background-color: #00362f;
+  /* color de animacion del menu interactivo */
+  background-color: #d1c694;
   text-decoration: none;
 }
 
 .app-nav {
+  /* Color de la barra de navegacion */
+  background-color: #eae0c8; 
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13670,6 +13676,7 @@ textarea.form-control-lg {
 }
 
 .app-sidebar {
+  
   position: fixed;
   top: 0;
   bottom: 0;
@@ -13689,6 +13696,7 @@ textarea.form-control-lg {
 }
 .app-sidebar::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
+  
 }
 @media print {
   .app-sidebar {
@@ -14880,4 +14888,74 @@ textarea.form-control-lg {
 }
 .user .user-settings label {
   color: #666;
+}
+
+/* Aqui inicia la personalizacion de los componentes */
+
+
+.titulo-de-pagina {
+  color: #fb0505; /* Cambia el color del texto */
+  font-family: 'Arial', sans-serif; /* Cambia el estilo de la fuente */
+  font-size: 2rem; /* Ajusta el tamaño de la fuente */
+  font-weight: bold; /* Hace que el texto sea más grueso */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
+}
+
+.col-md-6-agregar-usuario {
+  display: flex; /* Convierte el contenedor en un flexbox */
+  flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente dentro del contenedor */
+  justify-content: center; /* Centra los elementos verticalmente dentro del contenedor (si su contenedor padre tiene altura definida) */
+  width: 85%;
+  margin: auto; /* Centra el formulario horizontalmente */
+}
+
+.titulo-formulario-usuario{
+  color: #fb0505; /* Cambia el color del texto */
+  font-family: sans-serif; /* Cambia el estilo de la fuente */
+  font-size: 1rem; /* Ajusta el tamaño de la fuente */
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.form-label-usuario{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.container-formulario-usuario {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  margin: auto;
+  border-radius: 30px;
+}
+
+.img-fluid {
+  height: auto;
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
+}
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: 12px;
+  background-color: #fff ;
+}
+
+.titulo-foto-perfil{
+  color: #fb0505; /* Cambia el color del texto */
+  font-family: 'Arial', sans-serif; /* Cambia el estilo de la fuente */
+  font-size: 2rem; /* Ajusta el tamaño de la fuente */
+  font-weight: bold; /* Hace que el texto sea más grueso */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
+  text-align: center;
+  
 }
