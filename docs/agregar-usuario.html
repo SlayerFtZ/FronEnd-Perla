@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- Font-icon css -->
+    <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -144,12 +144,10 @@
                         class="bi bi-house-check-fill"></i><span class="app-menu__label">. Locales</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="consultar-local.html"><i class="bi bi-search"></i>. Buscar
-                            local</a></li>
-                    <li><a class="treeview-item" href="agregar-ingresos-local.html" target="_blank" rel="noopener"><i
-                                class="bi bi-cash-coin"></i>. Agregar ingreso</a></li>
-                    <li><a class="treeview-item" href="consultar-ingreso-local.html"><i class="bi bi-search"></i>.
-                            Buscar ingreso</a></li>
+                    <li><a class="treeview-item" href="agregar-local.html"><i class="bi bi-building-add"></i>. Agregar local</a></li>
+                    <li><a class="treeview-item" href="consultar-local.html"><i class="bi bi-search"></i>. Buscar local</a></li>
+                    <li><a class="treeview-item" href="agregar-ingresos-local.html" target="_blank" rel="noopener"><i class="bi bi-cash-coin"></i>. Agregar ingreso</a></li>
+                    <li><a class="treeview-item" href="consultar-ingreso-local.html"><i class="bi bi-search"></i>. Buscar ingreso</a></li>
                 </ul>
             </li>
 
@@ -194,32 +192,37 @@
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
-                <ul class="treeview-menu">
 
+                <ul class="treeview-menu">
                 </ul>
+
             </li>
 
+            <ul class="treeview-menu">
 
+            </ul>
+            </li>
         </ul>
     </aside>
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-person-plus fs-1"></i> Agregar Usuario </h1>
-                <label class="titulo-formulario-usuario">Complete la informacion para agregar un usuario</label>
+                <h1 class="titulo-de-pagina"><i class="bi bi-person-add"></i>. Agregar Usuario</h1>
+                <p>"INGRESA LOS DATOS DEL USUARIO"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-                <li class="breadcrumb-item"><a href="dashboard-inicio.html">Regresar</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             </ul>
         </div>
+
         <!-- Aqui inicia el formulario para usuarios -->
         <form class="form-layout">
             <div class="container mt-5">
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-3">
-                            
+                            <h1 class="titulo-formulario-usuario">Datos de Usuario</h1>
                             <div class="image-container">
                                 <img id="imagePreview" src="images/perfilUsuario.jpg" class="img-fluid rounded-start" alt="Imagen por defecto">
                             </div>
@@ -229,31 +232,31 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="nombre" class="form-label-usuario">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" placeholder="Ingresa su nombre">
+                                        <input type="text" class="form-control" id="nombre" placeholder="Ingresa su nombre" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="apellidoPaterno" class="form-label-usuario">Apellido paterno</label>
-                                        <input type="text" class="form-control" id="apellidoPaterno" placeholder="Ingresa su apellido paterno">
+                                        <input type="text" class="form-control" id="apellidoPaterno" placeholder="Ingresa su apellido paterno" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="apellidoMaterno" class="form-label-usuario">Apellido materno</label>
-                                        <input type="text" class="form-control" id="apellidoMaterno" placeholder="Ingresa su apellido materno">
+                                        <input type="text" class="form-control" id="apellidoMaterno" placeholder="Ingresa su apellido materno" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="correo" class="form-label-usuario">Correo</label>
-                                        <input type="email" class="form-control" id="correo" placeholder="Ingresa su correo electrónico">
+                                        <input type="email" class="form-control" id="correo" placeholder="Ingresa su correo electrónico" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="curp" class="form-label-usuario">Curp</label>
-                                        <input type="text" class="form-control" id="curp" placeholder="Ingresa su curp">
+                                        <input type="text" class="form-control" id="curp" placeholder="Ingresa su curp" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="rfc" class="form-label-usuario">RFC</label>
-                                        <input type="text" class="form-control" id="rfc" placeholder="Ingresa su rfc">
+                                        <input type="text" class="form-control" id="rfc" placeholder="Ingresa su rfc" required>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="fechaNacimiento" class="form-label-usuario">Fecha de nacimiento</label>
-                                        <input type="date" class="form-control" id="fechaNacimiento">
+                                        <label for="fechaNacimiento" class="form-label-usuario">Fecha de nacimiento</label >
+                                        <input type="date" class="form-control" id="fechaNacimiento" required>
                                     </div>
                                 </div>
                             </div>
@@ -263,16 +266,16 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="numeroTelefonico" class="form-label-usuario">Número telefónico</label>
-                                        <input type="tel" class="form-control" id="numeroTelefonico" placeholder="Ingresa su número telefónico">
+                                        <input type="tel" class="form-control" id="numeroTelefonico" placeholder="Ingresa su número telefónico" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="direccion" class="form-label-usuario">Dirección</label>
-                                        <input type="text" class="form-control" id="direccion" placeholder="Ingresa la dirección de su domicilio">
+                                        <input type="text" class="form-control" id="direccion" placeholder="Ingresa la dirección de su domicilio" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label class="form-label-usuario">Género</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genero" id="generoMasculino" value="masculino">
+                                            <input class="form-check-input" type="radio" name="genero" id="generoMasculino" value="masculino" >
                                             <label class="form-check-label" for="generoMasculino">Masculino</label>
                                         </div>
                                         <div class="form-check">
@@ -312,7 +315,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="profilePhoto" class="form-label-usuario">Foto de perfil</label>
-                                        <input class="form-control" type="file" id="profilePhoto" onchange="displayImage(event)">
+                                        <input class="form-control" type="file" id="profilePhoto" onchange="displayImage(event)" required>
                                     </div>
                                 </div>
                                 <br>
@@ -329,135 +332,168 @@
             </div>
         </form>
         
+    </main>
+    
+    <script>
+        function displayImage(event) {
+            const imagePreview = document.getElementById("imagePreview");
+            const file = event.target.files[0];
+            const reader = new FileReader();
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                function displayImage(event) {
-                    const imagePreview = document.getElementById("imagePreview");
-                    const file = event.target.files[0];
-                    const reader = new FileReader();
+            reader.onload = function () {
+                imagePreview.src = reader.result;
+                imagePreview.style.display = "block";
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            function showError(input, message) {
+                let errorSpan = input.nextElementSibling;
+                if (!errorSpan || !errorSpan.classList.contains("error-message")) {
+                    errorSpan = document.createElement("span");
+                    errorSpan.classList.add("error-message");
+                    errorSpan.style.color = "red";
+                    input.parentNode.appendChild(errorSpan);
+                }
+                errorSpan.innerText = message;
+            }
+        
+            function clearError(input) {
+                let errorSpan = input.nextElementSibling;
+                if (errorSpan && errorSpan.classList.contains("error-message")) {
+                    errorSpan.remove();
+                }
+            }
+        
+            function validateRadio(name, errorMessage) {
+                const radios = document.getElementsByName(name);
+                let checked = Array.from(radios).some(radio => radio.checked);
+                const container = radios[0].closest('.form-group'); // Contenedor de los radios (ajustar según la estructura HTML)
             
-                    reader.onload = function () {
-                        imagePreview.src = reader.result;
-                        imagePreview.style.display = "block";
-                    };
-            
-                    if (file) {
-                        reader.readAsDataURL(file);
-                    }
+                // Limpiar cualquier mensaje de error previo
+                let errorSpan = container.querySelector(".error-message");
+                if (errorSpan) {
+                    errorSpan.remove();
                 }
             
-                function showError(input, message) {
-                    let errorSpan = input.nextElementSibling;
-                    if (!errorSpan || !errorSpan.classList.contains("error-message")) {
-                        errorSpan = document.createElement("span");
-                        errorSpan.classList.add("error-message");
-                        errorSpan.style.color = "red";
-                        input.parentNode.appendChild(errorSpan);
-                    }
-                    errorSpan.innerText = message;
+                // Si no está marcado, mostrar el mensaje de error
+                if (!checked) {
+                    errorSpan = document.createElement("span");
+                    errorSpan.classList.add("error-message");
+                    errorSpan.style.color = "red";
+                    errorSpan.innerText = errorMessage;
+                    container.appendChild(errorSpan);
+                    return false;
                 }
-            
-                function clearError(input) {
-                    let errorSpan = input.nextElementSibling;
-                    if (errorSpan && errorSpan.classList.contains("error-message")) {
-                        errorSpan.remove();
-                    }
-                }
-            
-                function validateRadio(name, errorMessage) {
-                    const radios = document.getElementsByName(name);
-                    let checked = Array.from(radios).some(radio => radio.checked);
-                    if (!checked) {
-                        alert(errorMessage);
-                        return false;
-                    }
-                    return true;
-                }
-            
-                const form = document.querySelector(".form-layout");
-                form.addEventListener("submit", function (event) {
-                    event.preventDefault();
-                    let valid = true;
-            
-                    // Expresiones regulares
-                    const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
-                    const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                    const regexCurp = /^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9]{2}$/;
-                    const regexRfc = /^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$/;
-                    const regexTelefono = /^[0-9]{10}$/;
-            
-                    // Elementos del formulario
-                    const fields = [
-                        { id: "nombre", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
-                        { id: "apellidoPaterno", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
-                        { id: "apellidoMaterno", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
-                        { id: "correo", regex: regexCorreo, error: "Correo inválido", minLength: 5, maxLength: 100 },
-                        { id: "curp", regex: regexCurp, error: "CURP inválido", minLength: 18, maxLength: 18 },
-                        { id: "rfc", regex: regexRfc, error: "RFC inválido", minLength: 12, maxLength: 13 },
-                        { id: "numeroTelefonico", regex: regexTelefono, error: "Debe contener 10 dígitos numéricos", minLength: 10, maxLength: 10 }
-                    ];
-            
-                    fields.forEach(field => {
-                        const input = document.getElementById(field.id);
-                        const inputLength = input.value.trim().length;
-                        if (!field.regex.test(input.value.trim()) || inputLength < field.minLength || inputLength > field.maxLength) {
-                            showError(input, field.error + ` (Debe tener entre ${field.minLength} y ${field.maxLength} caracteres)`);
-                            valid = false;
-                        } else {
-                            clearError(input);
-                        }
-                    });
-            
-                    // Validar Fecha de Nacimiento
-                    const fechaNacimiento = document.getElementById("fechaNacimiento");
-                    const fechaIngresada = new Date(fechaNacimiento.value);
-                    if (fechaIngresada >= new Date()) {
-                        showError(fechaNacimiento, "Fecha inválida, debe ser en el pasado");
+                return true;
+            }
+        
+            const form = document.querySelector(".form-layout");
+            const defaultImage = document.getElementById("imagePreview").src; // Guardamos la imagen por defecto
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                let valid = true;
+        
+                // Expresiones regulares
+                const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
+                const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                const regexCurp = /^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9]{2}$/;
+                const regexRfc = /^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$/;
+                const regexTelefono = /^[0-9]{10}$/;
+        
+                // Elementos del formulario
+                const fields = [
+                    { id: "nombre", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
+                    { id: "apellidoPaterno", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
+                    { id: "apellidoMaterno", regex: regexNombre, error: "Solo se permiten letras y espacios", minLength: 3, maxLength: 100 },
+                    { id: "correo", regex: regexCorreo, error: "Correo inválido", minLength: 5, maxLength: 100 },
+                    { id: "curp", regex: regexCurp, error: "CURP inválido", minLength: 18, maxLength: 18 },
+                    { id: "rfc", regex: regexRfc, error: "RFC inválido", minLength: 12, maxLength: 13 },
+                    { id: "numeroTelefonico", regex: regexTelefono, error: "Debe contener 10 dígitos numéricos", minLength: 10, maxLength: 10 }
+                ];
+        
+                fields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const inputLength = input.value.trim().length;
+                    if (!field.regex.test(input.value.trim()) || inputLength < field.minLength || inputLength > field.maxLength) {
+                        showError(input, field.error + ` (Debe tener entre ${field.minLength} y ${field.maxLength} caracteres)`);
                         valid = false;
                     } else {
-                        clearError(fechaNacimiento);
-                    }
-            
-                    // Validar Dirección
-                    const direccion = document.getElementById("direccion");
-                    if (direccion.value.trim() === "") {
-                        showError(direccion, "La dirección no puede estar vacía");
-                        valid = false;
-                    } else {
-                        clearError(direccion);
-                    }
-            
-                    // Validar Género, Rol y Estado Civil
-                    valid &= validateRadio("genero", "Debe seleccionar un género");
-                    valid &= validateRadio("rol", "Debe seleccionar un rol");
-                    valid &= validateRadio("estado", "Debe seleccionar un estado civil");
-            
-                    // Validar Foto de Perfil
-                    const foto = document.getElementById("profilePhoto");
-                    if (foto.files.length > 0) {
-                        const file = foto.files[0];
-                        const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-                        if (!allowedTypes.includes(file.type)) {
-                            showError(foto, "Formato inválido, solo JPG o PNG");
-                            valid = false;
-                        } else {
-                            clearError(foto);
-                        }
-                    }
-            
-                    if (valid) {
-                        alert("Formulario enviado con éxito");
-                        form.submit();
+                        clearError(input);
                     }
                 });
-            
-                document.getElementById("profilePhoto").addEventListener("change", displayImage);
-            });
-        </script>
         
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        </body>
+                // Validar Fecha de Nacimiento
+                const fechaNacimiento = document.getElementById("fechaNacimiento");
+                const fechaIngresada = new Date(fechaNacimiento.value);
+                if (fechaIngresada >= new Date()) {
+                    showError(fechaNacimiento, "Fecha inválida, debe ser en el pasado");
+                    valid = false;
+                } else {
+                    clearError(fechaNacimiento);
+                }
+        
+                // Validar Dirección
+                const direccion = document.getElementById("direccion");
+                if (direccion.value.trim() === "") {
+                    showError(direccion, "La dirección no puede estar vacía");
+                    valid = false;
+                } else {
+                    clearError(direccion);
+                }
+        
+                // Validar Género, Rol y Estado Civil
+                valid &= validateRadio("genero", "Debe seleccionar un género");
+                valid &= validateRadio("rol", "Debe seleccionar un rol");
+                valid &= validateRadio("estado", "Debe seleccionar un estado civil");
+        
+                // Validar Foto de Perfil
+                const foto = document.getElementById("profilePhoto");
+                if (foto.files.length > 0) {
+                    const file = foto.files[0];
+                    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+                    if (!allowedTypes.includes(file.type)) {
+                        showError(foto, "Formato inválido, solo JPG o PNG");
+                        valid = false;
+                    } else {
+                        clearError(foto);
+                    }
+                }
+        
+                if (valid) {
+                    Swal.fire({
+                        title: "Usuario agregado correctamente!",
+                        icon: "success",
+                        draggable: true
+                    }).then(() => {
+                        form.reset();
+                        const imagePreview = document.getElementById("imagePreview");
+                        if (imagePreview.src !== defaultImage) {
+                            imagePreview.src = defaultImage;
+                        }
+                        
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Hay errores en el formulario. Por favor, corrígelos y vuelve a intentarlo.",
+                    });
+                }
+            });
+        
+            document.getElementById("profilePhoto").addEventListener("change", displayImage);
+        });
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <!-- Essential  javascripts for application to work-->
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
 </html>

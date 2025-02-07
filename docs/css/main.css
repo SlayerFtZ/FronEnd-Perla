@@ -14912,11 +14912,16 @@ textarea.form-control-lg {
 }
 
 .titulo-formulario-usuario{
+  margin-top: 30px;
   color: #fb0505; /* Cambia el color del texto */
   font-family: sans-serif; /* Cambia el estilo de la fuente */
   font-size: 1rem; /* Ajusta el tamaño de la fuente */
   text-align: center;
   text-transform: uppercase;
+  font-weight: bold; /* Hace que el texto sea más grueso */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
+  font-size: 25px;
 }
 
 .form-label-usuario{
@@ -14958,4 +14963,34 @@ textarea.form-control-lg {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
   text-align: center;
   
+}
+
+ /* animacion para input del formulario */
+.form-control{
+  background-color:  #eae0c8;
+  text-transform: uppercase;
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    border-color: #eae0c8; 
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5); 
+    transform: scale(1.02); 
+} 
+}
+/* color de contorno del card del formulario del usuario */
+.container{
+  box-shadow: 0px 0px 10px  #000;
+}
+
+/* configuracion del contenedor de la imagen de peril del usuario */
+.image-container {
+  width: 95%;
+  height: auto;
+  max-width: 500px; 
+  margin-top: 120px;
+  margin-left: 10px; 
+  box-shadow: 0px 0px 10px #000;
+  padding: 10px; 
+  border-radius: 10px; 
 }
