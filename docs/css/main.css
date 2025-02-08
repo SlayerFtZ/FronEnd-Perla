@@ -15028,5 +15028,147 @@ textarea.form-control-lg {
   margin-top: 10px;
   font-size: 1rem;
 }
+/* 
+ configuracion del perfil de salud */
+/* Configuración del perfil de salud */
+.card-salud {
+  background-color: white;
+  box-shadow: 0px 0px 10px var(--bs-yellow);
+  border-radius: 10px;
+  animation: colorChange 15s infinite alternate;
+  width: 100%; /* Asegura que la tarjeta ocupe el 100% del contenedor */
+  max-width: 850px; /* Limita el tamaño máximo */
+}
+
+@keyframes colorChange {
+  0% {
+    box-shadow: 0px 0px 10px var(--bs-yellow);
+    background-color: white; /* color inicial */
+  }
+  50% {
+    box-shadow: 0px 0px 10px var(--bs-blue); 
+    background-color: white; /* el fondo sigue blanco */
+  }
+  100% {
+    box-shadow: 0px 0px 10px var(--bs-yellow);
+    background-color: white; /* color final */
+  }
+}
+
+.container-salud {
+  background-color: white;
+  border-radius: 15px;
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del espacio disponible */
+  max-width: 850px; /* Limita el tamaño máximo */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  display: flex;
+  justify-content: center; /* Centra los elementos internos horizontalmente */
+  align-items: center; /* Centra los elementos internos verticalmente */
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+  padding: 20px; /* Espaciado alrededor del contenedor */
+}
+
+@media (max-width: 992px) {
+  .container-salud {
+    width: 90%; /* Reduce el tamaño del contenedor en pantallas medianas */
+  }
+
+  .card-salud {
+    width: 100%; /* Hace que la tarjeta ocupe el 100% del ancho disponible en pantallas medianas */
+    max-width: none; /* Elimina el límite de tamaño máximo */
+  }
+}
+
+@media (max-width: 576px) {
+  .container-salud {
+    width: 100%; /* El contenedor ocupa el 100% del ancho en pantallas pequeñas */
+    padding: 10px; /* Reduce el espaciado en pantallas pequeñas */
+  }
+
+  .card-salud {
+    width: 100%; /* La tarjeta ocupa el 100% del ancho en pantallas pequeñas */
+  }
+}
+
+body {
+  background-color: #f8f9fa;
+}
+.profile-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  border: 4px solid #007bff;
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007bff;
+}
+.field-title {
+  font-weight: bold;
+  color: #343a40;
+}
 
 
+/* Configuracion para la tabla de buscar usuario */
+
+
+/* Alternar colores en filas */
+tbody tr:nth-child(odd) {
+  background-color: #f9f1e7; /* Color pastel */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ffffff; /* Blanco */
+}
+
+/* Alternar colores en columnas */
+tbody tr td:nth-child(odd) {
+  background-color: #e7f3f9; /* Azul pastel */
+}
+
+tbody tr td:nth-child(even) {
+  background-color: #b2e2fd; /* azul un como mas intenso */
+}
+
+/* Estilizar bordes y texto */
+.table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+/* Mejorar visibilidad al pasar el mouse */
+tbody tr:hover {
+  background-color: #ececec;
+}
+
+/* configuraciones para el formulario de contacto de emergencia */
+
+.profile-img-emergencia {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid red;
+}
+
+.profile-card-emergencia {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  border: 4px solid red;
+}
