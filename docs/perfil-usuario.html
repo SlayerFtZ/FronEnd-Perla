@@ -277,9 +277,59 @@
                         <div class="col-md-6"><label class="labels">NUMERO DE SEGURO:</label><input type="text"
                                 class="form-control" value="" placeholder="Nss" disabled></div>
 
+                        <!-- Botón para abrir el modal de foto de perfil-->
                         <div>
-                            <div class="mt-5 text-center"><button class="btn btn-danger profile-button" type="button"><i
-                                        class="bi bi-phone-vibrate"></i>Actualizar Contacto de emergencia</button></div>
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-danger profile-button" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#modalFamiliar">
+                                    <i class="bi bi-phone-vibrate"></i>Actualizar contacto Emergencia
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Modal de contacto de emergencia -->
+                        <div class="modal fade" id="modalFamiliar" tabindex="-1" aria-labelledby="modalFamiliarLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalFamiliarLabel">Agregar Familiar</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-start mt-3">
+                                            <p><span class="field-title">Nombre:</span><input type="text"
+                                                    class="form-control" id="nombre" placeholder="Ingresa su nombre"
+                                                    required></p>
+                                            <p><span class="field-title">Apellido paterno:</span><input
+                                                    class="form-control" id="apellidoPaterno"
+                                                    placeholder="Ingresa el apellido paterno" required></p>
+                                            <p><span class="field-title">Apellido materno:</span><input
+                                                    class="form-control" id="apellidoMaterno"
+                                                    placeholder="Ingresa el apellido materno" required></p>
+                                            <p><span class="field-title">Número de teléfono:</span><input
+                                                    class="form-control" id="numeroTelefonico"
+                                                    placeholder="Ingresa el número de teléfono" required></p>
+                                            <p><span class="field-title">Parentesco:</span>
+                                                <select class="form-control" id="parentescoSelect"
+                                                    name="parentescoSelect">
+                                                    <option value="seleccion">Selecciona una opción</option>
+                                                    <option value="esposo">Esposa / Esposo</option>
+                                                    <option value="hijo">Hijo / Hija</option>
+                                                    <option value="conyuge">Cónyuge</option>
+                                                    <option value="otro">Otro</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" id="cancelBtn" type="button"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <button class="btn btn-primary" id="submitBtn" type="button">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Botón para abrir el modal de foto de perfil-->
                         <div>
@@ -291,7 +341,7 @@
                             </div>
                         </div>
 
-                        <!-- Modal -->
+                        <!-- Modal de foto de perfil -->
                         <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateProfileModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -329,12 +379,53 @@
                             </div>
                         </div>
 
-
-                        <div>
-                            <div class="mt-5 text-center"><button class="btn btn-info profile-button" type="button"><i
-                                        class="bi bi-person-heart"></i>Actualizar Perfil de salud</button></div>
+                        <!-- boton para abrir el modal de salud -->
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-info profile-button" type="button" data-bs-toggle="modal"
+                                data-bs-target="#updateHealthProfileModal">
+                                <i class="bi bi-person-hearts"></i> Actualizar Perfil de salud
+                            </button>
                         </div>
-
+                        <div class="modal fade" id="updateHealthProfileModal" tabindex="-1"
+                            aria-labelledby="updateHealthProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="updateHealthProfileModalLabel">Actualizar Perfil de
+                                            Salud</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-start mt-3">
+                                            <p><span class="field-title">Padecimientos:</span><input type="text"
+                                                    class="form-control" id="padecimientos"
+                                                    placeholder="Ingresa sus padecimientos" required></p>
+                                            <p><span class="field-title">Descripción:</span><textarea
+                                                    class="form-control" id="descripcion"
+                                                    placeholder="Ingresa una descripcion" required></textarea></p>
+                                            <p><span class="field-title">Categoría:</span>
+                                                <select class="form-control" id="opcionesCategoria"
+                                                    name="opcionesCategoria" required>
+                                                    <option value="seleccion">Selecciona una opción</option>
+                                                    <option value="ninguno">Ninguno</option>
+                                                    <option value="otro">Otro</option>
+                                                    <option value="cronico">Crónico</option>
+                                                    <option value="respiratorio">Respiratorio</option>
+                                                    <option value="psicologico">Psicológico</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            id="updateHealthProfile">Actualizar Perfil de Salud</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Modal para actualizar perfil de usuario -->
                         <!-- Botón para abrir el modal -->
                         <div class="mt-5 text-center">
@@ -468,6 +559,12 @@
                                                             id="estadoViudo" value="viudo">
                                                         <label class="form-check-label" for="estadoViudo">Viudo</label>
                                                     </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="estado"
+                                                            id="estadoUnion" value="union libre">
+                                                        <label class="form-check-label" for="estadoViudo">Union
+                                                            libre</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -554,7 +651,7 @@
             });
 
 
-            //modal y validacion para actualizar perfil de usuario
+            //modal y validacion para actualizar perfil de usuario modal
             document.addEventListener("DOMContentLoaded", function () {
                 function showError(input, message) {
                     let errorSpan = input.nextElementSibling;
@@ -611,17 +708,17 @@
                     const regexRfc = /^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$/;
                     const regexTelefono = /^[0-9]{10}$/;
                     const regexNss = /^[0-9]{11}$/;
-        
-                const fields = [
-                    { id: "nombre", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
-                    { id: "apellidoPaterno", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
-                    { id: "apellidoMaterno", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
-                    { id: "correo", regex: regexCorreo, error: "Correo inválido (5-100 caracteres)", minLength: 5, maxLength: 100 },
-                    { id: "curp", regex: regexCurp, error: "CURP inválido (18 caracteres)", minLength: 18, maxLength: 18 },
-                    { id: "rfc", regex: regexRfc, error: "RFC inválido (12-13 caracteres)", minLength: 12, maxLength: 13 },
-                    { id: "numeroTelefonico", regex: regexTelefono, error: "Teléfono inválido (10 dígitos)", minLength: 10, maxLength: 10 },
-                    { id: "nssSeguro", regex: regexNss, error: "NSS inválido (11 dígitos)", minLength: 11, maxLength: 11 }
-                ];
+
+                    const fields = [
+                        { id: "nombre", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
+                        { id: "apellidoPaterno", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
+                        { id: "apellidoMaterno", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
+                        { id: "correo", regex: regexCorreo, error: "Correo inválido (5-100 caracteres)", minLength: 5, maxLength: 100 },
+                        { id: "curp", regex: regexCurp, error: "CURP inválido (18 caracteres)", minLength: 18, maxLength: 18 },
+                        { id: "rfc", regex: regexRfc, error: "RFC inválido (12-13 caracteres)", minLength: 12, maxLength: 13 },
+                        { id: "numeroTelefonico", regex: regexTelefono, error: "Teléfono inválido (10 dígitos)", minLength: 10, maxLength: 10 },
+                        { id: "nssSeguro", regex: regexNss, error: "NSS inválido (11 dígitos)", minLength: 11, maxLength: 11 }
+                    ];
 
                     fields.forEach(field => {
                         const input = document.getElementById(field.id);
@@ -674,6 +771,81 @@
                             text: "Hay errores en el formulario. Por favor, corrígelos y vuelve a intentarlo.",
                         });
                     }
+                });
+            });
+
+            //manejo del modal de perfil de salud 
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("updateHealthProfile").addEventListener("click", function () {
+                    const padecimientos = document.getElementById("padecimientos").value.trim();
+                    const descripcion = document.getElementById("descripcion").value.trim();
+                    const categoria = document.getElementById("opcionesCategoria").value;
+
+                    if (padecimientos === "" || descripcion === "" || categoria === "seleccion") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Todos los campos son obligatorios."
+                        });
+                        return;
+                    }
+
+                    Swal.fire({
+                        title: "Perfil de salud actualizado con éxito!",
+                        icon: "success",
+                        confirmButtonText: "Aceptar"
+                    }).then(() => {
+                        $('#updateHealthProfileModal').modal('hide');
+                    });
+                });
+            });
+
+            //control del modal de emergencia 
+            document.addEventListener("DOMContentLoaded", function () {
+                function showError(input, message) {
+                    Swal.fire({ icon: "error", title: "Error", text: message });
+                    input.focus();
+                }
+            
+                document.getElementById("submitBtn").addEventListener("click", function () {
+                    const nombre = document.getElementById("nombre").value.trim();
+                    const apellidoPaterno = document.getElementById("apellidoPaterno").value.trim();
+                    const apellidoMaterno = document.getElementById("apellidoMaterno").value.trim();
+                    const numeroTelefonico = document.getElementById("numeroTelefonico").value.trim();
+                    const parentesco = document.getElementById("parentescoSelect").value;
+            
+                    const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
+                    const regexTelefono = /^[0-9]{10}$/;
+            
+                    if (!regexNombre.test(nombre) || nombre.length < 3) {
+                        showError(document.getElementById("nombre"), "El nombre debe contener solo letras y al menos 3 caracteres.");
+                        return;
+                    }
+                    if (!regexNombre.test(apellidoPaterno) || apellidoPaterno.length < 3) {
+                        showError(document.getElementById("apellidoPaterno"), "El apellido paterno debe contener solo letras y al menos 3 caracteres.");
+                        return;
+                    }
+                    if (!regexNombre.test(apellidoMaterno) || apellidoMaterno.length < 3) {
+                        showError(document.getElementById("apellidoMaterno"), "El apellido materno debe contener solo letras y al menos 3 caracteres.");
+                        return;
+                    }
+                    if (!regexTelefono.test(numeroTelefonico)) {
+                        showError(document.getElementById("numeroTelefonico"), "El número de teléfono debe contener 10 dígitos.");
+                        return;
+                    }
+                    if (parentesco === "seleccion") {
+                        showError(document.getElementById("parentescoSelect"), "Debe seleccionar un parentesco válido.");
+                        return;
+                    }
+            
+                    Swal.fire({
+                        title: "Familiar agregado correctamente!",
+                        icon: "success",
+                        confirmButtonText: "Aceptar"
+                    }).then(() => {
+                        document.getElementById("modalFamiliar").querySelectorAll("input, select").forEach(el => el.value = "");
+                        $("#modalFamiliar").modal("hide");
+                    });
                 });
             });
         </script>
