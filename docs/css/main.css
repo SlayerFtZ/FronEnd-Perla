@@ -13552,7 +13552,7 @@ textarea.form-control-lg {
   display: block;
   padding: 15px;
   line-height: 20px;
-  color: #fff;
+  color: #000000;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
