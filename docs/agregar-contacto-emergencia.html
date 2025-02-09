@@ -330,8 +330,10 @@
                         text: 'El formulario no ha sido enviado.',
                     }).then(() => {
                         clearForm();
+                        window.location.href = 'dashboard-inicio.html'; // Redirige a dashboard.html después de mostrar el mensaje
                     });
                 };
+                
         
                 const handleFormSubmit = () => {
                     let valid = true;

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 5 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description"
+        content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
+    <title>Centro Comercial La Perla</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main-buscarLocal.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body class="app sidebar-mini">
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo" href="index.html">La perla</a>
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+            aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+
+            </li>
+            <!--Notification Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
+                    aria-label="Show notifications"><i class="bi bi-bell fs-5"></i></a>
+                <ul class="app-notification dropdown-menu dropdown-menu-right">
+                    <li class="app-notification__title">You have 4 new notifications.</li>
+                    <div class="app-notification__content">
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i
+                                        class="bi bi-envelope fs-4 text-primary"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Lisa sent you a mail</p>
+                                    <p class="app-notification__meta">2 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i
+                                        class="bi bi-exclamation-triangle fs-4 text-warning"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Mail server not working</p>
+                                    <p class="app-notification__meta">5 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i class="bi bi-cash fs-4 text-success"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Transaction complete</p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i
+                                        class="bi bi-envelope fs-4 text-primary"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Lisa sent you a mail</p>
+                                    <p class="app-notification__meta">2 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i
+                                        class="bi bi-exclamation-triangle fs-4 text-warning"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Mail server not working</p>
+                                    <p class="app-notification__meta">5 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><i class="bi bi-cash fs-4 text-success"></i></span>
+                                <div>
+                                    <p class="app-notification__message">Transaction complete</p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a></li>
+                    </div>
+                    <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+                </ul>
+            </li>
+            <!-- User Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
+                    aria-label="Open Profile Menu"><i class="bi bi-person fs-4"></i></a>
+                <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li><a class="dropdown-item" href="page-user.html"><i class="bi bi-gear me-2 fs-5"></i> Settings</a>
+                    </li>
+                    <li><a class="dropdown-item" href="page-user.html"><i class="bi bi-person me-2 fs-5"></i>
+                            Profile</a></li>
+                    <li><a class="dropdown-item" href="page-login.html"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
+                            Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
+                src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Image">
+            <div>
+                <p class="app-sidebar__user-name">John Doe</p>
+                <p class="app-sidebar__user-designation">Frontend Developer</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+
+            <!--Navegacion a el dashboard -->
+            <li><a class="app-menu__item active" href="dashboard-inicio.html"><i
+                        class="app-menu__icon bi bi-speedometer"></i><span class="app-menu__label">Dashboard</span></a>
+            </li>
+
+            <!-- Navegacion y menu para Usuarios -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-people-fill"></i><span class="app-menu__label">. Usuarios</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="perfil-usuario.html"><i class="bi bi-person-bounding-box"></i>.
+                            Perfil de usuario</a></li>
+                    <li><a class="treeview-item" href="agregar-usuario.html"><i class="bi bi-person-add"></i>. Agregar
+                            Usuarios</a></li>
+                    <li><a class="treeview-item" href="consultar-usuario.html" rel="noopener"><i
+                                class="bi bi-search"></i>. Buscar usuario</a></li>
+                    <li><a class="treeview-item" href="agregar-perfil-salud.html"><i class="bi bi-person-heart"></i>.
+                            Perfil de
+                            salud</a></li>
+                    <li><a class="treeview-item" href="agregar-contacto-emergencia.html"><i
+                                class="bi bi-telephone-outbound"></i>. Contacto de emergencia</a></li>
+                </ul>
+            </li>
+
+            <!-- Navegacion y menu para locales -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-house-check-fill"></i><span class="app-menu__label">. Locales</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="agregar-local.html"><i class="bi bi-building-add"></i>. Agregar
+                            local</a></li>
+                    <li><a class="treeview-item" href="consultar-local.html"><i class="bi bi-search"></i>. Buscar
+                            local</a></li>
+                    <li><a class="treeview-item" href="agregar-ingresos-local.html" rel="noopener"><i
+                                class="bi bi-cash-coin"></i>. Agregar ingreso</a></li>
+                    <li><a class="treeview-item" href="consultar-ingreso-local.html"><i class="bi bi-search"></i>.
+                            Buscar ingreso</a></li>
+                </ul>
+            </li>
+
+            <!-- Navegacion y menu para Juegos -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-controller"></i><span class="app-menu__label">. Juegos</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="agregar-juego.html"><i class="bi bi-controller"></i>. Agregar
+                            juego</a></li>
+                    <li><a class="treeview-item" href="consultar-ingreso-juego.html"><i class="bi bi-search"></i>.
+                            Buscar ingreso</a></li>
+                    <li><a class="treeview-item" href="agregar-ingreso-juego.html" rel="noopener"><i
+                                class="bi bi-cash-coin"></i>. Agregar ingreso</a></li>
+
+                </ul>
+            </li>
+
+            <!-- Navegacion y menu para Reparaciones -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-house-gear-fill"></i><span class="app-menu__label">. Reparaciones</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="agregar-reparacion.html"><i
+                                class="bi bi-gear-wide-connected"></i>. Agregar reparacion</a></li>
+                    <li><a class="treeview-item" href="consultar-reparacion.html" rel="noopener"><i
+                                class="bi bi-search"></i>. Buscar reparacion</a></li>
+                </ul>
+            </li>
+
+
+            <!-- Navegacion y menu para Reportes -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-file-earmark-pdf-fill"></i><span class="app-menu__label">. Reportes</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+
+                </ul>
+            </li>
+
+            <!-- Navegacion y menu para Pagos extras -->
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+
+                <ul class="treeview-menu">
+                </ul>
+
+            </li>
+
+            <ul class="treeview-menu">
+
+            </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1 class="titulo-de-pagina"><i class="bi bi-search"></i>. Buscar local</h1>
+                <p>"BUSCAR LOCAL POR IDENTIFICADOR"</p>
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+                <li class="breadcrumb-item"><a href="dashboard-inicio.html">Inicio</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Información del local</h5>
+                        <div>
+                            <div class="mb-2 d-flex justify-content-between align-items-center">
+                                <div class="position-relative">
+                                    <span class="position-absolute search"></span>
+                                    <li class="app-search">
+                                        <input class="app-search__input" type="search" placeholder="Buscar por nombre del local">
+                                        <button class="app-search__button"><i class="bi bi-search"></i></button>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre Local</th>
+                                    <th>Nombre del Socio</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
+                                    <th>Estado de uso</th>
+                                    <th>Monto de renta</th>
+                                    <th>Adeudo</th>
+                                    <th>Estado de pago</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LC-100</td>
+                                    <td><img src="images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez simbron</td>
+                                    <td>10/12/2024</td>
+                                    <td>10/1/2025</td>
+                                    <td>Ocupado</td>
+                                    <td>$3800.00</td>
+                                    <td>$3800.00</td>
+                                    <td>Pendiente</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#simularPagoModal">Abonar renta</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>LC-100</td>
+                                    <td><img src="images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez simbron</td>
+                                    <td>10/12/2024</td>
+                                    <td>10/1/2025</td>
+                                    <td>Ocupado</td>
+                                    <td>$3800.00</td>
+                                    <td>$1800.00</td>
+                                    <td>Abono</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#simularPagoModal">Abonar renta</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>LC-100</td>
+                                    <td><img src="images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez simbron</td>
+                                    <td>10/12/2024</td>
+                                    <td>10/1/2025</td>
+                                    <td>Ocupado</td>
+                                    <td>$3800.00</td>
+                                    <td>$0.00</td>
+                                    <td>Pagado</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#simularPagoModal" disabled>Abonar renta</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para simular el pago -->
+<div class="modal fade" id="simularPagoModal" tabindex="-1" aria-labelledby="simularPagoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="simularPagoModalLabel">Abonar renta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formPago">
+                    <div class="mb-3">
+                        <label for="monto" class="form-label">Monto de la renta</label>
+                        <input type="text" class="form-control" id="Adeudo" placeholder="$3800.00" disabled>
+                        <br>
+                        <label for="monto" class="form-label">Monto del adeudo</label>
+                        <input type="text" class="form-control" id="Adeudo" placeholder="$1800.00" disabled>
+                        <br>
+                        <label for="monto" class="form-label">Abono</label>
+                        <input type="number" class="form-control" id="monto" placeholder="Ingrese el monto">
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Pagar</button>
+                    <button type="button" class="btn btn-danger"data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+        <script>
+            // Espera a que el DOM esté listo
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Obtener el formulario
+    const formPago = document.getElementById('formPago');
+
+    formPago.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevenir el envío del formulario por defecto
+
+        // Obtener el valor del abono
+        const montoAbono = document.getElementById('monto').value;
+
+        // Validación del abono
+        if (!montoAbono || montoAbono <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Por favor ingrese un monto válido para abonar.',
+                confirmButtonText: 'Aceptar'
+            });
+        } else {
+            // Validación si el monto ingresado es mayor que el adeudo
+            const adeudo = 1800; // Monto del adeudo
+            if (montoAbono > adeudo) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¡Atención!',
+                    text: 'El monto ingresado excede el adeudo.',
+                    confirmButtonText: 'Aceptar'
+                });
+            } else {
+                // Si todo está bien, muestra mensaje de éxito y cierra el modal
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pago realizado',
+                    text: 'El pago se ha realizado exitosamente.',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    // Cierra el modal
+                    $('#simularPagoModal').modal('hide');
+                });
+            }
+        }
+    });
+});
+
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </main>
+
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
