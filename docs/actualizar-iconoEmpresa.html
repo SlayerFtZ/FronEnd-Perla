@@ -47,7 +47,7 @@
                                         class="bi bi-envelope fs-4 text-primary"></i></span>
                                 <div>
                                     <p class="app-notification__message">Abono de renta vencido</p>
-
+                                    
                                 </div>
                             </a></li>
                         <li><a class="app-notification__item" href="javascript:;"><span
@@ -55,14 +55,14 @@
                                         class="bi bi-exclamation-triangle fs-4 text-warning"></i></span>
                                 <div>
                                     <p class="app-notification__message">Renta proxima</p>
-
+                                    
                                 </div>
                             </a></li>
                         <li><a class="app-notification__item" href="javascript:;"><span
                                     class="app-notification__icon"><i class="bi bi-cash fs-4 text-success"></i></span>
                                 <div>
                                     <p class="app-notification__message">Abono realizado</p>
-
+                                    
                                 </div>
                             </a></li>
                     </div>
@@ -72,8 +72,7 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
                     aria-label="Open Profile Menu"><i class="bi bi-person fs-4"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href="actualizar-iconoEmpresa.html"><i
-                                class="bi bi-gear me-2 fs-5"></i> Configuraciones</a>
+                    <li><a class="dropdown-item" href="actualizar-iconoEmpresa.html"><i class="bi bi-gear me-2 fs-5"></i> Configuraciones</a>
                     </li>
                     <li><a class="dropdown-item" href="perfil-usuario.html"><i class="bi bi-person me-2 fs-5"></i>
                             Perfil de usuario</a></li>
@@ -198,8 +197,8 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-person-heart"></i> Perfil de Salud</h1>
-                <p>"DATOS DE SALUD DEL USUARIO"</p>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-card-image"></i> Actualizar Icono de la empresa</h1>
+                <p>"SELECCIONA LA NUEVA IMAGEN DE LA EMPRESA"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -207,182 +206,117 @@
             </ul>
         </div>
 
-        <!-- Componente para perfil de emergencia de usuario -->
-        <div class="container py-5">
-            <div class="profile-card-emergencia text-center" style="border: 2px solid red; padding: 15px;">
-                <h3 class="titulo-formulario-usuario"> Emergencia</h3>
-                <img src="images/perfilUsuario.jpg" alt="Imagen de usuario" class="profile-img-emergencia mb-3"
-                    style="border: 2px solid red; padding: 5px;">
+        <!-- Agregar SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                <p>
-                    <select class="form-control" id="usuarioSelect" name="usuarioSelect">
-                        <option value="seleccion">Selecciona un usuario</option>
-                        <option value="opcion1">Saul Severiano Gomez</option>
-                        <option value="opcion2">Jesus peres flores</option>
-                        <option value="opcion3">Roberto juarez gomez</option>
-                    </select>
-                </p>
-                <p class="text-muted">Rol: Gerente</p>
-
-                <div class="text-start mt-3">
-                    <p><span class="field-title">Nombre:</span><input type="text" class="form-control" id="nombre"
-                            placeholder="Ingresa su nombre" required></p>
-                    <p><span class="field-title">Apellido paterno:</span><input class="form-control"
-                            id="apellidoPaterno" placeholder="Ingresa el apellido paterno" required></input></p>
-                    <p><span class="field-title">Apellido materno:</span><input class="form-control"
-                            id="apellidoMaterno" placeholder="Ingresa el apellido materno" required></input></p>
-                    <p><span class="field-title">Número de teléfono:</span><input class="form-control"
-                            id="numeroTelefonico" placeholder="Ingresa el número de teléfono" required></input></p>
-                    <p><span class="field-title">Parentesco:</span>
-                        <select class="form-control" id="parentescoSelect" name="parentescoSelect">
-                            <option value="seleccion">Selecciona una opción</option>
-                            <option value="opcion1">Esposa / Esposo</option>
-                            <option value="opcion2">Hijo / Hija</option>
-                            <option value="opcion3">Cónyuge</option>
-                            <option value="opcion1">Otro</option>
-                        </select>
-                    </p>
+        <!-- Componente para actualizar el icono de la empresa -->
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Logo de la empresa -->
+                <div class="col-md-6">
+                    <img id="companyLogo" src="images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+                    <br>
                 </div>
 
-                <button class="btn btn-primary" id="submitBtn" type="button">Agregar</button>
-                <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+                <!-- Columna 2: Formulario para cambiar la foto -->
+                <div class="col-md-6">
+                    <form id="formAgregarLocal">
+                        <div>
+                            <br>
+                            <label class="titulo-de-pagina">Agregar Imagen de la empresa</label>
+                        </div>
+                        <div class="mb-3">
+                            <div>
+                                <br>
+                                <input class="form-control" type="file" id="profilePhoto" accept="image/*" required>
+                            </div>
+                            <div>
+                                <br>
+                                <button type="submit" class="btn btn-warning">Actualizar</button>
+                                <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+
+                            </div>
+                            <br>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <!-- Script para el formulario de emergencia -->
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Funciones de manejo de errores
-                function showError(input, message) {
-                    let errorSpan = input.nextElementSibling;
-                    if (!errorSpan || !errorSpan.classList.contains("error-message")) {
-                        errorSpan = document.createElement("span");
-                        errorSpan.classList.add("error-message");
-                        errorSpan.style.color = "red";
-                        input.parentNode.appendChild(errorSpan);
-                    }
-                    errorSpan.innerText = message;
+            let originalLogo = document.getElementById("companyLogo").src; // Guardamos la imagen original
+
+            // Función para mostrar la vista previa de la imagen seleccionada
+            document.getElementById("profilePhoto").addEventListener("change", function (event) {
+                let file = event.target.files[0];
+
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("companyLogo").src = e.target.result; // Mostrar la imagen
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById("formAgregarLocal").addEventListener("submit", function (event) {
+                event.preventDefault(); // Evita el envío inmediato del formulario
+
+                let fileInput = document.getElementById("profilePhoto");
+                let file = fileInput.files[0];
+
+                // Validar que se haya seleccionado un archivo
+                if (!file) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Por favor, selecciona una imagen antes de actualizar.",
+                    });
+                    return;
                 }
 
-                function clearError(input) {
-                    let errorSpan = input.nextElementSibling;
-                    if (errorSpan && errorSpan.classList.contains("error-message")) {
-                        errorSpan.remove();
-                    }
+                // Validar el tipo de archivo (solo imágenes permitidas)
+                let allowedExtensions = ["image/jpeg", "image/png", "image/gif"];
+                if (!allowedExtensions.includes(file.type)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Formato no permitido",
+                        text: "Solo se permiten imágenes en formato JPG, PNG o GIF.",
+                    });
+                    return;
                 }
 
-                // Validaciones del formulario
-                const submitBtn = document.getElementById('submitBtn');
-                const cancelBtn = document.getElementById('cancelBtn');
-                const nombreInput = document.getElementById('nombre');
-                const apellidoPaternoInput = document.getElementById('apellidoPaterno');
-                const apellidoMaternoInput = document.getElementById('apellidoMaterno');
-                const numeroTelefonicoInput = document.getElementById('numeroTelefonico');
-                const parentescoSelect = document.getElementById('parentescoSelect');
-                const usuarioSelect = document.getElementById('usuarioSelect');
+                // Simulación de actualización exitosa
+                Swal.fire({
+                    icon: "success",
+                    title: "Éxito",
+                    text: "El icono de la empresa ha sido actualizado correctamente.",
+                });
 
-                const clearForm = () => {
-                    nombreInput.value = '';
-                    apellidoPaternoInput.value = '';
-                    apellidoMaternoInput.value = '';
-                    numeroTelefonicoInput.value = '';
-                    parentescoSelect.value = 'seleccion';
-                    usuarioSelect.value = 'seleccion';
-                };
+                // Aquí puedes agregar la lógica para enviar el formulario al servidor si es necesario
+                // this.submit();
+            });
 
-                const showSuccessMessage = () => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Formulario enviado!',
-                        text: 'Los datos han sido guardados correctamente.',
-                    }).then(() => {
-                        clearForm();
-                    });
-                };
-
-                const showErrorMessage = () => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Por favor, llena todos los campos.',
-                    });
-                };
-
-                const showCancelMessage = () => {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Cancelado',
-                        text: 'El formulario no ha sido enviado.',
-                    }).then(() => {
-                        clearForm();
-                        window.location.href = 'dashboard-inicio.html'; // Redirige a dashboard.html después de mostrar el mensaje
-                    });
-                };
-
-
-                const handleFormSubmit = () => {
-                    let valid = true;
-
-                    // Validaciones de los campos
-                    const nombreRegex = /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]+$/;
-                    if (!nombreRegex.test(nombreInput.value.trim())) {
-                        showError(nombreInput, 'El nombre solo debe contener letras y espacios');
-                        valid = false;
-                    } else {
-                        clearError(nombreInput);
+            // Botón de cancelar
+            document.getElementById("cancelBtn").addEventListener("click", function () {
+                Swal.fire({
+                    icon: "warning",
+                    title: "¿Estás seguro?",
+                    text: "Los cambios no se guardarán si cancelas.",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, cancelar",
+                    cancelButtonText: "No, continuar",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("formAgregarLocal").reset();
+                        document.getElementById("companyLogo").src = originalLogo; // Restaurar la imagen original
+                        Swal.fire("Cancelado", "No se realizaron cambios.", "info").then(() => {
+                            window.location.href = "dashboard-inicio.html"; // Redirigir al dashboard
+                        });
                     }
-
-                    const apellidoRegex = /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]+$/;
-                    if (!apellidoRegex.test(apellidoPaternoInput.value.trim())) {
-                        showError(apellidoPaternoInput, 'El apellido paterno solo debe contener letras y espacios');
-                        valid = false;
-                    } else {
-                        clearError(apellidoPaternoInput);
-                    }
-
-                    if (!apellidoRegex.test(apellidoMaternoInput.value.trim())) {
-                        showError(apellidoMaternoInput, 'El apellido materno solo debe contener letras y espacios');
-                        valid = false;
-                    } else {
-                        clearError(apellidoMaternoInput);
-                    }
-
-                    const telefonoRegex = /^[0-9]{10}$/;
-                    if (!telefonoRegex.test(numeroTelefonicoInput.value.trim())) {
-                        showError(numeroTelefonicoInput, 'El número de teléfono debe contener 10 dígitos numéricos');
-                        valid = false;
-                    } else {
-                        clearError(numeroTelefonicoInput);
-                    }
-
-                    if (parentescoSelect.value === 'seleccion') {
-                        showError(parentescoSelect, 'Por favor, selecciona un parentesco');
-                        valid = false;
-                    } else {
-                        clearError(parentescoSelect);
-                    }
-
-                    if (usuarioSelect.value === 'seleccion') {
-                        showError(usuarioSelect, 'Por favor, selecciona un usuario');
-                        valid = false;
-                    } else {
-                        clearError(usuarioSelect);
-                    }
-
-                    if (valid) {
-                        showSuccessMessage();
-                    } else {
-                        showErrorMessage();
-                    }
-                };
-
-                // Eventos
-                submitBtn.addEventListener('click', handleFormSubmit);
-                cancelBtn.addEventListener('click', showCancelMessage);
+                });
             });
         </script>
-
-
 
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

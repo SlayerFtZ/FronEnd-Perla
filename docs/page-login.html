@@ -1,142 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <link rel="stylesheet" href="css/main-login.css" />
-    <title>Login</title>
-  </head>
-  <body>
-    <div class="container" id="container">
-      <!-- Formulario de recuperación de contraseña -->
-      <div class="form-container sign-up">
-        <form id="resetForm">
-          <h1>¿Olvidaste tu contraseña?</h1>
-          <div><br /><span>Correo Electrónico:</span></div>
-          <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required />
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
 
-      <!-- Formulario de inicio de sesión -->
-      <div class="form-container sign-in">
-        <form id="loginForm">
-          <h1>Iniciar Sesión</h1>
-          <div class="social-icons">
-            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-          </div>
-          <span>Ingresa tus credenciales de autentificación</span>
-          <br />
-          <div>
-            <span>Correo electrónico:</span>
-            <input type="email" id="loginEmail" placeholder="Email" required />
-            <span>Contraseña:</span>
-            <input type="password" id="loginPassword" placeholder="Password" required />
-          </div>
-          <button type="submit">Iniciar sesión</button>
-        </form>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/main-login.css" />
+  <title>Login</title>
+</head>
 
-      <div class="toggle-container">
-        <div class="toggle">
-          <div class="toggle-panel toggle-left">
-            <h1>¡Quieres iniciar sesión!</h1>
-            <p>Ingresa a la plataforma en el formulario, con tus credenciales de autentificación</p>
-            <button class="hidden" id="login">Formulario</button>
-          </div>
-          <div class="toggle-panel toggle-right">
-            <h1>¡Olvidaste tu contraseña!</h1>
-            <p>Recupera tu contraseña con tu correo electrónico en el siguiente formulario</p>
-            <button class="hidden" id="register">Formulario</button>
-          </div>
+<body>
+  <div class="container" id="container">
+    <!-- Formulario de recuperación de contraseña -->
+    <div class="form-container sign-up">
+      <form id="resetForm">
+        <h1>¿Olvidaste tu contraseña?</h1>
+        <div><br /><span>Correo Electrónico:</span></div>
+        <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <div class="form-container sign-in">
+      <form id="loginForm">
+        <h1>Iniciar Sesión</h1>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <span>Ingresa tus credenciales de autentificación</span>
+        <br />
+        <div>
+          <span>Correo electrónico:</span>
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <span>Contraseña:</span>
+          <input type="password" id="loginPassword" placeholder="Password" required />
+        </div>
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </div>
+
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>¡Quieres iniciar sesión!</h1>
+          <p>Ingresa a la plataforma en el formulario, con tus credenciales de autentificación</p>
+          <button class="hidden" id="login">Formulario</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>¡Olvidaste tu contraseña!</h1>
+          <p>Recupera tu contraseña con tu correo electrónico en el siguiente formulario</p>
+          <button class="hidden" id="register">Formulario</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const container = document.getElementById("container");
-        const registerBtn = document.getElementById("register");
-        const loginBtn = document.getElementById("login");
-        const resetForm = document.getElementById("resetForm");
-        const loginForm = document.getElementById("loginForm");
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("container");
+      const registerBtn = document.getElementById("register");
+      const loginBtn = document.getElementById("login");
+      const resetForm = document.getElementById("resetForm");
+      const loginForm = document.getElementById("loginForm");
 
-        registerBtn.addEventListener("click", () => container.classList.add("active"));
-        loginBtn.addEventListener("click", () => container.classList.remove("active"));
+      registerBtn.addEventListener("click", () => container.classList.add("active"));
+      loginBtn.addEventListener("click", () => container.classList.remove("active"));
 
-        // Validación del formulario de recuperación de contraseña
-        resetForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-          const email = document.getElementById("email").value.trim();
+      // Validación del formulario de recuperación de contraseña
+      resetForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const email = document.getElementById("email").value.trim();
 
-          if (email === "") {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Por favor, ingresa tu correo electrónico.",
-              confirmButtonColor: "#d33"
-            });
-            return;
-          }
-
+        if (email === "") {
           Swal.fire({
-            icon: "success",
-            title: "¡Correo enviado!",
-            text: "Revisa tu bandeja de entrada para restablecer tu contraseña.",
-            confirmButtonColor: "#3085d6",
-            timer: 3000,
-            showConfirmButton: false
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor, ingresa tu correo electrónico.",
+            confirmButtonColor: "#d33"
           });
+          return;
+        }
 
-          setTimeout(() => {
-            window.location.href = "recuperar-contrasena.html";
-          }, 3200);
+        Swal.fire({
+          icon: "success",
+          title: "¡Correo enviado!",
+          text: "Revisa tu bandeja de entrada para restablecer tu contraseña.",
+          confirmButtonColor: "#3085d6",
+          timer: 3000,
+          showConfirmButton: false
         });
 
-        // Validación del formulario de inicio de sesión
-        loginForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-          const email = document.getElementById("loginEmail").value.trim();
-          const password = document.getElementById("loginPassword").value.trim();
-
-          if (email === "" || password === "") {
-            Swal.fire({
-              icon: "error",
-              title: "Campos vacíos",
-              text: "Por favor, completa todos los campos.",
-              confirmButtonColor: "#d33"
-            });
-            return;
-          }
-
-          if (password.length < 6) {
-            Swal.fire({
-              icon: "warning",
-              title: "Contraseña débil",
-              text: "La contraseña debe tener al menos 6 caracteres.",
-              confirmButtonColor: "#ff9800"
-            });
-            return;
-          }
-
-          Swal.fire({
-            icon: "success",
-            title: "Inicio de sesión exitoso",
-            text: "Redirigiendo...",
-            timer: 3000,
-            showConfirmButton: false
-          });
-
-          setTimeout(() => {
-            window.location.href = "dashboard-inicio.html";
-          }, 3200);
-        });
+        setTimeout(() => {
+          window.location.href = "recuperar-contrasena.html";
+        }, 3200);
       });
-    </script>
-  </body>
+
+      // Validación del formulario de inicio de sesión
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+
+        if (email === "" || password === "") {
+          Swal.fire({
+            icon: "error",
+            title: "Campos vacíos",
+            text: "Por favor, completa todos los campos.",
+            confirmButtonColor: "#d33"
+          });
+          return;
+        }
+
+        if (password.length < 6) {
+          Swal.fire({
+            icon: "warning",
+            title: "Contraseña débil",
+            text: "La contraseña debe tener al menos 6 caracteres.",
+            confirmButtonColor: "#ff9800"
+          });
+          return;
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: "Inicio de sesión exitoso",
+          text: "Redirigiendo...",
+          timer: 3000,
+          showConfirmButton: false
+        });
+
+        setTimeout(() => {
+          window.location.href = "dashboard-inicio.html";
+        }, 3200);
+      });
+    });
+  </script>
+</body>
+
 </html>
