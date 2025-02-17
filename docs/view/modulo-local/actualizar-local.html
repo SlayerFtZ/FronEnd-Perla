@@ -218,73 +218,68 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-search"></i>. Buscar usuario</h1>
-                <p>"CONSULTA DE USUARIOS"</p>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-building-add"></i> Agregar Local</h1>
+                <p>"LLENA LOS CAMPOS PARA AGREGAR UN LOCAL"</p>
             </div>
-            <<ul class="app-breadcrumb breadcrumb">
+            <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
                 <li class="breadcrumb-item"><a href="../modulo-inicio/dashboard-inicio.html">Inicio</a></li>
-                </ul>
+            </ul>
         </div>
 
-        <!-- Tabla para buscar usuarios -->
-        <div class="container mt-5 px-2">
-            <div class="mb-2 d-flex justify-content-between align-items-center">
-                <div class="position-relative">
-                    <span class="position-absolute search"></span>
-                    <li class="app-search">
-                        <input class="app-search__input" type="search" placeholder="Buscar por nombre">
-                        <button class="app-search__button"><i class="bi bi-search"></i></button>
-                    </li>
+        <!-- Componente para agregar un local -->
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Logo de la empresa -->
+                <div class="col-md-6">
+                    <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+                    <br>
+                </div>
+
+                <!-- Columna 2: Formulario -->
+                <div class="col-md-6">
+                    <form id="formActLocal">
+                        <div>
+                            <br>
+                            <label class="titulo-de-pagina">Actualizar local</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombreActLocal" class="form-label">Selecciona un Local</label>
+                            <select class="form-control" id="nombreActLocal" required>
+                                <option value="">Seleccione un local</option>
+                                <option value="restaurante">B-12</option>
+                                <option value="tienda">A-45</option>
+                                <option value="oficina">C-1</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precioActMensual" class="form-label">Actualiza el precio mensual</label>
+                            <input type="number" class="form-control" id="precioActMensual"
+                                placeholder="Ingresa el precio de renta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estatusActRenta" class="form-label">Estatus de renta</label>
+                            <select class="form-control" id="estatusActRenta" required>
+                                <option value="">Seleccione un status</option>
+                                <option value="restaurante">Ocupado</option>
+                                <option value="tienda">Disponible</option>
+                                <option value="oficina">En mantenimiento</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-warning">Actualizar Local</button>
+                            <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+                        </div>
+                        <br>
+                    </form>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-responsive table-borderless">
-                    <thead>
-                        <tr class="bg-light">
-                            <th scope="col" width="10%">Ver Perfil</th>
-                            <th scope="col" width="20%">Nombre</th>
-                            <th scope="col" width="15%">Apellido Paterno</th>
-                            <th scope="col" width="15%">Apellido Materno</th>
-                            <th scope="col" width="20%">RFC</th>
-                            <th scope="col" width="20%">CURP</th>
-                            <th scope="col" class="text-end" width="10%">Rol</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><button class="btn btn-info btn-sm">Ver perfil</button></td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Althan Travis</td>
-                            <td>Gómez</td>
-                            <td>Pérez</td>
-                            <td>GOTP920101ABC</td>
-                            <td>GOTP920101HDFRRL05</td>
-                            <td class="text-end">Administrador</td>
-                        </tr>
-                        <tr>
-                            <td><button class="btn btn-info btn-sm">Ver perfil</button></td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Tomo Arvis</td>
-                            <td>López</td>
-                            <td>Hernández</td>
-                            <td>LOHT910505XYZ</td>
-                            <td>LOHT910505MDFRNR08</td>
-                            <td class="text-end">Usuario</td>
-                        </tr>
-                        <tr>
-                            <td><button class="btn btn-info btn-sm">Ver perfil</button></td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Travis Head</td>
-                            <td>Martínez</td>
-                            <td>Ramírez</td>
-                            <td>MARA900606QWE</td>
-                            <td>MARA900606HDFRPL03</td>
-                            <td class="text-end">Editor</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
+    </main>
 
+    <script src="../../controller/locales/actualizarLocalController.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>

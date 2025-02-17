@@ -135,6 +135,9 @@
                     <li><a class="treeview-item" href="../modulo-local/agregar-local.html"><i
                                 class="bi bi-building-add"></i>. Agregar
                             local</a></li>
+                    <li><a class="treeview-item" href="../modulo-local/actualizar-local.html"><i
+                                class="bi bi-building-add"></i></i>.
+                            Actualizar local</a></li>
                     <li><a class="treeview-item" href="../modulo-local/consultar-local.html"><i
                                 class="bi bi-search"></i>. Buscar
                             local</a></li>
@@ -261,7 +264,8 @@
                                 <tbody>
                                     <tr>
                                         <td>LC-100</td>
-                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez
+                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                                            perez
                                             simbron</td>
                                         <td>10/12/2024</td>
                                         <td>10/1/2025</td>
@@ -276,7 +280,8 @@
                                     </tr>
                                     <tr>
                                         <td>LC-100</td>
-                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez
+                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                                            perez
                                             simbron</td>
                                         <td>10/12/2024</td>
                                         <td>10/1/2025</td>
@@ -291,7 +296,8 @@
                                     </tr>
                                     <tr>
                                         <td>LC-100</td>
-                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus perez
+                                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                                            perez
                                             simbron</td>
                                         <td>10/12/2024</td>
                                         <td>10/1/2025</td>
@@ -343,56 +349,7 @@
 
     </main>
 
-    <script>
-        // Espera a que el DOM esté listo
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Obtener el formulario
-            const formPago = document.getElementById('formPago');
-
-            formPago.addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevenir el envío del formulario por defecto
-
-                // Obtener el valor del abono
-                const montoAbono = document.getElementById('monto').value;
-
-                // Validación del abono
-                if (!montoAbono || montoAbono <= 0) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '¡Error!',
-                        text: 'Por favor ingrese un monto válido para abonar.',
-                        confirmButtonText: 'Aceptar'
-                    });
-                } else {
-                    // Validación si el monto ingresado es mayor que el adeudo
-                    const adeudo = 1800; // Monto del adeudo
-                    if (montoAbono > adeudo) {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: '¡Atención!',
-                            text: 'El monto ingresado excede el adeudo.',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    } else {
-                        // Si todo está bien, muestra mensaje de éxito y cierra el modal
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Pago realizado',
-                            text: 'El pago se ha realizado exitosamente.',
-                            confirmButtonText: 'Aceptar'
-                        }).then(() => {
-                            // Cierra el modal
-                            $('#simularPagoModal').modal('hide');
-                        });
-                    }
-                }
-            });
-        });
-
-
-    </script>
+    <script src="../../controller/locales/localPagoController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </main>
 
