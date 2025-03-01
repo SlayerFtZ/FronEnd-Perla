@@ -227,8 +227,8 @@
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1 class="titulo-de-pagina"><i class="bi bi-person-heart"></i> Perfil de Salud</h1>
-        <p>"DATOS DE SALUD DEL USUARIO"</p>
+        <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Agregar Renta</h1>
+        <p>"LLENA LOS CAMPOS PARA AGREGAR LA RENTA DE UN LOCAL"</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -236,57 +236,73 @@
       </ul>
     </div>
 
-    <!-- Componente para perfil de emergencia de usuario -->
-    <div class="container py-5">
-      <div class="profile-card-emergencia text-center" style="border: 2px solid red; padding: 15px;">
-        <h3 class="titulo-formulario-usuario"> Emergencia</h3>
-        <img src="../../images/perfilUsuario.jpg" alt="Imagen de usuario" class="profile-img-emergencia mb-3"
-          style="border: 2px solid red; padding: 5px;">
-
-        <p>
-          <select class="form-control" id="usuarioSelect" name="usuarioSelect">
-            <option value="seleccion">Selecciona un usuario</option>
-            <option value="opcion1">Saul Severiano Gomez</option>
-            <option value="opcion2">Jesus peres flores</option>
-            <option value="opcion3">Roberto juarez gomez</option>
-          </select>
-        </p>
-        <p class="text-muted">Rol: Gerente</p>
-
-        <div class="text-start mt-3">
-          <p><span class="field-title">Nombre:</span><input type="text" class="form-control" id="nombre"
-              placeholder="Ingresa su nombre" required></p>
-          <p><span class="field-title">Apellido paterno:</span><input class="form-control" id="apellidoPaterno"
-              placeholder="Ingresa el apellido paterno" required></input></p>
-          <p><span class="field-title">Apellido materno:</span><input class="form-control" id="apellidoMaterno"
-              placeholder="Ingresa el apellido materno" required></input></p>
-          <p><span class="field-title">Número de teléfono:</span><input class="form-control" id="numeroTelefonico"
-              placeholder="Ingresa el número de teléfono" required></input></p>
-          <p><span class="field-title">Parentesco:</span>
-            <select class="form-control" id="parentescoSelect" name="parentescoSelect">
-              <option value="seleccion">Selecciona una opción</option>
-              <option value="opcion1">Esposa / Esposo</option>
-              <option value="opcion2">Hijo / Hija</option>
-              <option value="opcion3">Cónyuge</option>
-              <option value="opcion1">Otro</option>
-            </select>
-          </p>
+    <!-- Componente para agregar un renta -->
+    <div class="container">
+      <div class="row">
+        <!-- Columna 1: Logo de la empresa -->
+        <div class="col-md-6">
+          <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+          <br>
         </div>
 
-        <button class="btn btn-primary" id="submitBtn" type="button">Agregar</button>
-        <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+        <!-- Columna 2: Formulario -->
+        <!-- Columna 2: Formulario -->
+        <div class="col-md-6">
+          <form id="formAgregarLocal">
+            <div>
+              <br>
+              <label class="titulo-de-pagina">Agregar renta de un local</label>
+            </div>
+            <div class="mb-3">
+              <label for="nombreRntLocal" class="form-label">Selecciona un local</label>
+              <select class="form-control" id="nombreRntLocal" required>
+                <option value="">Seleccione un local</option>
+                <option value="B-102">B-102</option>
+                <option value="A-105">A-105</option>
+                <option value="C-154">C-154</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="estatusRenta" class="form-label">Estatus de renta</label>
+              <input class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="usuarioRntLocal" class="form-label">Selecciona un usuario</label>
+              <select class="form-control" id="usuarioRntLocal" required>
+                <option value="">Seleccione un usuario</option>
+                <option value="raul-perez">Raul Perez Simbron</option>
+                <option value="gabriela-gomez">Gabriela Gomez Simbron</option>
+                <option value="saul-severiano">Saul Severiano Perez</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
+              <input type="date" class="form-control" id="fechaInicioRnt" required>
+            </div>
+            <div class="mb-3">
+              <label for="fechaFinRnt" class="form-label">Fecha de fin</label>
+              <input type="date" class="form-control" id="fechaFinRnt" required>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Agregar Renta</button>
+              <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+            </div>
+            <br>
+          </form>
+        </div>
+
       </div>
     </div>
 
-    <!-- Script para el formulario de emergencia -->
-    <script src="../../controller/usuario/agregarContactoEmergencia.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </main>
+
+  <script src="../../controller/renta/agregarRentaController.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Essential javascripts for application to work-->
   <script src="../../js/jquery-3.7.0.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/main.js"></script>
+
 </body>
 
 </html>

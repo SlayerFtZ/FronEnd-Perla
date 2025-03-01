@@ -3,12 +3,13 @@ document.getElementById('formActLocal').addEventListener('submit', function (eve
     event.preventDefault();
 
     // Obtener los valores de los campos
+    const actLocal = document.getElementById('actLocal').value.trim();
     const nombreActLocal = document.getElementById('nombreActLocal').value.trim();
     const precioActMensual = document.getElementById('precioActMensual').value.trim();
     const estatusActRenta = document.getElementById('estatusActRenta').value.trim();
 
     // Validación de campos
-    if (!nombreActLocal || !precioActMensual || !estatusActRenta) {
+    if (!actLocal || !nombreActLocal || !precioActMensual || !estatusActRenta) {
         // Mostrar alerta si algún campo está vacío
         Swal.fire({
             icon: 'error',

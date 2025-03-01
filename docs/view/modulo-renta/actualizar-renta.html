@@ -227,8 +227,8 @@
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1 class="titulo-de-pagina"><i class="bi bi-person-heart"></i> Perfil de Salud</h1>
-        <p>"DATOS DE SALUD DEL USUARIO"</p>
+        <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Actualizar renta</h1>
+        <p>"ACTUALIZAR LA INFORMACIÓN DE UNA RENTA"</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -236,57 +236,153 @@
       </ul>
     </div>
 
-    <!-- Componente para perfil de emergencia de usuario -->
-    <div class="container py-5">
-      <div class="profile-card-emergencia text-center" style="border: 2px solid red; padding: 15px;">
-        <h3 class="titulo-formulario-usuario"> Emergencia</h3>
-        <img src="../../images/perfilUsuario.jpg" alt="Imagen de usuario" class="profile-img-emergencia mb-3"
-          style="border: 2px solid red; padding: 5px;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Información de la renta de un local</h5>
+            <div>
+              <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="position-relative">
+                  <span class="position-absolute search"></span>
+                  <li class="app-search">
+                    <input class="app-search__input" type="search" placeholder="Buscar por ID local">
+                    <button class="app-search__button"><i class="bi bi-search"></i></button>
+                  </li>
+                </div>
+              </div>
+            </div>
 
-        <p>
-          <select class="form-control" id="usuarioSelect" name="usuarioSelect">
-            <option value="seleccion">Selecciona un usuario</option>
-            <option value="opcion1">Saul Severiano Gomez</option>
-            <option value="opcion2">Jesus peres flores</option>
-            <option value="opcion3">Roberto juarez gomez</option>
-          </select>
-        </p>
-        <p class="text-muted">Rol: Gerente</p>
-
-        <div class="text-start mt-3">
-          <p><span class="field-title">Nombre:</span><input type="text" class="form-control" id="nombre"
-              placeholder="Ingresa su nombre" required></p>
-          <p><span class="field-title">Apellido paterno:</span><input class="form-control" id="apellidoPaterno"
-              placeholder="Ingresa el apellido paterno" required></input></p>
-          <p><span class="field-title">Apellido materno:</span><input class="form-control" id="apellidoMaterno"
-              placeholder="Ingresa el apellido materno" required></input></p>
-          <p><span class="field-title">Número de teléfono:</span><input class="form-control" id="numeroTelefonico"
-              placeholder="Ingresa el número de teléfono" required></input></p>
-          <p><span class="field-title">Parentesco:</span>
-            <select class="form-control" id="parentescoSelect" name="parentescoSelect">
-              <option value="seleccion">Selecciona una opción</option>
-              <option value="opcion1">Esposa / Esposo</option>
-              <option value="opcion2">Hijo / Hija</option>
-              <option value="opcion3">Cónyuge</option>
-              <option value="opcion1">Otro</option>
-            </select>
-          </p>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nombre Local</th>
+                    <th>Nombre del Socio</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Estado de uso</th>
+                    <th>Monto de renta</th>
+                    <th>Accion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>LC-100</td>
+                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                      perez
+                      simbron</td>
+                    <td>10/12/2024</td>
+                    <td>10/1/2025</td>
+                    <td>En renta</td>
+                    <td>$3800.00</td>
+                    <td>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#modalActLocal">
+                        Actualizar Renta
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>LC-100</td>
+                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                      perez
+                      simbron</td>
+                    <td>10/12/2024</td>
+                    <td>10/1/2025</td>
+                    <td>En renta</td>
+                    <td>$3800.00</td>
+                    <td>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#modalActLocal">
+                        Actualizar Renta
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>LC-100</td>
+                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
+                      perez
+                      simbron</td>
+                    <td>10/12/2024</td>
+                    <td>10/1/2025</td>
+                    <td>En renta</td>
+                    <td>$3800.00</td>
+                    <td>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#modalActLocal">
+                        Actualizar Renta
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <button class="btn btn-primary" id="submitBtn" type="button">Agregar</button>
-        <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
       </div>
     </div>
 
-    <!-- Script para el formulario de emergencia -->
-    <script src="../../controller/usuario/agregarContactoEmergencia.js"></script>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalActLocal" tabindex="-1" aria-labelledby="modalActLocalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalActLocalLabel">Actualizar Renta de un Local</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formActLocal">
+              <div class="mb-3">
+                <label for="actRntLocal" class="form-label">Selecciona un local</label>
+                <select class="form-control" id="actRntLocal" required>
+                  <option value="">Seleccione un local</option>
+                  <option value="B-102">B-102</option>
+                  <option value="A-105">A-105</option>
+                  <option value="C-154">C-154</option>
+
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="estatusActRenta" class="form-label">Estatus de renta</label>
+                <input class="form-control" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="usuarioActRntLocal" class="form-label">Selecciona un usuario</label>
+                <select class="form-control" id="usuarioActRntLocal" required>
+                  <option value="">Seleccione un usuario</option>
+                  <option value="raul_perez">Raul Perez Simbron</option>
+                  <option value="gabriela_gomez">Gabriela Gomez Simbron</option>
+                  <option value="saul_severiano">Saul Severiano Perez</option>
+
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="fechaActInicioRnt" class="form-label">Fecha de inicio</label>
+                <input type="date" class="form-control" id="fechaActInicioRnt" required>
+              </div>
+              <div class="mb-3">
+                <label for="fechaActFinRnt" class="form-label">Fecha de fin</label>
+                <input type="date" class="form-control" id="fechaActFinRnt" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="formActLocal">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../controller/renta/actualizarRentaController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </main>
-  <!-- Essential javascripts for application to work-->
-  <script src="../../js/jquery-3.7.0.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <script src="../../js/main.js"></script>
+    <!-- Essential javascripts for application to work-->
+    <script src="../../js/jquery-3.7.0.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 
 </html>
