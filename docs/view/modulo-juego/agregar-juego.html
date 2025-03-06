@@ -143,7 +143,7 @@
               Buscar ingreso</a></li>
         </ul>
       </li>
-      
+
       <!-- Navegacion y menu para rentas -->
       <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
             class="bi bi-postcard-fill"></i><span class="app-menu__label">. Rentas</span><i
@@ -170,7 +170,9 @@
           <li><a class="treeview-item" href="../modulo-ingresos/agregar-ingreso-juego.html" rel="noopener"><i
                 class="bi bi-cash-coin"></i>.
               Agregar ingreso</a></li>
-
+          <li><a class="treeview-item" href="../modulo-juego/actualizarJuego.html" rel="noopener"><i
+                class="bi bi-controller"></i>
+              . Actualizar Juego</a></li>
         </ul>
       </li>
 
@@ -226,16 +228,60 @@
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1><i class="bi bi-speedometer"></i> Dashboard</h1>
-        <p>"Sistema de administración de ingresos y egresos"</p>
+        <h1 class="titulo-de-pagina"><i class="bi bi-controller"></i> Agregar Juego</h1>
+        <p>"LLENE LOS CAMPOS PARA INGRESAR UN JUEGO"</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="../modulo-inicio/dashboard-inicio.html">Inicio</a></li>
       </ul>
     </div>
 
+    <!-- Componente para agregar un juego -->
+    <div class="container">
+      <div class="row">
+        <!-- Columna 1: Logo de la empresa -->
+        <div class="col-md-6">
+          <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+          <br>
+        </div>
+
+        <!-- Columna 2: Formulario -->
+        <div class="col-md-6">
+          <form id="formAgregarJuego">
+            <div>
+              <br>
+              <label class="titulo-de-pagina">Agregar Juego</label>
+            </div>
+            <div class="mb-3">
+              <label for="nombreJuego" class="form-label">Identificador del Juego</label>
+              <input type="text" class="form-control" id="nombreJuego" placeholder="Ingresa el ID del juego" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionJuego" class="form-label">Descripción del juego</label>
+              <textarea class="form-control" id="descripcionJuego" placeholder="Ingresa una descripcion"
+                required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="estadoUso" class="form-label">Estado de uso</label>
+              <select class="form-control" id="estadoUso" required>
+                <option value="">Seleccione un status</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Mantenimiento">En mantenimiento</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Agregar Juego</button>
+              <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+            </div>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
   </main>
+  <script src="../../controller/juego/agregarJuegoController.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Essential javascripts for application to work-->
   <script src="../../js/jquery-3.7.0.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>

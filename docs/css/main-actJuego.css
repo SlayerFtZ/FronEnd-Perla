@@ -1,0 +1,24 @@
+:root {
+    --gradient: linear-gradient(to left top, #1a9bf1 10%, #0f19dc 90%) !important;
+  }
+  
+  body {
+    background: #111 !important;
+  }
+  
+  .card {
+    margin-top: 15px;
+    background: #eae0c8;
+    border: 1px solid #e3ea13;
+    color: rgba(9, 2, 2, 0.8);
+    margin-bottom: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+    min-width: 150px;
+    max-width: 100%;
+
+  }
+  
+
+
+
