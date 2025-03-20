@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/main-login.css" />
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <!-- Formulario de recuperación de contraseña -->
+    <div class="form-container sign-up">
+      <form id="resetForm">
+        <h1>¿Olvidaste tu contraseña?</h1>
+        <div><br /><span>Correo Electrónico:</span></div>
+        <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <div class="form-container sign-in">
+      <form id="loginForm">
+        <h1>Iniciar Sesión</h1>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <span>Ingresa tus credenciales de autentificación</span>
+        <br />
+        <div>
+          <span>Correo electrónico:</span>
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <span>Contraseña:</span>
+          <input type="password" id="loginPassword" placeholder="Password" required />
+        </div>
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </div>
+
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>¡Quieres iniciar sesión!</h1>
+          <p>Ingresa a la plataforma en el formulario, con tus credenciales de autentificación</p>
+          <button class="hidden" id="login">Formulario</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>¡Olvidaste tu contraseña!</h1>
+          <p>Recupera tu contraseña con tu correo electrónico en el siguiente formulario</p>
+          <button class="hidden" id="register">Formulario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../../controller/login/loginController.js"></script>
+</body>
+
+</html>

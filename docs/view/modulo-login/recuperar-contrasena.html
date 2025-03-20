@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../css/main-login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Recuperar Contraseña</title>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in">
+            <form id="resetPasswordForm">
+                <h1>Recupera tu contraseña</h1>
+                <div>
+                    <br>
+                    <span>Ingresa tu nueva contraseña</span>
+                </div>
+                <br />
+                <div>
+                    <span>Token de seguridad:</span>
+                    <input type="text" id="token" placeholder="Ingresa el token" required />
+                    <span>Contraseña nueva:</span>
+                    <input type="password" id="newPassword" placeholder="Contraseña nueva" required />
+                    <span>Confirma Contraseña:</span>
+                    <input type="password" id="confirmPassword" placeholder="Confirma contraseña" required />
+                </div>
+
+                <!-- Botones de acción -->
+                <button type="submit">Cambiar contraseña</button>
+                <button type="button" style="background-color: red;" id="cancelButton">Cancelar</button>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>¿Qué debo hacer?</h1>
+                    <p>
+                        Recupera tu contraseña ingresando el Token de verificación que se mandó al correo que
+                        proporcionaste e ingresa tu nueva contraseña.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../controller/login/recuperarContasena.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
