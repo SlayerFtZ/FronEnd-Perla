@@ -245,7 +245,62 @@
         </div>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- componente para consultar reparaciones -->
+        
+        <div class="container mt-5 px-2">
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="position-relative">
+                    <span class="position-absolute search"></span>
+                    <li class="app-search">
+                        <input class="app-search__input" type="search" placeholder="Buscar Reparación">
+                        <button class="app-search__button"><i class="bi bi-search"></i></button>
+                    </li>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                        <tr class="bg-light">
+                            <th scope="col" width="10%">Accion</th>
+                            <th scope="col" width="15%">Contratista</th>
+                            <th scope="col" width="25%">Descripcion</th>
+                            <th scope="col" width="9%">Fecha</th>
+                            <th scope="col" width="9%">Fecha de finalizacion</th>
+                            <th scope="col" width="10%">Costo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><button class="btn btn-info btn-sm">Ver Historial</button></td>
+                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Althan Travis</td>
+                            <td>Reoaracion del juego  mecanico del avion del sector del norte</td>
+                            <td>10/12/2025</td>
+                            <td>15/12/2025</td>
+                            <td>$1560.00</td>
+                            
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-info btn-sm">Ver Historial</button></td>
+                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Josue perez</td>
+                            <td>Reoaracion del juego  mecanico del avion del sector del norte</td>
+                            <td>10/12/2025</td>
+                            <td>15/12/2025</td>
+                            <td>$160.00</td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-info btn-sm">Ver Historial</button></td>
+                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Alejandro mangno</td>
+                            <td>Reoaracion del juego  mecanico del avion del sector del norte</td>
+                            <td>10/12/2025</td>
+                            <td>15/12/2025</td>
+                            <td>$1500.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
