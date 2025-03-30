@@ -140,11 +140,6 @@
                     <li><a class="treeview-item" href="../modulo-local/consultar-local.html"><i
                                 class="bi bi-search"></i>. Buscar
                             local</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-ingresos-local.html" rel="noopener"><i
-                                class="bi bi-cash-coin"></i>. Agregar ingreso</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso-local.html"><i
-                                class="bi bi-search"></i>.
-                            Buscar ingreso</a></li>
                 </ul>
             </li>
 
@@ -162,6 +157,7 @@
                             Actualizar renta</a></li>
                 </ul>
             </li>
+
             <!-- Navegacion y menu para Juegos -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-controller"></i><span class="app-menu__label">. Juegos</span><i
@@ -171,12 +167,6 @@
                                 class="bi bi-controller"></i>.
                             Agregar
                             juego</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso-juego.html"><i
-                                class="bi bi-search"></i>.
-                            Buscar ingreso</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-ingreso-juego.html" rel="noopener"><i
-                                class="bi bi-cash-coin"></i>.
-                            Agregar ingreso</a></li>
                     <li><a class="treeview-item" href="../modulo-juego/actualizarJuego.html" rel="noopener"><i
                                 class="bi bi-controller"></i>
                             . Actualizar Juego</a></li>
@@ -232,6 +222,7 @@
             </li>
         </ul>
     </aside>
+    
     <main class="app-content">
         <div class="app-title">
             <div>
@@ -259,15 +250,6 @@
                         <div>
                             <br>
                             <label class="titulo-de-pagina">Agregar Reparación</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nombreLocal" class="form-label">Identificador del Local</label>
-                            <select class="form-control" id="estatusRenta" required>
-                                <option value="">Seleccione un local</option>
-                                <option value="B-101">B-101</option>
-                                <option value="A-101">A-101</option>
-                                <option value="C-102">C-102</option>
-                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="reparacionUsuario" class="form-label">Usuario</label>
@@ -312,6 +294,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../controller/reparacion/agregarReparacionController.js"></script> 
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
