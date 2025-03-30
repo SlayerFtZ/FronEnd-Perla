@@ -234,18 +234,57 @@
         </ul>
     </aside>
     <main class="app-content">
-        <div class="app-title">
-            <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Agregar reparación</h1>
-                <p>"Sistema de administración de ingresos y egresos"</p>
+        <form id="formAgregarReparacion">
+            <div class="app-title">
+                <div>
+                    <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Agregar reparación</h1>
+                    <p>"Sistema de administración de ingresos y egresos"</p>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                </ul>
             </div>
-            <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            </ul>
-        </div>
-
+            <div class="container-perfil rounded bg-white mt-5 mb-5">
+                <div class="col-md-20">
+                    <div class="d-flex justify-content-center align-items-center mb-10 text-truncate">
+                        <h2 class="titulo-de-pagina">Llena los campos para registrar una reparación</h2>
+                    </div>
+                    <div class="p-3 py-5">
+                        <div class="col-md-1">
+                            <label class="labels">LOCAL</label>
+                            <input type="number" class="form-control" id="local" placeholder="" required="">
+                        </div>  
+                        <div class="col-md-4">
+                            <label class="labels">DESCRIPCION</label>
+                            <input type="text" class="form-control" id="descripcion" placeholder="Ingrese una descripcion" required="">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labels">CONTRATISTA:</label>
+                            <input type="text" class="form-control" id="contratista" placeholder="Nombre del contratista" required="">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="labels">COSTO:</label>
+                            <input type="number" class="form-control" id="costo" placeholder="" required="">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mb-10 text-truncate p-3">
+                    <button type="submit" class="btn btn-primary me-2" id="agregar-reparacion">
+                        <i class="bi bi-check-circle-fill me-2"></i>Agregar
+                    </button>
+                    <button type="submit" class="btn btn-danger me-2" id="cancelBtn">
+                        <i class="bi bi-check-circle-fill me-2"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-warning" onclick="location.href='../modulo-reparaciones/consultar-reparacion.html'">
+                        <i class="bi bi-check-circle-fill me-2">Consultar reparaciones</i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </main>
+    <script src="../../controller/juego/agregarReparacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
