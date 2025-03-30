@@ -22,6 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <!-- Font-icon css-->
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -145,7 +146,8 @@
       </li>
 
       <!-- Navegacion y menu para rentas -->
-      <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="bi bi-postcard-fill"></i><span class="app-menu__label">. Rentas</span><i
+      <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            class="bi bi-postcard-fill"></i><span class="app-menu__label">. Rentas</span><i
             class="treeview-indicator bi bi-chevron-right"></i></a>
         <ul class="treeview-menu">
           <li><a class="treeview-item" href="../modulo-renta/agregar-renta.html"><i class="bi bi-postcard-fill"></i>.
@@ -170,7 +172,8 @@
           <li><a class="treeview-item" href="../modulo-ingresos/agregar-ingreso-juego.html" rel="noopener"><i
                 class="bi bi-cash-coin"></i>.
               Agregar ingreso</a></li>
-              <li><a class="treeview-item" href="../modulo-juego/actualizarJuego.html" rel="noopener"><i class="bi bi-controller"></i>
+          <li><a class="treeview-item" href="../modulo-juego/actualizarJuego.html" rel="noopener"><i
+                class="bi bi-controller"></i>
               . Actualizar Juego</a></li>
         </ul>
       </li>
@@ -227,8 +230,8 @@
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1><i class="bi bi-speedometer"></i> Dashboard</h1>
-        <p>"Sistema de administración de ingresos y egresos"</p>
+        <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Dashboard</h1>
+        <p>"SISTEMA DE ADMINISTRACION DEL CENTRO COMERCIAL LA PERLA"</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -272,7 +275,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="tile">
-          <h3 class="tile-title">Weekly Sales - Last week</h3>
+          <h3 class="tile-title">INGRESOS ANUALES</h3>
           <div class="ratio ratio-16x9">
             <div id="salesChart"></div>
           </div>
@@ -280,13 +283,92 @@
       </div>
       <div class="col-md-6">
         <div class="tile">
-          <h3 class="tile-title">Support Requests</h3>
+          <h3 class="tile-title">INGRESO DEL MES POR AREA</h3>
           <div class="ratio ratio-16x9">
             <div id="supportRequestChart"></div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="tile">
+          <h3 class="tile-title">GASTOS DE MANTENIMIENTO</h3>
+          <div class="ratio ratio-16x9">
+            <div id="gastosMantenimiento"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="tile">
+          <h3 class="tile-title">EGRESOS ANUALES</h3>
+          <div class="ratio ratio-16x9">
+            <div id="egresosAnual"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <!-- Ingreso Total -->
+      <div class="col">
+        <div class="kpi-card">
+          <i class="fas fa-dollar-sign"></i>
+          <h3>Ingreso Total del Mes</h3>
+          <p class="value">$25,000</p>
+          <p class="percentage positive">+5% de la meta</p>
+        </div>
+      </div>
+    
+      <!-- Egreso Total -->
+      <div class="col">
+        <div class="kpi-card">
+          <i class="fas fa-money-bill-wave"></i>
+          <h3>Egreso Total del Mes</h3>
+          <p class="value">$12,000</p>
+          <p class="percentage negative">-3% de la meta</p>
+        </div>
+      </div>
+    
+      <!-- Meta de Ingreso -->
+      <div class="col">
+        <div class="kpi-card">
+          <i class="fas fa-bullseye"></i>
+          <h3>Meta de Ingreso</h3>
+          <p class="value">$24,000</p>
+          <p class="percentage positive">Meta alcanzada</p>
+        </div>
+      </div>
+    
+      <!-- Meta de Egreso -->
+      <div class="col">
+        <div class="kpi-card">
+          <i class="fas fa-bullseye"></i>
+          <h3>Meta de Egreso</h3>
+          <p class="value">$10,000</p>
+          <p class="percentage negative">Meta excedida</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="tile">
+            <h3 class="tile-title">UBICACIONES</h3>
+            <div class="ratio ratio-16x9">
+              <!-- Aseguramos que el contenedor tenga un tamaño suficiente para el mapa -->
+              <div id="map" style="height: 100%; width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+
   </main>
   <!-- Essential javascripts for application to work-->
   <script src="../../js/jquery-3.7.0.min.js"></script>
@@ -298,7 +380,7 @@
     const salesData = {
       xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
       },
       yAxis: {
         type: 'value',
@@ -308,9 +390,15 @@
       },
       series: [
         {
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line',
-          smooth: true
+          data: [1200, 1500, 1800, 1300, 1700, 2000, 1900, 2200, 2500, 2700, 3000, 2000],
+          type: 'bar',
+          itemStyle: {
+            color: function (params) {
+              const colors = ['#ff9e80', '#a3ffb0', '#a3b8ff', '#ff99d5', '#d8a3ff', '#a3fff9', '#fbff99', '#ffbf80', '#c5ff99', '#99c5ff', '#ff99bf', '#99ffd8'];
+
+              return colors[params.dataIndex];
+            }
+          }
         }
       ],
       tooltip: {
@@ -321,7 +409,8 @@
 
     const supportRequests = {
       tooltip: {
-        trigger: 'item'
+        trigger: 'item',
+        formatter: "<b>{b}:</b> ${c}"
       },
       legend: {
         orient: 'vertical',
@@ -333,9 +422,9 @@
           type: 'pie',
           radius: '50%',
           data: [
-            { value: 300, name: 'In Progress' },
-            { value: 50, name: 'Delayed' },
-            { value: 100, name: 'Complete' }
+            { value: 4800, name: 'Juegos' },
+            { value: 5000, name: 'Rentas' },
+            { value: 1000, name: 'Extras' }
           ],
           emphasis: {
             itemStyle: {
@@ -348,29 +437,131 @@
       ]
     };
 
+
     const salesChartElement = document.getElementById('salesChart');
     const salesChart = echarts.init(salesChartElement, null, { renderer: 'svg' });
     salesChart.setOption(salesData);
     new ResizeObserver(() => salesChart.resize()).observe(salesChartElement);
 
-    const supportChartElement = document.getElementById("supportRequestChart")
+    const supportChartElement = document.getElementById("supportRequestChart");
     const supportChart = echarts.init(supportChartElement, null, { renderer: 'svg' });
     supportChart.setOption(supportRequests);
     new ResizeObserver(() => supportChart.resize()).observe(supportChartElement);
   </script>
-  <!-- Google analytics script-->
-  <script type="text/javascript">
-    if (document.location.hostname == 'pratikborsadiya.in') {
-      (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-      ga('create', 'UA-72504830-1', 'auto');
-      ga('send', 'pageview');
-    }
+
+  <!-- Incluye ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var egresosChart = echarts.init(document.getElementById("egresosAnual"));
+      var egresosOption = {
+
+        tooltip: { trigger: "axis" },
+        xAxis: {
+          type: "category",
+          data: ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        },
+        yAxis: { type: "value" },
+        series: [
+          {
+            name: "Egresos",
+            type: "bar",
+            data: [1200, 1500, 1800, 1300, 1600, 1700, 2000, 2200, 2100, 1900, 1800, 2500],
+            itemStyle: { color: "#ff5733" }
+          }
+        ]
+      };
+
+      egresosChart.setOption(egresosOption);
+
+      var mantenimientoChart = echarts.init(document.getElementById("gastosMantenimiento"));
+      var mantenimientoOption = {
+        tooltip: { trigger: "axis" },
+        legend: { data: ['Reparaciones', 'Servicios', 'Materiales', 'Otros'], left: 'left' },
+        xAxis: {
+          type: 'category',
+          data: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        },
+        yAxis: { type: 'value' },
+        series: [
+          {
+            name: 'Reparaciones',
+            type: 'line',
+            data: [300, 400, 500, 450, 600, 650, 700, 750, 800, 850, 900, 950],
+            smooth: true, // Línea suave
+            color: '#ff5733'
+          },
+          {
+            name: 'Servicios',
+            type: 'line',
+            data: [200, 250, 300, 350, 400, 420, 440, 480, 510, 550, 580, 600],
+            smooth: true,
+            color: '#33ff57'
+          },
+          {
+            name: 'Materiales',
+            type: 'line',
+            data: [150, 200, 220, 250, 280, 300, 320, 340, 360, 380, 400, 420],
+            smooth: true,
+            color: '#3357ff'
+          },
+          {
+            name: 'Otros',
+            type: 'line',
+            data: [100, 120, 150, 180, 200, 210, 230, 250, 270, 290, 310, 330],
+            smooth: true,
+            color: '#FF00C8FF'
+          }
+        ]
+      };
+      mantenimientoChart.setOption(mantenimientoOption);
+    });
   </script>
+
+  <!-- Incluir el archivo JS de Leaflet -->
+  <script src="../../js/plugins/leaflet.js"></script>
+
+  <script>
+    var map = L.map('map').setView([19.817114965266097, -97.35986734768879], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+    var Laperla = L.marker([19.817114965266097, -97.35986734768879]).bindPopup('Centro comercial La perla, centro comercial la Perla, Av. Benito Juárez S/N-Local 69, Centro, 73800 Teziutlán, Pue.').addTo(map);
+    var ConstruramaTubyco = L.marker([19.818182744404755, -97.358894744056882]).bindPopup('Construrama Tubyco Suc. Teziutlan, 73800, Allende 503, Centro, Teziutlán, Pue.').addTo(map);
+    var MaterialesCarmen = L.marker([19.81852246666271, -97.3587055911554]).bindPopup('Materiales el Carmen, Zaragoza 411A, Centro, 73800 Teziutlán, Pue.').addTo(map);
+    var HerreriaPlomeria = L.marker([19.821695644212074, -97.35931768978635]).bindPopup('Herrería plomería y electricidad, Nigromante 9, Centro, 73800 Teziutlán, Pue.').addTo(map);
+    var FerreteraCatorsa = L.marker([19.81920769217201, -97.36072305761097]).bindPopup('Ferretera Catorsa, Lerdo 701, Centro, 73800 Teziutlán, Pue.').addTo(map);
+
+    var circle = L.circle([19.817114965266097, -97.35986734768879], {
+      color: '#30f',
+      fillColor: 'yellow',
+      fillOpacity: 0.5,
+      radius: 300 
+    }).addTo(map);
+    circle.bindPopup("Área de influencia de Denver").openPopup();
+
+    function encontrarUsuario() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var userLat = position.coords.latitude;
+          var userLon = position.coords.longitude;
+          var userMarker = L.marker([userLat, userLon]).addTo(map);
+          userMarker.bindPopup('Tu ubicación').openPopup();
+          map.setView([userLat, userLon], 13);
+        }, function() {
+          alert("No se pudo obtener la ubicación del usuario.");
+        });
+      } else {
+        alert("La geolocalización no es compatible con este navegador.");
+      }
+    }
+    // Llamar a la función para ubicar al usuario
+    encontrarUsuario();
+  </script>
+
 </body>
 
 </html>
