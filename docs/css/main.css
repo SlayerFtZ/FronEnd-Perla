@@ -15163,4 +15163,43 @@ tbody tr:hover {
   }
 }
 
-/* BOTON PARA TEMA NEGRO  */
+
+/* configuracion del dashboard */
+.kpi-card {
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #444;
+  box-shadow: #ffcd39 0px 0px 8px;
+}
+.kpi-card i {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.kpi-card h3 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+.kpi-card p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+.positive {
+  color: #4CAF50;
+}
+.negative {
+  color: #F44336;
+}
+.neutral {
+  color: #FF9800;
+}
+.kpi-card .value {
+  font-size: 32px;
+  font-weight: bold;
+}
+.kpi-card .percentage {
+  font-size: 14px;
+}

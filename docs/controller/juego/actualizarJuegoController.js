@@ -16,8 +16,8 @@ document.getElementById("formActJuego").addEventListener("submit", function(even
 
     Swal.fire({
         icon: "success",
-        title: "Juego agregado",
-        text: "El juego se ha agregado correctamente.",
+        title: "Juego actualizado",
+        text: "El juego se ha actualizado correctamente.",
         confirmButtonText: "Aceptar"
     }).then(() => {
         document.getElementById("formActJuego").reset();
