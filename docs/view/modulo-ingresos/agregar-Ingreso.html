@@ -33,8 +33,6 @@
                 aria-label="Hide Sidebar"></a>
             <!-- Navbar Right Menu-->
             <ul class="app-nav">
-    
-    
                 <!--Notification Menu-->
                 <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
                         aria-label="Show notifications"><i class="bi bi-bell fs-5"></i></a>
@@ -61,7 +59,6 @@
                                         class="app-notification__icon"><i class="bi bi-cash fs-4 text-success"></i></span>
                                     <div>
                                         <p class="app-notification__message">Abono realizado</p>
-    
                                     </div>
                                 </a></li>
                         </div>
@@ -170,6 +167,19 @@
                                 . Actualizar Juego</a></li>
                     </ul>
                 </li>
+
+                <!-- Ingresos -->
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="bi bi-currency-dollar"></i><span
+                            class="app-menu__label">. Ingresos</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i class="bi bi-controller"></i>.
+                                Agregar
+                                juego</a></li>
+                        <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso.html" rel="noopener"><i
+                                    class="bi bi-controller"></i>
+                                . Consultar ingreso de juego</a></li>
+                    </ul>
+                </li>
     
                 <!-- Navegacion y menu para Reparaciones -->
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
@@ -194,7 +204,6 @@
     
                     </ul>
                 </li>
-    
                 <!-- Navegacion y menu para Pagos extras -->
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                             class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
@@ -202,7 +211,6 @@
     
                     <ul class="treeview-menu">
                     </ul>
-    
                 </li>
     
                 <ul class="treeview-menu">
@@ -233,21 +241,22 @@
                     <li class="breadcrumb-item"><a href="../modulo-inicio/dashboard-inicio.html">Inicio</a></li>
                 </ul>
             </div>
-            <!-- Componente para agregar ingresos -->
-            <div class="container">
+            <!-- Componente para agregar el tipo de ingresos -->
+            <div class="container" id="tipoIngreso">
                 <br>
                 <div class="mb-3">
                     <label for="nombreActLocal" class="form-label">Selecciona el tipo de ingreso</label>
-                    <select class="form-control" id="nombreActLocal" required="">
-                        <option value="">Seleccione una opcion</option>
-                        <option value="restaurante" id="gral">Ingreso general</option>
-                        <option value="tienda" id="juego">Ingreso de un juego </option>
-                    </select>
+                        <select class="form-control" id="selectPrincipal" required="">
+                            <option value="">Seleccione una opcion</option>
+                            <option value="ingGral" id="gral">Ingreso general</option>
+                            <option value="ingJue" id="juego">Ingreso de un juego </option>
+                        </select>
                 </div>
                 <br>
             </div>
             <br>
-            <div class="container">
+            <!--seccion de ingresos generales-->
+            <div class="container" id="ingresoGral">
                 <div class="row">
                     <!-- Columna 1: Logo de la empresa -->
                     <div class="col-md-6">
@@ -277,8 +286,8 @@
                                         <label for="nombreActLocal" class="form-label">Estatus del local</label>
                                         <select class="form-control" id="statusLocal1" required="">
                                             <option value="">Seleccione una opcion</option>
-                                            <option value="restaurante" id="gral">Ingreso general</option>
-                                            <option value="tienda" id="juego">Ingreso de un juego </option>
+                                            <option value="restaurante" id="gral">Si</option>
+                                            <option value="tienda" id="juego">No</option>
                                         </select>
                                     </div>
                                 </form>
@@ -292,7 +301,6 @@
                                 <button class="btn btn-primary" id="agegstr">Agregar ingreso</button>
                                 <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
                                 <a href="consultar-ingreso.html"><button class="btn btn-warning" type="button">Consultar</button></a>
-                                <!-- <button class="btn btn-warning" id="cancelBtn" type="button">Cancelar</button> -->
                             </div>
                             <br>
                         </form>
@@ -301,56 +309,56 @@
             </div>
             <br>
             <!--seccion de juegos-->
-        <div class="container">
-            <div class="row">
-                <!-- Columna 1: Logo de la empresa -->
-                <div class="col-md-6">
-                    <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
-                    <br>
-                </div>
-                <div class="col-md-6">
-                    <form id="formAgregarLocal">
-                        <div>
-                            <br>
-                            <label class="titulo-de-pagina">Agregar ingreso de un juego</label>
-                        </div>
-        
-                        <div>
-                            <div class="mb-3">
-                                <label for="actLocal" class="form-label">Maquina</label>
-                                <input type="number" class="form-control" id="actLocal"
-                                    placeholder="Ingresa el numero de maquina" required="">
-                            </div>
-                            <div class="mb-3">
-                                <label for="actLocal" class="form-label">Monto de ingreso total</label>
-                                <input type="number" class="form-control" id="actLocal"
-                                    placeholder="Ingresa el numero de maquina" required="">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
-                                        <input type="date" class="form-control" id="fechaInicioRnt" required="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
-                                        <input type="date" class="form-control" id="fechaInicioRnt" required="">
-                                    </div>
-                                </div>
-                            </div>
+            <div class="container" id="ingresoJuego">
+                <div class="row">
+                    <!-- Columna 1: Logo de la empresa -->
+                    <div class="col-md-6">
+                        <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+                        <br>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="formAgregarLocal">
                             <div>
-                                <button type="submit" class="btn btn-primary">Agregar ingreso de juego</button>
-                                <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
-                               <a href="consultar-ingreso.html"><button class="btn btn-warning" type="button">Consultar</button></a>
+                                <br>
+                                <label class="titulo-de-pagina">Agregar ingreso de un juego</label>
                             </div>
-                            <br>
-                    </form>
+            
+                            <div>
+                                <div class="mb-3">
+                                    <label for="actLocal" class="form-label">Maquina</label>
+                                    <input type="number" class="form-control" id="actLocal"
+                                        placeholder="Ingresa el numero de maquina" required="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="actLocal" class="form-label">Monto de ingreso total</label>
+                                    <input type="number" class="form-control" id="actLocal"
+                                        placeholder="Ingresa el numero de maquina" required="">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
+                                            <input type="date" class="form-control" id="fechaInicioRnt" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
+                                            <input type="date" class="form-control" id="fechaInicioRnt" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Agregar ingreso de juego</button>
+                                    <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+                                <a href="consultar-ingreso.html"><button class="btn btn-warning" type="button">Consultar</button></a>
+                                </div>
+                                <br>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
+            <br>
         </main>
         
         <script src="../../controller/ingresos/agregarIngresoController.js"></script>
@@ -399,7 +407,5 @@
             }
             // ]]>
         </script>
-    
-    
     </body>
 </html>

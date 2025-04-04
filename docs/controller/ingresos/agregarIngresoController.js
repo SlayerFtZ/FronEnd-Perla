@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Configuración común para SweetAlert
     const swalError = (title, text) => {
         Swal.fire({
             icon: 'error',
@@ -31,10 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // Función para restablecer un formulario
     const resetForm = (form) => {
         form.reset();
-        // Limpiar estilos de error
+        
         form.querySelectorAll('.is-invalid').forEach(campo => {
             campo.classList.remove('is-invalid');
         });
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // Función para validar campos
     const validarCampo = (campo, nombreCampo) => {
         const valor = campo.value.trim();
         const feedback = campo.nextElementSibling;
@@ -61,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // ===== FORMULARIO 1: AGREGAR INGRESO GENERAL =====
     const formAgregarIngreso = document.getElementById('formAgregarIngreso1');
     const btnAgregarRenta = document.getElementById('agegstr');
     const btnCancelarRenta = document.getElementById('cancelBtn');
@@ -109,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ===== FORMULARIO 2: AGREGAR INGRESO DE JUEGO =====
     const formAgregarJuego = document.getElementById('formAgregarLocal');
     const btnAgregarJuego = formAgregarJuego?.querySelector('button[type="submit"]');
     const btnCancelarJuego = formAgregarJuego?.querySelector('#cancelBtn');
@@ -128,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const campos = [
                 { id: 'actLocal', nombre: 'Número de máquina' },
                 { id: 'fechaInicioRnt', nombre: 'Fecha de inicio' }
-                // Agrega más campos si es necesario
             ];
 
             campos.forEach(({ id, nombre }) => {
@@ -156,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Eliminar estilos de error al escribir
     document.querySelectorAll('.form-control').forEach(input => {
         input.addEventListener('input', function () {
             this.classList.remove('is-invalid');
@@ -165,3 +158,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const seleccionartipo = document.getElementById('selectPrincipal');
+    const ingresoGral = document.getElementById('ingresoGral');
+    const ingresoJuego = document.getElementById('ingresoJuego');
+
+    ingresoGral.style.display = 'none';
+    ingresoJuego.style.display = 'none';
+
+    seleccionartipo.addEventListener('change', function () {
+        const seleccion = seleccionartipo.value;
+
+        if (seleccion === 'ingGral') {
+            ingresoGral.style.display = 'block';
+            ingresoJuego.style.display = 'none';
+        } else if (seleccion === 'ingJue') {
+            ingresoGral.style.display = 'none';
+            ingresoJuego.style.display = 'block';
+        }
+        else {
+            ingresoGral.style.display = 'none';
+            ingresoJuego.style.display = 'none';
+        }
+    });
+
+});
+
+
