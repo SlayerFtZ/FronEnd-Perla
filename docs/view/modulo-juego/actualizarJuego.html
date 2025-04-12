@@ -80,8 +80,7 @@
                     <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                                 class="bi bi-person me-2 fs-5"></i>
                             Perfil de usuario</a></li>
-                    <li><a class="dropdown-item" href="../modulo-login/page-login.html"><i
-                                class="bi bi-box-arrow-right me-2 fs-5"></i>
+                    <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
                             Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -90,11 +89,12 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/perfilUsuario.jpg"
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" id="user-avatar" src="../../images/perfilUsuario.jpg"
                 alt="User Image">
             <div>
-                <p class="app-sidebar__user-name">JOSUE GOMEZ</p>
-                <p class="app-sidebar__user-designation">Administrador</p>
+                <p class="app-sidebar__user-name" id="user-name">Acceso Denegado</p>
+                <p class="app-sidebar__user-designation" id="user-role">Inicia Sesion</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -156,6 +156,9 @@
                     <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
                                 class="bi bi-key"></i></i>.
                             Actualizar renta</a></li>
+                    <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
+                                class="bi bi-search"></i></i>.
+                            Buscar renta</a></li>
                 </ul>
             </li>
 
@@ -253,79 +256,7 @@
 
         <div class="container mx-auto mt-4">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <div class="container fxFlex=Centro">
-                            <img src="../../images/logo-la perla.png" class="card-img-top d-block mx-auto" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">CABALLO MECANICO</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ESTADO: DISPONIBLE</h6>
-                            <p class="card-text">DESCRIPCIÓN: Some quick example text to build on the card title and
-                                make up the bulk
-                                of the card's content.</p>
-                            <button href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalActJuego">
-                                Actualizar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <div class="container fxFlex=Centro">
-                            <img src="../../images/logo-la perla.png" class="card-img-top d-block mx-auto" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">AVION</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ESTADO: DISPONIBLE</h6>
-                            <p class="card-text">DESCRIPCIÓN: Some quick example text to build on the card title and
-                                make up the bulk
-                                of the card's content.</p>
-                            <button href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalActJuego">
-                                Actualizar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <div class="container fxFlex=Centro">
-                            <img src="../../images/logo-la perla.png" class="card-img-top d-block mx-auto" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">CARRITO</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ESTADO: DISPONIBLE</h6>
-                            <p class="card-text">DESCRIPCIÓN: Some quick example text to build on the card title and
-                                make up the bulk
-                                of the card's content.</p>
-                            <button href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalActJuego">
-                                Actualizar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <div class="container fxFlex=Centro">
-                            <img src="../../images/logo-la perla.png" class="card-img-top d-block mx-auto" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">DRAGON BALL</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ESTADO: DISPONIBLE</h6>
-                            <p class="card-text">DESCRIPCIÓN: Some quick example text to build on the card title and
-                                make up the bulk
-                                of the card's content.</p>
-                            <button href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalActJuego">
-                                Actualizar
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
+            
             </div>
         </div>
 
@@ -341,11 +272,7 @@
                         <form id="formActJuego">
                             <div class="mb-3">
                                 <label for="nombreActJuego" class="form-label">Identificador del Juego</label>
-                                <select class="form-control" id="nombreActJuego" required>
-                                    <option value="">Seleccione un status</option>
-                                    <option value="B-101">B-101</option>
-                                    <option value="A-102">A-102</option>
-                                </select>
+                                <input type="text" class="form-control" id="nombreActJuego" placeholder="Ingresa el ID del juego" required>
                             </div>
                             <div class="mb-3">
                                 <label for="descripcionActJuego" class="form-label">Descripción del juego</label>
@@ -372,6 +299,7 @@
     </main>
 
     <script src="../../controller/juego/actualizarJuegoController.js"></script>
+    <script src="../../controller/inicio/menuUsuarioController.js"></script>
     <script src="../../controller/juego/agregarJuegoController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Essential javascripts for application to work-->

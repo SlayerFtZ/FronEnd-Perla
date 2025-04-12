@@ -1,12 +1,32 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Verificar si el usuario tiene token, id y rol en el localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
 
+    // Si no hay token, id o rol, redirigir al login
+    if (!token || !id || !rol) {
+        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+    }
+});
 
+// Función para mostrar el modal de imagen de perfil
 document.addEventListener("DOMContentLoaded", function () {
     const profileImageInput = document.getElementById('profileImageInput');
     const previewImage = document.getElementById('profileImagePreview');
 
     profileImageInput.addEventListener('change', function (event) {
         const file = event.target.files[0];
+        const id = localStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
 
+        if (!id) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente.',
+            });
+            return;
+        }
         if (file) {
             // Confirmar con SweetAlert antes de cambiar la imagen
             Swal.fire({
@@ -23,14 +43,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     reader.onload = function (e) {
                         previewImage.src = e.target.result;
                         previewImage.style.display = 'block';
-
-                        // Alerta de éxito
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Imagen actualizada',
-                            text: 'Tu imagen de perfil ha sido cambiada con éxito.',
-                            timer: 2000,
-                            showConfirmButton: false
+                        // Preparar la conexión con el API
+                        const formData = new FormData();
+                        formData.append("image", file);
+                        formData.append("id", id);
+                        fetch('/api/update-profile-image', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Imagen actualizada',
+                                    text: 'Tu imagen de perfil ha sido cambiada con éxito.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Hubo un problema al actualizar la imagen de perfil.',
+                                });
+                            }
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'No se pudo conectar con el servidor.',
+                            });
                         });
                     };
                     reader.readAsDataURL(file);
@@ -53,14 +97,25 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
-
+});
 
     // Manejo del perfil de salud
     document.getElementById("updateHealthProfileForm").addEventListener("submit", function (event) {
         event.preventDefault();
+
         const padecimientos = document.getElementById("healthConditions").value.trim();
         const descripcion = document.getElementById("healthDescription").value.trim();
         const categoria = document.getElementById("healthCategory").value;
+        const id = sessionStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
+
+        if (!id) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente."
+            });
+            return;
+        }
 
         if (padecimientos === "" || descripcion === "" || categoria === "seleccion") {
             Swal.fire({
@@ -79,43 +134,75 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                // Aquí realizarías la actualización del perfil de salud
-                // Después de la actualización, mostrar el mensaje de éxito
-                Swal.fire({
-                    title: "¡Perfil de salud actualizado con éxito!",
-                    icon: "success",
-                    confirmButtonText: "Aceptar"
-                }).then(() => {
-                    // Cerrar el modal después de mostrar el mensaje de éxito
-                    $('#updateHealthProfileModal').modal('hide');
+                // Preparar los datos para enviar al API
+                const healthProfileData = {
+                    userId: userId,
+                    padecimientos: padecimientos,
+                    descripcion: descripcion,
+                    categoria: categoria
+                };
+
+                // Realizar la solicitud al API
+                fetch('/api/update-health-profile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(healthProfileData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            title: "¡Perfil de salud actualizado con éxito!",
+                            icon: "success",
+                            confirmButtonText: "Aceptar"
+                        }).then(() => {
+                            // Cerrar el modal después de mostrar el mensaje de éxito
+                            const modal = document.getElementById('updateHealthProfileModal');
+                            if (modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Hubo un problema al actualizar el perfil de salud."
+                        });
+                    }
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "No se pudo conectar con el servidor."
+                    });
                 });
             }
         });
     });
 
-
-    // Manejo del contacto de emergencia
     document.getElementById("updateEmergencyContactForm").addEventListener("submit", function (event) {
+        const token = localStorage.getItem("token");
+        const id = localStorage.getItem("id");
         event.preventDefault();
-
-        // Obtener los valores de los campos
+    
+        // Obtener los valores del formulario
         const nombre = document.getElementById("emergencyContactName").value.trim();
         const apellidoPaterno = document.getElementById("emergencyContactLastName").value.trim();
         const apellidoMaterno = document.getElementById("emergencyContactSecondLastName").value.trim();
         const numeroTelefonico = document.getElementById("emergencyContactPhone").value.trim();
         const parentesco = document.getElementById("emergencyContactRelationship").value;
-
-        // Expresiones regulares para validación
+    
+        // Validaciones
         const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
         const regexTelefono = /^[0-9]{10}$/;
-
-        // Limpiar mensajes de error previos
-        const errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach((msg) => msg.style.display = 'none');
-
+    
+        document.querySelectorAll('.error-message').forEach(msg => msg.style.display = 'none');
+    
         let isValid = true;
-
-        // Validar cada campo
+    
         if (!regexNombre.test(nombre) || nombre.length < 3) {
             displayError("nameError", "El nombre debe contener solo letras y al menos 3 caracteres.");
             isValid = false;
@@ -132,12 +219,12 @@ document.addEventListener("DOMContentLoaded", function () {
             displayError("phoneError", "El número de teléfono debe contener 10 dígitos.");
             isValid = false;
         }
-        if (parentesco === "seleccion") {
+        if (!parentesco || parentesco === "seleccion") {
             displayError("relationshipError", "Debe seleccionar un parentesco válido.");
             isValid = false;
         }
-
-        // Si la validación es correcta, mostrar la confirmación
+    
+        // Si todo es válido, continuar
         if (isValid) {
             Swal.fire({
                 title: "¿Estás seguro de que deseas actualizar el contacto de emergencia?",
@@ -147,28 +234,85 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "No"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Familiar agregado correctamente!",
-                        icon: "success",
-                        confirmButtonText: "Aceptar"
-                    }).then(() => {
-                        $('#updateEmergencyContactModal').modal('hide');
+                    const id = localStorage.getItem("id");
+                    if (!id  || !token) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "No se pudo obtener la información del usuario, contacto o token."
+                        });
+                        return;
+                    }
+    
+                    const data = {
+                        usuario: { idUsuario: parseInt(id) },
+                        nombre,
+                        apellidoPaterno,
+                        apellidoMaterno,
+                        telefono: numeroTelefonico,
+                        parentesco
+                    };
+    
+                    fetch(`http://localhost:8081/api/contactos-emergencia/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error("Error al actualizar el contacto");
+                        return response.json();
+                    })
+                    .then(data => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Contacto actualizado",
+                            text: "El contacto de emergencia se actualizó correctamente."
+                        }).then(() => {
+                            $('#updateEmergencyContactModal').modal('hide');
+                            // Aquí podrías actualizar la vista o recargar los contactos
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "No se pudo actualizar el contacto. Intenta de nuevo."
+                        });
+                        console.error(error);
                     });
                 }
             });
         }
     });
-
-    // Función para mostrar un mensaje de error debajo del campo
+    
+    // Función para mostrar mensajes de error
     function displayError(errorId, message) {
         const errorElement = document.getElementById(errorId);
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
     }
-});
+    
+    
+    
 
-// boton para desahibilitar un usuario 
+// Botón para deshabilitar un usuario
 document.getElementById("btn-despedir").addEventListener("click", function () {
+    const id = sessionStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
+
+    if (!id) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente."
+        });
+        return;
+    }
+
     Swal.fire({
         title: "¿Estás seguro?",
         text: "Esta acción despedirá al usuario y no se podrá revertir.",
@@ -180,34 +324,46 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch('/api/despedir-usuario', { method: 'POST' }) // Cambia la URL por la de tu backend
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({
-                            title: "Despedido",
-                            text: "El usuario ha sido despedido exitosamente.",
-                            icon: "success"
-                        });
-                    } else {
-                        Swal.fire({
-                            title: "Error",
-                            text: "Hubo un problema al despedir al usuario.",
-                            icon: "error"
-                        });
-                    }
-                })
-                .catch(() => {
+            // Preparar los datos para enviar al API
+            const data = { id };
+
+            fetch('/api/despedir-usuario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: "Despedido",
+                        text: "El usuario ha sido despedido exitosamente.",
+                        icon: "success"
+                    });
+                } else {
                     Swal.fire({
                         title: "Error",
-                        text: "No se pudo conectar con el servidor.",
+                        text: "Hubo un problema al despedir al usuario.",
                         icon: "error"
                     });
+                }
+            })
+            .catch(() => {
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo conectar con el servidor.",
+                    icon: "error"
                 });
+            });
         }
     });
 });
-//actualziar usuario
+
+
+
+//actualizar usuario
 document.addEventListener("DOMContentLoaded", function () {
     function showError(input, message) {
         let errorSpan = input.nextElementSibling;
@@ -314,21 +470,71 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "No, cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Si el usuario confirma, enviamos el formulario
-                    Swal.fire({
-                        title: "Perfil actualizado correctamente!",
-                        icon: "success",
+                    const id = sessionStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
 
-                        confirmButtonText: "Cerrar",
-                    }).then(() => {
-                        // Aquí escondemos el modal y enviamos el formulario
-                        const modal = document.querySelector("#modalActualizarUsuario");
-                        if (modal) {
-                            modal.style.display = "none";
+                    if (!id) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente."
+                        });
+                        return;
+                    }
+
+                    // Preparar los datos para enviar al API
+                    const userData = {
+                        id: id,
+                        nombre: document.getElementById("actualizarNombre").value.trim(),
+                        apellidoPaterno: document.getElementById("actualizarApellidoPaterno").value.trim(),
+                        apellidoMaterno: document.getElementById("actualizarApellidoMaterno").value.trim(),
+                        correo: document.getElementById("actualizarCorreo").value.trim(),
+                        curp: document.getElementById("actualizarCurp").value.trim(),
+                        rfc: document.getElementById("actualizarRfc").value.trim(),
+                        telefono: document.getElementById("actualizarTelefono").value.trim(),
+                        nss: document.getElementById("actualizarNss").value.trim(),
+                        fechaNacimiento: document.getElementById("actualizarFechaNacimiento").value,
+                        direccion: document.getElementById("actualizarDireccion").value.trim(),
+                        genero: document.querySelector("input[name='genero']:checked").value,
+                        rol: document.querySelector("input[name='rol']:checked").value,
+                        estado: document.querySelector("input[name='estado']:checked").value
+                    };
+
+                    fetch('/api/actualizar-usuario', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: "Perfil actualizado correctamente!",
+                                icon: "success",
+                                confirmButtonText: "Cerrar",
+                            }).then(() => {
+                                const modal = document.querySelector("#modalActualizarUsuario");
+                                if (modal) {
+                                    modal.style.display = "none";
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: "Hubo un problema al actualizar el perfil.",
+                                icon: "error",
+                                confirmButtonText: "Aceptar",
+                            });
                         }
-
-                        // Ahora podemos enviar el formulario
-                        event.target.submit(); // Esto envía el formulario
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            title: "Error",
+                            text: "No se pudo conectar con el servidor.",
+                            icon: "error",
+                            confirmButtonText: "Aceptar",
+                        });
                     });
                 }
             });
@@ -341,6 +547,10 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
-
 });
 
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+    localStorage.clear();  // Limpia todo el localStorage
+    sessionStorage.clear(); // Limpia todo el sessionStorage
+    window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });
