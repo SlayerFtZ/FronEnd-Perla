@@ -78,8 +78,7 @@
           <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                 class="bi bi-person me-2 fs-5"></i>
               Perfil de usuario</a></li>
-          <li><a class="dropdown-item" href="../modulo-login/page-login.html"><i
-                class="bi bi-box-arrow-right me-2 fs-5"></i>
+          <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
               Cerrar sesión</a></li>
         </ul>
       </li>
@@ -88,11 +87,11 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/perfilUsuario.jpg"
-        alt="User Image">
+    <div class="app-sidebar__user">
+      <img class="app-sidebar__user-avatar" id="user-avatar" src="../../images/perfilUsuario.jpg" alt="User Image">
       <div>
-        <p class="app-sidebar__user-name">JOSUE GOMEZ</p>
-        <p class="app-sidebar__user-designation">Administrador</p>
+        <p class="app-sidebar__user-name" id="user-name">Acceso Denegado</p>
+        <p class="app-sidebar__user-designation" id="user-role">Inicia Sesion</p>
       </div>
     </div>
     <ul class="app-menu">
@@ -151,6 +150,8 @@
               rentas</a></li>
           <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i class="bi bi-key"></i></i>.
               Actualizar renta</a></li>
+          <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
+              Buscar renta</a></li>
         </ul>
       </li>
 
@@ -308,7 +309,6 @@
           <i class="fas fa-dollar-sign"></i>
           <h3>Ingreso Total del Mes</h3>
           <p class="value">$25,000</p>
-          <p class="percentage positive">+5% de la meta</p>
         </div>
       </div>
 
@@ -318,7 +318,6 @@
           <i class="fas fa-money-bill-wave"></i>
           <h3>Egreso Total del Mes</h3>
           <p class="value">$12,000</p>
-          <p class="percentage negative">-3% de la meta</p>
         </div>
       </div>
 
@@ -328,7 +327,6 @@
           <i class="fas fa-bullseye"></i>
           <h3>Meta de Ingreso</h3>
           <p class="value">$24,000</p>
-          <p class="percentage positive">Meta alcanzada</p>
         </div>
       </div>
 
@@ -338,7 +336,6 @@
           <i class="fas fa-bullseye"></i>
           <h3>Meta de Egreso</h3>
           <p class="value">$10,000</p>
-          <p class="percentage negative">Meta excedida</p>
         </div>
       </div>
     </div>
@@ -553,6 +550,28 @@
     encontrarUsuario();
   </script>
 
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Verificar si el usuario tiene token, id y rol en el localStorage
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+      const rol = localStorage.getItem("rol");
+
+      // Si no hay token, id o rol, redirigir al login
+      if (!token || !id || !rol) {
+        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.clear();  // Limpia todo el localStorage
+      sessionStorage.clear(); // Limpia todo el sessionStorage
+      window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });
+
+  </script>
+  <script src="../../controller/inicio/menuUsuarioController.js"></script>
 </body>
 
 </html>

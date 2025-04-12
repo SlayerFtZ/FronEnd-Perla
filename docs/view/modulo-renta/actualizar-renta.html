@@ -77,8 +77,7 @@
           <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                 class="bi bi-person me-2 fs-5"></i>
               Perfil de usuario</a></li>
-          <li><a class="dropdown-item" href="../modulo-login/page-login.html"><i
-                class="bi bi-box-arrow-right me-2 fs-5"></i>
+          <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
               Cerrar sesión</a></li>
         </ul>
       </li>
@@ -87,11 +86,11 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/perfilUsuario.jpg"
-        alt="User Image">
+    <div class="app-sidebar__user">
+      <img class="app-sidebar__user-avatar" id="user-avatar" src="../../images/perfilUsuario.jpg" alt="User Image">
       <div>
-        <p class="app-sidebar__user-name">JOSUE GOMEZ</p>
-        <p class="app-sidebar__user-designation">Administrador</p>
+        <p class="app-sidebar__user-name" id="user-name">Acceso Denegado</p>
+        <p class="app-sidebar__user-designation" id="user-role">Inicia Sesion</p>
       </div>
     </div>
     <ul class="app-menu">
@@ -150,6 +149,8 @@
               rentas</a></li>
           <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i class="bi bi-key"></i></i>.
               Actualizar renta</a></li>
+          <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
+              Buscar renta</a></li>
         </ul>
       </li>
 
@@ -370,6 +371,7 @@
     </div>
 
     <script src="../../controller/renta/actualizarRentaController.js"></script>
+    <script src="../../controller/inicio/menuUsuarioController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>

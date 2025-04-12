@@ -153,8 +153,7 @@
                                 class="bi bi-postcard-fill"></i>.
                             Agregar
                             rentas</a></li>
-                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
-                                class="bi bi-key"></i></i>.
+                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><iclass="bi bi-key"></iclass=></i>.
                             Actualizar renta</a></li>
                             <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
                                 Buscar renta</a></li>
@@ -229,7 +228,7 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-person-bounding-box"></i> Perfil de usuario</h1>
+                <h1 class="titulo-de-pagina"><i class="bi bi-person-bounding-box"></i> Perfil de usuario consultado</h1>
                 <p>"DATOS PERSONALES"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
@@ -449,9 +448,11 @@
                                 <label for="healthCategory" class="form-label">Categoría</label>
                                 <select class="form-control" id="healthCategory" name="healthCategory" required>
                                     <option value="seleccion">Selecciona una opción</option>
-                                    <option value="LEVE">Leve</option>
-                                    <option value="MODERADO">Moderado</option>
-                                    <option value="GRAVE">Grave</option>
+                                    <option value="ninguno">Ninguno</option>
+                                    <option value="otro">Otro</option>
+                                    <option value="cronico">Crónico</option>
+                                    <option value="respiratorio">Respiratorio</option>
+                                    <option value="psicologico">Psicológico</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -510,10 +511,10 @@
                                 <select class="form-control" id="emergencyContactRelationship"
                                     name="emergencyContactRelationship">
                                     <option value="seleccion">Selecciona una opción</option>
-                                    <option value="Esposos">Esposa / Esposo</option>
-                                    <option value="Hijos">Hijo / Hija</option>
-                                    <option value="Union libre">Cónyuge</option>
-                                    <option value="Hermanos">Hernamo / Hermana</option>
+                                    <option value="esposo">Esposa / Esposo</option>
+                                    <option value="hijo">Hijo / Hija</option>
+                                    <option value="conyuge">Cónyuge</option>
+                                    <option value="otro">Otro</option>
                                 </select>
                                 <div class="error-message" id="relationshipError" style="color: red; display: none;">
                                 </div> <!-- Error -->
@@ -678,11 +679,7 @@
 
         <script src="../../js/plugins/sweetalert.js"></script>
 
-        <script src="../../controller/usuario/usuarioController.js"></script>
-
-        <script src="../../controller/usuario/perfilUsuarioController.js"></script>
-
-        <script src="../../controller/usuario/actualizarUsuarioController.js"></script>
+        <script src="../../controller/usuario/perfilUsuarioBuscadoController.js"></script>
 
         <script src="../../controller/inicio/menuUsuarioController.js"></script>
     </main>

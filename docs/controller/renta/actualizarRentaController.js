@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Verificar si el usuario tiene token, id y rol en el localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+
+    // Si no hay token, id o rol, redirigir al login
+    if (!token || !id || !rol) {
+        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formActLocal");
     const cancelBtn = document.querySelector("[data-bs-dismiss='modal']");
 
@@ -74,38 +86,88 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    icon: "success",
-                    title: "Renta actualizada",
-                    text: "Se ha registrado correctamente.",
-                }).then(() => {
-                    form.submit();
-                    window.location.href = '../../view/modulo-renta/actualizar-renta.html';
+                // Preparar datos para enviar al API
+                const data = {
+                    local: nombreLocal.value,
+                    usuario: usuario.value,
+                    fechaInicio: fechaInicio.value,
+                    fechaFin: fechaFin.value
+                };
+
+                // Enviar datos al API
+                fetch("https://api.example.com/rentas/actualizar", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error al actualizar la renta");
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Renta actualizada",
+                        text: "Se ha registrado correctamente.",
+                    }).then(() => {
+                        window.location.href = '../../view/modulo-renta/actualizar-renta.html';
+                    });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "No se pudo actualizar la renta. Inténtalo nuevamente.",
+                    });
+                    console.error("Error:", error);
                 });
             }
         });
     });
 
     // Confirmación para el botón cancelar
-    // cancelBtn.addEventListener("click", function () {
-    //     Swal.fire({
-    //         title: "¿Cancelar?",
-    //         text: "¿Estás seguro de cancelar la operación?",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Sí, cancelar",
-    //         cancelButtonText: "Volver"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 icon: "info",
-    //                 title: "Operación cancelada",
-    //                 text: "No se realizó ningún cambio.",
-    //             });
-    //             form.reset(); // Limpia el formulario si se confirma la cancelación
-    //         }
-    //     });
-    // });
+    cancelBtn.addEventListener("click", function () {
+        Swal.fire({
+            title: "¿Cancelar?",
+            text: "¿Estás seguro de cancelar la operación?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, cancelar",
+            cancelButtonText: "Volver"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: "info",
+                    title: "Operación cancelada",
+                    text: "No se realizó ningún cambio.",
+                });
+                form.reset(); // Limpia el formulario si se confirma la cancelación
+            }
+        });
+    });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Verificar si el usuario tiene token, id y rol en el localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+
+    // Si no hay token, id o rol, redirigir al login
+    if (!token || !id || !rol) {
+        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+    }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+    localStorage.clear();  // Limpia todo el localStorage
+    sessionStorage.clear(); // Limpia todo el sessionStorage
+    window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });

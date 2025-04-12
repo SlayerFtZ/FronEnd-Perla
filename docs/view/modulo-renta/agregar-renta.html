@@ -77,8 +77,7 @@
           <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                 class="bi bi-person me-2 fs-5"></i>
               Perfil de usuario</a></li>
-          <li><a class="dropdown-item" href="../modulo-login/page-login.html"><i
-                class="bi bi-box-arrow-right me-2 fs-5"></i>
+          <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
               Cerrar sesión</a></li>
         </ul>
       </li>
@@ -87,11 +86,11 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/perfilUsuario.jpg"
-        alt="User Image">
+    <div class="app-sidebar__user">
+      <img class="app-sidebar__user-avatar" id="user-avatar" src="../../images/perfilUsuario.jpg" alt="User Image">
       <div>
-        <p class="app-sidebar__user-name">JOSUE GOMEZ</p>
-        <p class="app-sidebar__user-designation">Administrador</p>
+        <p class="app-sidebar__user-name" id="user-name">Acceso Denegado</p>
+        <p class="app-sidebar__user-designation" id="user-role">Inicia Sesion</p>
       </div>
     </div>
     <ul class="app-menu">
@@ -150,6 +149,8 @@
               rentas</a></li>
           <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i class="bi bi-key"></i></i>.
               Actualizar renta</a></li>
+          <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
+              Buscar renta</a></li>
         </ul>
       </li>
 
@@ -229,7 +230,7 @@
       </ul>
     </div>
 
-    <!-- Componente para agregar un renta -->
+    <!-- Componente para agregar una renta -->
     <div class="container">
       <div class="row">
         <!-- Columna 1: Logo de la empresa -->
@@ -239,35 +240,37 @@
         </div>
 
         <!-- Columna 2: Formulario -->
-        <!-- Columna 2: Formulario -->
         <div class="col-md-6">
-          <form id="formAgregarLocal">
+          <form id="formAgregarRenta">
             <div>
               <br>
               <label class="titulo-de-pagina">Agregar renta de un local</label>
             </div>
+
+            <!-- Selección de Local -->
             <div class="mb-3">
               <label for="nombreRntLocal" class="form-label">Selecciona un local</label>
               <select class="form-control" id="nombreRntLocal" required>
                 <option value="">Seleccione un local</option>
-                <option value="B-102">B-102</option>
-                <option value="A-105">A-105</option>
-                <option value="C-154">C-154</option>
+                
               </select>
             </div>
+
+            <!-- Estatus de Renta -->
             <div class="mb-3">
               <label for="estatusRenta" class="form-label">Estatus de renta</label>
-              <input class="form-control" disabled>
+              <input class="form-control" id="estatusRenta" disabled>
             </div>
+
+            <!-- Selección de Usuario -->
             <div class="mb-3">
-              <label for="usuarioRntLocal" class="form-label">Selecciona un usuario</label>
-              <select class="form-control" id="usuarioRntLocal" required>
-                <option value="">Seleccione un usuario</option>
-                <option value="raul-perez">Raul Perez Simbron</option>
-                <option value="gabriela-gomez">Gabriela Gomez Simbron</option>
-                <option value="saul-severiano">Saul Severiano Perez</option>
+              <label for="opcionesUsuario" class="form-label">Selecciona un usuario</label>
+              <select class="form-control" id="opcionesUsuario" name="opcionesUsuario">
+                <option value="seleccion">Selecciona un usuario</option>
               </select>
             </div>
+
+            <!-- Fechas de Renta -->
             <div class="mb-3">
               <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
               <input type="date" class="form-control" id="fechaInicioRnt" required>
@@ -276,6 +279,8 @@
               <label for="fechaFinRnt" class="form-label">Fecha de fin</label>
               <input type="date" class="form-control" id="fechaFinRnt" required>
             </div>
+
+            <!-- Botones -->
             <div>
               <button type="submit" class="btn btn-primary">Agregar Renta</button>
               <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
@@ -283,12 +288,12 @@
             <br>
           </form>
         </div>
-
       </div>
     </div>
 
-  </main>
 
+  </main>
+  <script src="../../controller/inicio/menuUsuarioController.js"></script>
   <script src="../../controller/renta/agregarRentaController.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Essential javascripts for application to work-->

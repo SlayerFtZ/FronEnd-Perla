@@ -10,7 +10,8 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-postcss": "^0.9.0",
     "grunt-sass": "^3.1.0",
-    "sass": "^1.69.3"
+    "sass": "^1.69.3",
+    "vite": "^6.2.4"
   },
   "scripts": {
     "dev": "grunt watch",
@@ -35,6 +36,7 @@
   "dependencies": {
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.3",
+    "cors": "^2.8.5",
     "leaflet": "^1.9.4",
     "sweetalert2": "^11.15.10"
   },

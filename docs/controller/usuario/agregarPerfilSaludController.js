@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Verificar si el usuario tiene token, id y rol en el localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+
+    // Si no hay token, id o rol, redirigir al login
+    if (!token || !id || !rol) {
+        window.location.href = "../../view/modulo-login/page-login.html"; // Redirigir al login si no hay token, id o rol
+        return;
+    }
+
     // Funciones de manejo de errores
     function showError(input, message) {
         let errorSpan = input.nextElementSibling;
@@ -17,6 +28,52 @@ document.addEventListener("DOMContentLoaded", function () {
             errorSpan.remove();
         }
     }
+
+    //funcion para mostrar la lista de usuarios
+    async function loadUsuarios() {
+        if (!token) return;
+        try {
+            const response = await fetch('http://localhost:8081/api/usuarios', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) throw new Error('Error en la solicitud');
+    
+            const data = await response.json();
+            const select = document.getElementById('opcionesUsuario');
+            data.forEach(usuario => {
+                const option = document.createElement('option');
+                option.value = usuario.idUsuario;
+                option.textContent = `${usuario.nombre} ${usuario.apellidoPaterno} ${usuario.apellidoMaterno}`;
+                select.appendChild(option);
+            });
+    
+            select.addEventListener('change', () => {
+                const selectedUserId = select.value;
+                sessionStorage.setItem('selectedUserId', selectedUserId); // Guardar en sessionStorage
+    
+                const selectedUser = data.find(usuario => usuario.idUsuario == selectedUserId);
+                if (selectedUser) {
+                    const rolUsuario = selectedUser.rol || "Rol no disponible";
+                    document.querySelector('.text-muted').textContent = `Rol: ${rolUsuario}`;
+    
+                    // Actualizar la imagen del usuario seleccionado
+                    const userImage = document.querySelector('.profile-img');
+                    userImage.src = selectedUser.fotoPerfilUrl || "../../images/perfilUsuario.jpg"; // Imagen por defecto si no tiene foto
+                }
+            });
+    
+        } catch (error) {
+            console.error('Error al cargar los usuarios:', error);
+        }
+    }
+    
+    loadUsuarios(); // Cargar usuarios al cargar la página
+    
 
     // Obtener elementos
     const submitBtn = document.getElementById('submitBtn');
@@ -54,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
+    // Función para mostrar el mensaje de cancelación
     const showCancelMessage = () => {
         Swal.fire({
             icon: 'info',
@@ -66,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Función que valida los campos y envía el formulario
-    const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
         let valid = true;
 
         // Validar campos
@@ -99,7 +157,43 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (valid) {
-            showSuccessMessage();
+            const selectedUserId = sessionStorage.getItem('selectedUserId');
+            const data = {
+                nombrePadecimiento: padecimientosInput.value.trim(),
+                descripcion: descripcionInput.value.trim(),
+                categoria: opcionesCategoriaSelect.value,
+                    "usuario": {
+                        "idUsuario": selectedUserId, // Usar directamente el valor de selectedUserId
+                    },
+            };
+
+            try {
+                const response = await fetch(`http://localhost:8081/api/padecimientos`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showSuccessMessage();
+                } else {
+                    const errorData = await response.json();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al enviar',
+                        text: errorData.message || 'Ocurrió un error al guardar los datos.',
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de conexión',
+                    text: 'No se pudo conectar con el servidor. Por favor, intenta nuevamente.',
+                });
+            }
         } else {
             showErrorMessage();
         }
@@ -110,4 +204,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Evento para el botón "Cancelar"
     cancelBtn.addEventListener('click', showCancelMessage);
+
+    // Evento de logout
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();  // Limpia todo el localStorage
+        sessionStorage.clear(); // Limpia todo el sessionStorage
+        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });
 });
