@@ -82,17 +82,17 @@
                 </li>
             </ul>
         </header>
-        <!-- Sidebar menu-->
-        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <aside class="app-sidebar">
-            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/perfilUsuario.jpg"
-                    alt="User Image">
-                <div>
-                    <p class="app-sidebar__user-name">JOSUE GOMEZ</p>
-                    <p class="app-sidebar__user-designation">Administrador</p>
-                </div>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" id="user-avatar" src="../../images/perfilUsuario.jpg" alt="User Image">
+            <div>
+                <p class="app-sidebar__user-name" id="user-name">Acceso Denegado</p>
+                <p class="app-sidebar__user-designation" id="user-role">Inicia Sesion</p>
             </div>
-            <ul class="app-menu">
+        </div>
+        <ul class="app-menu">
     
                 <!--Navegacion a el dashboard -->
                 <li><a class="app-menu__item active" href="../modulo-inicio/dashboard-inicio.html"><i
@@ -369,6 +369,7 @@
         <script src="../../js/jquery-3.7.0.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/main.js"></script>
+        <script src="../../controller/inicio/menuUsuarioController.js"></script>
         <!-- Code injected by live-server -->
         <script>
             // <![CDATA[  <-- For SVG support
