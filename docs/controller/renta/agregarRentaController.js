@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const selectedOption = selectLocal.options[selectLocal.selectedIndex];
             const estado = selectedOption.getAttribute('data-estado');
             estatusInput.value = estado || '';
+            sessionStorage.setItem('selectLocalid', selectLocal.value);
         });
 
         const storedId = sessionStorage.getItem('selectLocalid');
@@ -39,16 +40,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             selectLocal.value = storedId;
         }
 
-        selectLocal.addEventListener('change', function () {
-            sessionStorage.setItem('selectLocalid', selectLocal.value);
-        });
-
         window.localesData = data;
     })
     .catch(error => {
         console.error('Error al cargar locales:', error);
     });
 
+    // Cargar usuarios
     async function loadUsuarios() {
         if (!token) return;
         try {
@@ -119,7 +117,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const usuario = document.getElementById("opcionesUsuario");
         const fechaInicio = document.getElementById("fechaInicioRnt");
         const fechaFin = document.getElementById("fechaFinRnt");
-        const estatusRenta = document.getElementById("estatusRenta");  // Definir esta variable
+        const estado = document.getElementById("estatusRenta");
 
         if (nombreLocal.value === "") {
             mostrarError(nombreLocal, "Debes seleccionar un local válido.");
@@ -139,6 +137,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             mostrarError(fechaFin, "La fecha de fin es obligatoria.");
         } else if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaFin.value)) {
             mostrarError(fechaFin, "Formato de fecha inválido (YYYY-MM-DD).");
+        } else if (fechaFin.value < fechaInicio.value) {
+            mostrarError(fechaFin, "La fecha de fin no puede ser anterior a la fecha de inicio.");
         }
 
         if (!isValid) {
@@ -161,10 +161,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             cancelButtonText: "Cancelar"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const estatus = estatusRenta.value;
+                const estadoValor = estado.value;
         
                 // Verifica el estado antes de hacer el fetch
-                if (estatus === "Ocupado") {
+                if (estadoValor.toLowerCase() === "ocupado") {
                     Swal.fire({
                         icon: "warning",
                         title: "Local ocupado",
@@ -172,13 +172,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                     });
                     return; // Cancela el proceso si el local está ocupado
                 }
-        
+
                 try {
                     // Crear el objeto de datos para el POST
                     const data = {
                         idLocal: nombreLocal.value,
                         idUsuario: usuario.value,
-                        estado: (estatus === "Disponible" || estatus === "Reservado") ? "Disponible" : "En renta",
+                        estado: (estadoValor === "Disponible" || estadoValor === "Reservado") ? "Disponible" : "En renta",
                         fechaInicio: fechaInicio.value,
                         fechaFin: fechaFin.value
                     };
@@ -219,8 +219,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
             }
         });
-
-    }); // ✅ Este evento debe estar FUERA del .then anterior
+    });
 
     cancelBtn.addEventListener("click", function () {
         Swal.fire({
