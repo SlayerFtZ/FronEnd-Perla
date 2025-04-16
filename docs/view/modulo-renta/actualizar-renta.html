@@ -16,7 +16,7 @@
   <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
   <meta property="og:description"
     content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
-  <title> Centro Comercial La Perla</title>
+  <title>Centro Comercial La Perla</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -231,11 +231,12 @@
       </li>
     </ul>
   </aside>
+
   <main class="app-content">
     <div class="app-title">
       <div>
-        <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Actualizar renta</h1>
-        <p>"ACTUALIZAR LA INFORMACIÓN DE UNA RENTA"</p>
+        <h1 class="titulo-de-pagina"><i class="bi bi-speedometer"></i> Agregar Renta</h1>
+        <p>"LLENA LOS CAMPOS PARA AGREGAR LA RENTA DE UN LOCAL"</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -243,154 +244,77 @@
       </ul>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Información de la renta de un local</h5>
+    <!-- Componente para agregar una renta -->
+    <div class="container">
+      <div class="row">
+        <!-- Columna 1: Logo de la empresa -->
+        <div class="col-md-6">
+          <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+          <br>
+        </div>
+
+        <!-- Columna 2: Formulario -->
+        <div class="col-md-6">
+          <form id="formAgregarRenta">
             <div>
-              <div class="mb-2 d-flex justify-content-between align-items-center">
-                <div class="position-relative">
-                  <span class="position-absolute search"></span>
-                  <li class="app-search">
-                    <input class="app-search__input" type="search" placeholder="Buscar por ID local">
-                    <button class="app-search__button"><i class="bi bi-search"></i></button>
-                  </li>
-                </div>
-              </div>
+              <br>
+              <label class="titulo-de-pagina">Actualizar renta de un local</label>
             </div>
 
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Nombre Local</th>
-                    <th>Nombre del Socio</th>
-                    <th>Fecha inicio</th>
-                    <th>Fecha fin</th>
-                    <th>Estado de uso</th>
-                    <th>Monto de renta</th>
-                    <th>Accion</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>LC-100</td>
-                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
-                      perez
-                      simbron</td>
-                    <td>10/12/2024</td>
-                    <td>10/1/2025</td>
-                    <td>En renta</td>
-                    <td>$3800.00</td>
-                    <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#modalActLocal">
-                        Actualizar Renta
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>LC-100</td>
-                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
-                      perez
-                      simbron</td>
-                    <td>10/12/2024</td>
-                    <td>10/1/2025</td>
-                    <td>En renta</td>
-                    <td>$3800.00</td>
-                    <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#modalActLocal">
-                        Actualizar Renta
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>LC-100</td>
-                    <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2">Jesus
-                      perez
-                      simbron</td>
-                    <td>10/12/2024</td>
-                    <td>10/1/2025</td>
-                    <td>En renta</td>
-                    <td>$3800.00</td>
-                    <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#modalActLocal">
-                        Actualizar Renta
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <!-- Selección de Local -->
+            <div class="mb-3">
+              <label for="nombreRntLocal" class="form-label">Selecciona un local</label>
+              <select class="form-control" id="nombreRntLocal" required>
+                <option value="">Seleccione un local</option>
+                
+              </select>
             </div>
-          </div>
+
+            <!-- Estatus de Renta -->
+            <div class="mb-3">
+              <label for="estatusRenta" class="form-label">Estatus de renta</label>
+              <input class="form-control" id="estatusRenta" >
+            </div>
+
+            <!-- Selección de Usuario -->
+            <div class="mb-3">
+              <label for="opcionesUsuario" class="form-label">Selecciona un usuario</label>
+              <select class="form-control" id="opcionesUsuario" name="opcionesUsuario">
+                <option value="seleccion">Selecciona un usuario</option>
+              </select>
+            </div>
+
+            <!-- Fechas de Renta -->
+            <div class="mb-3">
+              <label for="fechaInicioRnt" class="form-label">Fecha de inicio</label>
+              <input type="date" class="form-control" id="fechaInicioRnt" required>
+            </div>
+            <div class="mb-3">
+              <label for="fechaFinRnt" class="form-label">Fecha de fin</label>
+              <input type="date" class="form-control" id="fechaFinRnt" required>
+            </div>
+
+            <!-- Botones -->
+            <div>
+              <button type="submit" class="btn btn-primary">Agregar Renta</button>
+              <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+            </div>
+            <br>
+          </form>
         </div>
       </div>
     </div>
 
 
+  </main>
+  <script src="../../controller/inicio/menuUsuarioController.js"></script>
+  <script src="../../controller/renta/actualizarRentaController.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Essential javascripts for application to work-->
+  <script src="../../js/jquery-3.7.0.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/main.js"></script>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalActLocal" tabindex="-1" aria-labelledby="modalActLocalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalActLocalLabel">Actualizar Renta de un Local</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="formActLocal">
-              <div class="mb-3">
-                <label for="actRntLocal" class="form-label">Selecciona un local</label>
-                <select class="form-control" id="actRntLocal" required>
-                  <option value="">Seleccione un local</option>
-                  <option value="B-102">B-102</option>
-                  <option value="A-105">A-105</option>
-                  <option value="C-154">C-154</option>
-
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="estatusActRenta" class="form-label">Estatus de renta</label>
-                <input class="form-control" disabled>
-              </div>
-              <div class="mb-3">
-                <label for="usuarioActRntLocal" class="form-label">Selecciona un usuario</label>
-                <select class="form-control" id="usuarioActRntLocal" required>
-                  <option value="">Seleccione un usuario</option>
-                  <option value="raul_perez">Raul Perez Simbron</option>
-                  <option value="gabriela_gomez">Gabriela Gomez Simbron</option>
-                  <option value="saul_severiano">Saul Severiano Perez</option>
-
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="fechaActInicioRnt" class="form-label">Fecha de inicio</label>
-                <input type="date" class="form-control" id="fechaActInicioRnt" required>
-              </div>
-              <div class="mb-3">
-                <label for="fechaActFinRnt" class="form-label">Fecha de fin</label>
-                <input type="date" class="form-control" id="fechaActFinRnt" required>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" form="formActLocal">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="../../controller/renta/actualizarRentaController.js"></script>
-    <script src="../../controller/inicio/menuUsuarioController.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Essential javascripts for application to work-->
-    <script src="../../js/jquery-3.7.0.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/main.js"></script>
 </body>
 
 </html>

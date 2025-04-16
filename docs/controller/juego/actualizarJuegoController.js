@@ -1,73 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Verificar si el usuario tiene token, id y rol en el localStorage
-    const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
-    const rol = localStorage.getItem("rol");
 
-    // Si no hay token, id o rol, redirigir al login
-    if (!token || !id || !rol) {
-        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+    // Función para verificar si el usuario tiene token, id y rol
+    function verificarSesion() {
+        const token = localStorage.getItem("token");
+        const id = localStorage.getItem("id");
+        const rol = localStorage.getItem("rol");
+
+        if (!token || !id || !rol) {
+            window.location.href = "../../view/modulo-login/page-login.html"; // Redirigir al login si no hay token, id o rol
+            return false;
+        }
+        return true;
     }
 
-    // Cargar las máquinas de juego desde la API
-    const apiUrl = 'http://localhost:8081/api/maquinas-juegos';
-    const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-    };
-    const container = document.querySelector('.row');
+    if (!verificarSesion()) return;
 
-    // Realizar la solicitud GET para cargar las máquinas
-    fetch(apiUrl, { headers })
-        .then(response => {
+    // Función para cargar las máquinas de juego
+    async function cargarMaquinas() {
+        const apiUrl = 'http://localhost:8081/api/maquinas-juegos';
+        const token = localStorage.getItem("token");
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+        const container = document.querySelector('.row');
+        const loadingMessage = document.createElement('p');
+        loadingMessage.textContent = "Cargando máquinas de juego...";
+        container.appendChild(loadingMessage);
+
+        try {
+            const response = await fetch(apiUrl, { headers });
             if (response.status === 204) {
                 container.innerHTML = "<p>No hay máquinas registradas.</p>";
                 return;
             }
-            return response.json();
-        })
-        .then(data => {
-            // Iterar sobre la respuesta para crear las tarjetas
+            const data = await response.json();
+            container.innerHTML = ''; // Limpiar el contenedor antes de agregar las nuevas tarjetas
             data.forEach(maquina => {
-                const card = createCard(maquina);
+                const card = crearCard(maquina);
                 container.appendChild(card);
             });
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error al obtener las máquinas de juego:', error);
-        });
-
-    // Escuchar el envío del formulario de actualización
-    document.getElementById("formActJuego").addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita el envío tradicional del formulario
-
-        let nombreJuego = document.getElementById("nombreActJuego").value.trim();
-        let descripcionJuego = document.getElementById("descripcionActJuego").value.trim();
-        let estadoUso = document.getElementById("estadoActUso").value;
-
-        if (nombreJuego === "" || descripcionJuego === "" || estadoUso === "") {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Todos los campos son obligatorios.",
-            });
-            return;
+            container.innerHTML = "<p>Hubo un error al cargar las máquinas. Por favor, intenta de nuevo más tarde.</p>";
         }
+    }
 
-        Swal.fire({
-            icon: "success",
-            title: "Juego actualizado",
-            text: "El juego se ha actualizado correctamente.",
-            confirmButtonText: "Aceptar"
-        }).then(() => {
-            document.getElementById("formActJuego").reset();
-            let modal = bootstrap.Modal.getInstance(document.getElementById("modalActJuego"));
-            modal.hide(); // Cierra el modal
-        });
-    });
+    cargarMaquinas();
 
     // Función para crear una tarjeta para cada máquina
-    function createCard(maquina) {
+    function crearCard(maquina) {
         const cardCol = document.createElement('div');
         cardCol.classList.add('col-md-4');
 
@@ -75,19 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
         card.classList.add('card');
         card.style.width = '20rem';
 
-        // Crear el contenedor de la imagen
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('container', 'fxFlex=Centro');
 
         const img = document.createElement('img');
-        img.src = '../../images/logo-la perla.png'; // Puedes cambiar la ruta de la imagen si es necesario
+        img.src = '../../images/logo-la perla.png';
         img.classList.add('card-img-top', 'd-block', 'mx-auto');
         img.alt = '...';
 
         imgContainer.appendChild(img);
         card.appendChild(imgContainer);
 
-        // Crear el cuerpo de la tarjeta
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
 
@@ -109,6 +89,13 @@ document.addEventListener("DOMContentLoaded", function () {
         button.setAttribute('data-bs-target', '#modalActJuego');
         button.textContent = 'Actualizar';
 
+        button.addEventListener('click', function () {
+            sessionStorage.setItem('idcardJuego', maquina.idMaquina); // Usar 'idMaquina' en lugar de 'id'
+            document.getElementById("nombreActJuego").value = maquina.nombre;
+            document.getElementById("descripcionActJuego").value = maquina.descripcion;
+            document.getElementById("estadoActUso").value = maquina.estado;
+        });
+
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardSubtitle);
         cardBody.appendChild(cardText);
@@ -120,10 +107,88 @@ document.addEventListener("DOMContentLoaded", function () {
         return cardCol;
     }
 
-    // Escuchar el evento de logout
-    document.getElementById("logoutBtn").addEventListener("click", function () {
-        localStorage.clear();  // Limpia todo el localStorage
-        sessionStorage.clear(); // Limpia todo el sessionStorage
+    // Función para actualizar el juego
+    async function actualizarJuego(event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        const nombreJuego = document.getElementById("nombreActJuego").value.trim().toUpperCase();
+        const descripcionJuego = document.getElementById("descripcionActJuego").value.trim().toUpperCase();
+        const estadoUso = document.getElementById("estadoActUso").value;
+
+        if (nombreJuego === "" || descripcionJuego === "" || estadoUso === "") {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Todos los campos son obligatorios.",
+            });
+            return;
+        }
+
+        const idJuego = sessionStorage.getItem('idcardJuego');
+        if (!idJuego) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "No se ha seleccionado un juego para actualizar.",
+            });
+            return;
+        }
+
+        const apiUpdateUrl = `http://localhost:8081/api/maquinas-juegos/${idJuego}`;
+        const requestBody = {
+            nombre: nombreJuego,
+            descripcion: descripcionJuego,
+            estado: estadoUso
+        };
+
+        const token = localStorage.getItem("token");
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+
+        try {
+            const response = await fetch(apiUpdateUrl, {
+                method: 'PUT',
+                headers: headers,
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar la máquina de juego.');
+            }
+
+            const data = await response.json();
+            Swal.fire({
+                icon: "success",
+                title: "Juego actualizado",
+                text: "El juego se ha actualizado correctamente.",
+                confirmButtonText: "Aceptar"
+            }).then(() => {
+                document.getElementById("formActJuego").reset();
+                let modal = bootstrap.Modal.getInstance(document.getElementById("modalActJuego"));
+                modal.hide(); // Cierra el modal
+                location.reload(); // Actualiza la página
+            });
+            
+        } catch (error) {
+            console.error('Error al actualizar la máquina de juego:', error);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Hubo un problema al actualizar el juego.",
+            });
+        }
+    }
+
+    document.getElementById("formActJuego").addEventListener("submit", actualizarJuego);
+
+    // Función de logout
+    function logout() {
+        localStorage.clear();
+        sessionStorage.clear();
         window.location.href = "../modulo-login/page-login.html"; // Redirige al login
-    });
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 });
