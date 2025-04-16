@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Verificar autenticación
+    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    if (!token || !id || !rol) {
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
         window.location.href = "../../view/modulo-login/page-login.html";
-        return;
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
+
 
     // Cargar opciones de locales
     fetch('http://localhost:8081/api/locales', {

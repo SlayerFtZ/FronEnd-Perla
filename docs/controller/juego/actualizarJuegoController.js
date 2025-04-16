@@ -1,17 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Obtener datos del localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    // Función para verificar si el usuario tiene token, id y rol
-    function verificarSesion() {
-        const token = localStorage.getItem("token");
-        const id = localStorage.getItem("id");
-        const rol = localStorage.getItem("rol");
-
-        if (!token || !id || !rol) {
-            window.location.href = "../../view/modulo-login/page-login.html"; // Redirigir al login si no hay token, id o rol
-            return false;
-        }
-        return true;
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../view/modulo-login/page-login.html";
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
+
 
     if (!verificarSesion()) return;
 
@@ -190,5 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../modulo-login/page-login.html"; // Redirige al login
     }
 
-    document.getElementById("logoutBtn").addEventListener("click", logout);
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../modulo-login/page-login.html";
+    });
 });

@@ -1,34 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Verificar si el usuario tiene token, id y rol en el localStorage
+    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    // Si no hay token, id o rol, redirigir al login
-    if (!token || !id || !rol) {
-        window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../view/modulo-login/page-login.html";
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
 });
 
-// Función para mostrar el modal de imagen de perfil
+
 document.addEventListener("DOMContentLoaded", function () {
     const profileImageInput = document.getElementById('profileImageInput');
     const previewImage = document.getElementById('profileImagePreview');
-    const token = localStorage.getItem("token");
+    const form = document.getElementById('updateProfilePicForm');
+    let selectedFile = null;
 
+    // Solo mostrar la vista previa cuando se selecciona un archivo
     profileImageInput.addEventListener('change', function (event) {
         const file = event.target.files[0];
-        const id = localStorage.getItem("id");
-
-        if (!id) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente.',
-            });
-            console.error("No se encontró el ID del usuario en localStorage.");
-            return;
-        }
 
         if (file) {
             const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -38,105 +35,131 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: 'Tipo de archivo no válido',
                     text: 'Por favor, selecciona una imagen válida (JPEG, PNG, GIF).',
                 });
-                console.warn("Tipo de archivo inválido:", file.type);
+                profileImageInput.value = '';
+                previewImage.style.display = 'none';
                 return;
             }
 
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: '¿Quieres cambiar tu imagen de perfil?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, cambiar',
-                cancelButtonText: 'No, cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        previewImage.src = e.target.result;
-                        previewImage.style.display = 'block';
+            selectedFile = file;
 
-                        const formData = new FormData();
-                        formData.append("file", file);
-                        formData.append("idUsuario", id);
-                        formData.append("tipo", "FotoPerfil");
-
-                        fetch(`http://localhost:8081/api/archivos/1/actualizar-con-archivo`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `Bearer ${token}`
-                                // NO pongas Content-Type aquí con FormData
-                            },
-                            body: formData
-                        })
-                        .then(async response => {
-                            console.log("Código de estado HTTP:", response.status);
-
-                            let data;
-                            try {
-                                data = await response.json();
-                                console.log("Respuesta del servidor:", data);
-                            } catch (jsonErr) {
-                                console.error("No se pudo parsear JSON:", jsonErr);
-                                throw new Error("Respuesta no válida del servidor.");
-                            }
-
-                            if (response.ok && data.success) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Imagen actualizada',
-                                    text: 'Tu imagen de perfil ha sido cambiada con éxito.',
-                                    timer: 2000,
-                                    showConfirmButton: false
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: data.message || 'Hubo un problema al actualizar la imagen de perfil.',
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error al hacer la petición fetch:", error);
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error de conexión',
-                                text: 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
-                            });
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    profileImageInput.value = '';
-                    previewImage.style.display = 'none';
-                    Swal.fire('Cancelado', 'No se ha cambiado la imagen de perfil.', 'error');
-                }
-            });
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
         } else {
             previewImage.style.display = 'none';
+            selectedFile = null;
+        }
+    });
+
+    // Enviar la imagen solo al hacer submit del formulario
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("id");
+
+        if (!userId) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente.',
+            });
+            return;
+        }
+
+        if (!selectedFile) {
             Swal.fire({
                 icon: 'warning',
                 title: 'No se seleccionó imagen',
                 text: 'Por favor selecciona una imagen de perfil.',
-                timer: 2000,
-                showConfirmButton: false
             });
+            return;
         }
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: '¿Quieres cambiar tu imagen de perfil?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cambiar',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData();
+                formData.append("file", selectedFile);
+                formData.append("idUsuario", userId);
+                formData.append("tipo", "FotoPerfil");
+                fetch(`http://localhost:8081/api/archivos/${userId}/actualizar-con-archivo`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                })
+                .then(async response => {
+                    console.log("Código de estado HTTP:", response.status);
+                
+                    let data;
+                    try {
+                        data = await response.json();
+                        console.log("Respuesta del servidor:", data);
+                    } catch (jsonErr) {
+                        console.error("No se pudo parsear JSON:", jsonErr);
+                        throw new Error("Respuesta no válida del servidor.");
+                    }
+                
+                    if (response.ok /* && data.success */) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Imagen actualizada',
+                            text: 'Tu imagen de perfil ha sido cambiada con éxito.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload(); // Recargar la página después de que termine el timer
+                        });
+                
+                        // Puedes cerrar el modal manualmente si quieres
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('updateProfilePicModal'));
+                        if (modal) modal.hide();
+                
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'Hubo un problema al actualizar la imagen de perfil.',
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al hacer la petición fetch:", error);
+                
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de conexión',
+                        text: 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
+                    });
+                });
+            } else {
+                Swal.fire('Cancelado', 'No se ha cambiado la imagen de perfil.', 'info');
+            }
+        });
     });
 });
-
-// Manejo del perfil de salud
 document.getElementById("updateHealthProfileForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const padecimientos = document.getElementById("healthConditions").value.trim();
     const descripcion = document.getElementById("healthDescription").value.trim();
     const categoria = document.getElementById("healthCategory").value;
-    const userId = localStorage.getItem("id"); // Asegúrate de que esta variable se llame igual que en el objeto enviado
+    const userId = localStorage.getItem("id");
     const token = localStorage.getItem("token");
+
     if (!userId) {
+        console.error("Error: No se pudo obtener el ID del usuario.");
         Swal.fire({
             icon: "error",
             title: "Error",
@@ -145,7 +168,8 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
         return;
     }
 
-    if (padecimientos === "" || descripcion === "" || categoria === "seleccion") {
+    if (padecimientos === "" || descripcion === "" || categoria === "") {
+        console.error("Error: Todos los campos son obligatorios.");
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -162,16 +186,19 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            // Preparar los datos para enviar al API
-            const healthProfileData = {
-                userId: parseInt(userId),
-                padecimientos: padecimientos,
-                descripcion: descripcion,
-                categoria: categoria
-            };
 
-            // Realizar la solicitud al API
-            fetch(`http://localhost:8081/api/padecimientos/${userId}`, {
+            const submitBtn = document.querySelector("#updateHealthProfileForm button[type='submit']");
+            submitBtn.disabled = true;
+
+            const healthProfileData = [
+                {
+                    nombrePadecimiento: padecimientos,
+                    descripcion: descripcion,
+                    categoria: categoria
+                }
+            ];
+
+            fetch(`http://localhost:8081/api/padecimientos/usuario/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -179,40 +206,52 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
                 },
                 body: JSON.stringify(healthProfileData)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor.");
+                }
+                return response.json();
+            })
             .then(data => {
-                if (data.success) {
+                console.log("Respuesta del servidor:", data);
+
+                // Si el backend devuelve un array, lo tomamos como éxito
+                if (Array.isArray(data)) {
                     Swal.fire({
                         title: "¡Perfil de salud actualizado con éxito!",
                         icon: "success",
                         confirmButtonText: "Aceptar"
                     }).then(() => {
                         const modal = $('#updateHealthProfileModal');
-                        modal.modal('hide');
-
-                        // Recargar la página una vez que el modal se haya cerrado completamente
                         modal.on('hidden.bs.modal', function () {
                             location.reload();
                         });
+                        modal.modal('hide');
                     });
                 } else {
+                    console.error("Error del servidor:", data.message || "Hubo un problema al actualizar el perfil de salud.");
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: "Hubo un problema al actualizar el perfil de salud."
+                        text: data.message || "Hubo un problema al actualizar el perfil de salud."
                     });
                 }
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error("Error de conexión:", error.message || "No se pudo conectar con el servidor.");
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "No se pudo conectar con el servidor."
+                    text: error.message || "No se pudo conectar con el servidor."
                 });
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
             });
         }
     });
 });
+
 
 document.getElementById("updateEmergencyContactForm").addEventListener("submit", function (event) {
     const token = localStorage.getItem("token");
@@ -381,8 +420,22 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
     });
 });
 
-//actualizar usuario
+
+let contrasenaReal = "";
+
+function generarContrasena(longitud = 10) {
+    const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    contrasenaReal = Array.from({ length: longitud }, () => caracteres.charAt(Math.floor(Math.random() * caracteres.length))).join('');
+    document.getElementById("contrasena").value = "*".repeat(contrasenaReal.length);
+}
+
+function obtenerContrasenaReal() {
+    return contrasenaReal;
+}
+
+// Función para actualziar el perfil del usuario
 document.addEventListener("DOMContentLoaded", function () {
+
     function showError(input, message) {
         let errorSpan = input.nextElementSibling;
         if (!errorSpan || !errorSpan.classList.contains("error-message")) {
@@ -399,29 +452,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (errorSpan && errorSpan.classList.contains("error-message")) {
             errorSpan.remove();
         }
-    }
-
-    function validateRadio(name, errorMessage) {
-        const radios = document.getElementsByName(name);
-        if (radios.length === 0) return false;
-
-        let checked = Array.from(radios).some(radio => radio.checked);
-        const container = radios[0].closest('.form-group');
-
-        let errorSpan = container.querySelector(".error-message");
-        if (errorSpan) {
-            errorSpan.remove();
-        }
-
-        if (!checked) {
-            errorSpan = document.createElement("span");
-            errorSpan.classList.add("error-message");
-            errorSpan.style.color = "red";
-            errorSpan.innerText = errorMessage;
-            container.appendChild(errorSpan);
-            return false;
-        }
-        return true;
     }
 
     const form = document.querySelector("#formActualizarUsuario");
@@ -475,9 +505,29 @@ document.addEventListener("DOMContentLoaded", function () {
             clearError(direccion);
         }
 
-        valid &= validateRadio("genero", "Debe seleccionar un género");
-        valid &= validateRadio("rol", "Debe seleccionar un rol");
-        valid &= validateRadio("estado", "Debe seleccionar un estado civil");
+        const genero = document.getElementById("actualizarGenero");
+        if (!genero.value) {
+            showError(genero, "Debe seleccionar un género");
+            valid = false;
+        } else {
+            clearError(genero);
+        }
+
+        const rol = document.getElementById("actualizarRol");
+        if (!rol.value) {
+            showError(rol, "Debe seleccionar un rol");
+            valid = false;
+        } else {
+            clearError(rol);
+        }
+
+        const estadoCivil = document.getElementById("actualizarEstadoCivil");
+        if (!estadoCivil.value) {
+            showError(estadoCivil, "Debe seleccionar un estado civil");
+            valid = false;
+        } else {
+            clearError(estadoCivil);
+        }
 
         if (valid) {
             Swal.fire({
@@ -488,7 +538,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "No, cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const id = sessionStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
+                    const id = localStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
 
                     if (!id) {
                         Swal.fire({
@@ -501,7 +551,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Preparar los datos para enviar al API
                     const userData = {
-                        id: id,
                         nombre: document.getElementById("actualizarNombre").value.trim(),
                         apellidoPaterno: document.getElementById("actualizarApellidoPaterno").value.trim(),
                         apellidoMaterno: document.getElementById("actualizarApellidoMaterno").value.trim(),
@@ -509,38 +558,38 @@ document.addEventListener("DOMContentLoaded", function () {
                         curp: document.getElementById("actualizarCurp").value.trim(),
                         rfc: document.getElementById("actualizarRfc").value.trim(),
                         telefono: document.getElementById("actualizarTelefono").value.trim(),
-                        nss: document.getElementById("actualizarNss").value.trim(),
+                        numeroSeguro: document.getElementById("actualizarNss").value.trim(),
                         fechaNacimiento: document.getElementById("actualizarFechaNacimiento").value,
                         direccion: document.getElementById("actualizarDireccion").value.trim(),
-                        genero: document.querySelector("input[name='genero']:checked").value,
-                        rol: document.querySelector("input[name='rol']:checked").value,
-                        estado: document.querySelector("input[name='estado']:checked").value
+                        genero: document.getElementById("actualizarGenero").value,
+                        rol: document.getElementById("actualizarRol").value,
+                        estadoCivil: document.getElementById("actualizarEstadoCivil").value,
+                        estado: "Activo",
+                        contrasena: obtenerContrasenaReal()
                     };
-
-                    fetch('/api/actualizar-usuario', {
-                        method: 'POST',
+                    const token = localStorage.getItem("token");
+                    fetch(`http://localhost:8081/api/usuarios/actualizar/${id}`, {
+                        method: 'PUT',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
                         },
                         body: JSON.stringify(userData)
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
+                    .then(async response => {
+                        const data = await response.json();
+                        if (response.ok) {
                             Swal.fire({
                                 title: "Perfil actualizado correctamente!",
                                 icon: "success",
                                 confirmButtonText: "Cerrar",
                             }).then(() => {
-                                const modal = document.querySelector("#modalActualizarUsuario");
-                                if (modal) {
-                                    modal.style.display = "none";
-                                }
+                                location.reload(); // Recargar la página después de la actualización exitosa
                             });
                         } else {
                             Swal.fire({
                                 title: "Error",
-                                text: "Hubo un problema al actualizar el perfil.",
+                                text: data.message || "Hubo un problema al actualizar el perfil.",
                                 icon: "error",
                                 confirmButtonText: "Aceptar",
                             });
@@ -566,6 +615,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
     localStorage.clear();  // Limpia todo el localStorage

@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Validación de sesión
+    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    if (!token || !id || !rol) {
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
         window.location.href = "../../view/modulo-login/page-login.html";
-        return;
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
+
 
     // Elementos del DOM
     const searchBtn = document.querySelector(".app-search__button");
@@ -94,12 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Logout
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-            localStorage.clear();
-            sessionStorage.clear();
-            window.location.href = "../modulo-login/page-login.html";
-        });
-    }
+     // Evento de logout
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();  // Limpia todo el localStorage
+        sessionStorage.clear(); // Limpia todo el sessionStorage
+        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });
 });
