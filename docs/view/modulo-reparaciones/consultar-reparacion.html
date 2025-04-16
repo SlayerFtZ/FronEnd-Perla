@@ -252,59 +252,18 @@
             </ul>
         </div>
 
-        <div class="container mt-5 px-2">
-            <div class="mb-2 d-flex justify-content-between align-items-center">
-                <div class="position-relative">
-                    <span class="position-absolute search"></span>
-                    <li class="app-search">
-                        <input class="app-search__input" type="search" placeholder="Local">
-                        <button class="app-search__button"><i class="bi bi-search"></i></button>
-                    </li>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-responsive table-borderless">
-                    <thead>
-                        <tr class="bg-light">
-                            <!-- <th scope="col" width="10%">Ver Perfil</th> -->
-                            <th scope="col" width="8%">ID</th>
-                            <th scope="col" width="10%">Local</th>
-                            <th scope="col" width="30%">Descripcion</th>
-                            <th scope="col" width="10%">Contratista</th>
-                            <th scope="col" class="text-end" width="9%">Estatus</th>
-                            <th scope="col" width="10%">Costo</th>
-                            <th scope="col" class="text-end" width="12%">Acciones</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>24</td>
-                            <td>B-120</td>
-                            <td>Reparacion del muñeoloco no° 6, por ajsutes en la garra ya que perdio fuerza y una pieza se safo de la pieza principal</td>
-                            <td>Reparaciones Morelos MC</td>
-                            <td>En proceso</td>
-                            <td>1500</td>
-                            <td><button class="btn btn-warning btn-7m" id="act-rp">Actualizar infromacion</button></td>
-                        </tr>
-                        <tr>
-                            <td>24</td>
-                            <td>B-120</td>
-                            <td>Reparacion del muñeoloco no° 6, por ajsutes en la garra ya que perdio fuerza y una pieza se safo de la pieza
-                                principal</td>
-                            <td>Reparaciones Morelos MC</td>
-                            <td>En proceso</td>
-                            <td>1500</td>
-                            <td><button class="btn btn-warning btn-7m" id="act-rp">Actualizar infromacion</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <!-- componente para consultar reparaciones -->
 
         <div class="container mt-5 px-2">
+            <br>
+            <select class="form-control" id="opcionesBuscarReparacion" name="opcionesBuscarReparacion">
+                <option value="seleccion">Selecciona una opción</option>
+                <option value="contratista">Nombre Contratista</option>
+                <option value="fecha">Fecha de Fecha</option>
+            </select>
+
+            <br>
             <div class="mb-2 d-flex justify-content-between align-items-center">
                 <div class="position-relative">
                     <span class="position-absolute search"></span>
@@ -328,34 +287,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Althan Travis</td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Josue perez</td>
-                            <td>Reparacion del juego mecanico del avion del sector del norte</td>
-                            <td>10/12/2025</td>
-                            <td>15/12/2025</td>
-                            <td>$1560.00</td>
-
-                        </tr>
-                        <tr>
-
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Josue perez</td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Althan Travis</td>
-                            <td>Rearacion de porton principal</td>
-                            <td>10/12/2025</td>
-                            <td>15/12/2025</td>
-                            <td>$160.00</td>
-                        </tr>
-                        <tr>
-
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Alejandro mangno</td>
-                            <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Josue perez</td>
-                            <td>Reoaracion de lampara del pasillo oeste</td>
-                            <td>10/12/2025</td>
-                            <td>15/12/2025</td>
-                            <td>$1500.00</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -363,6 +294,7 @@
 
 
         <script src="../../controller/reparacion/consultarReparacionController.js"></script>
+        <script src="../../controller/inicio/menuUsuarioController.js"></script>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>

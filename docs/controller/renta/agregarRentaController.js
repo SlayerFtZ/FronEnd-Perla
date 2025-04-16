@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const data = {
                         idLocal: nombreLocal.value,
                         idUsuario: usuario.value,
-                        estado: (estadoValor === "Disponible" || estadoValor === "Reservado") ? "Disponible" : "En renta",
+                        // estado: (estadoValor === "Disponible" || estadoValor === "Reservado") ? "Disponible" : "En renta",
                         fechaInicio: fechaInicio.value,
                         fechaFin: fechaFin.value
                     };
