@@ -421,17 +421,17 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
 });
 
 
-let contrasenaReal = "";
+// let contrasenaReal = "";
 
-function generarContrasena(longitud = 10) {
-    const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    contrasenaReal = Array.from({ length: longitud }, () => caracteres.charAt(Math.floor(Math.random() * caracteres.length))).join('');
-    document.getElementById("contrasena").value = "*".repeat(contrasenaReal.length);
-}
+// function generarContrasena(longitud = 10) {
+//     const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//     contrasenaReal = Array.from({ length: longitud }, () => caracteres.charAt(Math.floor(Math.random() * caracteres.length))).join('');
+//     document.getElementById("contrasena").value = "*".repeat(contrasenaReal.length);
+// }
 
-function obtenerContrasenaReal() {
-    return contrasenaReal;
-}
+// function obtenerContrasenaReal() {
+//     return contrasenaReal;
+// }
 
 // Función para actualziar el perfil del usuario
 document.addEventListener("DOMContentLoaded", function () {
@@ -565,7 +565,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         rol: document.getElementById("actualizarRol").value,
                         estadoCivil: document.getElementById("actualizarEstadoCivil").value,
                         estado: "Activo",
-                        contrasena: obtenerContrasenaReal()
+                        // contrasena: obtenerContrasenaReal()
                     };
                     const token = localStorage.getItem("token");
                     fetch(`http://localhost:8081/api/usuarios/actualizar/${id}`, {
