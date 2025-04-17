@@ -463,11 +463,9 @@
                                 <label for="healthCategory" class="form-label">Categoría</label>
                                 <select class="form-control" id="healthCategory" name="healthCategory" required>
                                     <option value="seleccion">Selecciona una opción</option>
-                                    <option value="ninguno">Ninguno</option>
-                                    <option value="otro">Otro</option>
-                                    <option value="cronico">Crónico</option>
-                                    <option value="respiratorio">Respiratorio</option>
-                                    <option value="psicologico">Psicológico</option>
+                                    <option value="LEVE">Leve</option>
+                                    <option value="MODERADO">Moderado</option>
+                                    <option value="GRAVE">Grave</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -526,10 +524,10 @@
                                 <select class="form-control" id="emergencyContactRelationship"
                                     name="emergencyContactRelationship">
                                     <option value="seleccion">Selecciona una opción</option>
-                                    <option value="esposo">Esposa / Esposo</option>
-                                    <option value="hijo">Hijo / Hija</option>
-                                    <option value="conyuge">Cónyuge</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="Esposos">Esposa / Esposo</option>
+                                    <option value="Hijos">Hijo / Hija</option>
+                                    <option value="Union libre">Cónyuge</option>
+                                    <option value="Hermanos">Hernamo / Hermana</option>
                                 </select>
                                 <div class="error-message" id="relationshipError" style="color: red; display: none;">
                                 </div> <!-- Error -->
@@ -611,76 +609,49 @@
                                                     placeholder="Ingresa tu dirección" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Género</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="genero"
-                                                        id="actualizarGeneroMasculino" value="masculino" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarGeneroMasculino">Masculino</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="genero"
-                                                        id="actualizarGeneroFemenino" value="femenino" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarGeneroFemenino">Femenino</label>
-                                                </div>
+                                                <label for="actualizarGenero">Género</label>
+                                                <select class="form-control" id="actualizarGenero" required>
+                                                    <option value="" disabled selected>Selecciona el género</option>
+                                                    <option value="masculino">Masculino</option>
+                                                    <option value="femenino">Femenino</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Rol</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rol"
-                                                        id="actualizarRolEmpleado" value="empleado" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarRolEmpleado">Empleado</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rol"
-                                                        id="actualizarRolSocio" value="socio" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarRolSocio">Socio</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rol"
-                                                        id="actualizarRolAdministrativo" value="administrativo"
-                                                        required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarRolAdministrativo">Administrador</label>
-                                                </div>
+                                                <label for="actualizarRol">Rol</label>
+                                                <select class="form-control" id="actualizarRol" required>
+                                                    <option value="" disabled selected>Selecciona el rol</option>
+                                                    <option value="Administrador">Administrador</option>
+                                                    <option value="Arrendador">Arrendador</option>
+                                                    <option value="Socio">Socio</option>
+                                                    <option value="Mesa_Directiva">Mesa Directiva</option>
+                                                    <option value="Empleado">Empleado</option>
+                                                    <option value="Contador">Contador</option>
+                                                </select>
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <label>Estado civil</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="estado"
-                                                        id="actualizarEstadoSoltero" value="soltero" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarEstadoSoltero">Soltero</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="estado"
-                                                        id="actualizarEstadoCasado" value="casado" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarEstadoCasado">Casado</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="estado"
-                                                        id="actualizarEstadoViudo" value="viudo" required>
-                                                    <label class="form-check-label"
-                                                        for="actualizarEstadoViudo">Viudo</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="estado"
-                                                        id="actualizarEstadoUnion" value="union libre" required>
-                                                    <label class="form-check-label" for="actualizarEstadoUnion">Unión
-                                                        libre</label>
-                                                </div>
+                                                <label for="actualizarEstadoCivil">Estado civil</label>
+                                                <select class="form-control" id="actualizarEstadoCivil" required>
+                                                    <option value="" disabled selected>Selecciona el estado civil</option>
+                                                    <option value="soltero">Soltero</option>
+                                                    <option value="casado">Casado</option>
+                                                    <option value="viudo">Viudo</option>
+                                                    <option value="union libre">Unión libre</option>
+                                                </select>
                                             </div>
+                                            <!-- <div class="form-group">
+                                                <label for="contrasena">Contraseña</label>
+                                                <input type="password" class="form-control" id="contrasena" placeholder="la contraseña se generará automáticamente" readonly required>
+                                                
+                                                <button type="button" class="btn btn-secondary mt-2" onclick="generarContrasena()">Generar Contraseña</button>
+                                            </div> -->
+                                        </div>
                                             <div class="text-right">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="bi bi-check-circle-fill me-2"></i>Actualizar
                                                 </button>
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Cancelar</button>
-
                                             </div>
                                         </div>
                                     </div>
@@ -690,11 +661,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+            </div>
         <script src="../../js/plugins/sweetalert.js"></script>
 
         <script src="../../controller/usuario/perfilUsuarioBuscadoController.js"></script>
+
+        <script src="../../controller/usuario/usuarioControllerBuscado.js"></script>
 
         <script src="../../controller/inicio/menuUsuarioController.js"></script>
     </main>
