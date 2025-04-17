@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: "Se ha registrado correctamente.",
                     }).then(() => {
                         form.reset();
-                        window.location.href = '../../view/modulo-renta/actualizar-renta.html';
+                        window.location.href = '../../view/modulo-renta/buscar-renta.html';
                     });
         
                 } catch (error) {
