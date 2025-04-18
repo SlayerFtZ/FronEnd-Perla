@@ -253,41 +253,49 @@
                         <div class="row mt-2 justify-content-center">
                             <div class="col-md-3 mb-3">
                                 <label class="labels">Tipo de reporte</label>
-                                <select class="form-control" id="reporteSeleccion" name="">
+                                <select class="form-control" id="reporteSeleccion">
                                     <option value="seleccion">Selecciona un tipo de reporte</option>
-                                    <option value="1">Renta</option>
-                                    <option value="1">Financiero</option>
-                                    <option value="1">Incidente</option>
+                                    <option value="renta">Renta</option>
+                                    <option value="financiero">Financiero</option>
+                                    <option value="incidente">Incidente</option>
                                 </select>
+                                <div class="invalid-feedback">Selecciona un tipo de reporte</div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="labels">Estado</label>
-                                <select class="form-control" id="opcionesUsuariReporte" name="opcionesUsuario">
-                                    <option value="seleccion">Selecciona un usuario</option>
-                                    <option value="1">Abierto</option>
-                                    <option value="1">Cerrado</option>
-                                    <option value="1">En proceso</option>
+                                <select class="form-control" id="opcionesUsuariReporte">
+                                    <option value="seleccion">Selecciona un estado</option>
+                                    <option value="abierto">Abierto</option>
+                                    <option value="cerrado">Cerrado</option>
+                                    <option value="en_proceso">En proceso</option>
                                 </select>
+                                <div class="invalid-feedback">Selecciona un estado</div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="labels">Inicio del periodo</label>
-                                <input type="date" class="form-control" id="periodoReporte" placeholder="Selecciona uno" required="">
+                                <input type="date" class="form-control" id="periodoReporte">
+                                <div class="invalid-feedback">Ingresa la fecha inicial</div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="labels">Fin del periodo</label>
-                                <input type="date" class="form-control" id="periodoReporte2" placeholder="Selecciona uno" required="">
+                                <input type="date" class="form-control" id="periodoReporte2">
+                                <div class="invalid-feedback">Ingresa la fecha final</div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="row-md-9 mb-3">
-                        <label class="labels">Notas (opcional) </label>
-                        <input type="text" class="form-control" id="notasReporte" required="">
-                    </div>
-                    <div class="col-md-1 mb-0 align-self-center">
-                        <button type="submit" class="btn btn-secondary">
-                            Generar <i class="bi bi-wrench-adjustable"></i>
-                        </button>
-                    </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-9 mb-3">
+                                <label class="labels">Notas (opcional)</label>
+                                <input type="text" class="form-control" id="notasReporte">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-1 mb-0 align-self-center">
+                                <button type="submit" class="btn btn-secondary">
+                                    Generar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-responsive table-borderless text-center">

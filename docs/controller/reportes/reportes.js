@@ -1,66 +1,67 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const formReporte = document.querySelector('form');
+    const form = document.querySelector('form');
 
-    // Desactivar validación HTML5 nativa
-    formReporte.setAttribute('novalidate', true);
-
-    // Validar al enviar el formulario
-    formReporte.addEventListener('submit', function (e) {
-        // Resetear todas las validaciones visuales primero
+    // Configurar validación al enviar
+    form.addEventListener('submit', function (e) {
+        // Resetear validaciones previas
         document.querySelectorAll('.form-control').forEach(campo => {
             campo.classList.remove('is-invalid');
         });
 
-        // Validar campos
-        let isValid = true;
+        let hasErrors = false;
 
-        // Validar selects
+        // Validar tipo de reporte
         const tipoReporte = document.getElementById('reporteSeleccion');
-        const estadoReporte = document.getElementById('opcionesUsuariReporte');
-
         if (tipoReporte.value === "seleccion") {
             tipoReporte.classList.add('is-invalid');
-            isValid = false;
+            hasErrors = true;
         }
 
+        // Validar estado
+        const estadoReporte = document.getElementById('opcionesUsuariReporte');
         if (estadoReporte.value === "seleccion") {
             estadoReporte.classList.add('is-invalid');
-            isValid = false;
+            hasErrors = true;
         }
 
-        // Validar campo de fecha
-        const periodoReporte = document.getElementById('periodoReporte');
-        if (!periodoReporte.value) {
-            periodoReporte.classList.add('is-invalid');
-            isValid = false;
+        // Validar fechas
+        const inicioPeriodo = document.getElementById('periodoReporte');
+        const finPeriodo = document.getElementById('periodoReporte2');
+
+        if (!inicioPeriodo.value) {
+            inicioPeriodo.classList.add('is-invalid');
+            hasErrors = true;
         }
 
-        const periodoReporte2 = document.getElementById('periodoReporte2');
-        if(!periodoReporte2.value) {
-            periodoReporte2.classList.add('is-invalid');
-            isValid = false;
-
+        if (!finPeriodo.value) {
+            finPeriodo.classList.add('is-invalid');
+            hasErrors = true;
         }
 
-        // Prevenir envío si no es válido
-        if (!isValid) {
+        // Validar que fecha fin no sea menor a fecha inicio
+        if (inicioPeriodo.value && finPeriodo.value) {
+            if (new Date(finPeriodo.value) < new Date(inicioPeriodo.value)) {
+                finPeriodo.classList.add('is-invalid');
+                hasErrors = true;
+                // Opcional: Mostrar mensaje específico
+                finPeriodo.nextElementSibling.textContent = "La fecha final no puede ser anterior a la inicial";
+            }
+        }
+
+        // Prevenir envío si hay errores
+        if (hasErrors) {
             e.preventDefault();
-            e.stopPropagation();
         }
     });
 
     // Limpiar validación al modificar campos
-    const camposValidar = [
-        'reporteSeleccion',
-        'opcionesUsuariReporte',
-        'periodoReporte'
-    ];
-
-    camposValidar.forEach(id => {
-        const campo = document.getElementById(id);
+    document.querySelectorAll('#reporteSeleccion, #opcionesUsuariReporte, #periodoReporte, #periodoReporte2').forEach(campo => {
         campo.addEventListener('input', function () {
-            // Solo removemos la clase de error, no añadimos la de éxito
             this.classList.remove('is-invalid');
+            // Limpiar mensaje de error si existe
+            if (this.nextElementSibling && this.nextElementSibling.classList.contains('invalid-feedback')) {
+                this.nextElementSibling.textContent = this.getAttribute('data-default-error') || '';
+            }
         });
     });
 });

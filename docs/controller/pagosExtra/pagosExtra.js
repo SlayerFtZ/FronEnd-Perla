@@ -33,11 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
             campos.monto.classList.add('is-invalid');
             hasErrors = true;
         }
-        // Validar notas (solo si está vacío y es requerido)
-        // if(!campos.nota.value.trim()) {
-        //     campos.nota.classList.add('is-invalid');
-        //     hasErrors = true;
-        // }
         
         // Prevenir envío si hay errores
         if (hasErrors) {
