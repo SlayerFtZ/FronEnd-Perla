@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("id");
+        const userId = sessionStorage.getItem("idUsuario");
 
         if (!userId) {
             Swal.fire({
@@ -155,7 +155,7 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
     const padecimientos = document.getElementById("healthConditions").value.trim();
     const descripcion = document.getElementById("healthDescription").value.trim();
     const categoria = document.getElementById("healthCategory").value;
-    const userId = localStorage.getItem("id");
+    const userId = sessionStorage.getItem("idUsuario");
     const token = localStorage.getItem("token");
 
     if (!userId) {
@@ -255,7 +255,7 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
 
 document.getElementById("updateEmergencyContactForm").addEventListener("submit", function (event) {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("idUsuario");
     event.preventDefault();
 
     // Obtener los valores del formulario
@@ -304,7 +304,7 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
             cancelButtonText: "No"
         }).then((result) => {
             if (result.isConfirmed) {
-                const id = localStorage.getItem("id");
+                const id = sessionStorage.getItem("idUsuario");
                 if (!id  || !token) {
                     Swal.fire({
                         icon: "error",
@@ -538,7 +538,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "No, cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const id = localStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
+                    const id = sessionStorage.getItem("idUsuario"); // Obtener el ID del usuario desde sessionStorage
 
                     if (!id) {
                         Swal.fire({

@@ -1,12 +1,20 @@
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    if (!token || !id || !rol) {
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
         window.location.href = "../../view/modulo-login/page-login.html";
-        return;
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
+
 
     // Cargar opciones de locales
     fetch('http://localhost:8081/api/locales', {
@@ -178,7 +186,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const data = {
                         idLocal: nombreLocal.value,
                         idUsuario: usuario.value,
-                        estado: (estadoValor === "Disponible" || estadoValor === "Reservado") ? "Disponible" : "En renta",
+                        // estado: (estadoValor === "Disponible" || estadoValor === "Reservado") ? "Disponible" : "En renta",
                         fechaInicio: fechaInicio.value,
                         fechaFin: fechaFin.value
                     };
@@ -206,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         text: "Se ha registrado correctamente.",
                     }).then(() => {
                         form.reset();
-                        window.location.href = '../../view/modulo-renta/actualizar-renta.html';
+                        window.location.href = '../../view/modulo-renta/buscar-renta.html';
                     });
         
                 } catch (error) {

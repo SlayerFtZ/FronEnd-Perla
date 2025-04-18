@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Verificar si el usuario tiene token, id y rol en el localStorage antes de cualquier cosa
+    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    // Si no hay token, id o rol, redirigir al login
-    if (!token || !id || !rol) {
-        window.location.href = "../../view/modulo-login/page-login.html"; // Redirige al login
-        return; // Detener ejecución del script si no hay acceso
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../view/modulo-login/page-login.html";
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
     }
 
     // Evento para el formulario de agregar juego

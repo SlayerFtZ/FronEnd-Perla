@@ -1,3 +1,21 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener datos del localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
+
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../view/modulo-login/page-login.html";
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
+    }
+});
+
 document.addEventListener('DOMContentLoaded', async function() {
     const form = document.getElementById('formAgregarReparacion');
     const cancelBtn = document.getElementById('cancelBtn');
@@ -141,5 +159,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                 confirmButtonText: 'Aceptar'
             });
         }
+    });
+     // Evento de logout
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();  // Limpia todo el localStorage
+        sessionStorage.clear(); // Limpia todo el sessionStorage
+        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
     });
 });
