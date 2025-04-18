@@ -35,6 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
             isValid = false;
         }
 
+        const periodoReporte2 = document.getElementById('periodoReporte2');
+        if(!periodoReporte2.value) {
+            periodoReporte2.classList.add('is-invalid');
+            isValid = false;
+
+        }
+
         // Prevenir envío si no es válido
         if (!isValid) {
             e.preventDefault();
