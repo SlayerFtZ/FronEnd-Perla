@@ -77,9 +77,8 @@
                     <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                                 class="bi bi-person me-2 fs-5"></i>
                             Perfil de usuario</a></li>
-                    <li><a class="dropdown-item" href="../modulo-login/page-login.html"><i
-                                class="bi bi-box-arrow-right me-2 fs-5"></i>
-                            Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
+                                Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -255,10 +254,8 @@
                         <div class="row mt-2 justify-content-center">
                             <div class="col-md-3 mb-3">
                                 <label class="labels">Usuario</label>
-                                <select class="form-control" id="userExtra" required>
+                                <select class="form-control" id="opcionesUsuario" required>
                                     <option value="">Selecciona el usuario</option>
-                                    <option value="1">Felix</option>
-                                    <option value="2">Saul</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Selecciona un usuario
@@ -291,10 +288,14 @@
                         </div>
                         <div class="row justify-content-center mt-4">
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-secondary w-100">
-                                    Generar <i class="bi bi-wrench-adjustable"></i>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Agregar <i class="bi bi-wrench-adjustable"></i>
                                 </button>
                             </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger w-100" id="btnCancelar">
+                                    Cancelar <i class="bi bi-x-circle"></i>
+                                </button><
                         </div>
                     </div>
                 </div>
@@ -302,52 +303,15 @@
         </div>
         <br>
     </main>
-    <script src="../../controller/ingresos/agregarIngresoController.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../controller/inicio/menuUsuarioController.js"></script>
-    <script src="../../controller/pagosExtra/pagosExtra.js"></script>
-    <!-- Code injected by live-server -->
-    <script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        }
-        else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-        // ]]>
-    </script>
+    <script src="../../controller/pagosExtra/pagosExtraController.js"></script>
+    
 </body>
 
 </html>

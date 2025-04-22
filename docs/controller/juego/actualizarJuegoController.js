@@ -7,26 +7,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Validar existencia de datos y el estado del usuario
     if (!token || !id || !rol || !estado) {
-        window.location.href = "../../view/modulo-login/page-login.html";
+        return window.location.href = "../../view/modulo-login/page-login.html";
     } else if (estado.toLowerCase() === "inactivo") {
-        // Si el estado es inactivo, limpiar almacenamiento y redirigir
         localStorage.clear();
         sessionStorage.clear();
-        window.location.href = "../../view/modulo-login/page-login.html";
+        return window.location.href = "../../view/modulo-login/page-login.html";
     }
 
+    if (typeof verificarSesion === "function" && !verificarSesion()) return;
 
-    if (!verificarSesion()) return;
-
-    // Función para cargar las máquinas de juego
     async function cargarMaquinas() {
         const apiUrl = 'http://localhost:8081/api/maquinas-juegos';
-        const token = localStorage.getItem("token");
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         };
         const container = document.querySelector('.row');
+
+        if (!container) return;
+
         const loadingMessage = document.createElement('p');
         loadingMessage.textContent = "Cargando máquinas de juego...";
         container.appendChild(loadingMessage);
@@ -37,12 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 container.innerHTML = "<p>No hay máquinas registradas.</p>";
                 return;
             }
+
             const data = await response.json();
-            container.innerHTML = ''; // Limpiar el contenedor antes de agregar las nuevas tarjetas
+            container.innerHTML = ''; // Limpiar el contenedor antes de agregar las tarjetas
+
             data.forEach(maquina => {
                 const card = crearCard(maquina);
                 container.appendChild(card);
             });
+
         } catch (error) {
             console.error('Error al obtener las máquinas de juego:', error);
             container.innerHTML = "<p>Hubo un error al cargar las máquinas. Por favor, intenta de nuevo más tarde.</p>";
@@ -51,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cargarMaquinas();
 
-    // Función para crear una tarjeta para cada máquina
     function crearCard(maquina) {
         const cardCol = document.createElement('div');
         cardCol.classList.add('col-md-4');
@@ -61,12 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
         card.style.width = '20rem';
 
         const imgContainer = document.createElement('div');
-        imgContainer.classList.add('container', 'fxFlex=Centro');
+        imgContainer.classList.add('container', 'text-center'); // fxFlex eliminado, reemplazado por 'text-center'
 
         const img = document.createElement('img');
         img.src = '../../images/logo-la perla.png';
         img.classList.add('card-img-top', 'd-block', 'mx-auto');
-        img.alt = '...';
+        img.alt = 'Imagen de máquina';
 
         imgContainer.appendChild(img);
         card.appendChild(imgContainer);
@@ -93,10 +94,17 @@ document.addEventListener("DOMContentLoaded", function () {
         button.textContent = 'Actualizar';
 
         button.addEventListener('click', function () {
-            sessionStorage.setItem('idcardJuego', maquina.idMaquina); // Usar 'idMaquina' en lugar de 'id'
-            document.getElementById("nombreActJuego").value = maquina.nombre;
-            document.getElementById("descripcionActJuego").value = maquina.descripcion;
-            document.getElementById("estadoActUso").value = maquina.estado;
+            sessionStorage.setItem('idcardJuego', maquina.idMaquina);
+
+            const nombreInput = document.getElementById("nombreActJuego");
+            const descripcionInput = document.getElementById("descripcionActJuego");
+            const estadoSelect = document.getElementById("estadoActUso");
+
+            if (nombreInput && descripcionInput && estadoSelect) {
+                nombreInput.value = maquina.nombre;
+                descripcionInput.value = maquina.descripcion;
+                estadoSelect.value = maquina.estado;
+            }
         });
 
         cardBody.appendChild(cardTitle);
@@ -110,15 +118,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return cardCol;
     }
 
-    // Función para actualizar el juego
     async function actualizarJuego(event) {
-        event.preventDefault(); // Evita el envío tradicional del formulario
+        event.preventDefault();
 
-        const nombreJuego = document.getElementById("nombreActJuego").value.trim().toUpperCase();
-        const descripcionJuego = document.getElementById("descripcionActJuego").value.trim().toUpperCase();
-        const estadoUso = document.getElementById("estadoActUso").value;
+        const nombreJuego = document.getElementById("nombreActJuego")?.value.trim().toUpperCase();
+        const descripcionJuego = document.getElementById("descripcionActJuego")?.value.trim().toUpperCase();
+        const estadoUso = document.getElementById("estadoActUso")?.value;
 
-        if (nombreJuego === "" || descripcionJuego === "" || estadoUso === "") {
+        if (!nombreJuego || !descripcionJuego || !estadoUso) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -144,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
             estado: estadoUso
         };
 
-        const token = localStorage.getItem("token");
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -157,23 +163,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify(requestBody)
             });
 
-            if (!response.ok) {
-                throw new Error('Error al actualizar la máquina de juego.');
-            }
+            if (!response.ok) throw new Error('Error al actualizar la máquina de juego.');
 
-            const data = await response.json();
+            await response.json(); // podrías usarlo si quieres algo de la respuesta
+
             Swal.fire({
                 icon: "success",
                 title: "Juego actualizado",
                 text: "El juego se ha actualizado correctamente.",
                 confirmButtonText: "Aceptar"
             }).then(() => {
-                document.getElementById("formActJuego").reset();
-                let modal = bootstrap.Modal.getInstance(document.getElementById("modalActJuego"));
-                modal.hide(); // Cierra el modal
-                location.reload(); // Actualiza la página
+                document.getElementById("formActJuego")?.reset();
+                const modal = bootstrap.Modal.getInstance(document.getElementById("modalActJuego"));
+                modal?.hide();
+                location.reload();
             });
-            
+
         } catch (error) {
             console.error('Error al actualizar la máquina de juego:', error);
             Swal.fire({
@@ -184,16 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    document.getElementById("formActJuego").addEventListener("submit", actualizarJuego);
+    document.getElementById("formActJuego")?.addEventListener("submit", actualizarJuego);
 
-    // Función de logout
-    function logout() {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
-    }
-
-    document.getElementById("logoutBtn").addEventListener("click", function () {
+    // Logout
+    document.getElementById("logoutBtn")?.addEventListener("click", function () {
         localStorage.clear();
         sessionStorage.clear();
         window.location.href = "../modulo-login/page-login.html";
