@@ -80,6 +80,33 @@ document.getElementById('formAgregarLocal').addEventListener('submit', function 
         });
     }
 });
+
+document.getElementById('cancelBtn').addEventListener('click', () => {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Se cancelará el registro y serás redirigido al panel principal.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, cancelar',
+        cancelButtonText: 'No, volver',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Cancelado',
+                text: 'Has sido redirigido al dashboard.',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = '../../view/modulo-inicio/dashboard-inicio.html';
+            });
+        }
+    });
+});
+
+
 // Función para cerrar sesión
 
 document.getElementById("logoutBtn").addEventListener("click", function () {

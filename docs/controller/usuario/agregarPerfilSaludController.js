@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: 'El formulario no ha sido enviado.',
         }).then(() => {
             clearForm();
+            sessionStorage.clear();
             window.location.href = '../modulo-inicio/dashboard-inicio.html'; // Redirige a dashboard.html después de mostrar el mensaje
         });
     };
@@ -184,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (response.ok) {
                     showSuccessMessage();
+                    sessionStorage.clear();
                 } else {
                     const errorData = await response.json();
                     Swal.fire({

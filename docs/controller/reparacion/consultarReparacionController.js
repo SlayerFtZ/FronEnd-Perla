@@ -15,11 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../../view/modulo-login/page-login.html";
     }
 
-
-    // Elementos del DOM
     const searchBtn = document.querySelector(".app-search__button");
     const searchInput = document.querySelector(".app-search__input");
-    const resultTable = document.querySelector("tbody"); // asegúrate que este tbody es el correcto
+    const resultTable = document.querySelector("tbody");
     const filtroBusqueda = document.getElementById("opcionesBuscarReparacion");
 
     searchBtn.addEventListener("click", function (e) {
@@ -29,7 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const filtro = filtroBusqueda.value;
 
         if (textoBusqueda === "" || filtro === "seleccion") {
-            alert("Selecciona un tipo de búsqueda y escribe un término.");
+            Swal.fire({
+                icon: 'warning',
+                title: 'Búsqueda inválida',
+                text: 'Selecciona un filtro y haz tu busqueda.',
+            });
             return;
         }
 
@@ -40,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 url = `http://localhost:8081/api/reparaciones/buscar/contratista/${encodeURIComponent(textoBusqueda)}`;
                 break;
             case "fecha":
-                // Validar y convertir la fecha si está en formato dd/mm/yyyy
                 const partes = textoBusqueda.split("/");
                 if (partes.length === 3) {
                     const [dia, mes, anio] = partes;
@@ -50,19 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     }
                 }
-
-                // Si ya viene con el formato yyyy-mm-dd o algo inesperado, usar como está
                 url = `http://localhost:8081/api/reparaciones/buscar/fecha/${encodeURIComponent(textoBusqueda)}`;
                 break;
             default:
-                alert("Opción de búsqueda no válida.");
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Opción no válida',
+                    text: 'Por favor, selecciona un filtro de busqueda.',
+                });
                 return;
         }
 
         fetch(url, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`, // Aquí se envía el token JWT
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         })
@@ -77,14 +80,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (data.length === 0) {
                 resultTable.innerHTML = `<tr><td colspan="6" class="text-center">No se encontraron resultados</td></tr>`;
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Sin resultados',
+                    text: 'No se encontraron reparaciones con el filtro seleccionado.',
+                });
                 return;
             }
+
+            // Mostrar alerta de éxito si hay datos
+            Swal.fire({
+                icon: 'success',
+                title: 'Reparaciones encontradas',
+                text: `Se encontraron ${data.length} reparaciones.`,
+            });
 
             data.forEach(reparacion => {
                 const row = `
                     <tr>
                         <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> ${reparacion.contratista}</td>
-                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> ${reparacion.nombreUsuario} </td>
+                        <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> ${reparacion.nombreUsuario}</td>
                         <td>${reparacion.descripcion}</td>
                         <td>${reparacion.fecha}</td>
                         <td>${reparacion.fechaFinalizacion}</td>
@@ -96,15 +111,19 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             console.error("Error al buscar reparaciones:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error al buscar reparaciones. Por favor, inténtalo de nuevo más tarde.',
+            });
             resultTable.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Ocurrió un error al buscar</td></tr>`;
         });
     });
 
     // Logout
-     // Evento de logout
-        document.getElementById("logoutBtn").addEventListener("click", function () {
-        localStorage.clear();  // Limpia todo el localStorage
-        sessionStorage.clear(); // Limpia todo el sessionStorage
-        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../modulo-login/page-login.html";
     });
 });

@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+// funcion para cambiar la foto de perfil de usuario logeado
 document.addEventListener("DOMContentLoaded", function () {
     const profileImageInput = document.getElementById('profileImageInput');
     const previewImage = document.getElementById('profileImagePreview');
@@ -92,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 formData.append("file", selectedFile);
                 formData.append("idUsuario", userId);
                 formData.append("tipo", "FotoPerfil");
+
                 fetch(`http://localhost:8081/api/archivos/${userId}/actualizar-con-archivo`, {
                     method: 'PUT',
                     headers: {
@@ -101,17 +104,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .then(async response => {
                     console.log("Código de estado HTTP:", response.status);
-                
+
                     let data;
                     try {
-                        data = await response.json();
-                        console.log("Respuesta del servidor:", data);
-                    } catch (jsonErr) {
-                        console.error("No se pudo parsear JSON:", jsonErr);
-                        throw new Error("Respuesta no válida del servidor.");
+                        const contentType = response.headers.get("content-type");
+
+                        if (contentType && contentType.includes("application/json")) {
+                            data = await response.json();
+                        } else {
+                            const text = await response.text();
+                            throw new Error(text); // Lanzamos el texto como error para manejarlo abajo
+                        }
+                    } catch (error) {
+                        console.error("Error de respuesta:", error.message);
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: error.message || 'Respuesta no válida del servidor.',
+                        });
+
+                        return;
                     }
-                
-                    if (response.ok /* && data.success */) {
+
+                    if (response.ok) {
                         Swal.fire({
                             icon: 'success',
                             title: 'Imagen actualizada',
@@ -119,13 +135,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             timer: 2000,
                             showConfirmButton: false
                         }).then(() => {
-                            location.reload(); // Recargar la página después de que termine el timer
+                            location.reload();
                         });
-                
-                        // Puedes cerrar el modal manualmente si quieres
+
                         const modal = bootstrap.Modal.getInstance(document.getElementById('updateProfilePicModal'));
                         if (modal) modal.hide();
-                
+
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -136,11 +151,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch(error => {
                     console.error("Error al hacer la petición fetch:", error);
-                
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Error de conexión',
-                        text: 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
+                        text: error.message || 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
                     });
                 });
             } else {
@@ -149,6 +164,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
 document.getElementById("updateHealthProfileForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -361,8 +379,8 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
 
 // Botón para deshabilitar un usuario
 document.getElementById("btn-despedir").addEventListener("click", function () {
-    const id = sessionStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
-
+    const id = localStorage.getItem("id"); 
+    const token = localStorage.getItem("token"); 
     if (!id) {
         Swal.fire({
             icon: "error",
@@ -383,42 +401,37 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            // Preparar los datos para enviar al API
-            const data = { id };
-
-            fetch('/api/despedir-usuario', {
-                method: 'POST',
+            fetch(`http://localhost:8081/api/usuarios/${id}/inactivar`, {
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        title: "Despedido",
-                        text: "El usuario ha sido despedido exitosamente.",
-                        icon: "success"
-                    });
-                } else {
-                    Swal.fire({
-                        title: "Error",
-                        text: "Hubo un problema al despedir al usuario.",
-                        icon: "error"
-                    });
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             })
-            .catch(() => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor");
+                }
+                return response.json();
+            })
+            .then(data => {
+                Swal.fire({
+                    title: "Despedido",
+                    text: "El usuario ha sido despedido exitosamente.",
+                    icon: "success"
+                });
+            })
+            .catch((error) => {
                 Swal.fire({
                     title: "Error",
-                    text: "No se pudo conectar con el servidor.",
+                    text: "No se pudo conectar con el servidor o el usuario no fue encontrado.",
                     icon: "error"
                 });
             });
         }
     });
 });
+
 
 
 // let contrasenaReal = "";
@@ -434,6 +447,7 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
 // }
 
 // Función para actualziar el perfil del usuario
+
 document.addEventListener("DOMContentLoaded", function () {
 
     function showError(input, message) {

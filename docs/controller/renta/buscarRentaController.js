@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function buscarRentas() {
         const valorBusqueda = document.getElementById('inputBusqueda')?.value.trim();
         const opcion = document.getElementById('opcionesBuscarUsuario')?.value;
-
+    
         if (!valorBusqueda || opcion === 'seleccion') {
             Swal.fire({
                 icon: 'warning',
@@ -29,8 +29,35 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             return;
         }
-
+    
         let url = '';
+    
+        // 👉 Función para formatear fechas a YYYY-MM-DD
+        function convertirFecha(fechaTexto) {
+            const partes = fechaTexto.includes('/') ? fechaTexto.split('/') : fechaTexto.split('-');
+    
+            if (partes.length !== 3) return null;
+    
+            let dia, mes, anio;
+    
+            // Si el primer valor tiene 4 cifras, es formato YYYY-MM-DD o YYYY/MM/DD
+            if (partes[0].length === 4) {
+                anio = partes[0];
+                mes = partes[1];
+                dia = partes[2];
+            } else {
+                dia = partes[0];
+                mes = partes[1];
+                anio = partes[2];
+            }
+    
+            // Asegurarse de que estén en formato de dos dígitos
+            if (dia.length === 1) dia = '0' + dia;
+            if (mes.length === 1) mes = '0' + mes;
+    
+            return `${anio}-${mes}-${dia}`;
+        }
+    
         switch (opcion) {
             case 'localNombreUsuario':
                 url = `http://localhost:8081/api/rentas/buscar/usuario?nombreUsuario=${valorBusqueda}`;
@@ -42,7 +69,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 url = `http://localhost:8081/api/rentas/buscar/estadoPago?estadoPago=${valorBusqueda}`;
                 break;
             case 'fechaInicio':
-                url = `http://localhost:8081/api/rentas/buscar/fecha?fechaInicio=${valorBusqueda}`;
+                const fechaFormateada = convertirFecha(valorBusqueda);
+                if (!fechaFormateada) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Fecha inválida',
+                        text: 'Por favor ingresa una fecha válida en formatos como DD/MM/YYYY o YYYY-MM-DD.',
+                    });
+                    return;
+                }
+                url = `http://localhost:8081/api/rentas/buscar/fecha?fechaInicio=${fechaFormateada}`;
                 break;
             default:
                 Swal.fire({
@@ -106,8 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const fila = document.createElement('tr');
             fila.innerHTML = `
-                <td>LC-${renta.idLocal}</td>
-                <td><img src="../../images/perfilUsuario.jpg" width="25" class="me-2"> Usuario #${renta.idUsuario}</td>
+                <td><strong>${renta.nombreLocal}</strong> </td>
+                <td>
+                    <img src="${renta.fotoPerfil || '../../images/perfilUsuario.jpg'}" width="30" class="rounded-circle me-2">
+                    ${renta.nombreUsuario} ${renta.apellidoPaterno} ${renta.apellidoMaterno}
+                </td>
                 <td>${new Date(renta.fechaInicio).toLocaleDateString('es-MX')}</td>
                 <td>${new Date(renta.fechaFin).toLocaleDateString('es-MX')}</td>
                 <td>${renta.estadoLocal}</td>
@@ -117,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${botonEstadoPago}</td>
             `;
             tbody.appendChild(fila);
+
         });
 
         document.querySelectorAll('.btn-abonar').forEach(btn => {
@@ -176,8 +216,7 @@ if (formPago) {
             })
             .then(response => response.json())
 .then(data => {
-    console.log('Respuesta de la API:', data);  // Revisa lo que recibes
-    // Verifica si el estado de pago es 'ABONO' para determinar si el abono fue exitoso
+    console.log('Respuesta de la API:', data); 
     if (data.estadoPago === 'ABONO') {
         Swal.fire({
             title: '¡Éxito!',
@@ -187,7 +226,7 @@ if (formPago) {
         }).then(() => {
             montoInput.value = '';
             $('#simularPagoModal').modal('hide');
-            buscarRentas(); // ✅ Recarga la tabla con los nuevos datos
+            buscarRentas(); 
         });
     } else if (data.estadoPago === 'PAGADO') {
         Swal.fire({
@@ -197,7 +236,7 @@ if (formPago) {
             confirmButtonText: 'Aceptar'
         }).then(() => {
             $('#simularPagoModal').modal('hide');
-            buscarRentas(); // ✅ También recarga si el pago finaliza la renta
+            buscarRentas(); 
         });
     } else {
         Swal.fire({

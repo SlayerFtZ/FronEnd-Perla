@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (response.ok) {
                     showAlert('success', 'Registro exitoso', 'Los datos han sido guardados correctamente.', clearForm);
+                    sessionStorage.clear();
                 } else {
                     const errorData = await response.json();
                     showAlert('error', 'Error al enviar', errorData.message || 'Ocurrió un error al guardar los datos.');
@@ -202,6 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cancelBtn.addEventListener('click', () => {
         showAlert('info', 'Cancelado', 'El formulario no ha sido enviado.', () => {
             clearForm();
+            sessionStorage.clear();
             window.location.href = '../modulo-inicio/dashboard-inicio.html';
         });
     });

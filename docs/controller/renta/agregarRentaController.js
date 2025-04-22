@@ -214,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: "Se ha registrado correctamente.",
                     }).then(() => {
                         form.reset();
+                        sessionStorage.clear();
                         window.location.href = '../../view/modulo-renta/buscar-renta.html';
                     });
         
@@ -247,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: "No se realizó ningún cambio.",
                 });
                 form.reset();
+                sessionStorage.clear();
                 window.location.href = '../../view/modulo-inicio/dashboard-inicio.html';
             }
         });
