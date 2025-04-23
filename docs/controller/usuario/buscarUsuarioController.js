@@ -108,35 +108,47 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Mostrar usuarios en tabla
-function mostrarUsuariosEnTabla(usuarios) {
-    const tabla = document.getElementById('tablaUsuarios');
-    tabla.innerHTML = '';
-
-    let contenido = '';
-    usuarios.forEach(usuario => {
-        contenido += `
-            <tr>
-                <td>
-                    <button class="btn btn-info btn-sm" onclick="redirigirPerfil(${usuario.idUsuario})">
-                        Ver perfil
-                    </button>
-                </td>
-                <td>
-                    <img src="${usuario.fotoPerfilUrl || '../../images/perfilUsuario.jpg'}" width="50" class="me-2">
-                    ${usuario.nombre}
-                </td>
-                <td>${usuario.apellidoPaterno}</td>
-                <td>${usuario.apellidoMaterno}</td>
-                <td>${usuario.rfc}</td>
-                <td>${usuario.curp}</td>
-                <td class="text-end">${usuario.rol}</td>
-            </tr>
-        `;
-    });
-
-    tabla.innerHTML = contenido;
-}
+    function mostrarUsuariosEnTabla(usuarios) {
+        const tabla = document.getElementById('tablaUsuarios');
+        tabla.innerHTML = '';
+    
+        let contenido = '';
+        usuarios.forEach(usuario => {
+            let claseFondoEstado = '';
+            switch (usuario.estado) {
+                case 'Activo':
+                    claseFondoEstado = 'bg-success text-white';
+                    break;
+                case 'Inactivo':
+                    claseFondoEstado = 'bg-danger text-white';
+                    break;
+            }
+    
+            contenido += `
+                <tr>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="redirigirPerfil(${usuario.idUsuario})">
+                            Ver perfil
+                        </button>
+                    </td>
+                    <td>
+                        <img src="${usuario.fotoPerfilUrl || '../../images/perfilUsuario.jpg'}" width="50" class="me-2">
+                        ${usuario.nombre}
+                    </td>
+                    <td>${usuario.apellidoPaterno}</td>
+                    <td>${usuario.apellidoMaterno}</td>
+                    <td>${usuario.rfc}</td>
+                    <td>${usuario.curp}</td>
+                    <td class="text-end">${usuario.rol}</td>
+                    <td class="text-end ${claseFondoEstado}"><strong>${usuario.estado}</strong></td>
+                </tr>
+            `;
+        });
+    
+        tabla.innerHTML = contenido;
+    }
+    
+    
 
     // Redirección al perfil
     window.redirigirPerfil = function (idUsuario) {

@@ -32,120 +32,139 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // BÚSQUEDA DE PAGOS EXTRAS
-    searchBtn.addEventListener("click", function (e) {
-        e.preventDefault();
+    const opcionesBuscarPagoExtra = document.getElementById("opcionesBuscarPagoExtra");
+const fechaDePagoFields = document.getElementById("fechaDePagoFields");
 
-        const textoBusqueda = searchInput.value.trim();
-        const filtro = filtroBusqueda.value;
-        let url = "";
+opcionesBuscarPagoExtra.addEventListener("change", function () {
+    const filtro = opcionesBuscarPagoExtra.value;
 
-        if (filtro === "seleccion") {
+    // Mostrar u ocultar los campos de fecha
+    if (filtro === "fechaDePago") {
+        fechaDePagoFields.style.display = "block";
+    } else {
+        fechaDePagoFields.style.display = "none";
+    }
+});
+
+// BÚSQUEDA DE PAGOS EXTRAS
+searchBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const textoBusqueda = searchInput.value.trim();
+    const filtro = filtroBusqueda.value;
+    let url = "";
+
+    if (filtro === "seleccion") {
+        Swal.fire({
+            icon: 'info',
+            title: 'Filtro no seleccionado',
+            text: 'Selecciona un tipo de búsqueda antes de continuar.',
+        });
+        return;
+    }
+
+    if (filtro === "todos") {
+        url = `http://localhost:8081/api/pagos-extras`;
+    } else if (filtro === "fechaDePago") {
+        const fechaInicio = document.getElementById("fechaInicio").value;
+        const fechaFin = document.getElementById("fechaFin").value;
+
+        if (!fechaInicio || !fechaFin) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos vacíos',
+                text: 'Por favor, ingresa ambas fechas (inicio y fin).',
+            });
+            return;
+        }
+
+        url = `http://localhost:8081/api/pagos-extras?fechaInicio=${encodeURIComponent(fechaInicio)}&fechaFin=${encodeURIComponent(fechaFin)}`;
+    } else if (filtro === "nombreUsuario") {
+        if (!textoBusqueda) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo vacío',
+                text: 'Escribe un nombre de usuario para buscar.',
+            });
+            return;
+        }
+        url = `http://localhost:8081/api/pagos-extras?nombre=${encodeURIComponent(textoBusqueda)}`;
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Filtro no válido',
+            text: 'El filtro seleccionado no es válido.',
+        });
+        return;
+    }
+
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+    })
+    .then(data => {
+        resultTable.innerHTML = "";
+    
+        if (!data || data.length === 0) {
+            resultTable.innerHTML = `<tr><td colspan="6" class="text-center">No se encontraron resultados</td></tr>`;
             Swal.fire({
                 icon: 'info',
-                title: 'Filtro no seleccionado',
-                text: 'Selecciona un tipo de búsqueda antes de continuar.',
+                title: 'Sin resultados',
+                text: 'No se encontraron pagos extras con los criterios de búsqueda.',
             });
             return;
         }
-
-        if (filtro === "todos") {
-            url = `http://localhost:8081/api/pagos-extras`;
-        } else if (filtro === "fechaDePago") {
-            if (!textoBusqueda) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Campo vacío',
-                    text: 'Escribe una fecha para buscar.',
-                });
-                return;
-            }
-            url = `http://localhost:8081/api/pagos-extras/fecha/${encodeURIComponent(textoBusqueda)}`;
-        } else if (filtro === "nombreUsuario") {
-            if (!textoBusqueda) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Campo vacío',
-                    text: 'Escribe un nombre de usuario para buscar.',
-                });
-                return;
-            }
-            url = `http://localhost:8081/api/pagos-extras/usuario/${encodeURIComponent(textoBusqueda)}`;
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Filtro no válido',
-                text: 'El filtro seleccionado no es válido.',
-            });
-            return;
-        }
-
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            resultTable.innerHTML = "";
-
-            if (!data || data.length === 0) {
-                resultTable.innerHTML = `<tr><td colspan="6" class="text-center">No se encontraron resultados</td></tr>`;
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Sin resultados',
-                    text: 'No se encontraron pagos extras con los criterios de búsqueda.',
-                });
-                return;
-            }
-
-            data.forEach(pago => {
-                resultTable.innerHTML += `
-                    <tr>
-                        <td>${pago.idPagoExtra}</td>
-                        <td>${pago.nombreUsuario || `ID ${pago.idUsuario}`}</td>
-                        <td>${pago.fecha}</td>
-                        <td>$${parseFloat(pago.montoAportado).toFixed(2)}</td>
-                        <td>${pago.descripcion}</td>
-                        <td>
-                            <button 
-                                type="button" 
-                                class="btn btn-warning mb-3 btn-editar" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalPagoExtra"
-                                data-id="${pago.idPagoExtra}"
-                                data-idusuario="${pago.idUsuario}"
-                                data-fecha="${pago.fecha}"
-                                data-monto="${pago.montoAportado}"
-                                data-descripcion="${pago.descripcion}">
-                                Actualizar
-                            </button>
-                        </td>
-                    </tr>`;
-            });
-            
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Búsqueda exitosa',
-                text: 'Los resultados se han cargado correctamente.',
-            });
-        })
-        .catch(error => {
-            console.error("Error al buscar pagos extras:", error);
-            resultTable.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Ocurrió un error al buscar</td></tr>`;
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: `Ocurrió un error al buscar: ${error.message}`,
-            });
+    
+        data.forEach(pago => {
+            resultTable.innerHTML += `
+            <tr>
+                <td>${pago.idPagoExtra}</td>
+                <td>${pago.nombreCompleto || `ID ${pago.idUsuario}`}</td>
+                <td>${pago.fecha}</td>
+                <td>$${parseFloat(pago.montoAportado).toFixed(2)}</td>
+                <td>${pago.descripcion}</td>
+                <td>
+                <button 
+                    type="button" 
+                            class="btn btn-warning mb-3 btn-editar" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#modalPagoExtra"
+                            data-id="${pago.idPagoExtra}"
+                            data-idusuario="${pago.idUsuario}"
+                            data-fecha="${pago.fecha}"
+                            data-monto="${pago.montoAportado}"
+                            data-descripcion="${pago.descripcion}">
+                            Actualizar
+                        </button>
+                    </td>
+                </tr>`;
+        });
+    
+        // ✅ Este Swal debe estar aquí DENTRO
+        Swal.fire({
+            icon: 'success',
+            title: 'Búsqueda exitosa',
+            text: 'Los resultados se han cargado correctamente.',
+        });
+    
+    })
+    .catch(error => {
+        console.error("Error al buscar pagos extras:", error);
+        resultTable.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Ocurrió un error al buscar</td></tr>`;
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `Ocurrió un error al buscar: ${error.message}`,
         });
     });
+});    
 
     // FUNCIÓN PARA CARGAR USUARIOS
     async function loadUsuarios() {
@@ -249,16 +268,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
         
-    // BOTÓN DE CIERRE DE SESIÓN
-    document.getElementById("logoutBtn").addEventListener("click", function () {
-        localStorage.clear();
-        sessionStorage.clear();
-        Swal.fire({
-            icon: 'success',
-            title: 'Sesión cerrada',
-            text: 'Has cerrado sesión correctamente.',
-        }).then(() => {
-            window.location.href = "../modulo-login/page-login.html";
+        // BOTÓN DE CIERRE DE SESIÓN
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+            localStorage.clear();
+            sessionStorage.clear();
+            Swal.fire({
+                icon: 'success',
+                title: 'Sesión cerrada',
+                text: 'Has cerrado sesión correctamente.',
+            }).then(() => {
+                window.location.href = "../modulo-login/page-login.html";
+            });
         });
-    });
-});
+    }); 
+    
