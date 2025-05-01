@@ -199,6 +199,7 @@ searchBtn.addEventListener("click", function (e) {
             console.error('Error al cargar los usuarios:', error);
         }
     }
+    
     document.getElementById("formPagoExtra").addEventListener("submit", async function (e) {
         e.preventDefault();
     

@@ -156,8 +156,9 @@
                     <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
                                 class="bi bi-key"></i></i>.
                             Actualizar renta</a></li>
-                            <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
-                                Buscar renta</a></li>
+                    <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
+                                class="bi bi-search"></i></i>.
+                            Buscar renta</a></li>
                 </ul>
             </li>
 
@@ -176,16 +177,25 @@
                 </ul>
             </li>
 
-            <!-- Ingresos -->
+            <!-- Ingresos  y egresos-->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-currency-dollar"></i><span class="app-menu__label">. Ingreso / Egreso</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i class="bi bi-database-fill-add"></i>.
+                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i
+                                class="bi bi-database-fill-add"></i>.
                             Agregar
                             ingreso</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso.html" rel="noopener"><i class="bi bi-search"></i>
+                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso.html" rel="noopener"><i
+                                class="bi bi-search"></i>
                             . Consultar ingreso</a></li>
+                    <li><a class="treeview-item" href="../modulo-egresos/agregar-egreso.html"><i
+                                class="bi bi-database-fill-add"></i>.
+                            Agregar
+                            egreso</a></li>
+                    <li><a class="treeview-item" href="../modulo-egresos/consultar-egreso.html" rel="noopener"><i
+                                class="bi bi-search"></i>
+                            . Consultar egreso</a></li>
                 </ul>
             </li>
 
@@ -215,8 +225,9 @@
                 </ul>
             </li>
             <!-- Navegacion y menu para Pagos extras -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="bi bi-cash-coin"></i><span
-                        class="app-menu__label">. Pagos extras</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="../modulo-pagosExtra/pagosExtra.html">
                             <i class="bi bi-stripe"></i>. Agregar
@@ -234,6 +245,10 @@
                     <li><a class="treeview-item" href="../modulo-configuracion/actualizar-iconoEmpresa.html"><i
                                 class="bi bi-card-image"></i>.
                             Cambiar Icono</a></li>
+                    <li><a class="treeview-item" href="../modulo-configuracion/configuracionGlobal-renta.html"><i
+                                class="bi bi-coin"></i>.
+                            Actualizar precio renta</a></li>
+            </li>
             </li>
         </ul>
     </aside>
@@ -251,122 +266,135 @@
         </div>
 
         <!-- Aquí inicia el formulario para usuarios -->
-<form class="form-layout">
-    <div class="container mt-5">
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-3 text-center">
-                    <h1 class="titulo-formulario-usuario">Datos de Usuario</h1>
-                    <div class="image-container">
-                        <img id="imagePreview" src="../../images/perfilUsuario.jpg" class="img-fluid rounded-start" alt="Imagen por defecto">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingresa su nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="apellidoPaterno">Apellido paterno</label>
-                                <input type="text" class="form-control" id="apellidoPaterno" placeholder="Ingresa su apellido paterno" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="apellidoMaterno">Apellido materno</label>
-                                <input type="text" class="form-control" id="apellidoMaterno" placeholder="Ingresa su apellido materno" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input type="email" class="form-control" id="correo" placeholder="Ingresa su correo electrónico" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="curp">CURP</label>
-                                <input type="text" class="form-control" id="curp" placeholder="Ingresa su CURP" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="rfc">RFC</label>
-                                <input type="text" class="form-control" id="rfc" placeholder="Ingresa su RFC" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechaNacimiento">Fecha de nacimiento</label>
-                                <input type="date" class="form-control" id="fechaNacimiento" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nssSeguro">Número de Seguro Social (NSS)</label>
-                                <input type="text" class="form-control" id="nssSeguro" placeholder="Ingresa el nss social" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contrasena">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena" placeholder="la contraseña se generará automáticamente" readonly required>
-                                
-                                <button type="button" class="btn btn-secondary mt-2" onclick="generarContrasena()">Generar Contraseña</button>
+        <form class="form-layout">
+            <div class="container mt-5">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-3 text-center">
+                            <h1 class="titulo-formulario-usuario">Datos de Usuario</h1>
+                            <div class="image-container">
+                                <img id="imagePreview" src="../../images/perfilUsuario.jpg"
+                                    class="img-fluid rounded-start" alt="Imagen por defecto">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="numeroTelefonico">Número telefónico</label>
-                                <input type="tel" class="form-control" id="numeroTelefonico" placeholder="Ingresa su número telefónico" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="direccion">Dirección</label>
-                                <input type="text" class="form-control" id="direccion" placeholder="Ingresa la dirección de su domicilio" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="genero">Género</label>
-                                <select class="form-control" id="genero" required>
-                                    <option value="" disabled selected>Selecciona el género</option>
-                                    <option value="masculino">Masculino</option>
-                                    <option value="femenino">Femenino</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="rol">Rol</label>
-                                <select class="form-control" id="rol" required>
-                                    <option value="" disabled selected>Selecciona el rol</option>
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Arrendador">Arrendador</option>
-                                    <option value="Usuario">Usuario</option>
-                                    <option value="Socio">Socio</option>
-                                    <option value="Mesa Directiva">Mesa Directiva</option>
-                                    <option value="Empleado">Empleado</option>
-                                    <option value="SuperAdmin">SuperAdmin</option>
-                                    <option value="Contador">Contador</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="estadoCivil">Estado civil</label>
-                                <select class="form-control" id="estadoCivil" required>
-                                    <option value="" disabled selected>Selecciona el estado civil</option>
-                                                    <option value="Soltero">Soltero</option>
-                                                    <option value="Casado">Casado</option>
-                                                    <option value="Viudo">Viudo</option>
-                                                    <option value="Divorciado">Divorciado</option>
-                                                    <option value="Unión libre">Unión libre</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="profilePhoto">Foto de perfil</label>
-                                <input class="form-control" type="file" id="profilePhoto" onchange="displayImage(event)" accept="image/*" required>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre"
+                                            placeholder="Ingresa su nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidoPaterno">Apellido paterno</label>
+                                        <input type="text" class="form-control" id="apellidoPaterno"
+                                            placeholder="Ingresa su apellido paterno" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidoMaterno">Apellido materno</label>
+                                        <input type="text" class="form-control" id="apellidoMaterno"
+                                            placeholder="Ingresa su apellido materno" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="correo">Correo</label>
+                                        <input type="email" class="form-control" id="correo"
+                                            placeholder="Ingresa su correo electrónico" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="curp">CURP</label>
+                                        <input type="text" class="form-control" id="curp" placeholder="Ingresa su CURP"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rfc">RFC</label>
+                                        <input type="text" class="form-control" id="rfc" placeholder="Ingresa su RFC"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+                                        <input type="date" class="form-control" id="fechaNacimiento" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nssSeguro">Número de Seguro Social (NSS)</label>
+                                        <input type="text" class="form-control" id="nssSeguro"
+                                            placeholder="Ingresa el nss social" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contrasena">Contraseña</label>
+                                        <input type="password" class="form-control" id="contrasena"
+                                            placeholder="la contraseña se generará automáticamente" readonly required>
+
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="generarContrasena()">Generar Contraseña</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-check-circle-fill me-2"></i>Registrar
-                        </button>
-                        <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
-                        </a>
+                        <div class="col-md-3">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="numeroTelefonico">Número telefónico</label>
+                                        <input type="tel" class="form-control" id="numeroTelefonico"
+                                            placeholder="Ingresa su número telefónico" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="direccion">Dirección</label>
+                                        <input type="text" class="form-control" id="direccion"
+                                            placeholder="Ingresa la dirección de su domicilio" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="genero">Género</label>
+                                        <select class="form-control" id="genero" required>
+                                            <option value="" disabled selected>Selecciona el género</option>
+                                            <option value="masculino">Masculino</option>
+                                            <option value="femenino">Femenino</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rol">Rol</label>
+                                        <select class="form-control" id="rol" required>
+                                            <option value="" disabled selected>Selecciona el rol</option>
+                                            <option value="Administrador">Administrador</option>
+                                            <option value="Arrendador">Arrendador</option>
+                                            <option value="Usuario">Usuario</option>
+                                            <option value="Socio">Socio</option>
+                                            <option value="Mesa Directiva">Mesa Directiva</option>
+                                            <option value="Empleado">Empleado</option>
+                                            <option value="SuperAdmin">SuperAdmin</option>
+                                            <option value="Contador">Contador</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="estadoCivil">Estado civil</label>
+                                        <select class="form-control" id="estadoCivil" required>
+                                            <option value="" disabled selected>Selecciona el estado civil</option>
+                                            <option value="Soltero">Soltero</option>
+                                            <option value="Casado">Casado</option>
+                                            <option value="Viudo">Viudo</option>
+                                            <option value="Divorciado">Divorciado</option>
+                                            <option value="Unión libre">Unión libre</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePhoto">Foto de perfil</label>
+                                        <input class="form-control" type="file" id="profilePhoto"
+                                            onchange="displayImage(event)" accept="image/*" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle-fill me-2"></i>Registrar
+                                </button>
+                                <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</form>
+        </form>
 
 
 

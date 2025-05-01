@@ -53,42 +53,46 @@
       const fecha = new Date();
       const year = fecha.getFullYear();
       const month = fecha.getMonth() + 1;
-    
+
       const token = localStorage.getItem('token');
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       };
-    
-      const fetchJuegos = fetch(`http://localhost:8081/api/dashboard/ingresos/juegos?year=${year}&month=${month}`, { method: 'GET', headers })
+
+      fetch(`http://localhost:8081/api/dashboard/ingresos?year=${year}&month=${month}`, {
+        method: 'GET',
+        headers
+      })
         .then(response => {
-          if (!response.ok) throw new Error('Error al obtener juegos');
+          if (!response.ok) throw new Error('Error al obtener ingresos');
           return response.json();
-        });
-    
-      const fetchRentas = fetch(`http://localhost:8081/api/dashboard/ingresos/rentas?year=${year}&month=${month}`, { method: 'GET', headers })
-        .then(response => {
-          if (!response.ok) throw new Error('Error al obtener rentas');
-          return response.json();
-        });
-    
-      Promise.all([fetchJuegos, fetchRentas])
-        .then(([dataJuegos, dataRentas]) => {
-          const totalJuegos = dataJuegos.totalPagosJuego || 0;
-          const totalRentas = dataRentas.totalPagosRenta || 0;
-          const totalExtras = 1000; // si deseas que también sea dinámico, se puede agregar otro fetch
-    
+        })
+        .then(data => {
+          const totalJuegos = data.totalJuego || 0;
+          const totalRentas = data.totalRenta || 0;
+          const totalExtras = data.totalExtras || 0;
+
+          // Calcular la suma total
+          const sumaTotal = totalJuegos + totalRentas + totalExtras;
+
           // Actualizar widgets visuales
           const juegosElement = document.querySelector('.widget-small.warning .info p b');
           if (juegosElement) juegosElement.textContent = `$${totalJuegos.toLocaleString('es-MX')}`;
-    
+
           const rentaElement = document.querySelector('.widget-small.info .info p b');
           if (rentaElement) rentaElement.textContent = `$${totalRentas.toLocaleString('es-MX')}`;
-    
+
+          // Mostrar la suma total en el componente con id "graficatotal"
+          const graficatotalElement = document.getElementById('graficatotal');
+          if (graficatotalElement) {
+            graficatotalElement.textContent = `Total: $${sumaTotal.toLocaleString('es-MX')}`;
+          }
+
           // Actualizar gráfica de pastel
           const supportChartElement = document.getElementById("supportRequestChart");
           const supportChart = echarts.init(supportChartElement, null, { renderer: 'svg' });
-    
+
           const updatedSupportRequests = {
             tooltip: {
               trigger: 'item',
@@ -118,21 +122,25 @@
               }
             ]
           };
-    
+
           supportChart.setOption(updatedSupportRequests);
           new ResizeObserver(() => supportChart.resize()).observe(supportChartElement);
         })
         .catch(error => {
           console.error('Error al cargar datos del dashboard:', error);
-    
+
           const juegosElement = document.querySelector('.widget-small.warning .info p b');
           if (juegosElement) juegosElement.textContent = 'Error al cargar';
-    
+
           const rentaElement = document.querySelector('.widget-small.info .info p b');
           if (rentaElement) rentaElement.textContent = 'Error al cargar';
+
+          const graficatotalElement = document.getElementById('graficatotal');
+          if (graficatotalElement) {
+            graficatotalElement.textContent = 'Error al cargar';
+          }
         });
     });
-    
     
     
      // total de ingresos
@@ -247,147 +255,221 @@
     });
 
 
-    
+    async function fetchSalesDataAndRenderChart() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+
+      const url = `http://localhost:8081/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
+
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+
+        const monthlyTotals = [
+          'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ].map(mes => {
+          const item = data.find(d => d.mes.toLowerCase() === mes);
+          return item ? item.total : 0;
+        });
+
+        // Calculate the total sum of all months
+        const totalSum = monthlyTotals.reduce((sum, value) => sum + value, 0);
+
+        // Update the card with the total sum
+        const totalSumElement = document.getElementById('totalSumCard');
+        if (totalSumElement) {
+          totalSumElement.textContent = `$${totalSum.toLocaleString('es-MX')}`;
+        }
+
         const salesData = {
-            xAxis: {
+          xAxis: {
             type: 'category',
             data: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            yAxis: {
+          },
+          yAxis: {
             type: 'value',
             axisLabel: {
-                formatter: '${value}'
+              formatter: '${value}'
             }
-            },
-            series: [
+          },
+          series: [
             {
-                data: [1200, 1500, 1800, 1300, 1700, 2000, 1900, 2200, 2500, 2700, 3000, 2000],
-                type: 'bar',
-                itemStyle: {
+              data: monthlyTotals,
+              type: 'bar',
+              itemStyle: {
                 color: function (params) {
-                    const colors = ['#ff9e80', '#a3ffb0', '#a3b8ff', '#ff99d5', '#d8a3ff', '#a3fff9', '#fbff99', '#ffbf80', '#c5ff99', '#99c5ff', '#ff99bf', '#99ffd8'];
-    
-                    return colors[params.dataIndex];
+                  const colors = ['#ff9e80', '#a3ffb0', '#a3b8ff', '#ff99d5', '#d8a3ff', '#a3fff9', '#fbff99', '#ffbf80', '#c5ff99', '#99c5ff', '#ff99bf', '#99ffd8'];
+                  return colors[params.dataIndex];
                 }
-                }
+              }
             }
-            ],
-            tooltip: {
+          ],
+          tooltip: {
             trigger: 'axis',
             formatter: "<b>{b0}:</b> ${c0}"
-            }
-        }
-    
-        const supportRequests = {
-            tooltip: {
-            trigger: 'item',
-            formatter: "<b>{b}:</b> ${c}"
-            },
-            legend: {
-            orient: 'vertical',
-            left: 'left'
-            },
-            series: [
-            {
-                name: 'Support Requests',
-                type: 'pie',
-                radius: '75%',
-                data: [
-                { value: 4800, name: 'Juegos' },
-                { value: 5000, name: 'Rentas' },
-                { value: 1000, name: 'Extras' }
-                ],
-                emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-                }
-            }
-            ]
+          }
         };
-    
-    
+
         const salesChartElement = document.getElementById('salesChart');
         const salesChart = echarts.init(salesChartElement, null, { renderer: 'svg' });
         salesChart.setOption(salesData);
         new ResizeObserver(() => salesChart.resize()).observe(salesChartElement);
-    
-        const supportChartElement = document.getElementById("supportRequestChart");
-        const supportChart = echarts.init(supportChartElement, null, { renderer: 'svg' });
-        supportChart.setOption(supportRequests);
-        new ResizeObserver(() => supportChart.resize()).observe(supportChartElement);
 
+      } catch (error) {
+        console.error('Error al cargar los datos del gráfico:', error);
+      }
+    }
+
+    fetchSalesDataAndRenderChart();
 
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        var egresosChart = echarts.init(document.getElementById("egresosAnual"));
-        var egresosOption = {
+      // Gráfica de egresos
+      var egresosChart = echarts.init(document.getElementById("egresosAnual"));
   
-          tooltip: { trigger: "axis" },
-          xAxis: {
-            type: "category",
-            data: ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
-          },
-          yAxis: { type: "value" },
-          series: [
-            {
-              name: "Egresos",
-              type: "bar",
-              data: [1200, 1500, 1800, 1300, 1600, 1700, 2000, 2200, 2100, 1900, 1800, 2500],
-              itemStyle: { color: "#ff5733" }
-            }
-          ]
+      async function fetchEgresosData() {
+          const url = 'http://localhost:8081/api/dashboard/egresos/anuales?year=2025&month=01';
+          const token = localStorage.getItem('token');
+  
+          try {
+              const response = await fetch(url, {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer ${token}`,
+                      'Content-Type': 'application/json'
+                  }
+              });
+  
+              const data = await response.json();
+  
+              const egresosData = [
+                  "enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+              ].map(mes => {
+                  const item = data.find(d => d.mes.toLowerCase() === mes);
+                  return item ? item.total : 0;
+              });
+  
+              const totalEgresos = egresosData.reduce((sum, value) => sum + value, 0);
+  
+              const totalGraficaEgresosElement = document.getElementById('totalGraficaEgresos');
+              if (totalGraficaEgresosElement) {
+                  totalGraficaEgresosElement.textContent = `$${totalEgresos.toLocaleString('es-MX')}`;
+              }
+  
+              const egresosOption = {
+                  tooltip: { trigger: "axis" },
+                  xAxis: {
+                      type: "category",
+                      data: ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+                  },
+                  yAxis: { type: "value" },
+                  series: [{
+                      name: "Egresos",
+                      type: "bar",
+                      data: egresosData,
+                      itemStyle: { color: "#ff5733" }
+                  }]
+              };
+  
+              egresosChart.setOption(egresosOption);
+  
+          } catch (error) {
+              console.error('Error al cargar los datos de egresos:', error);
+          }
+      }
+  
+      fetchEgresosData(); // ✅ ya hace el setOption
+  
+      
+        const token = localStorage.getItem('token');
+        const meses = [
+          'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ];
+      
+        // Obtener año y mes actuales del sistema
+        const fechaActual = new Date();
+        const year = fechaActual.getFullYear();
+        const month = String(fechaActual.getMonth() + 1).padStart(2, '0'); // mes comienza desde 0
+      
+        const ingresosUrl = `http://localhost:8081/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
+        const egresosUrl = `http://localhost:8081/api/dashboard/egresos/anuales?year=${year}&month=${month}`;
+      
+        const headers = {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
         };
-  
-        egresosChart.setOption(egresosOption);
-  
-        var mantenimientoChart = echarts.init(document.getElementById("gastosMantenimiento"));
-        var mantenimientoOption = {
-          tooltip: { trigger: "axis" },
-          legend: { data: ['Reparaciones', 'Servicios', 'Materiales', 'Otros'], left: 'left' },
-          xAxis: {
-            type: 'category',
-            data: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-          },
-          yAxis: { type: 'value' },
-          series: [
-            {
-              name: 'Reparaciones',
-              type: 'line',
-              data: [300, 400, 500, 450, 600, 650, 700, 750, 800, 850, 900, 950],
-              smooth: true, // Línea suave
-              color: '#ff5733'
+      
+        Promise.all([
+          fetch(egresosUrl, { headers }).then(res => res.json()),
+          fetch(ingresosUrl, { headers }).then(res => res.json())
+        ])
+        .then(([egresosData, ingresosData]) => {
+          const egresosTotales = meses.map(mes => {
+            const item = egresosData.find(d => d.mes.toLowerCase() === mes);
+            return item ? item.total : 0;
+          });
+      
+          const ingresosTotales = meses.map(mes => {
+            const item = ingresosData.find(d => d.mes.toLowerCase() === mes);
+            return item ? item.total : 0;
+          });
+      
+          const totalIngresos = ingresosTotales.reduce((acc, val) => acc + val, 0);
+          const totalEgresos = egresosTotales.reduce((acc, val) => acc + val, 0);
+          const resultado = totalIngresos - totalEgresos;
+      
+          document.getElementById('totalIngreso').textContent = `Ingresos: $${totalIngresos.toLocaleString()}`;
+          document.getElementById('totalEgreso').textContent = `Egresos: $${totalEgresos.toLocaleString()}`;
+          document.getElementById('total').textContent = `Resultado: $${resultado.toLocaleString()}`;
+      
+          const chart = echarts.init(document.getElementById("estadoResultados"));
+          const options = {
+            tooltip: { trigger: "axis" },
+            legend: { data: ['Ingresos', 'Egresos'], left: 'left' },
+            xAxis: {
+              type: 'category',
+              data: meses.map(m => m.charAt(0).toUpperCase() + m.slice(1))
             },
-            {
-              name: 'Servicios',
-              type: 'line',
-              data: [200, 250, 300, 350, 400, 420, 440, 480, 510, 550, 580, 600],
-              smooth: true,
-              color: '#33ff57'
-            },
-            {
-              name: 'Materiales',
-              type: 'line',
-              data: [150, 200, 220, 250, 280, 300, 320, 340, 360, 380, 400, 420],
-              smooth: true,
-              color: '#3357ff'
-            },
-            {
-              name: 'Otros',
-              type: 'line',
-              data: [100, 120, 150, 180, 200, 210, 230, 250, 270, 290, 310, 330],
-              smooth: true,
-              color: '#FF00C8FF'
-            }
-          ]
-        };
-        mantenimientoChart.setOption(mantenimientoOption);
+            yAxis: { type: 'value' },
+            series: [
+              {
+                name: 'Egresos',
+                type: 'line',
+                data: egresosTotales,
+                smooth: true,
+                color: '#ff5733'
+              },
+              {
+                name: 'Ingresos',
+                type: 'line',
+                data: ingresosTotales,
+                smooth: true,
+                color: '#33ff57'
+              },
+            ]
+          };
+      
+          chart.setOption(options);
+        })
+        .catch(error => {
+          console.error("Error al cargar los datos:", error);
+        });
       });
-
-
+      
 
 
     document.getElementById("logoutBtn").addEventListener("click", function () {

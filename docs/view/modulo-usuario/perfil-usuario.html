@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="description"
         content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
@@ -18,7 +19,7 @@
     <title>Centro Comercial La Perla</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
     <!-- Font-icon css-->
@@ -86,7 +87,7 @@
         </ul>
     </header>
 
-    
+
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
@@ -157,8 +158,9 @@
                     <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
                                 class="bi bi-key"></i></i>.
                             Actualizar renta</a></li>
-                            <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i class="bi bi-search"></i></i>.
-                                Buscar renta</a></li>
+                    <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
+                                class="bi bi-search"></i></i>.
+                            Buscar renta</a></li>
                 </ul>
             </li>
 
@@ -177,16 +179,25 @@
                 </ul>
             </li>
 
-            <!-- Ingresos -->
+            <!-- Ingresos  y egresos-->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-currency-dollar"></i><span class="app-menu__label">. Ingreso / Egreso</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i class="bi bi-database-fill-add"></i>.
+                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i
+                                class="bi bi-database-fill-add"></i>.
                             Agregar
                             ingreso</a></li>
-                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso.html" rel="noopener"><i class="bi bi-search"></i>
+                    <li><a class="treeview-item" href="../modulo-ingresos/consultar-ingreso.html" rel="noopener"><i
+                                class="bi bi-search"></i>
                             . Consultar ingreso</a></li>
+                    <li><a class="treeview-item" href="../modulo-egresos/agregar-egreso.html"><i
+                                class="bi bi-database-fill-add"></i>.
+                            Agregar
+                            egreso</a></li>
+                    <li><a class="treeview-item" href="../modulo-egresos/consultar-egreso.html" rel="noopener"><i
+                                class="bi bi-search"></i>
+                            . Consultar egreso</a></li>
                 </ul>
             </li>
 
@@ -216,8 +227,9 @@
                 </ul>
             </li>
             <!-- Navegacion y menu para Pagos extras -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="bi bi-cash-coin"></i><span
-                        class="app-menu__label">. Pagos extras</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="../modulo-pagosExtra/pagosExtra.html">
                             <i class="bi bi-stripe"></i>. Agregar
@@ -235,6 +247,9 @@
                     <li><a class="treeview-item" href="../modulo-configuracion/actualizar-iconoEmpresa.html"><i
                                 class="bi bi-card-image"></i>.
                             Cambiar Icono</a></li>
+                    <li><a class="treeview-item" href="../modulo-configuracion/configuracionGlobal-renta.html"><i
+                                class="bi bi-coin"></i>.
+                            Actualizar precio renta</a></li>
             </li>
         </ul>
     </aside>
@@ -300,7 +315,7 @@
                         </div>
                         <br>
                         <br>
-                        
+
                         <div class="col-md-6"><label class="labels">GENERO</label><input type="text"
                                 class="form-control" placeholder="Genero" value="" disabled></div>
                         <div class="col-md-6"><label class="labels">ESTADO CIVIL</label><input type="text"
@@ -629,11 +644,12 @@
                                                     <option value="Contador">Contador</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label for="actualizarEstadoCivil">Estado civil</label>
                                                 <select class="form-control" id="actualizarEstadoCivil" required>
-                                                    <option value="" disabled selected>Selecciona el estado civil</option>
+                                                    <option value="" disabled selected>Selecciona el estado civil
+                                                    </option>
                                                     <option value="Soltero">Soltero</option>
                                                     <option value="Casado">Casado</option>
                                                     <option value="Viudo">Viudo</option>
@@ -648,21 +664,21 @@
                                                 <button type="button" class="btn btn-secondary mt-2" onclick="generarContrasena()">Generar Contraseña</button>
                                             </div> -->
                                         </div>
-                                            <div class="text-right">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="bi bi-check-circle-fill me-2"></i>Actualizar
-                                                </button>
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                            </div>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="bi bi-check-circle-fill me-2"></i>Actualizar
+                                            </button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Cancelar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
 
         <script src="../../js/plugins/sweetalert.js"></script>

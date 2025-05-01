@@ -80,12 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
             select.addEventListener('change', () => {
                 const selectedUserId = select.value;
                 sessionStorage.setItem('selectedUserId', selectedUserId);
-
-                const selectedUser = data.find(usuario => usuario.idUsuario == selectedUserId);
-                if (selectedUser) {
-                    const rolUsuario = selectedUser.rol || "Rol no disponible";
-                    document.querySelector('.text-muted').textContent = `Rol: ${rolUsuario}`;
-                }
             });
 
         } catch (error) {

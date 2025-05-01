@@ -1,19 +1,21 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener datos del localStorage
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol");
+    const estado = localStorage.getItem("estado");
 
-    // 🔀 Mostrar u ocultar formularios
-    const seleccionartipo = document.getElementById('selectPrincipal');
-    const ingresoGral = document.getElementById('ingresoGral');
-    const ingresoJuego = document.getElementById('ingresoJuego');
+    // Validar existencia de datos y el estado del usuario
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../view/modulo-login/page-login.html";
+    } else if (estado.toLowerCase() === "inactivo") {
+        // Si el estado es inactivo, limpiar almacenamiento y redirigir
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../view/modulo-login/page-login.html";
+    }
 
-    ingresoGral.style.display = 'none';
-    ingresoJuego.style.display = 'none';
-
-    seleccionartipo.addEventListener('change', function () {
-        const seleccion = seleccionartipo.value;
-        ingresoGral.style.display = seleccion === 'ingGral' ? 'block' : 'none';
-        ingresoJuego.style.display = seleccion === 'ingJue' ? 'block' : 'none';
-    });
-
-
+});
     // 🕹️ Formulario de ingreso de juegos
     const formAgregarJuego = document.getElementById('formAgregarIngresoJuego'); 
     const cancelBtnJuego = document.getElementById('cancelBtnJuego');  
@@ -186,3 +188,10 @@
         }
     }
 
+
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+        localStorage.clear();  // Limpia todo el localStorage
+        sessionStorage.clear(); // Limpia todo el sessionStorage
+        window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+    });
+    
