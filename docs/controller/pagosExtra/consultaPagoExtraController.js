@@ -126,7 +126,7 @@ searchBtn.addEventListener("click", function (e) {
             resultTable.innerHTML += `
             <tr>
                 <td>${pago.idPagoExtra}</td>
-                <td>${pago.nombreCompleto || `ID ${pago.idUsuario}`}</td>
+                <td><img src="${pago.fotoPerfilUrl || "../../images/perfilUsuario.jpg"}" width="50" class="me-2"> ${pago.nombreCompleto || `ID ${pago.idUsuario}`}</td>
                 <td>${pago.fecha}</td>
                 <td>$${parseFloat(pago.montoAportado).toFixed(2)}</td>
                 <td>${pago.descripcion}</td>

@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderizarTablaLocales(locales) {
         const tbody = document.getElementById('tablaLocal');
         tbody.innerHTML = ''; // Limpiar contenido previo
-
+    
         locales.forEach(local => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
@@ -108,9 +108,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${local.estado}</td>
                 <td>$${local.precioMensual.toFixed(2)}</td>
             `;
+    
+            // Obtener la celda del estado (segunda celda)
+            const celdaEstado = fila.children[1];
+            const estado = local.estado.toLowerCase();
+    
+            // Cambiar el color de fondo y texto según el estado
+            if (estado === 'disponible') {
+                celdaEstado.style.backgroundColor = 'green';
+                celdaEstado.style.color = 'white';
+            } else if (estado === 'ocupado') {
+                celdaEstado.style.backgroundColor = 'red';
+                celdaEstado.style.color = 'white';
+            }else if (estado === 'reservado') {
+                celdaEstado.style.backgroundColor = 'orange';
+                celdaEstado.style.color = 'white';
+            }
+    
             tbody.appendChild(fila);
         });
     }
+    
+    
     
     document.getElementById("logoutBtn").addEventListener("click", function () {
         localStorage.clear();  // Limpia todo el localStorage
