@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+
 const select = document.getElementById("opcionesBuscarEgreso");
 const input = document.getElementById("inputBusqueda");
 const tablaBody = document.querySelector("tbody");
@@ -27,27 +30,30 @@ function buscarEgresos() {
     const valor = input.value.trim();
     const token = localStorage.getItem("token");
     let url = "";
-    let paginacion = "?numeroPagina=0&tamanoPagina=10";
+    let paginacion = "?numeroPagina=0&tamanoPagina=10";  // Para implementar paginación si es necesario
 
     switch (opcion) {
         case "todos":
-            url = `${urlBase}`;
+            url = `${urlBase}`; // Lista todos los pagos
             break;
-        case "nMaquina":
-            url = `${urlBase}/buscar/maquina?nombre=${encodeURIComponent(valor)}${paginacion}`;
+        case "nUsuario":
+            url = `${urlBase}/buscar/usuario?nombre=${encodeURIComponent(valor)}`; // Buscar por nombre de usuario
             break;
         case "fecha":
-            const [fechaInicio, fechaFin] = valor.split(",");
-            url = `${urlBase}/periodo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}${paginacion}`;
+            let [fechaInicio] = valor.split(",");
+            // Reemplazar "/" por "-" y reordenar si es necesario
+            fechaInicio = fechaInicio.replace(/\//g, "-");
+            const partesFecha = fechaInicio.split("-");
+            if (partesFecha.length === 3) {
+            // Si el formato es DD-MM-YYYY, convertirlo a YYYY-MM-DD
+            const [dia, mes, anio] = partesFecha;
+            fechaInicio = `${anio}-${mes}-${dia}`;
+            }
+            url = `${urlBase}/buscar/fecha?fechaPago=${fechaInicio}`; // Buscar por fecha
             break;
-        case "descripcion":
-            Swal.fire({
-                icon: 'info',
-                title: 'Información',
-                text: 'El filtro por descripción aún no está implementado.',
-                confirmButtonText: 'Aceptar'
-            });
-            return;
+            case "descripcion":
+                url = `${urlBase}/buscar/descripcion?descripcion=${encodeURIComponent(valor)}`; // Buscar por descripción
+                break;
         default:
             Swal.fire({
                 icon: 'warning',
@@ -71,22 +77,22 @@ function buscarEgresos() {
     .then(data => {
         const resultados = data.content || data;
         tablaBody.innerHTML = "";
-        resultados.forEach(ingreso => {
+        resultados.forEach(egreso => {
             const fila = `
                 <tr>
-                    <td>${ingreso.idPago}</td>
-                    <td><img src="${ingreso.foto || '../../images/perfilUsuario.jpg'}" width="50" class="me-2">
-                    ${ingreso.nombreCompleto}</td>
-                    <td>${ingreso.descripcion}</td>
-                    <td>${ingreso.fechaPago}</td>
-                    <td>$${ingreso.monto.toFixed(2)}</td>
+                    <td>${egreso.idPago}</td>
+                    <td><img src="${egreso.foto || '../../images/perfilUsuario.jpg'}" width="50" class="me-2">
+                    ${egreso.nombreCompleto}</td>
+                    <td>${egreso.descripcion}</td>
+                    <td>${egreso.fechaPago}</td>
+                    <td>$${egreso.monto.toFixed(2)}</td>
                     <td>
                         <button type="button" class="btn btn-warning btn-abrir-modal" 
-                            data-id="${ingreso.idPago}"
-                            data-nombre="${ingreso.nombreCompleto}"
-                            data-descripcion="${ingreso.descripcion}"
-                            data-fecha="${ingreso.fechaPago}"
-                            data-monto="${ingreso.monto}"
+                            data-id="${egreso.idPago}"
+                            data-nombre="${egreso.nombreCompleto}"
+                            data-descripcion="${egreso.descripcion}"
+                            data-fecha="${egreso.fechaPago}"
+                            data-monto="${egreso.monto}"
                             data-bs-toggle="modal"
                             data-bs-target="#modalActualizarEgreso">
                             Actualizar
@@ -112,6 +118,7 @@ function buscarEgresos() {
 // Buscar cuando se hace clic en el botón
 document.querySelector(".app-search__button").addEventListener("click", buscarEgresos);
 
+
 // Delegación de eventos para abrir el modal
 tablaBody.addEventListener("click", (e) => {
     if (e.target.classList.contains('btn-abrir-modal')) {
@@ -129,7 +136,6 @@ document.getElementById('btnActualizarEgreso').addEventListener('click', () => {
     const modal = document.getElementById('modalActualizarEgreso');
     const idPago = modal.getAttribute('data-id-pago');
     const token = localStorage.getItem("token");
-
     const descripcion = document.getElementById('descripcionEgreso').value.trim();
     const fechaPago = document.getElementById('fechaEgreso').value;
     const monto = parseFloat(document.getElementById('costMen').value);

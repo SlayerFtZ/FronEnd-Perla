@@ -15,97 +15,139 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../../view/modulo-login/page-login.html";
     }
 });
+// Seleccionamos los elementos del formulario
+const form = document.getElementById('formAgregarFotoEmpresa');
+const profilePhoto = document.getElementById('Photo');  // Corregido ID de la imagen
+const cancelBtn = document.getElementById('cancelBtn');
+const previewImage = document.getElementById('previewImage');
+const updateButton = document.getElementById('updateButton');
+const companyLogo = document.getElementById('companyLogo');  // Logo de la empresa actual
 
+// El token de autenticación que se incluirá en los headers
+const token = localStorage.getItem("token");  // Reemplaza con tu token
 
-
-let originalLogo = document.getElementById("companyLogo").src; // Guardamos la imagen original
-
-            // Función para mostrar la vista previa de la imagen seleccionada
-            document.getElementById("profilePhoto").addEventListener("change", function (event) {
-                let file = event.target.files[0];
-
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById("companyLogo").src = e.target.result; // Mostrar la imagen
-                    };
-                    reader.readAsDataURL(file);
-                }
+// Previsualizar imagen seleccionada antes de enviar
+profilePhoto.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    
+    if (file) {
+        // Verificar si el archivo es una imagen
+        if (!file.type.startsWith('image/')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor selecciona un archivo de imagen.'
             });
+            return;
+        }
 
-            document.getElementById("formAgregarLocal").addEventListener("submit", function (event) {
-                event.preventDefault(); // Evita el envío inmediato del formulario
+        // Ocultamos la imagen actual del logo
+        companyLogo.style.display = 'none';
 
-                let fileInput = document.getElementById("profilePhoto");
-                let file = fileInput.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+            // Mostrar la imagen seleccionada en el mismo lugar del logo
+            previewImage.style.display = 'block';  // Mostrar la imagen de previsualización
+            previewImage.src = event.target.result;
+            updateButton.disabled = false;  // Habilitar el botón de actualización
+        };
+        
+        reader.readAsDataURL(file);
+    }
+});
 
-                // Validar que se haya seleccionado un archivo
-                if (!file) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Por favor, selecciona una imagen antes de actualizar.",
-                    });
-                    return;
-                }
+// Configuración de la solicitud POST
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evitamos el envío por defecto del formulario
 
-                // Validar el tipo de archivo (solo imágenes permitidas)
-                let allowedExtensions = ["image/jpeg", "image/png", "image/gif"];
-                if (!allowedExtensions.includes(file.type)) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Formato no permitido",
-                        text: "Solo se permiten imágenes en formato JPG, PNG o GIF.",
-                    });
-                    return;
-                }
+    // Verificamos si se ha seleccionado una imagen
+    if (!profilePhoto.files[0]) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Por favor selecciona una imagen'
+        });
+        return;
+    }
 
-                // Simulación de actualización exitosa
-                Swal.fire({
-                    icon: "success",
-                    title: "Éxito",
-                    text: "El icono de la empresa ha sido actualizado correctamente.",
-                });
+    // Confirmación antes de enviar la solicitud
+    const confirmChange = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¿Deseas cambiar la imagen de la empresa?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, cambiar',
+        cancelButtonText: 'Cancelar'
+    });
 
-                // Aquí puedes agregar la lógica para enviar el formulario al servidor si es necesario
-                // this.submit();
+    if (!confirmChange.isConfirmed) {
+        return;  // Si el usuario cancela, no hacemos la solicitud
+    }
+
+    const formData = new FormData();
+    formData.append('file', profilePhoto.files[0]); // Agregamos la imagen al FormData
+
+    try {
+        // Hacemos la solicitud POST
+        const response = await fetch('http://localhost:8081/api/archivos/empresa', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}` // Autenticación con token
+            },
+            body: formData
+        });
+
+        // Verificamos la respuesta de la API
+        if (response.ok) {
+            const data = await response.json();
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Imagen actualizada correctamente'
             });
-
-            // Botón de cancelar
-            document.getElementById("cancelBtn").addEventListener("click", function () {
-                Swal.fire({
-                    icon: "warning",
-                    title: "¿Estás seguro?",
-                    text: "Los cambios no se guardarán si cancelas.",
-                    showCancelButton: true,
-                    confirmButtonText: "Sí, cancelar",
-                    cancelButtonText: "No, continuar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById("formAgregarLocal").reset();
-                        document.getElementById("companyLogo").src = originalLogo; // Restaurar la imagen original
-                        Swal.fire("Cancelado", "No se realizaron cambios.", "info").then(() => {
-                            window.location.href = "../modulo-inicio/dashboard-inicio.html"; // Redirigir al dashboard
-                        });
-                    }
-                });
-            });
-
-
-            document.addEventListener("DOMContentLoaded", function () {
-                // Verificar si el usuario tiene token, id y rol en el localStorage
-                const token = localStorage.getItem("token");
-                const id = localStorage.getItem("id");
-                const rol = localStorage.getItem("rol");
+            console.log(data);
             
-                // Si no hay token, id o rol, redirigir al login
-                if (!token || !id || !rol) {
-                    window.location.href = "../../view/modulo-login/page-login.html"; // Si no hay token, id o rol, redirigir al login
-                }
-                });
-            
-                document.getElementById("logoutBtn").addEventListener("click", function () {
-                localStorage.clear();  // Limpia todo el localStorage
-                sessionStorage.clear(); // Limpia todo el sessionStorage
-                window.location.href = "../modulo-login/page-login.html"; // Redirige al login
-                });
+            // Actualizamos la imagen mostrada con la URL que regresa la API
+            document.getElementById('companyLogo').src = data.url;  // Usamos la URL de la respuesta
+            previewImage.style.display = 'none';  // Ocultamos la previsualización después de confirmar el cambio
+        } else {
+            const errorData = await response.json();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al actualizar la imagen: ' + (errorData.message || 'Desconocido')
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al intentar actualizar la imagen'
+        });
+        console.error(error);
+    }
+});
+
+// Función para cancelar la acción y limpiar el formulario
+cancelBtn.addEventListener('click', async () => {
+    const confirmCancel = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¿Deseas cancelar los cambios y volver al inicio?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, cancelar',
+        cancelButtonText: 'No'
+    });
+
+    if (confirmCancel.isConfirmed) {
+        window.location.href = '../../view/modulo-inicio/dashboard-inicio.html';
+    }
+});
+
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+    localStorage.clear();  // Limpia todo el localStorage
+    sessionStorage.clear(); // Limpia todo el sessionStorage
+    window.location.href = "../modulo-login/page-login.html"; // Redirige al login
+});

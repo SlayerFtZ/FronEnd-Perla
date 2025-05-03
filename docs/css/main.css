@@ -15203,3 +15203,12 @@ tbody tr:hover {
 .kpi-card .percentage {
   font-size: 14px;
 }
+
+/* logo */
+.company-logo {
+  max-width: 300px; /* Ajusta este valor según el tamaño que desees */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

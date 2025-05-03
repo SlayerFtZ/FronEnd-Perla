@@ -42,54 +42,54 @@ document.addEventListener("DOMContentLoaded", function () {
   
     switch (filtro) {
       case "contratista":
-        url = `http://localhost:8081/api/reparaciones/buscar/contratista/${encodeURIComponent(textoBusqueda)}`;
-        break;
-  
+      url = `http://localhost:8081/api/reparaciones/buscar/contratista/${encodeURIComponent(textoBusqueda)}`;
+      break;
+
       case "usuario":
-        url = `http://localhost:8081/api/reparaciones/buscar/usuario/${encodeURIComponent(textoBusqueda)}`;
-        break;
-  
+      url = `http://localhost:8081/api/reparaciones/buscar/usuario/${encodeURIComponent(textoBusqueda)}`;
+      break;
+
       case "fecha":
-        const partes = textoBusqueda.includes("/-")
-          ? textoBusqueda.split("/")
-          : textoBusqueda.split("-");
-  
-        if (partes.length === 3) {
-          let [dia, mes, anio] = partes;
-  
-          if (textoBusqueda.includes("-")) {
-            [anio, mes, dia] = partes;
-          }
-  
-          if (
-            !isNaN(dia) &&
-            !isNaN(mes) &&
-            !isNaN(anio) &&
-            dia >= 1 &&
-            dia <= 31 &&
-            mes >= 1 &&
-            mes <= 12
-          ) {
-            const fechaFormateada = `${anio}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
-            url = `http://localhost:8081/api/reparaciones/buscar/fecha/${encodeURIComponent(fechaFormateada)}`;
-            break;
-          }
+      const partes = textoBusqueda.includes("/") 
+        ? textoBusqueda.split("/") 
+        : textoBusqueda.split("-");
+
+      if (partes.length === 3) {
+        let [dia, mes, anio] = partes;
+
+        if (textoBusqueda.includes("-")) {
+        [dia, mes, anio] = partes;
         }
-  
-        Swal.fire({
-          icon: "warning",
-          title: "Formato de fecha inválido",
-          text: "Por favor, ingresa una fecha válida en formato DD/MM/AAAA o DD-MM-AAAA.",
-        });
-        return;
-  
+
+        if (
+        !isNaN(dia) &&
+        !isNaN(mes) &&
+        !isNaN(anio) &&
+        dia >= 1 &&
+        dia <= 31 &&
+        mes >= 1 &&
+        mes <= 12
+        ) {
+        const fechaFormateada = `${anio}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+        url = `http://localhost:8081/api/reparaciones/buscar/fecha/${encodeURIComponent(fechaFormateada)}`;
+        break;
+        }
+      }
+
+      Swal.fire({
+        icon: "warning",
+        title: "Formato de fecha inválido",
+        text: "Por favor, ingresa una fecha válida en formato DD/MM/AAAA o DD-MM-AAAA.",
+      });
+      return;
+
       default:
-        Swal.fire({
-          icon: "warning",
-          title: "Opción no válida",
-          text: "Por favor, selecciona un filtro de búsqueda.",
-        });
-        return;
+      Swal.fire({
+        icon: "warning",
+        title: "Opción no válida",
+        text: "Por favor, selecciona un filtro de búsqueda.",
+      });
+      return;
     }
   
     fetch(url, {

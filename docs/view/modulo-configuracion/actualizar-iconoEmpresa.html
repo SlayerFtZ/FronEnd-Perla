@@ -153,9 +153,7 @@
                                 class="bi bi-postcard-fill"></i>.
                             Agregar
                             rentas</a></li>
-                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
-                                class="bi bi-key"></i></i>.
-                            Actualizar renta</a></li>
+                    
                     <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
                                 class="bi bi-search"></i></i>.
                             Buscar renta</a></li>
@@ -265,45 +263,48 @@
             </ul>
         </div>
 
-        <!-- Agregar SweetAlert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Componente para actualizar el icono de la empresa -->
+<div class="container">
+    <div class="row">
+        <!-- Columna 1: Logo de la empresa -->
+        <div class="col-md-6">
+            <img id="companyLogo" alt="Logo de la Empresa" class="img-fluid">
 
-        <!-- Componente para actualizar el icono de la empresa -->
-        <div class="container">
-            <div class="row">
-                <!-- Columna 1: Logo de la empresa -->
-                <div class="col-md-6">
-                    <img id="companyLogo" src="../../images/logo-la perla.png" alt="Logo de la Empresa"
-                        class="img-fluid">
+            <br>
+            <!-- Imagen de previsualización para mostrar la imagen seleccionada -->
+            <img id="previewImage" src="" alt="Previsualización" class="img-fluid" style="display: none;">
+        </div>
+
+        <!-- Columna 2: Formulario para cambiar la foto -->
+        <div class="col-md-6">
+            <form id="formAgregarFotoEmpresa" enctype="multipart/form-data">
+                <div>
+                    <br>
+                    <label class="titulo-de-pagina">Agregar Imagen de la empresa</label>
+                </div>
+                <div class="mb-3">
+                    <div>
+                        <br>
+                        <input class="form-control" type="file" id="Photo" accept="image/*" required>
+                    </div>
+                    <div>
+                        <br>
+                        <button type="submit" class="btn btn-warning" id="updateButton" disabled>Actualizar</button>
+                        <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
+                    </div>
                     <br>
                 </div>
-
-                <!-- Columna 2: Formulario para cambiar la foto -->
-                <div class="col-md-6">
-                    <form id="formAgregarLocal">
-                        <div>
-                            <br>
-                            <label class="titulo-de-pagina">Agregar Imagen de la empresa</label>
-                        </div>
-                        <div class="mb-3">
-                            <div>
-                                <br>
-                                <input class="form-control" type="file" id="profilePhoto" accept="image/*" required>
-                            </div>
-                            <div>
-                                <br>
-                                <button type="submit" class="btn btn-warning">Actualizar</button>
-                                <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
-
-                            </div>
-                            <br>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </form>
         </div>
+    </div>
+</div>
+
+        
         <script src="../../controller/inicio/menuUsuarioController.js"></script>
         <script src="../../controller/configuracion/configuracionesController.js"></script>
+        <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Agregar SweetAlert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </main>
     <!-- Essential javascripts for application to work-->

@@ -151,9 +151,7 @@
                                 class="bi bi-postcard-fill"></i>.
                             Agregar
                             rentas</a></li>
-                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
-                                class="bi bi-key"></i></i>.
-                            Actualizar renta</a></li>
+                    
                     <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
                                 class="bi bi-search"></i></i>.
                             Buscar renta</a></li>
@@ -279,11 +277,16 @@
 
                 <!-- Campos de fecha (inicialmente ocultos) -->
                 <div id="fechaDePagoFields" style="display: none;">
-                    <label for="fechaInicio">Fecha de inicio:</label>
-                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
-                    <br>
-                    <label for="fechaFin">Fecha de fin:</label>
-                    <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fechaInicio">Fecha de inicio:</label>
+                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fechaFin">Fecha de fin:</label>
+                            <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                        </div>
+                    </div>
                 </div>
 
                 <br>

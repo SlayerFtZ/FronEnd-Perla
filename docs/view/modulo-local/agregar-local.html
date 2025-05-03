@@ -153,9 +153,7 @@
                                 class="bi bi-postcard-fill"></i>.
                             Agregar
                             rentas</a></li>
-                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
-                                class="bi bi-key"></i></i>.
-                            Actualizar renta</a></li>
+                    
                     <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
                                 class="bi bi-search"></i></i>.
                             Buscar renta</a></li>
@@ -270,8 +268,11 @@
             <div class="row">
                 <!-- Columna 1: Logo de la empresa -->
                 <div class="col-md-6">
-                    <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+                    <img id="companyLogo" alt="Logo de la Empresa" class="img-fluid">
+
                     <br>
+                    <!-- Imagen de previsualización para mostrar la imagen seleccionada -->
+                    <img id="previewImage" src="" alt="Previsualización" class="img-fluid" style="display: none;">
                 </div>
 
                 <!-- Columna 2: Formulario -->
@@ -317,6 +318,7 @@
     </script>
     <script src="../../controller/inicio/menuUsuarioController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>

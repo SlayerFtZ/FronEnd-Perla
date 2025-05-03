@@ -154,9 +154,7 @@
                                 class="bi bi-postcard-fill"></i>.
                             Agregar
                             rentas</a></li>
-                    <li><a class="treeview-item" href="../modulo-renta/actualizar-renta.html"><i
-                                class="bi bi-key"></i></i>.
-                            Actualizar renta</a></li>
+                    
                     <li><a class="treeview-item" href="../modulo-renta/buscar-renta.html"><i
                                 class="bi bi-search"></i></i>.
                             Buscar renta</a></li>
@@ -240,15 +238,16 @@
             </li>
             <!-- Navegacion y menu para CONFIGURACIONES  -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                class="bi bi-gear-wide-connected"></i><span class="app-menu__label">. Configuraciones</span><i
-                class="treeview-indicator bi bi-chevron-right"></i></a>
-        <ul class="treeview-menu">
-            <li><a class="treeview-item" href="../modulo-configuracion/actualizar-iconoEmpresa.html"><i
-                        class="bi bi-card-image"></i>.
-                    Cambiar Icono</a></li>
-            <li><a class="treeview-item" href="../modulo-configuracion/configuracionGlobal-renta.html"><i class="bi bi-coin"></i>.
-                    Actualizar precio renta</a></li>
-    </li>
+                        class="bi bi-gear-wide-connected"></i><span class="app-menu__label">. Configuraciones</span><i
+                        class="treeview-indicator bi bi-chevron-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="../modulo-configuracion/actualizar-iconoEmpresa.html"><i
+                                class="bi bi-card-image"></i>.
+                            Cambiar Icono</a></li>
+                    <li><a class="treeview-item" href="../modulo-configuracion/configuracionGlobal-renta.html"><i
+                                class="bi bi-coin"></i>.
+                            Actualizar precio renta</a></li>
+            </li>
             </li>
         </ul>
     </aside>
@@ -269,8 +268,12 @@
         <div class="container">
             <div class="row">
                 <!-- Columna 1: Logo de la empresa -->
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="../../images/logo-la perla.png" alt="Logo de la Empresa" class="img-fluid">
+                <div class="col-md-6">
+                    <img id="companyLogo" alt="Logo de la Empresa" class="img-fluid">
+
+                    <br>
+                    <!-- Imagen de previsualización para mostrar la imagen seleccionada -->
+                    <img id="previewImage" src="" alt="Previsualización" class="img-fluid" style="display: none;">
                 </div>
 
 
@@ -324,6 +327,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../controller/inicio/menuUsuarioController.js"></script>
     <script src="../../controller/reparacion/agregarReparacionController.js"></script>
+    <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
