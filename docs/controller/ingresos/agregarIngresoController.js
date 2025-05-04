@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.clear();
         window.location.href = "../../view/modulo-login/page-login.html";
     }
-
 });
+
     // 🕹️ Formulario de ingreso de juegos
     const formAgregarJuego = document.getElementById('formAgregarIngresoJuego'); 
     const cancelBtnJuego = document.getElementById('cancelBtnJuego');  

@@ -22,6 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -34,8 +35,6 @@
             aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
-
-            </li>
             <!--Notification Menu-->
             <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
                     aria-label="Show notifications"><i class="bi bi-bell fs-5"></i></a>
@@ -62,7 +61,6 @@
                                     class="app-notification__icon"><i class="bi bi-cash fs-4 text-success"></i></span>
                                 <div>
                                     <p class="app-notification__message">Abono realizado</p>
-
                                 </div>
                             </a></li>
                     </div>
@@ -79,7 +77,8 @@
                     <li><a class="dropdown-item" href="../modulo-usuario/perfil-usuario.html"><i
                                 class="bi bi-person me-2 fs-5"></i>
                             Perfil de usuario</a></li>
-                    <li><a class="dropdown-item" id="logoutBtn"><i class="bi bi-box-arrow-right me-2 fs-5"></i>
+                    <li><a class="dropdown-item" id="logoutBtn" href="../modulo-login/page-login.html"><i
+                                class="bi bi-box-arrow-right me-2 fs-5"></i>
                             Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -232,7 +231,6 @@
                 </ul>
             </li>
 
-
             <!-- Navegacion y menu para Pagos extras -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
@@ -265,83 +263,122 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"> <i class="bi bi-building-add"></i> Agregar Reparacion</h1>
-                <p>"LLENA LOS CAMPOS PARA AGREGAR UNA REPARACION"</p>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-file-earmark-text"></i> RECIBO DE REPARACIÓN </h1>
+                <p>"LLENA LOS CAMPOS PARA AGREGAR Y CONSULTAR UN RECIBO"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
                 <li class="breadcrumb-item"><a href="../modulo-inicio/dashboard-inicio.html">Inicio</a></li>
             </ul>
         </div>
-
-        <!-- Componente para agregar un local -->
-        <div class="container">
-            <div class="row">
-                <!-- Columna 1: Logo de la empresa -->
-                <div class="col-md-6">
-                    <img id="companyLogo" alt="Logo de la Empresa" class="img-fluid">
-
-                    <br>
-                    <!-- Imagen de previsualización para mostrar la imagen seleccionada -->
-                    <img id="previewImage" src="" alt="Previsualización" class="img-fluid" style="display: none;">
-                </div>
-
-
-                <!-- Columna 2: Formulario para agregar una repación -->
-                <div class="col-md-6">
-                    <form id="formAgregarReparacion">
-                        <div>
-                            <br>
-                            <label class="titulo-de-pagina">Agregar Reparación</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reparacionUsuario" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="reparacionUsuario"
-                                placeholder="Ingresa el nombre del usuario" disabled>
+        <!-- Componente para agregar y consultar los reportes -->
+        <div class="container-perfil rounded bg-white mt-5 mb-5">
+            <div class="col-md-12">
+                <div class="p-3 py-5 text-center">
+                    <form action="">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <h4 class="titulo-de-pagina">Genera un recibo</h4>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Descripción</label><textarea class="form-control" id="descripcionReparacion"
-                                placeholder="Ingresa una descripcion" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contratista" class="form-label">Ingresa al contratista</label>
-                            <input type="text" class="form-control" id="contratista"
-                                placeholder="Ingresa el nombre del contratista" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fechaReparacion" class="form-label">Fecha de reparación</label>
-                            <input type="date" class="form-control" id="fechaReparacion" disabled>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fechaFin" class="form-label">Fecha de fin</label>
-                            <input type="date" class="form-control" id="fechaFin" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="costoReparacion" class="form-label">Costo de reparación</label>
-                            <input type="number" class="form-control" id="costoReparacion"
-                                placeholder="Ingresa el costo" required>
-                        </div>
+                        <div class="row mt-2 justify-content-center">
 
-                        <div>
-                            <button type="submit" class="btn btn-primary">Agregar Reparacion</button>
-                            <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
-                        </div>
-                        <br>
+                            <div class="col-md-3 mb-3">
+                                <label class="labels">SELECCIONA UNA REPARACION </label>
+                                <select class="form-control" id="reciboSeleccionReparacion" name="">
+                                    <option value="seleccion">Selecciona una reparacion</option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-3 mb-3">
+                                <label class="labels">CONTRATISTA</label>
+                                <input type="text" class="form-control" id="contratistaReporte"
+                                    placeholder="Nombre del contratista" required="">
+                            </div>
+
+
+                            <div class="col-md-3 mb-3">
+                                <label class="labels">MONTO</label>
+                                <input type="num" class="form-control" id="montoReporte"
+                                    placeholder="Monto de la reparacion" required="">
+                            </div>
+
+                            <div class="col-md-2 mb-0 align-self-center d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    Generar <i class="bi bi-wrench-adjustable"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger ms-2">
+                                    Cancelar <i class="bi bi-x-circle"></i>
+                                </button>
+                            </div>
                     </form>
                 </div>
+                <div class="row-md-9 mb-3">
+                    <label class="labels">DESCRIPION </label>
+                    <input type="text" class="form-control" id="descripcionReporte" required="">
+                </div>
             </div>
+
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <h4 class="titulo-de-pagina">Seccion para guardar el pdf</h4>
+            </div>
+            <div class="row mt-2 justify-content-center">
+                <div class="col-md-3 mb-3">
+                    <label class="labels">TIPO</label>
+                    <select class="form-control" id="tipoReporte">
+                        <option value="seleccion">Selecciona un tipo</option>
+                        <option value="FINANCIERO">FINANCIERO</option>
+                        <option value="INCIDENTE">INCIDENTE</option>
+                        <option value="RENTA">RENTA</option>
+                        <OPTION value="OTRO">OTRO</OPTION>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="labels" for="estadoReporte">ESTADO</label>
+                    <select class="form-control" id="estadoReporte" name="estadoReporte">
+                        <option value="" disabled selected>Selecciona un estado</option>
+                        <option value="Abierto">ABIERTO</option>
+                        <option value="Cerrado">CERRADO</option>
+                        <option value="En Proceso">EN PROCESO</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="labels">DESCRIPCIÓN</label>
+                    <input type="text" class="form-control" id="descripcionGuardarPFDReporte"
+                        placeholder="Estado del reporte" required="">
+                </div>
+
+                <div class="col-md-2 mb-0 align-self-center d-flex justify-content-between">
+                    <button type="button" class="btn btn-success" id="guardarReporteBtn">
+                        Guardar <i class="bi bi-save"></i>
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <h5 class="titulo-de-pagina">Vista Previa del PDF</h5>
+                    <iframe id="pdfPreview" src="" width="90%" height="900px"
+                        style="border: 2px solid #ff0000; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);"></iframe>
+                </div>
+            </div>
+
         </div>
+        </div>
+        <br>
     </main>
-    <script src="../../controller/inicio/menuUsuarioController.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../controller/inicio/menuUsuarioController.js"></script>
-    <script src="../../controller/reparacion/agregarReparacionController.js"></script>
-    <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/main.js"></script>
+    <script src="../../controller/inicio/menuUsuarioController.js"></script>
+    <script src="../../controller/reportes/reporteReparacionController.js"></script>
 </body>
 
 </html>
