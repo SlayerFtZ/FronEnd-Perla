@@ -1,89 +1,107 @@
+// =================== INICIO DOM ===================
 document.addEventListener("DOMContentLoaded", function () {
+  // Variables principales
   const container = document.getElementById("container");
   const registerBtn = document.getElementById("register");
   const loginBtn = document.getElementById("login");
   const resetForm = document.getElementById("resetForm");
   const loginForm = document.getElementById("loginForm");
 
-  // Cambiar entre login y registro
+  // ========== Cambio entre login y registro ==========
   if (registerBtn && loginBtn && container) {
     registerBtn.addEventListener("click", () => container.classList.add("active"));
     loginBtn.addEventListener("click", () => container.classList.remove("active"));
   }
 
-  // Login
-  if (loginForm) {
-    loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
+  // ========== Login ==========
+if (loginForm) {
+  loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
 
-      if (email === "" || password === "") {
-        Swal.fire({ icon: "error", title: "Campos vacíos", text: "Por favor, completa todos los campos." });
-        return;
-      }
+    if (email === "" || password === "") {
+      Swal.fire({ icon: "error", title: "Campos vacíos", text: "Por favor, completa todos los campos." });
+      return;
+    }
 
-      if (password.length < 10) {
-        Swal.fire({ icon: "warning", title: "Contraseña corta", text: "Debe tener al menos 10 caracteres." });
-        return;
-      }
+    if (password.length < 10) {
+      Swal.fire({ icon: "warning", title: "Contraseña corta", text: "Debe tener al menos 10 caracteres." });
+      return;
+    }
 
-      try {
-        const response = await fetch("http://localhost:8081/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
+    try {
+      // Mostrar mensaje de carga
+      Swal.fire({
+        title: 'Iniciando sesión...',
+        html: 'Por favor espera',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
 
-        const data = await response.json();
+      const response = await fetch("http://localhost:8081/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
 
-        if (response.ok) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("id", data.idUsuario);
-          localStorage.setItem("rol", data.role);
-          localStorage.setItem("estado", data.estado);
+      const data = await response.json();
 
-          const estadoUsuario = (data.estado || "").toLowerCase();
+      // Cerrar loading
+      Swal.close();
 
-          if (estadoUsuario === "inactivo") {
-            Swal.fire({
-              icon: "error",
-              title: "Usuario inactivo",
-              text: "Ya no eres un usuario válido en el sistema."
-            });
-          } else {
-            Swal.fire({
-              icon: "success",
-              title: "Inicio exitoso",
-              text: "Redirigiendo...",
-              timer: 3000,
-              showConfirmButton: false
-            });
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("id", data.idUsuario);
+        localStorage.setItem("rol", data.role);
+        localStorage.setItem("estado", data.estado);
 
-            setTimeout(() => {
-              window.location.href = "../modulo-inicio/dashboard-inicio.html";
-            }, 3200);
-          }
-        } else {
+        const estadoUsuario = (data.estado || "").toLowerCase();
+
+        if (estadoUsuario === "inactivo") {
           Swal.fire({
             icon: "error",
-            title: "Error",
-            text: data.message || "Credenciales incorrectas"
+            title: "Usuario inactivo",
+            text: "Ya no eres un usuario válido en el sistema."
           });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Inicio exitoso",
+            text: "Redirigiendo...",
+            timer: 3000,
+            showConfirmButton: false
+          });
+
+          setTimeout(() => {
+            window.location.href = "../modulo-inicio/dashboard-inicio.html";
+          }, 3200);
         }
-      } catch (error) {
+      } else {
         Swal.fire({
           icon: "error",
-          title: "Error de conexión",
-          text: "No se pudo conectar con el servidor"
+          title: "Error",
+          text: data.message || "Credenciales incorrectas"
         });
-        console.error("Error en login:", error);
       }
-    });
-  }
+    } catch (error) {
+      Swal.close(); // En caso de error también cerrar loading
+      Swal.fire({
+        icon: "error",
+        title: "Error de conexión",
+        text: "No se pudo conectar con el servidor"
+      });
+      console.error("Error en login:", error);
+    }
+  });
+}
 
-  // Recuperar contraseña
+
+  // ========== Recuperar contraseña ==========
   if (resetForm) {
     resetForm.addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -95,8 +113,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      // Mostrar alerta de carga
+      const loadingAlert = Swal.fire({
+        title: "Enviando Token de Recuperación",
+        text: "Por favor, espera un momento...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
       try {
-        const response = await fetch("https://tu-api.com/api/recuperar-password", {
+        const response = await fetch("http://localhost:8081/api/auth/forgot-password", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -104,14 +132,29 @@ document.addEventListener("DOMContentLoaded", function () {
           body: JSON.stringify({ email }),
         });
 
-        const data = await response.json();
+        const data = await response.text(); // Cambiar a .text() para texto plano
+
+        Swal.close(); // Cerrar alerta de carga
 
         if (response.ok) {
-          Swal.fire("Éxito", data.message || "Correo de recuperación enviado", "success");
+          Swal.fire({
+            icon: "success",
+            title: "Éxito",
+            text: data || "Correo de recuperación enviado",
+            timer: 3000,
+            showConfirmButton: false
+          });
+
+          setTimeout(() => {
+            window.location.href = "../../view/modulo-login/recuperar-contrasena.html";
+          }, 3200);
+
+          document.getElementById("email").value = ""; // Limpiar campo tras éxito
         } else {
-          Swal.fire("Error", data.error || "Hubo un problema con la recuperación", "error");
+          Swal.fire("Error", data || "Hubo un problema con la recuperación", "error");
         }
       } catch (error) {
+        Swal.close(); // Cerrar alerta de carga en caso de error
         Swal.fire("Error", "No se pudo conectar con el servidor", "error");
         console.error("Error en recuperación:", error);
       }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +7,6 @@
   <link rel="stylesheet" href="../../css/main-login.css" />
   <title>Login</title>
 </head>
-
 <body>
   <div class="container" id="container">
     <!-- Formulario de recuperación de contraseña -->
@@ -16,8 +14,8 @@
       <form id="resetForm">
         <h1>¿Olvidaste tu contraseña?</h1>
         <div><br /><span>Correo Electrónico:</span></div>
-        <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required />
-        <button type="submitCorreo">Enviar</button>
+        <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required />
+        <button type="submit">Enviar</button>
       </form>
     </div>
 
@@ -32,9 +30,13 @@
         <br />
         <div>
           <span>Correo electrónico:</span>
-          <input type="email" id="loginEmail" placeholder="Ingresa tu correo electronico" required />
+          <input type="email" id="loginEmail" name="loginEmail" placeholder="Ingresa tu correo electrónico" required />
           <span>Contraseña:</span>
-          <input type="password" id="loginPassword" placeholder="Ingresa tu contraseña" required />
+          <div class="password-container">
+            <input type="password" id="loginPassword" name="loginPassword" placeholder="Ingresa tu contraseña" required />
+            <i class="fa fa-eye" id="togglePassword"></i>
+        </div>
+        
         </div>
         <button type="submit">Iniciar sesión</button>
       </form>
@@ -44,12 +46,12 @@
       <div class="toggle">
         <div class="toggle-panel toggle-left">
           <h1>¡Quieres iniciar sesión!</h1>
-          <p>Ingresa a plataforma con el formulario, con tus credenciales de autentificación</p>
+          <p>Ingresa a la plataforma con tus credenciales de autentificación</p>
           <button class="hidden" id="login">Formulario</button>
         </div>
         <div class="toggle-panel toggle-right">
           <h1>¡Olvidaste tu contraseña!</h1>
-          <p>Recupera tu contraseña con tu correo electrónico en el siguiente formulario</p>
+          <p>Recupera tu contraseña con tu correo electrónico</p>
           <button class="hidden" id="register">Formulario</button>
         </div>
       </div>
@@ -65,6 +67,23 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../../controller/login/loginController.js"></script>
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+      const passwordField = document.getElementById('loginPassword');
+      const icon = this;
+  
+      // Cambiar el tipo de input entre 'password' y 'text'
+      if (passwordField.type === 'password') {
+          passwordField.type = 'text'; // Mostrar la contraseña
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash'); // Cambiar icono a ojo cerrado
+      } else {
+          passwordField.type = 'password'; // Ocultar la contraseña
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye'); // Cambiar icono a ojo abierto
+      }
+  });
+  
+  </script>
 </body>
-
 </html>

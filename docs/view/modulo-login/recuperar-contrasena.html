@@ -23,11 +23,24 @@
                 <div>
                     <span>Token de seguridad:</span>
                     <input type="text" id="token" placeholder="Ingresa el token" required />
-                    <span>Contraseña nueva:</span>
-                    <input type="password" id="newPassword" placeholder="Contraseña nueva" required />
-                    <span>Confirma Contraseña:</span>
-                    <input type="password" id="confirmPassword" placeholder="Confirma contraseña" required />
+
+                    <div class="password-container">
+                        <span>Contraseña nueva:</span>
+                        <div class="input-with-icon">
+                            <input type="password" id="newPassword" placeholder="Contraseña nueva" required />
+                            <i class="fa fa-eye" id="toggleNewPassword"></i>
+                        </div>
+                    </div>
+
+                    <div class="password-container">
+                        <span>Confirma Contraseña:</span>
+                        <div class="input-with-icon">
+                            <input type="password" id="confirmPassword" placeholder="Confirma contraseña" required />
+                            <i class="fa fa-eye" id="toggleConfirmPassword"></i>
+                        </div>
+                    </div>
                 </div>
+
 
                 <button type="submit">Cambiar contraseña</button>
                 <button type="button" style="background-color: red;" id="cancelButton">Cancelar</button>
@@ -53,8 +66,10 @@
             <i class="fa fa-home"></i> Regresar a Inicio
         </button>
     </div>
-    <script src="../../controller/login/recuperarContasena.js"></script>
+    <script src="../../controller/login/recuperar-contrasena.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </body>
 
 </html>
