@@ -37,34 +37,19 @@
 
       </li>
       <!--Notification Menu-->
-      <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown"
-          aria-label="Show notifications"><i class="bi bi-bell fs-5"></i></a>
-        <ul class="app-notification dropdown-menu dropdown-menu-right">
-          <li class="app-notification__title">Tiene 4 notificaciones nuevas.</li>
-          <div class="app-notification__content">
-            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><i
-                    class="bi bi-envelope fs-4 text-primary"></i></span>
-                <div>
-                  <p class="app-notification__message">Abono de renta vencido</p>
+      <a class="app-nav__item dropdown-toggle position-relative" href="#" data-bs-toggle="dropdown"
+        aria-label="Show notifications">
+        <i class="bi bi-bell fs-5"></i>
+        <span id="notification-badge"
+          class="position-absolute bottom-0 end-0 translate-middle badge rounded-pill bg-danger d-none">
+          0
+        </span>
+      </a>
 
-                </div>
-              </a></li>
-            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><i
-                    class="bi bi-exclamation-triangle fs-4 text-warning"></i></span>
-                <div>
-                  <p class="app-notification__message">Renta proxima</p>
-
-                </div>
-              </a></li>
-            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><i
-                    class="bi bi-cash fs-4 text-success"></i></span>
-                <div>
-                  <p class="app-notification__message">Abono realizado</p>
-
-                </div>
-              </a></li>
-          </div>
-        </ul>
+      <ul class="app-notification dropdown-menu dropdown-menu-end" style="min-width: 350px;">
+        <li class="app-notification__title" id="notification-count">Cargando notificaciones...</li>
+        <div class="app-notification__content" id="notification-list"></div>
+      </ul>
       </li>
       <!-- User Menu-->
       <li class="dropdown"><a class="app-nav__item" href="#" data-bs-toggle="dropdown" aria-label="Open Profile Menu"><i
@@ -324,6 +309,7 @@
   <script src="../../controller/juego/agregarJuegoController.js"></script>
   <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
   <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
+  <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Essential javascripts for application to work-->
   <script src="../../js/jquery-3.7.0.min.js"></script>
