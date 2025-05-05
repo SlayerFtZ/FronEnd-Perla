@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../../view/modulo-login/page-login.html";
     }
 });
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", async function () {
     const id = localStorage.getItem("id");
     const token = localStorage.getItem("token");

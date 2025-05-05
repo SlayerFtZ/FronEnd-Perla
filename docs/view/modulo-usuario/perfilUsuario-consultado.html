@@ -114,28 +114,38 @@
                     <li><a class="treeview-item" href="../modulo-usuario/perfil-usuario.html"><i
                                 class="bi bi-person-bounding-box"></i>.
                             Perfil de usuario</a></li>
-                    <li><a class="treeview-item" href="../modulo-usuario/agregar-usuario.html"><i
-                                class="bi bi-person-add"></i>. Agregar
+
+                    <li id="agregarUsuarioAcceso"><a class="treeview-item"
+                            href="../modulo-usuario/agregar-usuario.html"><i class="bi bi-person-add"></i>.
+                            Agregar
                             Usuarios</a></li>
+
                     <li><a class="treeview-item" href="../modulo-usuario/consultar-usuario.html" rel="noopener"><i
                                 class="bi bi-search"></i>. Buscar
                             usuario</a></li>
-                    <li><a class="treeview-item" href="../modulo-usuario/agregar-perfil-salud.html"><i
-                                class="bi bi-person-heart"></i>.
+
+                    <li id="agregarPerfilSaludAcceso"><a class="treeview-item"
+                            href="../modulo-usuario/agregar-perfil-salud.html"><i class="bi bi-person-heart"></i>.
                             Perfil de
                             salud</a></li>
-                    <li><a class="treeview-item" href="../modulo-usuario/agregar-contacto-emergencia.html"><i
+
+                    <li id="agregarEmergenciaAcceso"><a class="treeview-item"
+                            href="../modulo-usuario/agregar-contacto-emergencia.html"><i
                                 class="bi bi-telephone-outbound"></i>.
                             Contacto de emergencia</a></li>
                 </ul>
             </li>
+
+
+
             <!-- Navegacion y menu para locales -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            <li class="treeview" id="navegacionLocales"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-house-check-fill"></i><span class="app-menu__label">. Locales</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="../modulo-local/agregar-local.html"><i
-                                class="bi bi-building-add"></i>. Agregar
+                                class="bi bi-building-add"></i>.
+                            Agregar
                             local</a></li>
                     <li><a class="treeview-item" href="../modulo-local/actualizar-local.html"><i
                                 class="bi bi-building-add"></i></i>.
@@ -147,7 +157,7 @@
             </li>
 
             <!-- Navegacion y menu para rentas -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            <li class="treeview" id="navegacionRenta"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-postcard-fill"></i><span class="app-menu__label">. Rentas</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
@@ -163,7 +173,7 @@
             </li>
 
             <!-- Navegacion y menu para Juegos -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            <li class="treeview" id="navegacionJuego"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-controller"></i><span class="app-menu__label">. Juegos</span><i
                         class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
@@ -171,18 +181,18 @@
                                 class="bi bi-controller"></i>.
                             Agregar
                             juego</a></li>
-                    <li><a class="treeview-item" href="../modulo-juego/actualizarJuego.html" rel="noopener"><i
+                    <li><a class="treeview-item" href="../modulo-juego/actualizar-juego.html" rel="noopener"><i
                                 class="bi bi-controller"></i>
                             . Actualizar Juego</a></li>
                 </ul>
             </li>
 
             <!-- Ingresos  y egresos-->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="bi bi-currency-dollar"></i><span class="app-menu__label">. Ingreso / Egreso</span><i
-                        class="treeview-indicator bi bi-chevron-right"></i></a>
+            <li class="treeview" id="navegacionIngresoEgreso"><a class="app-menu__item" href="#"
+                    data-toggle="treeview"><i class="bi bi-currency-dollar"></i><span class="app-menu__label">. Ingreso
+                        / Egreso</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-Ingreso.html"><i
+                    <li><a class="treeview-item" href="../modulo-ingresos/agregar-ingreso.html"><i
                                 class="bi bi-database-fill-add"></i>.
                             Agregar
                             ingreso</a></li>
@@ -247,9 +257,9 @@
                 </ul>
             </li>
             <!-- Navegacion y menu para CONFIGURACIONES  -->
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="bi bi-gear-wide-connected"></i><span class="app-menu__label">. Configuraciones</span><i
-                        class="treeview-indicator bi bi-chevron-right"></i></a>
+            <li class="treeview" id="navegacionConfiguraciones"><a class="app-menu__item" href="#"
+                    data-toggle="treeview"><i class="bi bi-gear-wide-connected"></i><span class="app-menu__label">.
+                        Configuraciones</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="../modulo-configuracion/actualizar-iconoEmpresa.html"><i
                                 class="bi bi-card-image"></i>.
@@ -257,6 +267,7 @@
                     <li><a class="treeview-item" href="../modulo-configuracion/configuracionGlobal-renta.html"><i
                                 class="bi bi-coin"></i>.
                             Actualizar precio renta</a></li>
+            </li>
             </li>
         </ul>
     </aside>
@@ -333,8 +344,8 @@
                         <!-- Botón para abrir el modal de perfil emergencia-->
                         <div>
                             <div class="mt-5 text-center">
-                                <button class="btn btn-danger profile-button" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#updateEmergencyContactModal">
+                                <button class="btn btn-danger profile-button" id="btnActualizarContactoEmergencia"
+                                    type="button" data-bs-toggle="modal" data-bs-target="#updateEmergencyContactModal">
                                     <i class="bi bi-phone-vibrate"></i>Actualizar contacto Emergencia
                                 </button>
                             </div>
@@ -343,8 +354,8 @@
                         <!-- Botón para abrir el modal de foto de perfil-->
                         <div>
                             <div class="mt-5 text-center">
-                                <button class="btn btn-warning profile-button" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#updateProfilePicModal">
+                                <button class="btn btn-warning profile-button" id="btnActualizarFoto" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#updateProfilePicModal">
                                     <i class="bi bi-person-square"></i>Actualizar foto de perfil
                                 </button>
                             </div>
@@ -353,16 +364,16 @@
 
                         <!-- boton para abrir el modal de salud -->
                         <div class="mt-5 text-center">
-                            <button class="btn btn-info profile-button" type="button" data-bs-toggle="modal"
-                                data-bs-target="#updateHealthProfileModal">
+                            <button class="btn btn-info profile-button" id="btnActualizarPerfilSalud" type="button"
+                                data-bs-toggle="modal" data-bs-target="#updateHealthProfileModal">
                                 <i class="bi bi-person-hearts"></i> Actualizar Perfil de salud
                             </button>
 
 
                             <!-- Botón para abrir el modal de usuario -->
                             <div class="mt-5 text-center">
-                                <button class="btn btn-warning profile-button" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#modalActualizarUsuario">
+                                <button class="btn btn-warning profile-button" id="btnActualizarPerfil" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#modalActualizarUsuario">
                                     <i class="bi bi-person-up"></i> Actualizar Perfil
                                 </button>
                             </div>
@@ -700,6 +711,27 @@
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/main.js"></script>
+    <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
+    <script>
+        const rol = localStorage.getItem("rol"); // Obtener el rol del usuario desde localStorage
+        // Mostrar u ocultar el botón según el rol
+        const btnActualizar = document.getElementById("btnActualizarPerfil");
+        const btnActualizarContactoEmergencia = document.getElementById("btnActualizarContactoEmergencia");
+        const btnActualizarPerfilSalud = document.getElementById("btnActualizarPerfilSalud");
+        const btnDespedir = document.getElementById("btn-despedir");
+        const btnActualizarFoto = document.getElementById("btnActualizarFoto");
+        const rolesPermitidos = ["superadmin", "administrador", "mesa directiva"];
+        const userRole = rol ? rol.toLowerCase() : ""; // Convertir el rol a minúsculas para comparación
+
+        if (!rolesPermitidos.includes(userRole)) {
+            btnActualizar.style.display = "none"; // Oculta el botón si no tiene rol permitido
+            btnDespedir.style.display = "none"; // Oculta el botón si no tiene rol permitido
+            btnActualizarContactoEmergencia.style.display = "none"; // Oculta el botón si no tiene rol permitido
+            btnActualizarPerfilSalud.style.display = "none"; // Oculta el botón si no tiene rol permitido
+            btnActualizarFoto.style.display = "none"; // Oculta el botón si no tiene rol permitido
+        }
+
+    </script>
 </body>
 
 </html>

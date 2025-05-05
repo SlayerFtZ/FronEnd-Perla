@@ -1,20 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtener datos del localStorage
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
+    const userRole = rol ? rol.toLowerCase() : "";
 
-    // Validar existencia de datos y el estado del usuario
-    if (!token || !id || !rol || !estado) {
-        window.location.href = "../../view/modulo-login/page-login.html";
-    } else if (estado.toLowerCase() === "inactivo") {
-        // Si el estado es inactivo, limpiar almacenamiento y redirigir
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.href = "../../view/modulo-login/page-login.html";
-    }
-});
+    const rolesPermitidos = ["superadmin", "administrador", "mesa directiva"];
+
+     // Extrae la ruta completa relativa desde "/docs"
+        const rutaActual = window.location.pathname.toLowerCase();
+
+        // Lista de rutas restringidas
+        const paginasRestringidas = [
+            "/docs/view/modulo-configuracion/actualizar-iconoempresa.html",
+            "/docs/view/modulo-configuracion/usuarios.html",
+            "/docs/view/modulo-configuracion/crear-usuario.html",
+            "/docs/view/modulo-rentas/rentas.html",
+            "/docs/view/modulo-juegos/juegos.html",
+            // Agrega todas las demás rutas que quieras restringir aquí
+        ];
+    
+        // Validación de sesión
+        if (!token || !id || !rol || !estado) {
+            window.location.href = "../../modulo-login/page-login.html";
+            return;
+        }
+    
+        if (estado.toLowerCase() === "inactivo") {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = "../../modulo-login/page-login.html";
+            return;
+        }
+    
+        // Validación de acceso a páginas restringidas
+        if (paginasRestringidas.includes(rutaActual) && !rolesPermitidos.includes(userRole)) {
+            alert("No tienes permiso para acceder a esta página.");
+            window.location.href = "/docs/view/modulo-inicio/dashboard-inicio.html"; // o tu página de inicio segura
+        }
+    });
+
 
 
 
