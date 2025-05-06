@@ -15214,3 +15214,31 @@ tbody tr:hover {
 }
 
 
+
+.download-btn {
+  padding: 10px 20px;
+  background-color: forestgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.download-btn:hover {
+  transform: scale(1.1);
+  background-color: darkblue; /* Cambio de color al pasar el mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para darle más profundidad */
+}
+
+.download-btn:active {
+  transform: scale(1);
+  background-color: #004085; /* Cambio de color cuando se hace clic */
+}
+
+.download-btn:disabled {
+  background-color: #c6c6c6; /* Color cuando está deshabilitado */
+  cursor: not-allowed; /* Desactiva el cursor */
+  box-shadow: none; /* Elimina la sombra cuando está deshabilitado */
+}
