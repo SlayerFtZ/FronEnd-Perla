@@ -147,8 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="${renta.fotoPerfilUrl || '../../images/perfilUsuario.jpg'}" width="80" class="rounded-circle me-2">
                     ${renta.nombreUsuario} ${renta.apellidoPaterno} ${renta.apellidoMaterno}
                 </td>
-                <td>${new Date(renta.fechaInicio).toLocaleDateString('es-MX')}</td>
-                <td>${new Date(renta.fechaFin).toLocaleDateString('es-MX')}</td>
+                <td>${renta.fechaInicio.split('-').reverse().join('/')}</td>
+                <td>${renta.fechaFin.split('-').reverse().join('/')}</td>
                 <td>${renta.estadoLocal}</td>
                 <td>$${renta.adeudo.toFixed(2)}</td>
                 <td>$${renta.montoPagado.toFixed(2)}</td>

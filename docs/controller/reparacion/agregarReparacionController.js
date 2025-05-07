@@ -140,12 +140,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         Swal.fire({
           icon: "success",
           title: "¡Reparación agregada!",
-          text: `La reparación se ha registrado correctamente a nombre de ${result.nombreUsuario}.`,
+          text: `La reparación se ha registrado correctamente.`,
           confirmButtonText: "Aceptar",
         }).then((res) => {
           if (res.isConfirmed) {
             form.reset();
             fechaReparacionInput.value = fechaActual; // Reiniciar fecha actual
+            location.reload(); // Recargar la página para mostrar la nueva reparación
           }
         });
       } else {

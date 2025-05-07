@@ -125,31 +125,46 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nombreInput.value.trim() === '') {
             showError(nombreInput, 'Por favor, ingresa el nombre');
             valid = false;
+        } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombreInput.value.trim())) {
+            showError(nombreInput, 'El nombre solo debe contener letras');
+            valid = false;
         } else {
             clearError(nombreInput);
         }
+        
 
         if (apellidoPaternoInput.value.trim() === '') {
             showError(apellidoPaternoInput, 'Por favor, ingresa el apellido paterno');
             valid = false;
+        } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoPaternoInput.value.trim())) {
+            showError(apellidoPaternoInput, 'El apellido paterno solo debe contener letras');
+            valid = false;
         } else {
             clearError(apellidoPaternoInput);
         }
+        
 
         if (apellidoMaternoInput.value.trim() === '') {
             showError(apellidoMaternoInput, 'Por favor, ingresa el apellido materno');
             valid = false;
+        } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoMaternoInput.value.trim())) {
+            showError(apellidoMaternoInput, 'El apellido materno solo debe contener letras');
+            valid = false;
         } else {
             clearError(apellidoMaternoInput);
         }
+        
 
         if (numeroTelefonicoInput.value.trim() === '') {
             showError(numeroTelefonicoInput, 'Por favor, ingresa el número telefónico');
             valid = false;
+        } else if (!/^\d{10}$/.test(numeroTelefonicoInput.value.trim())) {
+            showError(numeroTelefonicoInput, 'El número telefónico debe contener exactamente 10 dígitos numéricos');
+            valid = false;
         } else {
             clearError(numeroTelefonicoInput);
         }
-
+        
         if (parentescoSelect.value === 'seleccion') {
             showError(parentescoSelect, 'Por favor, selecciona un parentesco');
             valid = false;

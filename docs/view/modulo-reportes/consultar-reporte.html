@@ -282,9 +282,11 @@
                                 <option value="todos">TODOS</option>
                                 <option value="estado">ESTADO</option>
                                 <option value="tipo">Tipo</option>.
-                                <option value="perido">Periodo</option>
+                                <option value="periodo">Periodo</option>
                             </select>
-                            <div id="contenedor-busqueda" class="mt-3"></div>
+                            <br>
+                            <div id="contenedor-busqueda"></div>
+
                             <br>
                             <div class="mb-2 d-flex justify-content-between align-items-center">
                                 <div class="position-relative">
@@ -307,7 +309,9 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <canvas id="pdfViewer" style="width: 100%; border: 1px solid #ccc;"></canvas>
+                                        <canvas id="pdfViewer"
+                                            style="width: 100%; height: auto;  border: 1px solid #ccc;"></canvas>
+
 
                                         <!-- Fila con select y botón -->
 
@@ -366,63 +370,63 @@
         </div>
 
 
-       <!-- Modal -->
-<div class="modal fade" id="actualizarModalDatos" tabindex="-1" aria-labelledby="actualizarModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="actualizarModalLabel">Actualizar Datos</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formActualizar">
-                    <!-- Campo visible con el nombre del usuario -->
-                    <div class="mb-3">
-                        <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
-                        <input type="text" class="form-control" id="nombreUsuario" readonly disabled>
+        <!-- Modal -->
+        <div class="modal fade" id="actualizarModalDatos" tabindex="-1" aria-labelledby="actualizarModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="actualizarModalLabel">Actualizar Datos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formActualizar">
+                            <!-- Campo visible con el nombre del usuario -->
+                            <div class="mb-3">
+                                <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
+                                <input type="text" class="form-control" id="nombreUsuario" readonly disabled>
+                            </div>
+
+                            <!-- Campos ocultos -->
+                            <input type="hidden" id="idReporte">
+                            <input type="hidden" id="idUsuario">
+
+                            <!-- Select de tipo -->
+                            <div class="mb-3">
+                                <label for="opcionesBuscar" class="form-label">Tipo</label>
+                                <select class="form-control" id="opcionesBuscar" name="tipo">
+                                    <option value="">-- Selecciona una opción --</option>
+                                    <option value="SELECCIONAR">Seleccionar</option>
+                                    <option value="Estado de Renta">Estado de Renta</option>
+                                    <option value="Financiero">Financiero</option>
+                                    <option value="Incidente">Incidente</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <!-- Campo de descripción -->
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- Campos ocultos -->
-                    <input type="hidden" id="idReporte">
-                    <input type="hidden" id="idUsuario">
-
-                    <!-- Select de tipo -->
-                    <div class="mb-3">
-                        <label for="opcionesBuscar" class="form-label">Tipo</label>
-                        <select class="form-control" id="opcionesBuscar" name="tipo">
-                            <option value="">-- Selecciona una opción --</option>
-                            <option value="SELECCIONAR">Seleccionar</option>
-                            <option value="Estado de Renta">Estado de Renta</option>
-                            <option value="Financiero">Financiero</option>
-                            <option value="Incidente">Incidente</option>
-                            <option value="Otro">Otro</option>
-                        </select>
+                    <!-- Botones del modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="actualizarDatos">Guardar Cambios</button>
                     </div>
-
-                    <!-- Campo de descripción -->
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Botones del modal -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" id="actualizarDatos">Guardar Cambios</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
     </main>
     <script src="../../controller/reportes/consultar-reporteController.js"></script>
     <script src="../../controller/inicio/menuUsuarioController.js"></script>
     <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js"></script>
     <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>

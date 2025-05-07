@@ -300,7 +300,15 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     event.preventDefault();
-
+    
+    function displayError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = "block";
+        }
+    }
+    
     // Obtener los valores del formulario
     const nombre = document.getElementById("emergencyContactName").value.trim();
     const apellidoPaterno = document.getElementById("emergencyContactLastName").value.trim();
