@@ -11,12 +11,21 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../../view/modulo-login/page-login.html";
         return;
     }
-
+    
     const botonBuscar = document.querySelector('.app-search__button');
     if (botonBuscar) {
         botonBuscar.addEventListener('click', buscarRentas);
     }
 
+    const inputBusqueda = document.getElementById('inputBusqueda');
+    if (inputBusqueda) {
+        inputBusqueda.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                buscarRentas();
+            }
+        });
+    }
+    
     function buscarRentas() {
         const valorBusqueda = document.getElementById('inputBusqueda')?.value.trim();
         const opcion = document.getElementById('opcionesBuscarUsuario')?.value;
@@ -133,6 +142,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         Abonar renta
                     </button>`;
 
+                    let botonInfo = '';
+                    if ((renta.estadoPago === 'Abono' || renta.estadoPago === 'Pagado') && renta.abonos && renta.abonos.length > 0) {
+                        botonInfo = `
+                            <button class="btn btn-primary btn-info-abonos"
+                                data-abonos='${JSON.stringify(renta.abonos)}'>
+                                INFORMACIÓN
+                            </button>`;
+                    }
+                
             let claseFondoEstado = '';
             switch (renta.estadoPago) {
                 case 'Pagado': claseFondoEstado = 'bg-success text-white'; break;
@@ -153,12 +171,53 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>$${renta.adeudo.toFixed(2)}</td>
                 <td>$${renta.montoPagado.toFixed(2)}</td>
                 <td class="${claseFondoEstado} fw-bold">${renta.estadoPago}</td>
-                <td>${botonEstadoPago}</td>
+                <td>${botonEstadoPago}${botonInfo}</td>
+                
+
             `;
             tbody.appendChild(fila);
 
         });
-
+        //evento del modal de informacion de abonos
+            document.addEventListener('click', function (e) {
+                // Mostrar modal de abonos
+                if (e.target.classList.contains('btn-info-abonos')) {
+                const abonos = JSON.parse(e.target.getAttribute('data-abonos'));
+                const contenedor = document.getElementById('abonosContenido');
+                contenedor.innerHTML = ''; // Limpiar contenido anterior
+            
+                abonos.forEach(abono => {
+                    const fecha = new Date(abono.fecha).toLocaleString('es-MX');
+                    contenedor.innerHTML += `
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; border-bottom:1px solid #ddd; padding-bottom:10px;">
+                        <img src="${abono.fotoPerfilUrl}" style="width:60px; height:60px; border-radius:50%; object-fit:cover;">
+                        <div>
+                        <strong>${abono.nombreUsuario}</strong><br>
+                        Fecha: ${fecha}<br>
+                        Monto: $${abono.monto.toFixed(2)}<br>
+                        Tipo: ${abono.tipo}
+                        </div>
+                    </div>
+                    `;
+                });
+            
+                document.getElementById('modalAbonos').style.display = 'block';
+                }
+            
+                // Cerrar modal
+                if (e.target.classList.contains('close')) {
+                e.target.closest('.modal').style.display = 'none';
+                }
+            });
+            
+            // Cerrar si se hace clic fuera del modal
+            window.onclick = function (e) {
+                const modal = document.getElementById('modalAbonos');
+                if (e.target === modal) {
+                modal.style.display = 'none';
+                }
+            };
+            
         document.querySelectorAll('.btn-abonar').forEach(btn => {
             btn.addEventListener('click', () => {
                 const monto = btn.getAttribute('data-monto');
@@ -190,6 +249,7 @@ if (formPago) {
         const montoRenta = parseFloat(document.getElementById('montoRenta').value);
         const adeudo = hiddenAdeudo ? parseFloat(hiddenAdeudo.value) : NaN;
         const idRenta = hiddenIdRenta?.value;
+        const idUsuarioRegistro = localStorage.getItem("id");
 
         if (isNaN(adeudo) || montoRenta <= 0) {
             Swal.fire({
@@ -206,7 +266,7 @@ if (formPago) {
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            fetch(`http://localhost:8081/api/rentas/${idRenta}/abono?monto=${montoRenta}`, {
+            fetch(`http://localhost:8081/api/rentas/${idRenta}/abono?monto=${montoRenta}&&idUsuarioQuienRegistra=${idUsuarioRegistro}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -29,6 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Evento del botón de búsqueda
     document.querySelector('.app-search__button').addEventListener('click', buscarUsuario);
 
+    document.getElementById('searchEmail').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            buscarUsuario();
+        }
+    });
+    
     function buscarUsuario() {
         const valorBusqueda = document.getElementById('searchEmail').value.trim();
         const opcion = document.getElementById('opcionesBuscarUsuario').value;

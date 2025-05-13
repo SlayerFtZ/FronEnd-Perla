@@ -1,5 +1,7 @@
 let idReporteActual = null;
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const select = document.getElementById("opcionesBuscarLocal");
     const contenedorBusqueda = document.getElementById("contenedor-busqueda");
@@ -7,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputBusqueda = document.getElementById("searchLocal");
     const token = localStorage.getItem("token");
 
+    
     const setAlert = (message, type = "error") => {
         Swal.fire({
             icon: type,

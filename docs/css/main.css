@@ -449,13 +449,16 @@ th {
 
 label {
   display: inline-block;
+  text-transform: uppercase; 
 }
 
 button {
   border-radius: 0;
+ 
 }
 
 button:focus:not(:focus-visible) {
+  
   outline: 0;
 }
 
@@ -468,11 +471,13 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  
 }
 
 button,
 select {
   text-transform: none;
+  text-transform: uppercase; 
 }
 
 [role=button] {
@@ -15242,3 +15247,17 @@ tbody tr:hover {
   cursor: not-allowed; /* Desactiva el cursor */
   box-shadow: none; /* Elimina la sombra cuando está deshabilitado */
 }
+
+
+span{
+  text-transform: uppercase; 
+}
+
+a{
+  text-transform: uppercase; 
+}
+
+h5{
+  text-transform: uppercase; 
+}
+
