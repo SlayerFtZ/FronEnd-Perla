@@ -205,7 +205,6 @@
                 </ul>
             </li>
 
-
             <!-- Navegacion y menu para Reportes -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-file-earmark-pdf-fill"></i><span class="app-menu__label">. Reportes</span><i
@@ -247,6 +246,7 @@
                 </ul>
             </li>
 
+
             <!-- Navegacion y menu para Pagos extras -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
@@ -279,127 +279,107 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"> <i class="bi bi-building-add"></i> AAGREGAR EGRESOS</h1>
-                <p>"LLENA LOS CAMPOS PARA AGREGAR UN EGRESO"</p>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-file-earmark-text"></i> REPORTE MENSUAL DE Egresos</h1>
+                <p>"LLENA LOS CAMPOS PARA AGREGAR Y CONSULTAR UN REPORTE MENSUAL"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
                 <li class="breadcrumb-item"><a href="../modulo-inicio/dashboard-inicio.html">Inicio</a></li>
             </ul>
         </div>
+        <!-- Componente para agregar y consultar los reportes -->
+        <div class="container-perfil rounded bg-white mt-5 mb-5">
+            <div class="col-md-12">
+                <div class="p-3 py-5 text-center">
+                    <form action="">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <h4 class="titulo-de-pagina">Genera Reporte Mensual EGRESOS</h4>
+                        </div>
 
-        <!--seccion de egresos generales-->
-        <div class="container" id="egresoGeneral">
-            <div class="row">
-                <!-- Columna 1: Logo de la empresa -->
-                <div class="col-md-6">
-                    <img id="companyLogo" alt="Logo de la Empresa" class="img-fluid">
+                        <div class="row mt-2 justify-content-center">
 
-                    <br>
-                    <!-- Imagen de previsualización para mostrar la imagen seleccionada -->
-                    <img id="previewImage" src="" alt="Previsualización" class="img-fluid" style="display: none;">
-                </div>
-                <!-- Columna 2: Formulario -->
-                <div class="col-md-6">
-                    <form id="formAgregarEgresoGeneral">
-                        <div>
-                            <br>
-                            <label class="titulo-de-pagina">Agregar egreso general</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="usuarioEgreso" class="form-label">USUARIO</label>
-                            <input type="text" class="form-control" id="usuarioEgreso"
-                                placeholder="Usuario que registro" disabled>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descripcionEgreso" class="form-label">DESCRIPCIÓN</label>
-                            <textarea class="form-control" id="descripcionEgreso" rows="3"
-                                placeholder="Agrega una descripcion" required=""></textarea>
-                        </div>
-                        <div>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="fechaEgreso" class="form-label">Fecha de pago</label>
-                                    <input type="date" class="form-control" id="fechaEgreso" required="">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="mb-3">
-                            <label for="costMen" class="form-label">MONTO DE PAGO</label>
-                            <input type="number" class="form-control" id="costMen" placeholder="Ingresa el costo"
-                                required="">
-                        </div>
-                        <div>
-                            <button class="btn btn-primary" id="success">Agregar</button>
-                            <button class="btn btn-danger" id="cancelBtn" type="button">Cancelar</button>
-                        </div>
-                        <br>
+                            <div class="col-md-3 mb-3">
+                                <label class="labels">MES DEL REPORTE</label>
+                                <input type="month" id="mesReporte" class="form-control"
+                                    placeholder="Ingrese el año (ej. 2025)" />
+                            </div>
+
+                            <div class="col-md-2 mb-0 align-self-center d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    Generar <i class="bi bi-wrench-adjustable"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger ms-2">
+                                    Cancelar <i class="bi bi-x-circle"></i>
+                                </button>
+                            </div>
                     </form>
                 </div>
+
             </div>
+
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <h4 class="titulo-de-pagina">Seccion para guardar el pdf</h4>
+            </div>
+            <div class="row mt-2 justify-content-center">
+                <div class="col-md-3 mb-3">
+                    <label class="labels">TIPO</label>
+                    <select class="form-control" id="tipoReporte">
+                        <option value="">-- Selecciona una opción --</option>
+                        <option value="SELECCIONAR">Seleccionar</option>
+                        <option value="Estado de Renta">Estado de Renta</option>
+                        <option value="Financiero">Financiero</option>
+                        <option value="Incidente">Incidente</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="labels" for="estadoReporte">ESTADO</label>
+                    <select class="form-control" id="estadoReporte" name="estadoReporte">
+                        <option value="" disabled selected>Selecciona un estado</option>
+                        <option value="Abierto">ABIERTO</option>
+                        <option value="Cerrado">CERRADO</option>
+                        <option value="En Proceso">EN PROCESO</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="labels">DESCRIPCIÓN</label>
+                    <input type="text" class="form-control" id="descripcionGuardarPFDReporte"
+                        placeholder="Estado del reporte" required="">
+                </div>
+
+                <div class="col-md-2 mb-0 align-self-center d-flex justify-content-between">
+                    <button type="button" class="btn btn-success" id="guardarReporteBtn">
+                        Guardar <i class="bi bi-save"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <h5 class="titulo-de-pagina">Vista Previa del PDF</h5>
+                    <iframe id="pdfPreview" src="" width="90%" height="900px"
+                        style="border: 2px solid #ff0000; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);"></iframe>
+                </div>
+            </div>
+
+        </div>
         </div>
         <br>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalActualizarEgreso" tabindex="-1" aria-labelledby="modalActualizarEgresoLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form id="formActualizarEgresoGeneral">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalActualizarEgresoLabel">Actualizar Egreso General</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="mb-3">
-                                <label for="usuarioEgreso" class="form-label">USUARIO</label>
-                                <input type="text" class="form-control" id="usuarioEgreso"
-                                    placeholder="Usuario que registró" disabled>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="descripcionEgreso" class="form-label">DESCRIPCIÓN</label>
-                                <textarea class="form-control" id="descripcionEgreso" rows="3"
-                                    placeholder="Agrega una descripción" required></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="fechaEgreso" class="form-label">Fecha de pago</label>
-                                <input type="date" class="form-control" id="fechaEgreso" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="costMen" class="form-label">MONTO DE PAGO</label>
-                                <input type="number" class="form-control" id="costMen" placeholder="Ingresa el costo"
-                                    required>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Actualizar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
     </main>
 
-    <script src="../../controller/egreso/agregarEgresoController.js"></script>
-    <script src="../../controller/configuracion/consultaImagenEmpresa.js"></script>
-    <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
-    <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../controller/inicio/menuUsuarioController.js"></script>
+    <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
+    <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
+    <script src="../../controller/reportes/reporte-egresos-mes.js"></script>
+
 </body>
 
 </html>

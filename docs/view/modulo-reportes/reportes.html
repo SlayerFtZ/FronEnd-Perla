@@ -205,7 +205,6 @@
                 </ul>
             </li>
 
-
             <!-- Navegacion y menu para Reportes -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="bi bi-file-earmark-pdf-fill"></i><span class="app-menu__label">. Reportes</span><i
@@ -215,9 +214,27 @@
                             <i class="bi bi-stripe"></i>. Consultar Reporte
                         </a></li>
 
-                    <li><a class="treeview-item" href="../modulo-reportes/reportes.html">
-                            <i class="bi bi-stripe"></i>. Reporte Anual
+                    <li><a class="treeview-item" href="../modulo-reportes/consultar-usuario-reporte.html">
+                            <i class="bi bi-stripe"></i>. Consultar Reporte Para Usuarios
                         </a></li>
+                        
+                    <li><a class="treeview-item" href="../modulo-reportes/reportes.html">
+                            <i class="bi bi-stripe"></i>. Reporte Anual Juegos
+                        </a></li>
+                    
+                    <li><a class="treeview-item" href="../modulo-reportes/agregar-reporte-egresos-mes.html">
+                            <i class="bi bi-stripe"></i>. Reporte Mensual Egresos
+
+                    <li><a class="treeview-item" href="../modulo-reportes/agregar-reporte-egresos-anio.html">
+                            <i class="bi bi-stripe"></i>. Reporte Anual Egresos
+                        </a></li>
+
+                    <li><a class="treeview-item" href="../modulo-reportes/agregar-reporte-rentas-anio.html">
+                            <i class="bi bi-stripe"></i>. Reporte Anual Rentas
+                        </a></li>
+
+                    <li><a class="treeview-item" href="../modulo-reportes/agregar-reporte-rentas-mes.html">
+                            <i class="bi bi-stripe"></i>. Reporte Mensual Rentas
 
                     <li><a class="treeview-item" href="../modulo-reportes/agregraReparacionesRecibo.html">
                             <i class="bi bi-stripe"></i>. Generar Recibo Repacion
@@ -228,6 +245,7 @@
                         </a></li>
                 </ul>
             </li>
+
 
             <!-- Navegacion y menu para Pagos extras -->
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
@@ -261,7 +279,7 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"> <i class="bi bi-file-earmark-text"></i> REPORTE ANUAL </h1>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-file-earmark-text"></i> REPORTE ANUAL de Juegos</h1>
                 <p>"LLENA LOS CAMPOS PARA AGREGAR Y CONSULTAR UN REPORTE ANUAL"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
@@ -275,7 +293,7 @@
                 <div class="p-3 py-5 text-center">
                     <form action="">
                         <div class="d-flex justify-content-center align-items-center mb-3">
-                            <h4 class="titulo-de-pagina">Genera Reporte Anual</h4>
+                            <h4 class="titulo-de-pagina">Genera Reporte Anual de juegos</h4>
                         </div>
 
                         <div class="row mt-2 justify-content-center">
@@ -305,12 +323,12 @@
             <div class="row mt-2 justify-content-center">
                 <div class="col-md-3 mb-3">
                     <label class="labels">TIPO</label>
-                    <select class="form-control" id="tipoReporte">
-                        <option value="seleccion">Selecciona un tipo</option>
-                        <option value="FINANCIERO">FINANCIERO</option>
-                        <option value="INCIDENTE">INCIDENTE</option>
-                        <option value="RENTA">RENTA</option>
-                        <OPTION value="OTRO">OTRO</OPTION>
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="SELECCIONAR">Seleccionar</option>
+                    <option value="Estado de Renta">Estado de Renta</option>
+                    <option value="Financiero">Financiero</option>
+                    <option value="Incidente">Incidente</option>
+                    <option value="Otro">Otro</option>
                     </select>
                 </div>
 

@@ -351,8 +351,8 @@ function recargarTabla() {
                         data-nombre="${reporte.nombreUsuario}">
                         Actualizar
                     </button>
-                    <!-- Aquí agregamos la lógica para deshabilitar el botón de descarga según el estado -->
-                    <button class="btn btn-secondary btn-sm download-btn" type="button" data-path="${reporte.path}" ${isDisabled ? 'disabled' : ''}>
+        
+                    <button class="btn btn-secondary btn-sm download-btn" type="button" data-id="${reporte.idReporte}" data-path="${reporte.path}" ${isDisabled ? 'disabled' : ''}>
                         <i class="bi bi-cloud-download-fill"></i> Descargar
                     </button>
                 </td>
@@ -375,21 +375,30 @@ function recargarTabla() {
         });
 
         // ✅ Agrega eventos de descarga
-        document.querySelectorAll('.download-btn').forEach(btn => {
+            document.querySelectorAll('.download-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const filePath = btn.getAttribute('data-path');  // Obtenemos la ruta del PDF desde el atributo `data-path`
-                if (filePath) {
-                    const link = document.createElement('a');
-                    link.href = filePath;  // Establecemos la URL del PDF
-                    link.download = '';  // Si no se especifica nombre, tomará el nombre por defecto de la URL (puedes personalizarlo si lo deseas)
-                    document.body.appendChild(link);  // Necesario para Firefox
-                    link.click();  // Inicia la descarga
-                    document.body.removeChild(link);  // Limpia el DOM después de la descarga
-                } else {
-                    alert('No se encontró el archivo para descargar.');
-                }
-            });
+            const filePath = btn.getAttribute('data-path');
+            const idReporte = btn.getAttribute('data-id');
+            const idUsuario = localStorage.getItem('id');
+
+            if (filePath && filePath.startsWith('http')) {
+                const fileName = filePath.split('/').pop();
+
+                const link = document.createElement('a');
+                link.href = filePath;
+                link.download = fileName; // nombre personalizado
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Archivo no encontrado',
+                    text: 'No se encontró una ruta válida para descargar el archivo.',
+                });
+            }
         });
+    });
 
     })
     .catch(err => {
@@ -398,8 +407,6 @@ function recargarTabla() {
     });
 }
 
-    
-    
 });
 
 document.addEventListener("DOMContentLoaded", () => {

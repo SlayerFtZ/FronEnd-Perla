@@ -35,8 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
         "/docs/view/modulo-usuario/agregar-contacto-emergencia.html",
         "/docs/view/modulo-usuario/agregar-perfil-salud.html",
         "/docs/view/modulo-usuario/agregar-usuario.html",
+        //modulo reportes
+        "/docs/view/modulo-reportes/consultar-reporte.html",
 
     ];
+    
 
     if (!token || !id || !rol || !estado) {
         window.location.href = loginPage;

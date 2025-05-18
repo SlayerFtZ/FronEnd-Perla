@@ -13757,6 +13757,7 @@ textarea.form-control-lg {
 .app-menu {
   margin-bottom: 0;
   padding-bottom: 40px;
+  
 }
 
 .app-menu__item {
@@ -13768,7 +13769,7 @@ textarea.form-control-lg {
       -ms-flex-align: center;
           align-items: center;
   padding: 12px 15px;
-  font-size: 1.08em;
+  font-size: 1rem;
   border-left: 3px solid transparent;
   -webkit-transition: border-left-color 0.3s ease, background-color 0.3s ease;
   transition: border-left-color 0.3s ease, background-color 0.3s ease;
@@ -13776,17 +13777,17 @@ textarea.form-control-lg {
   color: #fff;
 }
 .app-menu__item.active, .app-menu__item:hover, .app-menu__item:focus {
-  background: #0d1214;
+  background:#087990;
   border-left-color: #00695C;
   text-decoration: none;
-  color: #fff;
+  color: bisque;
 }
 
 .app-menu__icon {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
-  width: 25px;
+  width: 35px;
 }
 
 .app-menu__label {
@@ -13853,15 +13854,15 @@ textarea.form-control-lg {
     display: none;
   }
   .sidebar-mini.sidenav-toggled .app-sidebar__user-avatar {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 55px;
   }
   .sidebar-mini.sidenav-toggled .app-content {
-    margin-left: 50px;
+    margin-left: 80px;
   }
   .sidebar-mini.sidenav-toggled .app-sidebar {
     left: 0;
-    width: 50px;
+    width: 80px;
     overflow: hidden;
   }
   .sidebar-mini.sidenav-toggled .app-sidebar:hover {
