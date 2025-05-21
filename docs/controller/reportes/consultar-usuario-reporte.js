@@ -191,8 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnVer) {
         const path = btnVer.getAttribute("data-path");
         idReporteActual = parseInt(btnVer.getAttribute("data-id"));
-        const idUsuario = parseInt(localStorage.getItem("id")); 
+        const idUsuario = parseInt(localStorage.getItem("id"));
         const token = localStorage.getItem("token");
+
         Swal.fire({
             title: '¿Deseas ver el reporte?',
             text: "Se abrirá una vista previa del PDF.",
@@ -228,11 +229,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!response.ok) {
                         throw new Error("Error al registrar vista");
                     }
-                    return response.text(); // <- usamos .text() porque la respuesta no es JSON
+                    return response.text();
                 })
                 .then(msg => {
                     console.log("Respuesta del servidor:", msg);
-                    // Mostrar éxito breve antes de continuar
                     return Swal.fire({
                         icon: 'success',
                         title: 'Vista registrada',
@@ -242,24 +242,42 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 })
                 .then(() => {
-                    // Ahora cargar el PDF
+                    const contenedorPDF = document.getElementById("pdfContainer");
+                    if (!contenedorPDF) {
+                        throw new Error("No se encontró el contenedor PDF.");
+                    }
+                    contenedorPDF.innerHTML = ""; // Limpiar contenido previo
+
                     return fetch(path)
                         .then(res => res.arrayBuffer())
                         .then(data => pdfjsLib.getDocument({ data }).promise)
-                        .then(pdf => pdf.getPage(1))
-                        .then(page => {
+                        .then(pdf => {
                             const scale = 1.5;
-                            const viewport = page.getViewport({ scale });
-                            const canvas = document.getElementById("pdfViewer");
-                            const context = canvas.getContext("2d");
-                            canvas.height = viewport.height;
-                            canvas.width = viewport.width;
+                            const renderPages = [];
 
-                            const renderContext = {
-                                canvasContext: context,
-                                viewport: viewport
-                            };
-                            return page.render(renderContext).promise;
+                            for (let i = 1; i <= pdf.numPages; i++) {
+                                renderPages.push(
+                                    pdf.getPage(i).then(page => {
+                                        const viewport = page.getViewport({ scale });
+                                        const canvas = document.createElement("canvas");
+                                        const context = canvas.getContext("2d");
+
+                                        canvas.width = viewport.width;
+                                        canvas.height = viewport.height;
+                                        canvas.style.marginBottom = "20px";
+
+                                        const renderContext = {
+                                            canvasContext: context,
+                                            viewport: viewport
+                                        };
+
+                                        contenedorPDF.appendChild(canvas);
+                                        return page.render(renderContext).promise;
+                                    })
+                                );
+                            }
+
+                            return Promise.all(renderPages);
                         });
                 })
                 .then(() => {
@@ -281,6 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 
 });
     document.addEventListener("DOMContentLoaded", () => {

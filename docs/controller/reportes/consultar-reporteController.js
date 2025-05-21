@@ -231,34 +231,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
     document.addEventListener("click", function (e) {
-        // Evento para botón de ver
-        const btnVer = e.target.closest(".ver-reporte");
-        if (btnVer) {
-            const path = btnVer.getAttribute("data-path");
-            idReporteActual = btnVer.getAttribute("data-id");
-            console.log("ID seleccionado desde botón 'Ver':", idReporteActual);
+    // Evento para botón de ver
+    const btnVer = e.target.closest(".ver-reporte");
+    if (btnVer) {
+        const path = btnVer.getAttribute("data-path");
+        idReporteActual = btnVer.getAttribute("data-id");
+        console.log("ID seleccionado desde botón 'Ver':", idReporteActual);
 
-            const modal = new bootstrap.Modal(document.getElementById("modalReporte"));
-            modal.show();
+        const modal = new bootstrap.Modal(document.getElementById("modalReporte"));
+        modal.show();
 
-            fetch(path)
-                .then(res => res.arrayBuffer())
-                .then(data => pdfjsLib.getDocument({ data }).promise)
-                .then(pdf => pdf.getPage(1))
-                .then(page => {
-                    const scale = 1.5;
-                    const viewport = page.getViewport({ scale });
-                    const canvas = document.getElementById("pdfViewer");
-                    const context = canvas.getContext("2d");
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
+        const contenedorPDF = document.getElementById("pdfContainer");
+        if (!contenedorPDF) {
+            console.error("No se encontró el contenedor con id 'pdfContainer'");
+            return;
+        }
+        contenedorPDF.innerHTML = ""; // Limpiar contenido anterior
 
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    page.render(renderContext);
-                })
+        fetch(path)
+            .then(res => res.arrayBuffer())
+            .then(data => pdfjsLib.getDocument({ data }).promise)
+            .then(pdf => {
+                const scale = 1.5;
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    pdf.getPage(i).then(page => {
+                        const viewport = page.getViewport({ scale });
+                        const canvas = document.createElement("canvas");
+                        const context = canvas.getContext("2d");
+
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        canvas.style.marginBottom = "20px";
+
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+
+                        page.render(renderContext);
+                        contenedorPDF.appendChild(canvas);
+                    });
+                }
+            })
                 .catch(err => {
                     console.error("Error al cargar el PDF:", err);
                     setAlert("No se pudo cargar el reporte.", "error");
