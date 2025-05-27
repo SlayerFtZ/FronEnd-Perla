@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const paginasRestringidas = [
         //modulo de reparaciones
-        "/docs/view/modulo-configuracion/actualizar-iconoempresa.html",
-        "/docs/view/modulo-configuracion/configuracionglobal-renta.html",
+        "/docs/view/modulo-configuracion/actualizar-icono-empresa.html",
+        "/docs/view/modulo-configuracion/configuracion-global-renta.html",
         //modulo de egresos
         "/docs/view/modulo-egresos/agregar-egreso.html",
         "/docs/view/modulo-egresos/consultar-egreso.html",

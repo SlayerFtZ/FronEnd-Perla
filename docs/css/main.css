@@ -13477,19 +13477,26 @@ textarea.form-control-lg {
   }
 }
 
+
 .app-header__logo {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto;
-  color: #000000;
+  color: #ffffff; /* Cambia el color del texto */
   text-align: center;
-  font-family: "Niconne";
+  font-family: 'Arial', sans-serif; /* Cambia el estilo de la fuente */
   padding: 0 15px;
   font-size: 26px;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 50px;
   text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un sombreado */
 }
+.app-header__logo::before {
+  content: "🌐";
+  margin-right: 8px;
+}
+
 @media (min-width: 768px) {
   .app-header__logo {
     -webkit-box-flex: 0;
@@ -13503,7 +13510,7 @@ textarea.form-control-lg {
 }
 .app-header__logo:focus, .app-header__logo:hover {
   text-decoration: none;
-  color: #fff;
+  color: #00000076;
 }
 
 .app-sidebar__toggle {

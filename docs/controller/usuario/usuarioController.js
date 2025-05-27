@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Lista de rutas restringidas
         const paginasRestringidas = [
-            "/docs/view/modulo-configuracion/actualizar-iconoempresa.html",
+            "/docs/view/modulo-configuracion/actualizar-icono-empresa.html",
             "/docs/view/modulo-configuracion/usuarios.html",
             "/docs/view/modulo-configuracion/crear-usuario.html",
             "/docs/view/modulo-rentas/rentas.html",

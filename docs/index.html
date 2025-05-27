@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
@@ -63,11 +64,7 @@
                             <li class="scroll-to-section"><a href="#chefs">Ubicacion</a></li>
                             <li class="scroll-to-section"><a href="#reservation">Contactos</a></li>
                             <li class="scroll-to-section"><a href="#offers">Fuente de sodas</a></li>
-                            <li class="scroll-to-section">
-                                <a href="view/modulo-login/page-login.html" style="border: 2px solid orange; border-radius: 6px; padding: 1px 16px; color: rgb(0, 0, 0);">
-                                    Iniciar Sesión
-                                </a>
-                            </li>
+                            <li class="scroll-to-section"><a href="view/modulo-login/page-login.html">Iniciar Sesión</a>
                             </li>
                         </ul>
                         <a class='menu-trigger'>
@@ -102,33 +99,38 @@
                             <!-- Item -->
                             <div class="item">
                                 <div class="img-fill">
-                                    <img src="assets/sourseLaperla/logo-entrada.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="assets/sourseLaperla/logo-entrada.png" alt=""
+                                        style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
                             <!-- // Item -->
                             <!-- Item -->
                             <div class="item">
                                 <div class="img-fill">
-                                    <img src="assets/sourseLaperla/laperla2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="assets/sourseLaperla/laperla2.png" alt=""
+                                        style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
                             <!-- // Item -->
                             <!-- Item -->
                             <div class="item">
                                 <div class="img-fill">
-                                    <img src="assets/sourseLaperla/laperla3.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="assets/sourseLaperla/laperla3.png" alt=""
+                                        style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
 
                             <div class="item">
                                 <div class="img-fill">
-                                    <img src="assets/sourseLaperla/laperla5.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="assets/sourseLaperla/laperla5.jpeg" alt=""
+                                        style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
 
                             <div class="item">
                                 <div class="img-fill">
-                                    <img src="assets/sourseLaperla/laperla8.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="assets/sourseLaperla/laperla8.png" alt=""
+                                        style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
 
@@ -242,8 +244,7 @@
 
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card1"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 1A-1B-1C-1D _TORNISHOP_.jpg">
+                        <div class="card card1" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-1</h6>
                             </div>
@@ -252,16 +253,27 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card2" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 2-4 _SONYS_.jpg">
+                        <div class="card card2" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-2</h6>
                             </div>
@@ -270,7 +282,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -279,8 +303,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card3"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 2-4 SONYS GAMES.jpg">
+                        <div class="card card3" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-3</h6>
                             </div>
@@ -289,7 +312,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -298,8 +333,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card4"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 5-7 FERRETERIA _EL TORNILLITO_.jpg">
+                        <div class="card card4" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-4</h6>
                             </div>
@@ -308,7 +342,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -317,8 +363,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card5"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 8 _NOVEDADES_.jpg">
+                        <div class="card card5" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-5</h6>
                             </div>
@@ -327,7 +372,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -336,8 +393,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card6"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 12 _NOVEDADES_.jpg">
+                        <div class="card card6" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-6</h6>
                             </div>
@@ -346,7 +402,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -355,8 +423,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card7"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 13-14 _BIG-BURGER_.jpg">
+                        <div class="card card7" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-7</h6>
                             </div>
@@ -365,7 +432,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -374,8 +453,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card8"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 14A ROPA CABALLERO.jpg">
+                        <div class="card card8" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-8</h6>
                             </div>
@@ -384,7 +462,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -393,8 +483,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card9"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 14B _KARLOS_.jpg">
+                        <div class="card card9" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-9</h6>
                             </div>
@@ -403,7 +492,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -412,8 +513,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card10"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 14B CELLSHOP.jpg">
+                        <div class="card card10" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-10</h6>
                             </div>
@@ -422,7 +522,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -431,8 +543,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card11"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 15-30 _ALFA Y OMEGA_.jpg">
+                        <div class="card card11" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-11</h6>
                             </div>
@@ -441,7 +552,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +573,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card12" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 16A _LM_.jpg">
+                        <div class="card card12" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-12</h6>
                             </div>
@@ -459,7 +582,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -468,8 +603,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card13"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 16B _REGALOS Y NOVEDADES_.jpg">
+                        <div class="card card13" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-13</h6>
                             </div>
@@ -478,7 +612,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -487,8 +633,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card14"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 16C NOVEDADES _.jpg">
+                        <div class="card card14" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-14</h6>
                             </div>
@@ -497,7 +642,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -506,8 +663,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card15"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 17 _MOBITECH_.jpg">
+                        <div class="card card15" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-15</h6>
                             </div>
@@ -516,7 +672,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -525,8 +693,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card16"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 18 RM SNEAKERS.jpg">
+                        <div class="card card16" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-16</h6>
                             </div>
@@ -535,7 +702,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -544,7 +723,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card17" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 19 _ISHOP_.jpg">
+                        <div class="card card17" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-17</h6>
                             </div>
@@ -553,7 +732,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -562,7 +753,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card18" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 20 _STAGE_.jpg">
+                        <div class="card card18" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-18</h6>
                             </div>
@@ -571,7 +762,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -580,8 +783,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card19"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 21 CHICA TRENDY.jpg">
+                        <div class="card card19" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-19</h6>
                             </div>
@@ -590,7 +792,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -599,8 +813,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card20"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 22 OPTICAS LUXOR.jpg">
+                        <div class="card card20" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-20</h6>
                             </div>
@@ -609,7 +822,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -618,8 +843,7 @@
                     <!-- ----------------------------------------------------------------- -->
                     <!-- --------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card21"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 23 _ROPA CASUAL CABALLERO_.jpg">
+                        <div class="card card21" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-21</h6>
                             </div>
@@ -628,7 +852,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -636,7 +872,7 @@
                     </div>
                     <!-- ----------------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card22" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 24 _NOVEDADES_.jpg">
+                        <div class="card card22" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-22</h6>
                             </div>
@@ -645,7 +881,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -653,8 +901,7 @@
                     </div>
                     <!-- ----------------------------------------------------------------- -->
                     <div class="item">
-                        <div class="card card23"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 26 _HELADOS_.jpg">
+                        <div class="card card23" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-23</h6>
                             </div>
@@ -663,7 +910,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -672,8 +931,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card24"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 28 _COLIBRI_.jpg">
+                        <div class="card card24" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-24</h6>
                             </div>
@@ -682,7 +940,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -693,8 +963,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card25"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 28A REGALOS Y NOVEDADES.jpg">
+                        <div class="card card25" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-25</h6>
                             </div>
@@ -703,7 +972,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -714,8 +995,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card26"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 29 _LA CREPE_.jpg">
+                        <div class="card card26" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-26</h6>
                             </div>
@@ -724,7 +1004,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -735,8 +1027,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card27"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 29A DE GALLO 4_20.jpg">
+                        <div class="card card27" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-27</h6>
                             </div>
@@ -745,7 +1036,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -755,8 +1058,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card28"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 29B _COLIBRI_.jpg">
+                        <div class="card card28" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-28</h6>
                             </div>
@@ -765,7 +1067,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -776,8 +1090,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card29"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 31 _JOYERIA_.jpg">
+                        <div class="card card29" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-29</h6>
                             </div>
@@ -786,7 +1099,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -797,8 +1122,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card30"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 31A _MAS TECNOLOGIA_.jpg">
+                        <div class="card card30" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-30</h6>
                             </div>
@@ -807,7 +1131,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -818,8 +1154,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card31"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 32-33 _REGALOS Y NOVEDADES.jpg">
+                        <div class="card card31" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-31</h6>
                             </div>
@@ -828,7 +1163,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -839,8 +1186,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card32"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 34 _LENCERIA_.jpg">
+                        <div class="card card32" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-32</h6>
                             </div>
@@ -849,7 +1195,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -860,8 +1218,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card33"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 35 ROPA DAMAS.jpg">
+                        <div class="card card33" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-33</h6>
                             </div>
@@ -870,7 +1227,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -881,8 +1250,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card34"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 36 ROPA DAMA.jpg">
+                        <div class="card card34" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-34</h6>
                             </div>
@@ -891,7 +1259,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -902,8 +1282,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card35"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 37 ROPA Y ACCESORIOS DAMAS.jpg">
+                        <div class="card card35" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-35</h6>
                             </div>
@@ -912,7 +1291,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -923,8 +1314,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card36"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 38 ROPA CASUAL.jpg">
+                        <div class="card card36" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-36</h6>
                             </div>
@@ -933,7 +1323,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -944,8 +1346,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card37"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 39 _NOVEDADES_.jpg">
+                        <div class="card card37" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-37</h6>
                             </div>
@@ -954,7 +1355,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -965,8 +1378,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card38"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 40 _PADRINO GAMES.jpg">
+                        <div class="card card38" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-38</h6>
                             </div>
@@ -975,7 +1387,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -986,8 +1410,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card39"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 41 _MANDALA_ NAILS.jpg">
+                        <div class="card card39" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-39</h6>
                             </div>
@@ -996,7 +1419,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1007,8 +1442,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card40"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 42 RM SNEAKERS KIDS.jpg">
+                        <div class="card card40" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-40</h6>
                             </div>
@@ -1017,7 +1451,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1028,8 +1474,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card41"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 43 REGALOS ROSSY.jpg">
+                        <div class="card card41" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-41</h6>
                             </div>
@@ -1038,7 +1483,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1049,8 +1506,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card42"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 43A-43B _NOVEDADES_.jpg">
+                        <div class="card card42" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-42</h6>
                             </div>
@@ -1059,7 +1515,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1070,8 +1538,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card43"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 44-45 _RAGATEZ_ .jpg">
+                        <div class="card card43" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-43</h6>
                             </div>
@@ -1080,7 +1547,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1091,8 +1570,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card44"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 46-71 ROPA CASUAÑ CABALLERO.jpg">
+                        <div class="card card44" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-44</h6>
                             </div>
@@ -1101,7 +1579,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1112,7 +1602,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card45" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 47 GRACE.jpg">
+                        <div class="card card45" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-45</h6>
                             </div>
@@ -1121,7 +1611,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1131,8 +1633,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card46"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 51 _JOYERIA_.jpg">
+                        <div class="card card46" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-46</h6>
                             </div>
@@ -1141,7 +1642,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1152,8 +1665,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card47"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 53 ROPA CABALLERO.jpg">
+                        <div class="card card47" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-47</h6>
                             </div>
@@ -1162,7 +1674,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1172,8 +1696,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card48"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 56 _ESTETICA UNISEX_.jpg">
+                        <div class="card card48" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-48</h6>
                             </div>
@@ -1182,7 +1705,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1193,7 +1728,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card49" data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 59 BLU-CEL.jpg">
+                        <div class="card card49" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-49</h6>
                             </div>
@@ -1202,7 +1737,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1213,8 +1760,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card50"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 60 _GAME MASTER_.jpg">
+                        <div class="card card50" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-50</h6>
                             </div>
@@ -1223,7 +1769,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1235,8 +1793,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card51"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 62-63 NOVEDADES HOLLYWOOD.jpg">
+                        <div class="card card51" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-51</h6>
                             </div>
@@ -1245,7 +1802,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1256,8 +1825,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card52"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 65-65A _JOYERIA SALGADO_.jpg">
+                        <div class="card card52" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-52</h6>
                             </div>
@@ -1266,7 +1834,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1278,8 +1858,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card53"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 65B _COLORŚ_.jpg">
+                        <div class="card card53" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-53</h6>
                             </div>
@@ -1288,7 +1867,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1299,8 +1890,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card54"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 66-67 _LA VENCEDORA_.jpg">
+                        <div class="card card54" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-54</h6>
                             </div>
@@ -1309,7 +1899,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1320,8 +1922,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card55"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 68  MODA AJEDREZ.jpg">
+                        <div class="card card55" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-55</h6>
                             </div>
@@ -1330,7 +1931,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1341,8 +1954,7 @@
                     <!-- ----------------------------------------------------------------- -->
 
                     <div class="item">
-                        <div class="card card56"
-                            data-image="../docs/assets/sourseLaperla/LOCALES/LOCAL 71A ROPA CASUAL CABALLERO.jpg">
+                        <div class="card card56" onclick="mostrarModal(this)">
                             <div class="price">
                                 <h6>L-56</h6>
                             </div>
@@ -1351,7 +1963,19 @@
                                 <p class="description">En este local encontraras todo lo necesario para estar.</p>
                                 <div class="main-text-button">
                                     <div class="scroll-to-section">
-                                        <a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a>
+                                        <div class="btn-redes-container">
+                                            <a href="#reservation" class="btn-redes">
+                                                <span class="btn-text">Visítanos</span>
+                                                <div class="social-icons">
+                                                    <a href="https://facebook.com" target="_blank"><i
+                                                            class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://instagram.com" target="_blank"><i
+                                                            class="fab fa-instagram"></i></a>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1421,6 +2045,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                 </div>
                 <!-- Agregar la columna para el item de la segunda columna -->
                 <div class="col-lg-6">
@@ -1429,17 +2054,16 @@
                             <div class="price">
                             </div>
                             <div class="info">
-                                <h1 class="title">Centro Comercial La perla</h1>
+                                <h1 class="title">Centro Comercial La Perla</h1>
                                 <p class="description" style="text-align: justify;">La Perla se encuentra en una
                                     ubicación privilegiada, justo debajo
                                     de la Plaza Cívica y a un costado de la Catedral de Teziutlán. Esta ubicación
                                     central la convierte en un punto de encuentro tradicional para los habitantes de la
                                     ciudad y visitantes, facilitando el acceso a una variedad de comercios y servicios.
-                                    <br>
                                 </p>
                                 <div class="main-text-button">
-                                    <a href="#reservation" class="btn btn-primary">Make Reservation <i
-                                            class="fa fa-angle-down"></i></a>
+                                    <a href="#reservation" class="btn btn-primary">Visitanos en nueastras redes sociales
+                                        <i class="fa fa-angle-down"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -1460,9 +2084,11 @@
                     <div class="right-text-content">
                         <ul class="social-icons">
                             <li style="display: flex; align-items: center;">
-                                <a href="https://www.facebook.com/c.comerciallaperla" target="_blank" style="margin-right: 10px;">
-                                    <i class="fa fa-facebook"></i>
+                                <a href="https://www.facebook.com/c.comerciallaperla" target="_blank"
+                                    style="margin-right: 25px; padding: 10px; border-radius: 50%; background-color: #4174d8; color: white; display: inline-flex; align-items: center; justify-content: center;">
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
+
                                 <p style="margin: 0;">Visita nuestras redes sociales</p>
                             </li>
                         </ul>
@@ -1481,6 +2107,10 @@
             </div>
         </div>
     </footer>
+    <div id="modal" class="modal" onclick="cerrarModal(event)">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <div class="modal-content" id="imagenModal"></div>
+    </div>
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
@@ -1537,34 +2167,24 @@
             .addTo(map);
 
     </script>
-    <!-- Repite este div para más tarjetas, cambiando solo el valor de data-image -->
-    <!-- MODAL al final del body -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
+
+
     <script>
-        function openModal(imageUrl) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imageUrl;
+        function mostrarModal(card) {
+            const backgroundImage = window.getComputedStyle(card).backgroundImage;
+            const modalContent = document.getElementById("imagenModal");
+            modalContent.style.backgroundImage = backgroundImage;
+
+            const modal = document.getElementById("modal");
+            modal.style.display = "flex";
         }
 
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
+        function cerrarModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "none";
         }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".card[data-image]");
-            cards.forEach(card => {
-                card.addEventListener("click", () => {
-                    const imgUrl = card.getAttribute("data-image");
-                    openModal(imgUrl);
-                });
-            });
-        });
     </script>
+
 
 </body>
 

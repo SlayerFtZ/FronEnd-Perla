@@ -39,6 +39,15 @@ const token = localStorage.getItem('token');
                     });
                     return;
                 }
+                if (anio < 1950) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Año no válido',
+                    text: 'El año debe ser 1950 o posterior.',
+                });
+                return;
+            }
+
 
                 fetch(`http://localhost:8081/api/reportes/generar/reporteIngresos/anio?anio=${anio}`, {
                     method: 'GET',
