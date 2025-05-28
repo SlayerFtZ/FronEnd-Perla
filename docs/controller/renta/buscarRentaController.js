@@ -127,57 +127,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderizarTablaRentas(rentas) {
-        const tbody = document.querySelector('.table-responsive tbody');
-        tbody.innerHTML = '';
+    const tbody = document.querySelector('.table-responsive tbody');
+    tbody.innerHTML = '';
 
-        rentas.forEach(renta => {
-            const botonEstadoPago = renta.estadoPago === 'Pagado'
-                ? `<button class="btn btn-warning" disabled>Abonar renta</button>`
-                : `<button class="btn btn-warning btn-abonar" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#simularPagoModal"
-                        data-monto="${renta.montoPagado}" 
-                        data-adeudo="${renta.adeudo}" 
-                        data-id-renta="${renta.idRenta}">
-                        Abonar renta
-                    </button>`;
+    // Ordenar rentas por estado de pago
+    rentas.sort((a, b) => {
+        const prioridad = { 'Abono': 1, 'Pendiente': 2, 'Pagado': 3 };
+        return prioridad[a.estadoPago] - prioridad[b.estadoPago];
+    });
 
-                    let botonInfo = '';
-                    if ((renta.estadoPago === 'Abono' || renta.estadoPago === 'Pagado') && renta.abonos && renta.abonos.length > 0) {
-                        botonInfo = `
-                            <button class="btn btn-primary btn-info-abonos"
-                                data-abonos='${JSON.stringify(renta.abonos)}'>
-                                INFORMACIÓN
-                            </button>`;
-                    }
-                
-            let claseFondoEstado = '';
-            switch (renta.estadoPago) {
-                case 'Pagado': claseFondoEstado = 'bg-success text-white'; break;
-                case 'Abono': claseFondoEstado = 'bg-warning text-dark'; break;
-                case 'Pendiente': claseFondoEstado = 'bg-danger text-white'; break;
-            }
+    // Ya ordenado, ahora sí iterar y renderizar
+    rentas.forEach(renta => {
+        const botonEstadoPago = renta.estadoPago === 'Pagado'
+            ? `<button class="btn btn-warning" disabled>Abonar renta</button>`
+            : `<button class="btn btn-warning btn-abonar" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#simularPagoModal"
+                    data-monto="${renta.montoPagado}" 
+                    data-adeudo="${renta.adeudo}" 
+                    data-id-renta="${renta.idRenta}">
+                    Abonar renta
+                </button>`;
 
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td><strong>${renta.nombreLocal}</strong> </td>
-                <td>
-                    <img src="${renta.fotoPerfilUrl || '../../images/perfilUsuario.jpg'}" width="80" class="rounded-circle me-2">
-                    ${renta.nombreUsuario} ${renta.apellidoPaterno} ${renta.apellidoMaterno}
-                </td>
-                <td>${renta.fechaInicio.split('-').reverse().join('/')}</td>
-                <td>${renta.fechaFin.split('-').reverse().join('/')}</td>
-                <td>${renta.estadoLocal}</td>
-                <td>$${renta.adeudo.toFixed(2)}</td>
-                <td>$${renta.montoPagado.toFixed(2)}</td>
-                <td class="${claseFondoEstado} fw-bold">${renta.estadoPago}</td>
-                <td>${botonEstadoPago}${botonInfo}</td>
-                
+        let botonInfo = '';
+        if ((renta.estadoPago === 'Abono' || renta.estadoPago === 'Pagado') && renta.abonos && renta.abonos.length > 0) {
+            botonInfo = `
+                <button class="btn btn-primary btn-info-abonos"
+                    data-abonos='${JSON.stringify(renta.abonos)}'>
+                    INFORMACIÓN
+                </button>`;
+        }
 
-            `;
-            tbody.appendChild(fila);
+        let claseFondoEstado = '';
+        switch (renta.estadoPago) {
+            case 'Pagado': claseFondoEstado = 'bg-success text-white'; break;
+            case 'Abono': claseFondoEstado = 'bg-warning text-dark'; break;
+            case 'Pendiente': claseFondoEstado = 'bg-danger text-white'; break;
+        }
 
-        });
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td><strong>${renta.nombreLocal}</strong></td>
+            <td>
+                <img src="${renta.fotoPerfilUrl || '../../images/perfilUsuario.jpg'}" width="80" class="rounded-circle me-2">
+                ${renta.nombreUsuario} ${renta.apellidoPaterno} ${renta.apellidoMaterno}
+            </td>
+            <td>${renta.fechaInicio.split('-').reverse().join('/')}</td>
+            <td>${renta.fechaFin.split('-').reverse().join('/')}</td>
+            <td>${renta.estadoLocal}</td>
+            <td>$${renta.adeudo.toFixed(2)}</td>
+            <td>$${renta.montoPagado.toFixed(2)}</td>
+            <td class="${claseFondoEstado} fw-bold">${renta.estadoPago}</td>
+            <td>${botonEstadoPago}${botonInfo}</td>
+        `;
+        tbody.appendChild(fila);
+    });
+
         //evento del modal de informacion de abonos
             document.addEventListener('click', function (e) {
                 // Mostrar modal de abonos
