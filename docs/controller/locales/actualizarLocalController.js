@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Cargar opciones de locales
-    fetch('http://localhost:8081/api/locales', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/locales', {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const nuevoNumeroLocal = document.getElementById('actLocal').value.trim();
         const precioActMensual = document.getElementById('precioActMensual').value.trim();
         const estatusActRenta = document.getElementById('estatusActRenta').value.trim();
-        const idUsuario = localStorage.getItem('id');
+        const idUsuario = getDecryptedUserId();
 
         if (!idLocal || !nuevoNumeroLocal || !precioActMensual || !estatusActRenta || !idUsuario) {
             Swal.fire({
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
             idUsuario: parseInt(idUsuario)
         };
 
-        fetch(`http://localhost:8081/api/locales/modificar/${idLocal}`, {
+        fetch(`https://laperlacentrocomercial.dyndns.org/api/locales/modificar/${idLocal}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

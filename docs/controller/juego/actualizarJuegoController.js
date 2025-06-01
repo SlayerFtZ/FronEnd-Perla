@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof verificarSesion === "function" && !verificarSesion()) return;
 
     async function cargarMaquinas() {
-        const apiUrl = 'http://localhost:8081/api/maquinas-juegos';
+        const apiUrl = 'https://laperlacentrocomercial.dyndns.org/api/maquinas-juegos';
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const apiUpdateUrl = `http://localhost:8081/api/maquinas-juegos/${idJuego}`;
+        const apiUpdateUrl = `https://laperlacentrocomercial.dyndns.org/api/maquinas-juegos/${idJuego}`;
         const requestBody = {
             nombre: nombreJuego,
             descripcion: descripcionJuego,

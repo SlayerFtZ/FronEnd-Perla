@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Obtener datos del localStorage
   const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
+  const id = getDecryptedUserId();
   const rol = localStorage.getItem("rol");
   const estado = localStorage.getItem("estado");
 
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     switch (filtro) {
       case "contratista":
-      url = `http://localhost:8081/api/reparaciones/buscar/contratista/${encodeURIComponent(textoBusqueda)}`;
+      url = `https://laperlacentrocomercial.dyndns.org/api/reparaciones/buscar/contratista/${encodeURIComponent(textoBusqueda)}`;
       break;
 
       case "usuario":
-      url = `http://localhost:8081/api/reparaciones/buscar/usuario/${encodeURIComponent(textoBusqueda)}`;
+      url = `https://laperlacentrocomercial.dyndns.org/api/reparaciones/buscar/usuario/${encodeURIComponent(textoBusqueda)}`;
       break;
 
       case "fecha":
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mes <= 12
         ) {
         const fechaFormateada = `${anio}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
-        url = `http://localhost:8081/api/reparaciones/buscar/fecha/${encodeURIComponent(fechaFormateada)}`;
+        url = `https://laperlacentrocomercial.dyndns.org/api/reparaciones/buscar/fecha/${encodeURIComponent(fechaFormateada)}`;
         break;
         }
       }
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     const data = {
-      idUsuario: localStorage.getItem("id"),
+      idUsuario: getDecryptedUserId(),
       descripcion,
       contratista,
       fecha,
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
   
     // Actualización de la reparación
-    fetch(`http://localhost:8081/api/reparaciones/${idReparacionGlobal}`, {
+    fetch(`https://laperlacentrocomercial.dyndns.org/api/reparaciones/${idReparacionGlobal}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

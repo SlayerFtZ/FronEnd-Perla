@@ -14,91 +14,99 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========== Login ==========
-if (loginForm) {
-  loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
 
-    if (email === "" || password === "") {
-      Swal.fire({ icon: "error", title: "Campos vacíos", text: "Por favor, completa todos los campos." });
-      return;
-    }
+      if (email === "" || password === "") {
+        Swal.fire({ icon: "error", title: "Campos vacíos", text: "Por favor, completa todos los campos." });
+        return;
+      }
 
-    if (password.length < 10) {
-      Swal.fire({ icon: "warning", title: "Contraseña corta", text: "Debe tener al menos 10 caracteres." });
-      return;
-    }
+      if (password.length < 10) {
+        Swal.fire({ icon: "warning", title: "Contraseña corta", text: "Debe tener al menos 10 caracteres." });
+        return;
+      }
 
-    try {
-      // Mostrar mensaje de carga
-      Swal.fire({
-        title: 'Iniciando sesión...',
-        html: 'Por favor espera',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      });
+      try {
+        // Mostrar mensaje de carga
+        Swal.fire({
+          title: 'Iniciando sesión...',
+          html: 'Por favor espera',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          didOpen: () => {
+            Swal.showLoading();
+          }
+        });
 
-      const response = await fetch("http://localhost:8081/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
+        const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      // Cerrar loading
-      Swal.close();
+        // Cerrar loading
+        Swal.close();
 
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("id", data.idUsuario);
-        localStorage.setItem("rol", data.role);
-        localStorage.setItem("estado", data.estado);
+        if (response.ok) {
+          const secretKey = "clave-secreta-123"; // ⚠️ No exponer en producción
 
-        const estadoUsuario = (data.estado || "").toLowerCase();
+          const role = typeof data.role === 'string' ? data.role : '';
+          const idStr = String(data.idUsuario);
 
-        if (estadoUsuario === "inactivo") {
-          Swal.fire({
-            icon: "error",
-            title: "Usuario inactivo",
-            text: "Ya no eres un usuario válido en el sistema."
-          });
+          const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();
+          const encryptedID = CryptoJS.AES.encrypt(idStr, secretKey).toString();
+
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("id", encryptedID);
+          localStorage.setItem("rol", encryptedRole);
+          localStorage.setItem("estado", data.estado);
+
+          const estadoUsuario = (data.estado || "").toLowerCase();
+
+          if (estadoUsuario === "inactivo") {
+            Swal.fire({
+              icon: "error",
+              title: "Usuario inactivo",
+              text: "Ya no eres un usuario válido en el sistema."
+            });
+          } else {
+            Swal.fire({
+              icon: "success",
+              title: "Inicio exitoso",
+              text: "Redirigiendo...",
+              timer: 3000,
+              showConfirmButton: false
+            });
+
+            setTimeout(() => {
+              window.location.href = "../modulo-inicio/dashboard-inicio.html";
+            }, 3200);
+          }
         } else {
           Swal.fire({
-            icon: "success",
-            title: "Inicio exitoso",
-            text: "Redirigiendo...",
-            timer: 3000,
-            showConfirmButton: false
+            icon: "error",
+            title: "Error",
+            text: data.message || "Credenciales incorrectas"
           });
-
-          setTimeout(() => {
-            window.location.href = "../modulo-inicio/dashboard-inicio.html";
-          }, 3200);
         }
-      } else {
+      } catch (error) {
+        Swal.close(); // En caso de error también cerrar loading
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: data.message || "Credenciales incorrectas"
+          title: "Error de conexión",
+          text: "No se pudo conectar con el servidor"
         });
+        console.error("Error en login:", error);
       }
-    } catch (error) {
-      Swal.close(); // En caso de error también cerrar loading
-      Swal.fire({
-        icon: "error",
-        title: "Error de conexión",
-        text: "No se pudo conectar con el servidor"
-      });
-      console.error("Error en login:", error);
-    }
-  });
-}
+    });
+  }
 
 
   // ========== Recuperar contraseña ==========
@@ -124,7 +132,7 @@ if (loginForm) {
       });
 
       try {
-        const response = await fetch("http://localhost:8081/api/auth/forgot-password", {
+        const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/auth/forgot-password", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -44,13 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let url = '';
         switch (opcion) {
             case 'estado':
-                url = `http://localhost:8081/api/locales/estado/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/locales/estado/${valorBusqueda}`;
                 break;
             case 'idUsuario':
-                url = `http://localhost:8081/api/locales/usuario/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/locales/usuario/${valorBusqueda}`;
                 break;
             case 'nombre':
-                    url = `http://localhost:8081/api/locales/nombre?nombre=${valorBusqueda}`;
+                    url = `https://laperlacentrocomercial.dyndns.org/api/locales/nombre?nombre=${valorBusqueda}`;
                     break;
             default:
                 Swal.fire({

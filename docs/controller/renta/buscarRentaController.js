@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -69,13 +69,13 @@ document.addEventListener("DOMContentLoaded", function () {
     
         switch (opcion) {
             case 'localNombreUsuario':
-                url = `http://localhost:8081/api/rentas/buscar/usuario?nombreUsuario=${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/rentas/buscar/usuario?nombreUsuario=${valorBusqueda}`;
                 break;
             case 'localNombreLocal':
-                url = `http://localhost:8081/api/rentas/buscar/local?nombreLocal=${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/rentas/buscar/local?nombreLocal=${valorBusqueda}`;
                 break;
             case 'estadoPagoLocal':
-                url = `http://localhost:8081/api/rentas/buscar/estadoPago?estadoPago=${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/rentas/buscar/estadoPago?estadoPago=${valorBusqueda}`;
                 break;
             case 'fechaInicio':
                 const fechaFormateada = convertirFecha(valorBusqueda);
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                     return;
                 }
-                url = `http://localhost:8081/api/rentas/buscar/fecha?fechaInicio=${fechaFormateada}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/rentas/buscar/fecha?fechaInicio=${fechaFormateada}`;
                 break;
             default:
                 Swal.fire({
@@ -254,7 +254,7 @@ if (formPago) {
         const montoRenta = parseFloat(document.getElementById('montoRenta').value);
         const adeudo = hiddenAdeudo ? parseFloat(hiddenAdeudo.value) : NaN;
         const idRenta = hiddenIdRenta?.value;
-        const idUsuarioRegistro = localStorage.getItem("id");
+        const idUsuarioRegistro = getDecryptedUserId();
 
         if (isNaN(adeudo) || montoRenta <= 0) {
             Swal.fire({
@@ -271,7 +271,7 @@ if (formPago) {
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            fetch(`http://localhost:8081/api/rentas/${idRenta}/abono?monto=${montoRenta}&&idUsuarioQuienRegistra=${idUsuarioRegistro}`, {
+            fetch(`https://laperlacentrocomercial.dyndns.org/api/rentas/${idRenta}/abono?monto=${montoRenta}&&idUsuarioQuienRegistra=${idUsuarioRegistro}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

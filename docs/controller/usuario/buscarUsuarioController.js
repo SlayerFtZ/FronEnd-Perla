@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -51,22 +51,22 @@ document.addEventListener("DOMContentLoaded", function () {
         let url = '';
         switch (opcion) {
             case 'correo':
-                url = `http://localhost:8081/api/usuarios/buscar/correo/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/correo/${valorBusqueda}`;
                 break;
             case 'nombre':
-                url = `http://localhost:8081/api/usuarios/buscar/nombre/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/nombre/${valorBusqueda}`;
                 break;
             case 'apellido':
-                url = `http://localhost:8081/api/usuarios/buscar/apellido/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/apellido/${valorBusqueda}`;
                 break;
             case 'direccion':
-                url = `http://localhost:8081/api/usuarios/buscar/direccion/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/direccion/${valorBusqueda}`;
                 break;
             case 'curp':
-                url = `http://localhost:8081/api/usuarios/buscar/curp/${valorBusqueda}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/curp/${valorBusqueda}`;
                 break;
                 case 'telefono':
-                    url = `http://localhost:8081/api/usuarios/buscar/telefono/${valorBusqueda}`;
+                    url = `https://laperlacentrocomercial.dyndns.org/api/usuarios/buscar/telefono/${valorBusqueda}`;
                     break;
             default:
                 Swal.fire({

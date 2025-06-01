@@ -1,7 +1,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         // Verificar si el usuario tiene token, id y rol en el localStorage
         const token = localStorage.getItem("token");
-        const id = localStorage.getItem("id");
+        const id = getDecryptedUserId();
         const rol = localStorage.getItem("rol");
 
         // Si no hay token, id o rol, redirigir al login
@@ -16,7 +16,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const token = localStorage.getItem("token");
     
-        fetch("http://localhost:8081/api/dashboard/usuarios/por-rol", {
+        fetch("https://laperlacentrocomercial.dyndns.org/api/dashboard/usuarios/por-rol", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -60,7 +60,7 @@
         'Authorization': `Bearer ${token}`
       };
 
-      fetch(`http://localhost:8081/api/dashboard/ingresos?year=${year}&month=${month}`, {
+      fetch(`https://laperlacentrocomercial.dyndns.org/api/dashboard/ingresos?year=${year}&month=${month}`, {
         method: 'GET',
         headers
       })
@@ -149,7 +149,7 @@
       const year = fecha.getFullYear();
       const month = fecha.getMonth() + 1;
     
-      const url = `http://localhost:8081/api/dashboard/ingresos/combinados?year=${year}&month=${month}`;
+      const url = `https://laperlacentrocomercial.dyndns.org/api/dashboard/ingresos/combinados?year=${year}&month=${month}`;
     
       fetch(url, {
         method: 'GET',
@@ -186,7 +186,7 @@
       const year = fecha.getFullYear();
       const month = fecha.getMonth() + 1;
     
-      const url = `http://localhost:8081/api/dashboard/reparaciones/costo?year=${year}&month=${month}`;
+      const url = `https://laperlacentrocomercial.dyndns.org/api/dashboard/reparaciones/costo?year=${year}&month=${month}`;
     
       fetch(url, {
         method: 'GET',
@@ -223,7 +223,7 @@
       const year = fecha.getFullYear();
       const month = fecha.getMonth() + 1;
     
-      const url = `http://localhost:8081/api/dashboard/egresos?year=${year}&month=${month}`;
+      const url = `https://laperlacentrocomercial.dyndns.org/api/dashboard/egresos?year=${year}&month=${month}`;
     
       fetch(url, {
         method: 'GET',
@@ -260,7 +260,7 @@
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0');
 
-      const url = `http://localhost:8081/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
+      const url = `https://laperlacentrocomercial.dyndns.org/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
 
       const token = localStorage.getItem('token');
 
@@ -340,7 +340,7 @@
       var egresosChart = echarts.init(document.getElementById("egresosAnual"));
   
       async function fetchEgresosData() {
-          const url = 'http://localhost:8081/api/dashboard/egresos/anuales?year=2025&month=01';
+          const url = 'https://laperlacentrocomercial.dyndns.org/api/dashboard/egresos/anuales?year=2025&month=01';
           const token = localStorage.getItem('token');
   
           try {
@@ -405,8 +405,8 @@
         const year = fechaActual.getFullYear();
         const month = String(fechaActual.getMonth() + 1).padStart(2, '0'); // mes comienza desde 0
       
-        const ingresosUrl = `http://localhost:8081/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
-        const egresosUrl = `http://localhost:8081/api/dashboard/egresos/anuales?year=${year}&month=${month}`;
+        const ingresosUrl = `https://laperlacentrocomercial.dyndns.org/api/dashboard/ingresos/anuales?year=${year}&month=${month}`;
+        const egresosUrl = `https://laperlacentrocomercial.dyndns.org/api/dashboard/egresos/anuales?year=${year}&month=${month}`;
       
         const headers = {
           "Authorization": `Bearer ${token}`,

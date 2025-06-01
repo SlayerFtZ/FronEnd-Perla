@@ -1,44 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
     const userRole = rol ? rol.toLowerCase() : "";
 
     const rolesPermitidos = ["superadmin", "administrador", "mesa directiva"];
 
-     // Extrae la ruta completa relativa desde "/docs"
-        const rutaActual = window.location.pathname.toLowerCase();
+    // Extrae la ruta completa relativa desde "/docs"
+    const rutaActual = window.location.pathname.toLowerCase();
 
-        // Lista de rutas restringidas
-        const paginasRestringidas = [
-            "/docs/view/modulo-configuracion/actualizar-icono-empresa.html",
-            "/docs/view/modulo-configuracion/usuarios.html",
-            "/docs/view/modulo-configuracion/crear-usuario.html",
-            "/docs/view/modulo-rentas/rentas.html",
-            "/docs/view/modulo-juegos/juegos.html",
-            // Agrega todas las demás rutas que quieras restringir aquí
-        ];
-    
-        // Validación de sesión
-        if (!token || !id || !rol || !estado) {
-            window.location.href = "../../modulo-login/page-login.html";
-            return;
-        }
-    
-        if (estado.toLowerCase() === "inactivo") {
-            localStorage.clear();
-            sessionStorage.clear();
-            window.location.href = "../../modulo-login/page-login.html";
-            return;
-        }
-    
-        // Validación de acceso a páginas restringidas
-        if (paginasRestringidas.includes(rutaActual) && !rolesPermitidos.includes(userRole)) {
-            alert("No tienes permiso para acceder a esta página.");
-            window.location.href = "/docs/view/modulo-inicio/dashboard-inicio.html"; // o tu página de inicio segura
-        }
-    });
+    // Lista de rutas restringidas
+    const paginasRestringidas = [
+        "/docs/view/modulo-configuracion/actualizar-icono-empresa.html",
+        "/docs/view/modulo-configuracion/usuarios.html",
+        "/docs/view/modulo-configuracion/crear-usuario.html",
+        "/docs/view/modulo-rentas/rentas.html",
+        "/docs/view/modulo-juegos/juegos.html",
+        // Agrega todas las demás rutas que quieras restringir aquí
+    ];
+
+    // Validación de sesión
+    if (!token || !id || !rol || !estado) {
+        window.location.href = "../../modulo-login/page-login.html";
+        return;
+    }
+
+    if (estado.toLowerCase() === "inactivo") {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../../modulo-login/page-login.html";
+        return;
+    }
+
+    // Validación de acceso a páginas restringidas
+    if (paginasRestringidas.includes(rutaActual) && !rolesPermitidos.includes(userRole)) {
+        alert("No tienes permiso para acceder a esta página.");
+        window.location.href = "/docs/view/modulo-inicio/dashboard-inicio.html"; // o tu página de inicio segura
+    }
+});
 
 
 
@@ -55,12 +55,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const file = event.target.files[0];
 
         if (file) {
-            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            const validImageTypes = ['image/jpeg',
+                'image/png',
+                'image/gif',
+                'image/bmp',
+                'image/webp',
+                'image/svg+xml',
+                'image/tiff',
+                'image/x-icon',
+                'image/heif',
+                'image/heic',
+                'image/avif',
+                'image/jxr',
+                'image/vnd.microsoft.icon'];
             if (!validImageTypes.includes(file.type)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Tipo de archivo no válido',
-                    text: 'Por favor, selecciona una imagen válida (JPEG, PNG, GIF).',
+                    text: 'Por favor, selecciona una imagen válida',
                 });
                 profileImageInput.value = '';
                 previewImage.style.display = 'none';
@@ -86,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("id");
+        const userId = getDecryptedUserId();
 
         if (!userId) {
             Swal.fire({
@@ -120,69 +132,69 @@ document.addEventListener("DOMContentLoaded", function () {
                 formData.append("idUsuario", userId);
                 formData.append("tipo", "FotoPerfil");
 
-                fetch(`http://localhost:8081/api/archivos/${userId}/actualizar-con-archivo`, {
+                fetch(`https://laperlacentrocomercial.dyndns.org/api/archivos/${userId}/actualizar-con-archivo`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
                     body: formData
                 })
-                .then(async response => {
-                    console.log("Código de estado HTTP:", response.status);
+                    .then(async response => {
+                        console.log("Código de estado HTTP:", response.status);
 
-                    let data;
-                    try {
-                        const contentType = response.headers.get("content-type");
+                        let data;
+                        try {
+                            const contentType = response.headers.get("content-type");
 
-                        if (contentType && contentType.includes("application/json")) {
-                            data = await response.json();
-                        } else {
-                            const text = await response.text();
-                            throw new Error(text); // Lanzamos el texto como error para manejarlo abajo
+                            if (contentType && contentType.includes("application/json")) {
+                                data = await response.json();
+                            } else {
+                                const text = await response.text();
+                                throw new Error(text); // Lanzamos el texto como error para manejarlo abajo
+                            }
+                        } catch (error) {
+                            console.error("Error de respuesta:", error.message);
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.message || 'Respuesta no válida del servidor.',
+                            });
+
+                            return;
                         }
-                    } catch (error) {
-                        console.error("Error de respuesta:", error.message);
+
+                        if (response.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Imagen actualizada',
+                                text: 'Tu imagen de perfil ha sido cambiada con éxito.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                location.reload();
+                            });
+
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('updateProfilePicModal'));
+                            if (modal) modal.hide();
+
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: data.message || 'Hubo un problema al actualizar la imagen de perfil.',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error al hacer la petición fetch:", error);
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
-                            text: error.message || 'Respuesta no válida del servidor.',
+                            title: 'Error de conexión',
+                            text: error.message || 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
                         });
-
-                        return;
-                    }
-
-                    if (response.ok) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Imagen actualizada',
-                            text: 'Tu imagen de perfil ha sido cambiada con éxito.',
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(() => {
-                            location.reload();
-                        });
-
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('updateProfilePicModal'));
-                        if (modal) modal.hide();
-
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: data.message || 'Hubo un problema al actualizar la imagen de perfil.',
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al hacer la petición fetch:", error);
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error de conexión',
-                        text: error.message || 'No se pudo conectar con el servidor. Verifica tu red o si el backend está activo.',
                     });
-                });
             } else {
                 Swal.fire('Cancelado', 'No se ha cambiado la imagen de perfil.', 'info');
             }
@@ -198,7 +210,7 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
     const padecimientos = document.getElementById("healthConditions").value.trim();
     const descripcion = document.getElementById("healthDescription").value.trim();
     const categoria = document.getElementById("healthCategory").value;
-    const userId = localStorage.getItem("id");
+    const userId = getDecryptedUserId();
     const token = localStorage.getItem("token");
 
     if (!userId) {
@@ -241,7 +253,7 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
                 }
             ];
 
-            fetch(`http://localhost:8081/api/padecimientos/usuario/${userId}`, {
+            fetch(`https://laperlacentrocomercial.dyndns.org/api/padecimientos/usuario/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -249,48 +261,48 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
                 },
                 body: JSON.stringify(healthProfileData)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la respuesta del servidor.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Respuesta del servidor:", data);
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta del servidor.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Respuesta del servidor:", data);
 
-                // Si el backend devuelve un array, lo tomamos como éxito
-                if (Array.isArray(data)) {
-                    Swal.fire({
-                        title: "¡Perfil de salud actualizado con éxito!",
-                        icon: "success",
-                        confirmButtonText: "Aceptar"
-                    }).then(() => {
-                        const modal = $('#updateHealthProfileModal');
-                        modal.on('hidden.bs.modal', function () {
-                            location.reload();
+                    // Si el backend devuelve un array, lo tomamos como éxito
+                    if (Array.isArray(data)) {
+                        Swal.fire({
+                            title: "¡Perfil de salud actualizado con éxito!",
+                            icon: "success",
+                            confirmButtonText: "Aceptar"
+                        }).then(() => {
+                            const modal = $('#updateHealthProfileModal');
+                            modal.on('hidden.bs.modal', function () {
+                                location.reload();
+                            });
+                            modal.modal('hide');
                         });
-                        modal.modal('hide');
-                    });
-                } else {
-                    console.error("Error del servidor:", data.message || "Hubo un problema al actualizar el perfil de salud.");
+                    } else {
+                        console.error("Error del servidor:", data.message || "Hubo un problema al actualizar el perfil de salud.");
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: data.message || "Hubo un problema al actualizar el perfil de salud."
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error de conexión:", error.message || "No se pudo conectar con el servidor.");
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: data.message || "Hubo un problema al actualizar el perfil de salud."
+                        text: error.message || "No se pudo conectar con el servidor."
                     });
-                }
-            })
-            .catch((error) => {
-                console.error("Error de conexión:", error.message || "No se pudo conectar con el servidor.");
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: error.message || "No se pudo conectar con el servidor."
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
                 });
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-            });
         }
     });
 });
@@ -298,9 +310,9 @@ document.getElementById("updateHealthProfileForm").addEventListener("submit", fu
 
 document.getElementById("updateEmergencyContactForm").addEventListener("submit", function (event) {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     event.preventDefault();
-    
+
     function displayError(elementId, message) {
         const errorElement = document.getElementById(elementId);
         if (errorElement) {
@@ -308,7 +320,7 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
             errorElement.style.display = "block";
         }
     }
-    
+
     // Obtener los valores del formulario
     const nombre = document.getElementById("emergencyContactName").value.trim();
     const apellidoPaterno = document.getElementById("emergencyContactLastName").value.trim();
@@ -355,8 +367,8 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
             cancelButtonText: "No"
         }).then((result) => {
             if (result.isConfirmed) {
-                const id = localStorage.getItem("id");
-                if (!id  || !token) {
+                const id = getDecryptedUserId();
+                if (!id || !token) {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
@@ -374,7 +386,7 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
                     parentesco
                 };
 
-                fetch(`http://localhost:8081/api/contactos-emergencia/actualizar/usuario/${id}`, {
+                fetch(`https://laperlacentrocomercial.dyndns.org/api/contactos-emergencia/actualizar/usuario/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -382,29 +394,29 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
                     },
                     body: JSON.stringify(data)
                 })
-                .then(response => {
-                    if (!response.ok) throw new Error("Error al actualizar el contacto");
-                    return response.json();
-                })
-                .then(data => {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Contacto actualizado",
-                        text: "El contacto de emergencia se actualizó correctamente."
-                    }).then(() => {
-                        $('#updateEmergencyContactModal').modal('hide');
-                        // Recargar la página después de cerrar el modal
-                        location.reload();
+                    .then(response => {
+                        if (!response.ok) throw new Error("Error al actualizar el contacto");
+                        return response.json();
+                    })
+                    .then(data => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Contacto actualizado",
+                            text: "El contacto de emergencia se actualizó correctamente."
+                        }).then(() => {
+                            $('#updateEmergencyContactModal').modal('hide');
+                            // Recargar la página después de cerrar el modal
+                            location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "No se pudo actualizar el contacto. Intenta de nuevo."
+                        });
+                        console.error(error);
                     });
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "No se pudo actualizar el contacto. Intenta de nuevo."
-                    });
-                    console.error(error);
-                });
             }
         });
     }
@@ -412,8 +424,8 @@ document.getElementById("updateEmergencyContactForm").addEventListener("submit",
 
 // Botón para deshabilitar un usuario
 document.getElementById("btn-despedir").addEventListener("click", function () {
-    const id = localStorage.getItem("id"); 
-    const token = localStorage.getItem("token"); 
+    const id = getDecryptedUserId();
+    const token = localStorage.getItem("token");
     if (!id) {
         Swal.fire({
             icon: "error",
@@ -434,33 +446,33 @@ document.getElementById("btn-despedir").addEventListener("click", function () {
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:8081/api/usuarios/${id}/inactivar`, {
+            fetch(`https://laperlacentrocomercial.dyndns.org/api/usuarios/${id}/inactivar`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la respuesta del servidor");
-                }
-                return response.json();
-            })
-            .then(data => {
-                Swal.fire({
-                    title: "Despedido",
-                    text: "El usuario ha sido despedido exitosamente.",
-                    icon: "success"
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta del servidor");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    Swal.fire({
+                        title: "Despedido",
+                        text: "El usuario ha sido despedido exitosamente.",
+                        icon: "success"
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo conectar con el servidor o el usuario no fue encontrado.",
+                        icon: "error"
+                    });
                 });
-            })
-            .catch((error) => {
-                Swal.fire({
-                    title: "Error",
-                    text: "No se pudo conectar con el servidor o el usuario no fue encontrado.",
-                    icon: "error"
-                });
-            });
         }
     });
 });
@@ -585,7 +597,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "No, cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const id = localStorage.getItem("id"); // Obtener el ID del usuario desde sessionStorage
+                    const id = getDecryptedUserId(); // Obtener el ID del usuario desde sessionStorage
 
                     if (!id) {
                         Swal.fire({
@@ -615,7 +627,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // contrasena: obtenerContrasenaReal()
                     };
                     const token = localStorage.getItem("token");
-                    fetch(`http://localhost:8081/api/usuarios/actualizar/${id}`, {
+                    fetch(`https://laperlacentrocomercial.dyndns.org/api/usuarios/actualizar/${id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -623,33 +635,33 @@ document.addEventListener("DOMContentLoaded", function () {
                         },
                         body: JSON.stringify(userData)
                     })
-                    .then(async response => {
-                        const data = await response.json();
-                        if (response.ok) {
-                            Swal.fire({
-                                title: "Perfil actualizado correctamente!",
-                                icon: "success",
-                                confirmButtonText: "Cerrar",
-                            }).then(() => {
-                                location.reload(); // Recargar la página después de la actualización exitosa
-                            });
-                        } else {
+                        .then(async response => {
+                            const data = await response.json();
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: "Perfil actualizado correctamente!",
+                                    icon: "success",
+                                    confirmButtonText: "Cerrar",
+                                }).then(() => {
+                                    location.reload(); // Recargar la página después de la actualización exitosa
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: data.message || "Hubo un problema al actualizar el perfil.",
+                                    icon: "error",
+                                    confirmButtonText: "Aceptar",
+                                });
+                            }
+                        })
+                        .catch(() => {
                             Swal.fire({
                                 title: "Error",
-                                text: data.message || "Hubo un problema al actualizar el perfil.",
+                                text: "No se pudo conectar con el servidor.",
                                 icon: "error",
                                 confirmButtonText: "Aceptar",
                             });
-                        }
-                    })
-                    .catch(() => {
-                        Swal.fire({
-                            title: "Error",
-                            text: "No se pudo conectar con el servidor.",
-                            icon: "error",
-                            confirmButtonText: "Aceptar",
                         });
-                    });
                 }
             });
         } else {

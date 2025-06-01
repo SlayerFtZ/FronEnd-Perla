@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const select = document.getElementById("opcionesBuscarEgreso");
 const input = document.getElementById("inputBusqueda");
 const tablaBody = document.querySelector("tbody");
-const urlBase = "http://localhost:8081/api/pagos"; // Ajusta a tu ruta real
+const urlBase = "https://laperlacentrocomercial.dyndns.org/api/pagos"; // Ajusta a tu ruta real
 
 // Función reutilizable para buscar y renderizar la tabla
 function buscarEgresos() {
@@ -144,7 +144,7 @@ document.getElementById('btnActualizarEgreso').addEventListener('click', () => {
         descripcion,
         fechaPago,
         monto,
-        idUsuario: localStorage.getItem("id") // Ajusta dinámicamente si es necesario
+        idUsuario: getDecryptedUserId() // Ajusta dinámicamente si es necesario
     };
 
     fetch(`${urlBase}/actualizar/${idPago}`, {

@@ -43,7 +43,7 @@ document.getElementById("resetPasswordForm").addEventListener("submit", async fu
     });
 
     try {
-        const response = await fetch(`http://localhost:8081/api/auth/reset-password?token=${encodeURIComponent(token)}&password=${encodeURIComponent(newPassword)}`, {
+        const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/auth/reset-password?token=${encodeURIComponent(token)}&password=${encodeURIComponent(newPassword)}`, {
             method: "POST"
         });
 

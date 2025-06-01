@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -83,7 +83,7 @@ function validateSelect(id, errorMessage) {
 
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
 
     if (!token || !id || !rol) {
@@ -101,14 +101,14 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         let valid = true;
         console.log("Formulario enviado, comenzando validaciones...");
-    
+
         const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
         const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const regexCurp = /^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9]{2}$/;
         const regexRfc = /^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$/;
         const regexTelefono = /^[0-9]{10}$/;
         const regexNss = /^[0-9]{11}$/;
-    
+
         const fields = [
             { id: "nombre", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
             { id: "apellidoPaterno", regex: regexNombre, error: "Solo letras y espacios (3-100 caracteres)", minLength: 3, maxLength: 100 },
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { id: "numeroTelefonico", regex: regexTelefono, error: "Teléfono inválido (10 dígitos)", minLength: 10, maxLength: 10 },
             { id: "nssSeguro", regex: regexNss, error: "NSS inválido (11 dígitos)", minLength: 11, maxLength: 11 }
         ];
-    
+
         fields.forEach(field => {
             const input = document.getElementById(field.id);
             const value = input.value.trim();
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 clearError(input);
             }
         });
-    
+
         const fechaNacimiento = document.getElementById("fechaNacimiento");
         const fechaIngresada = new Date(fechaNacimiento.value);
         if (isNaN(fechaIngresada.getTime()) || fechaIngresada >= new Date()) {
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             clearError(fechaNacimiento);
         }
-    
+
         const direccion = document.getElementById("direccion");
         if (direccion.value.trim() === "") {
             showError(direccion, "La dirección no puede estar vacía");
@@ -147,32 +147,45 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             clearError(direccion);
         }
-    
+
         valid = validateSelect("genero", "Debe seleccionar un género") && valid;
         valid = validateSelect("rol", "Debe seleccionar un rol") && valid;
         valid = validateSelect("estadoCivil", "Debe seleccionar un estado civil") && valid;
-    
+
         const fotoInput = document.getElementById("profilePhoto");
         if (fotoInput.files.length === 0) {
             showError(fotoInput, "Debe subir una imagen de perfil");
             valid = false;
         } else {
             const file = fotoInput.files[0];
-            const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+            const allowedTypes = ["image/jpeg",
+                "image/png",
+                "image/jpg",
+                "image/gif",
+                "image/bmp",
+                "image/webp",
+                "image/svg+xml",
+                "image/tiff",
+                "image/x-icon",
+                "image/vnd.microsoft.icon",
+                "image/heif",
+                "image/heic",
+                "image/avif",
+                "image/jxr"];
             if (!allowedTypes.includes(file.type)) {
-                showError(fotoInput, "Formato inválido, solo JPG o PNG");
+                showError(fotoInput, "Formato inválido");
                 valid = false;
             } else {
                 clearError(fotoInput);
             }
         }
-    
+
         console.log(`Validaciones completadas, resultado: ${valid ? "Todo correcto" : "Error en validación"}`);
-    
+
         if (valid) {
             const formData = new FormData();
             console.log("Enviando datos al servidor...");
-    
+
             const usuario = {
                 nombre: document.getElementById("nombre").value.trim(),
                 apellidoPaterno: document.getElementById("apellidoPaterno").value.trim(),
@@ -190,13 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 estado: "Activo",
                 contrasena: obtenerContrasenaReal()
             };
-    
+
             formData.append("usuario", new Blob([JSON.stringify(usuario)], { type: "application/json" }));
             formData.append("file", fotoInput.files[0]);
             const token = localStorage.getItem("token");
-    
+
             try {
-                const response = await fetch("http://localhost:8081/api/usuarios/registrar-con-imagen", {
+                const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/usuarios/registrar-con-imagen", {
                     method: "POST",
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -204,13 +217,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: formData,
                 });
 
-                    Swal.fire({
-                        title: "Usuario agregado correctamente!",
-                        icon: "success"
-                    }).then(() => {
-                        form.reset();
-                        if (imagePreview) imagePreview.src = defaultImage;
-                    });
+                Swal.fire({
+                    title: "Usuario agregado correctamente!",
+                    icon: "success"
+                }).then(() => {
+                    form.reset();
+                    if (imagePreview) imagePreview.src = defaultImage;
+                });
                 if (response.ok) {
                     Swal.fire({
                         title: "Usuario agregado correctamente!",
@@ -239,35 +252,35 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-    
+
 
     document.getElementById("profilePhoto")?.addEventListener("change", displayImage);
 
-    
-document.getElementById('cancelBtn').addEventListener('click', () => {
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "Se cancelará el registro y serás redirigido al panel principal.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, cancelar',
-        cancelButtonText: 'No, volver',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'Cancelado',
-                text: 'Has sido redirigido al dashboard.',
-                icon: 'success',
-                timer: 1500,
-                showConfirmButton: false
-            }).then(() => {
-                window.location.href = '../../view/modulo-inicio/dashboard-inicio.html';
-            });
-        }
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Se cancelará el registro y serás redirigido al panel principal.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No, volver',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Cancelado',
+                    text: 'Has sido redirigido al dashboard.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = '../../view/modulo-inicio/dashboard-inicio.html';
+                });
+            }
+        });
     });
-});
 
     document.getElementById("logoutBtn").addEventListener("click", function () {
         localStorage.clear();  // Limpia todo el localStorage

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Obtener datos del usuario
     try {
-        const response = await fetch(`http://localhost:8081/api/usuarios/${id}`, {
+        const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/usuarios/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Obtener padecimientos
     try {
-        const padecimientosResponse = await fetch(`http://localhost:8081/api/padecimientos/usuario/${id}`, {
+        const padecimientosResponse = await fetch(`https://laperlacentrocomercial.dyndns.org/api/padecimientos/usuario/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     
     // Obtener contacto de emergencia
     try {
-        const emergenciaResponse = await fetch(`http://localhost:8081/api/contactos-emergencia/usuario/${id}`, {
+        const emergenciaResponse = await fetch(`https://laperlacentrocomercial.dyndns.org/api/contactos-emergencia/usuario/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

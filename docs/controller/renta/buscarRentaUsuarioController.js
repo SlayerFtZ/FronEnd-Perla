@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    const url = `http://localhost:8081/api/rentas/usuario/${id}`;
+    const url = `https://laperlacentrocomercial.dyndns.org/api/rentas/usuario/${id}`;
 
     fetch(url, {
         method: 'GET',
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const montoRenta = parseFloat(document.getElementById('montoRenta').value);
             const adeudo = hiddenAdeudo ? parseFloat(hiddenAdeudo.value) : NaN;
             const idRenta = hiddenIdRenta?.value;
-            const idUsuarioRegistro = localStorage.getItem("id");
+            const idUsuarioRegistro = getDecryptedUserId();
 
             if (isNaN(adeudo) || montoRenta <= 0) {
                 Swal.fire({
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: 'El monto a abonar no puede ser mayor que el adeudo.',
                 });
             } else {
-                fetch(`http://localhost:8081/api/rentas/${idRenta}/abono?monto=${montoRenta}&&idUsuarioQuienRegistra=${idUsuarioRegistro}`, {
+                fetch(`https://laperlacentrocomercial.dyndns.org/api/rentas/${idRenta}/abono?monto=${montoRenta}&&idUsuarioQuienRegistra=${idUsuarioRegistro}`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

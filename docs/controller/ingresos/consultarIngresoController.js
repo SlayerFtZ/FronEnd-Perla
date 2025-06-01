@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Obtener datos del localStorage
   const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
+  const id = getDecryptedUserId();
   const rol = localStorage.getItem("rol");
   const estado = localStorage.getItem("estado");
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnBuscar = document.querySelector(".app-search__button");
     const tbody = document.querySelector("tbody");
     const token = localStorage.getItem("token");
-    const urlBase = "http://localhost:8081/api/ingresos-juegos";
+    const urlBase = "https://laperlacentrocomercial.dyndns.org/api/ingresos-juegos";
 
     // Actualizar campos según opción seleccionada
     select.addEventListener("change", () => {
@@ -165,11 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const monto = document.getElementById("montoActualizar").value;
         const fecha = document.getElementById("fechaActualizar").value;
         const idJuego = document.getElementById('juegoSeleccionado').getAttribute('data-id-maquina');
-        const idUsuario = localStorage.getItem("id");
+        const idUsuario = getDecryptedUserId();
         const token = localStorage.getItem("token");
 
         try {
-            const response = await fetch(`http://localhost:8081/api/ingresos-juegos/actualizar/${idIngreso}`, {
+            const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/ingresos-juegos/actualizar/${idIngreso}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
