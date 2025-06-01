@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switch (opcion) {
             case "todos":
-                url = "http://localhost:8081/api/reportes";
+                url = "https://laperlacentrocomercial.dyndns.org/api/reportes";
                 break;
 
             case "estado":
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                url = `http://localhost:8081/api/reportes/estado?estadoReporte=${encodeURIComponent(estado)}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/estado?estadoReporte=${encodeURIComponent(estado)}`;
                 break;
 
             case "tipo":
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setAlert("Por favor ingresa un tipo de reporte para buscar.", "warning");
                     return;
                 }
-                url = `http://localhost:8081/api/reportes/tipo?tipoReporte=${encodeURIComponent(tipo)}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/tipo?tipoReporte=${encodeURIComponent(tipo)}`;
                 break;
 
             case "periodo":
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setAlert("Por favor selecciona ambas fechas.", "warning");
                     return;
                 }
-                url = `http://localhost:8081/api/reportes/periodo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/periodo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
                 break;
 
             default:
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const url = `http://localhost:8081/api/reportes/estado/${idReporteActual}?estadoReporte=${encodeURIComponent(nuevoEstado.toUpperCase())}`;
+            const url = `https://laperlacentrocomercial.dyndns.org/api/reportes/estado/${idReporteActual}?estadoReporte=${encodeURIComponent(nuevoEstado.toUpperCase())}`;
 
             fetch(url, {
                 method: "PUT",
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // Función para recargar la tabla
 function recargarTabla() {
-    fetch('http://localhost:8081/api/reportes', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/reportes', {
         method: "GET",
         headers: headers,
     })
@@ -394,7 +394,7 @@ function recargarTabla() {
             btn.addEventListener('click', () => {
             const filePath = btn.getAttribute('data-path');
             const idReporte = btn.getAttribute('data-id');
-            const idUsuario = localStorage.getItem('id');
+            const idUsuario = getDecryptedUserId();
 
             if (filePath && filePath.startsWith('http')) {
                 const fileName = filePath.split('/').pop();
@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Evento para guardar los cambios
     btnActualizarDatos.addEventListener('click', () => {
         const idReporte = document.getElementById('idReporte').value;
-        const idUsuario = localStorage.getItem('id');
+        const idUsuario = getDecryptedUserId();
         const tipo = document.getElementById('opcionesBuscar').value.trim().toUpperCase();  // Obtener el valor del select en mayúsculas
         const descripcion = document.getElementById('descripcion').value.trim();
 
@@ -484,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Preparar solicitud
         console.log('Payload enviado a la API:', { tipo, descripcion, idUsuario });
 
-        fetch(`http://localhost:8081/api/reportes/actualizarDatos/${idReporte}`, {
+        fetch(`https://laperlacentrocomercial.dyndns.org/api/reportes/actualizarDatos/${idReporte}`, {
             method: "PUT",
             headers: headers,
             body: JSON.stringify({ tipo, descripcion, idUsuario }),
@@ -521,7 +521,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para recargar la tabla
     // Función para recargar la tabla
 function recargarTabla() {
-    fetch('http://localhost:8081/api/reportes', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/reportes', {
         method: "GET",
         headers: headers,
     })

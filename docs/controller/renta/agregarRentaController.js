@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Cargar opciones de locales
-    fetch('http://localhost:8081/api/locales', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/locales', {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function loadUsuarios() {
         if (!token) return;
         try {
-            const response = await fetch('http://localhost:8081/api/usuarios', {
+            const response = await fetch('https://laperlacentrocomercial.dyndns.org/api/usuarios', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     };
         
                     // Hacer el fetch para registrar la renta
-                    const response = await fetch("http://localhost:8081/api/rentas/registrar", {
+                    const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/rentas/registrar", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

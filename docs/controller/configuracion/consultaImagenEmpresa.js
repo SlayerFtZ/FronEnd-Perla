@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem("token"); 
 
-    fetch('http://localhost:8081/api/archivos/empresa', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/archivos/empresa', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`

@@ -22,21 +22,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../css/main-actJuego.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<body class="app sidebar-mini">
+<body class="app sidebar-mini ">
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo">La perla</a>
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
             aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
-
-            </li>
             <!--Notification Menu-->
             <a class="app-nav__item dropdown-toggle position-relative" href="#" data-bs-toggle="dropdown"
                 aria-label="Show notifications">
@@ -287,8 +285,8 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1 class="titulo-de-pagina"><i class="bi bi-controller"></i> Actualizar Juego</h1>
-                <p>"SELECCIONA UN JUEGO PARA ACTUALIZAR"</p>
+                <h1 class="titulo-de-pagina"> <i class="bi bi-file-earmark-text"></i> Pagos extra </h1>
+                <p>"CONSULTA DE PAGOS EXTRA"</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -297,60 +295,141 @@
         </div>
 
 
-        <div class="container mx-auto mt-4">
-            <div class="row">
+        <div class="container mt-4">
+            <br>
+            <h5 class="card-title">INFORMACION DE PAGO EXTRA</h5>
+            <div>
+                <br>
+                <select class="form-control" id="opcionesBuscarPagoExtra" name="opcionesBuscarPagoExtra">
+                    <option value="seleccion">Selecciona una opción</option>
+                    <option value="fechaDePago">FECHA DE PAGO</option>
+                    <option value="nombreUsuario">NOMBRE DE USUARIO</option>
+                    <option value="todos">TODOS</option>
+                </select>
+                <br>
 
+                <!-- Campos de fecha (inicialmente ocultos) -->
+                <div id="fechaDePagoFields" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fechaInicio">Fecha de inicio:</label>
+                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fechaFin">Fecha de fin:</label>
+                            <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                    <div class="position-relative">
+                        <span class="position-absolute search"></span>
+                        <li class="app-search">
+                            <input class="app-search__input" type="search" id="searchLocal" placeholder="Buscar">
+                            <button class="app-search__button"><i class="bi bi-search"></i></button>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>N. Pago</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                            <th>Monto Aportado</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Modal actualizar juego-->
-        <div class="modal fade" id="modalActJuego" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalPagoExtra" tabindex="-1" aria-labelledby="modalPagoExtraLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Agregar Juego</h5>
+                        <h5 class="modal-title" id="modalPagoExtraLabel">Formulario para actualizar pago</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="formActJuego">
-                            <div class="mb-3">
-                                <label for="nombreActJuego" class="form-label">Identificador del Juego</label>
-                                <input type="text" class="form-control" id="nombreActJuego"
-                                    placeholder="Ingresa el ID del juego" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="descripcionActJuego" class="form-label">Descripción del juego</label>
-                                <textarea class="form-control" id="descripcionActJuego"
-                                    placeholder="Ingresa una descripción" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="estadoActUso" class="form-label">Estado de uso</label>
-                                <select class="form-control" id="estadoActUso" required>
-                                    <option value="">Seleccione un status</option>
-                                    <option value="Disponible">Disponible</option>
-                                    <option value="EN_MANTENIMIENTO">En mantenimiento</option>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-warning">Actualizar Juego</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="formPagoExtra" class="needs-validation" novalidate>
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="row mt-2 justify-content-center">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="labels">Usuario</label>
+                                            <select class="form-control" id="opcionesUsuario" required>
+                                                <option value="">Selecciona el usuario</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Selecciona un usuario
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="labels">Fecha</label>
+                                            <input type="date" class="form-control" id="fechaExtra" required>
+                                            <div class="invalid-feedback">
+                                                Ingresa una fecha válida
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="labels">Monto aportado</label>
+                                            <input type="number" class="form-control" id="montoExtra" min="0.01"
+                                                step="0.01" required>
+                                            <div class="invalid-feedback">
+                                                El monto debe ser mayor a 0
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center mt-3">
+                                        <div class="col-md-10 mb-3">
+                                            <label class="labels">Notas</label>
+                                            <input type="text" class="form-control" id="notaextra" required>
+                                            <div class="invalid-feedback">
+                                                Ingresa una descripción
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" form="formPagoExtra" class="btn btn-warning">
+                            Actualizar <i class="bi bi-wrench-adjustable"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            Cancelar <i class="bi bi-x-circle"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="../../controller/juego/actualizarJuegoController.js"></script>
-    <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
-    <script src="../../controller/inicio/menuUsuarioController.js"></script>
-    <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../controller/inicio/menuUsuarioController.js"></script>
+    <script src="../../controller/pagosExtra/consultaPagoExtraController.js"></script>
+    <script src="../../controller/notificaciones/notificacionescontroller.js"></script>
+    <script src="../../controller/bloqueoAccesoAccionesNavegacion.js"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../js/jquery-3.7.0.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/main.js"></script>
+
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -64,7 +64,7 @@ searchBtn.addEventListener("click", function (e) {
     }
 
     if (filtro === "todos") {
-        url = `http://localhost:8081/api/pagos-extras`;
+        url = `https://laperlacentrocomercial.dyndns.org/api/pagos-extras`;
     } else if (filtro === "fechaDePago") {
         const fechaInicio = document.getElementById("fechaInicio").value;
         const fechaFin = document.getElementById("fechaFin").value;
@@ -78,7 +78,7 @@ searchBtn.addEventListener("click", function (e) {
             return;
         }
 
-        url = `http://localhost:8081/api/pagos-extras?fechaInicio=${encodeURIComponent(fechaInicio)}&fechaFin=${encodeURIComponent(fechaFin)}`;
+        url = `https://laperlacentrocomercial.dyndns.org/api/pagos-extras?fechaInicio=${encodeURIComponent(fechaInicio)}&fechaFin=${encodeURIComponent(fechaFin)}`;
     } else if (filtro === "nombreUsuario") {
         if (!textoBusqueda) {
             Swal.fire({
@@ -88,7 +88,7 @@ searchBtn.addEventListener("click", function (e) {
             });
             return;
         }
-        url = `http://localhost:8081/api/pagos-extras?nombre=${encodeURIComponent(textoBusqueda)}`;
+        url = `https://laperlacentrocomercial.dyndns.org/api/pagos-extras?nombre=${encodeURIComponent(textoBusqueda)}`;
     } else {
         Swal.fire({
             icon: 'error',
@@ -172,7 +172,7 @@ searchBtn.addEventListener("click", function (e) {
         if (!token) return;
 
         try {
-            const response = await fetch('http://localhost:8081/api/usuarios', {
+            const response = await fetch('https://laperlacentrocomercial.dyndns.org/api/usuarios', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -212,7 +212,7 @@ searchBtn.addEventListener("click", function (e) {
         const token = localStorage.getItem("token");
     
         try {
-            const response = await fetch(`http://localhost:8081/api/pagos-extras/actualizar/${idPagoExtra}`, {
+            const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/pagos-extras/actualizar/${idPagoExtra}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,

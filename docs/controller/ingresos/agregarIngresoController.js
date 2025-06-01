@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cargarMaquinas() {
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:8081/api/maquinas-juegos", {
+            const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/maquinas-juegos", {
                 headers: {
                     "Authorization": `Bearer ${token}` 
                 }
@@ -109,12 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
             idMaquina: idMaquina,
             fecha: document.getElementById("fechaInicioJuego").value, 
             totalIngresos: parseFloat(document.getElementById("agregarMonto").value), 
-            idUsuario: parseInt(localStorage.getItem("id")) 
+            idUsuario: parseInt(getDecryptedUserId()) 
         };
         
 
         const token = localStorage.getItem("token");
-        fetch("http://localhost:8081/api/ingresos-juegos/registrar", {
+        fetch("https://laperlacentrocomercial.dyndns.org/api/ingresos-juegos/registrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

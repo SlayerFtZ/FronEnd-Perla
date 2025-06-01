@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Enviar la solicitud POST a la API--
         const token = localStorage.getItem("token");
-        fetch("http://localhost:8081/api/maquinas-juegos", {
+        fetch("https://laperlacentrocomercial.dyndns.org/api/maquinas-juegos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

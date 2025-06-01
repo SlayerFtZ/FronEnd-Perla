@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Obtener datos del localStorage
   const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
+  const id = getDecryptedUserId();
   const rol = localStorage.getItem("rol");
   const estado = localStorage.getItem("estado");
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   try {
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const token = localStorage.getItem("token");
 
     if (!id || !token) {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       );
     }
 
-    const response = await fetch(`http://localhost:8081/api/usuarios/${id}`, {
+    const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/usuarios/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       submitBtn.innerText = "Enviando...";
 
       const data = {
-        idUsuario: localStorage.getItem("id"),
+        idUsuario: getDecryptedUserId(),
         descripcion,
         contratista,
         fecha,
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         costo: parseFloat(costoReparacion),
       };
 
-      const response = await fetch("http://localhost:8081/api/reparaciones", {
+      const response = await fetch("https://laperlacentrocomercial.dyndns.org/api/reparaciones", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

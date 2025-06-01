@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     // Verificar si el usuario tiene token, id y rol en el localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
 
     // Si no hay token, id o rol, redirigir al login

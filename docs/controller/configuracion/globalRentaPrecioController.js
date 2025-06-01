@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -58,7 +58,7 @@ document.getElementById('formAgregarGloabalRenta').addEventListener('submit', fu
                 return;
             }
 
-            fetch(`http://localhost:8081/api/locales/precio-mensual?nuevoPrecio=${encodeURIComponent(nuevoPrecio)}`, {
+            fetch(`https://laperlacentrocomercial.dyndns.org/api/locales/precio-mensual?nuevoPrecio=${encodeURIComponent(nuevoPrecio)}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`

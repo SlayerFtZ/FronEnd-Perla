@@ -1,3 +1,17 @@
+function getDecryptedUserId() {
+    const encryptedId = localStorage.getItem("id");
+    const secretKey = "clave-secreta-123"; // ⚠️ No exponer en producción
+    if (!encryptedId) return null;
+
+    try {
+        const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey);
+        const decryptedId = bytes.toString(CryptoJS.enc.Utf8);
+        return decryptedId || null;
+    } catch (error) {
+        console.error("Error al desencriptar ID:", error);
+        return null;
+    }
+}
 let idReporteActual = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -83,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switch (opcion) {
             case "todos":
-                url = "http://localhost:8081/api/reportes";
+                url = "https://laperlacentrocomercial.dyndns.org/api/reportes";
                 break;
 
             case "estado":
@@ -103,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                url = `http://localhost:8081/api/reportes/estado?estadoReporte=${encodeURIComponent(estado)}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/estado?estadoReporte=${encodeURIComponent(estado)}`;
                 break;
 
             case "tipo":
@@ -112,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setAlert("Por favor ingresa un tipo de reporte para buscar.", "warning");
                     return;
                 }
-                url = `http://localhost:8081/api/reportes/tipo?tipoReporte=${encodeURIComponent(tipo)}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/tipo?tipoReporte=${encodeURIComponent(tipo)}`;
                 break;
 
             case "periodo":
@@ -122,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setAlert("Por favor selecciona ambas fechas.", "warning");
                     return;
                 }
-                url = `http://localhost:8081/api/reportes/periodo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+                url = `https://laperlacentrocomercial.dyndns.org/api/reportes/periodo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
                 break;
 
             default:
@@ -191,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnVer) {
         const path = btnVer.getAttribute("data-path");
         idReporteActual = parseInt(btnVer.getAttribute("data-id"));
-        const idUsuario = parseInt(localStorage.getItem("id"));
+        const idUsuario = parseInt(getDecryptedUserId());
         const token = localStorage.getItem("token");
 
         Swal.fire({
@@ -214,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
 
-                fetch("http://localhost:8081/api/reportesVistos", {
+                fetch("https://laperlacentrocomercial.dyndns.org/api/reportesVistos", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -309,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("token");
 
         try {
-            const response = await fetch(`http://localhost:8081/api/reportesVistos/porReporte/${idReporte}`, {
+            const response = await fetch(`https://laperlacentrocomercial.dyndns.org/api/reportesVistos/porReporte/${idReporte}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

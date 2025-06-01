@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -90,8 +90,8 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // Hacemos la solicitud POST
-        const response = await fetch('http://localhost:8081/api/archivos/empresa', {
-            method: 'POST',
+        const response = await fetch('https://laperlacentrocomercial.dyndns.org/api/archivos/empresa/5', {
+            method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}` // Autenticación con token
             },

@@ -1,7 +1,22 @@
+function getDecryptedUserId() {
+    const encryptedId = localStorage.getItem("id");
+    const secretKey = "clave-secreta-123"; // ⚠️ No exponer en producción
+    if (!encryptedId) return null;
+
+    try {
+        const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey);
+        const decryptedId = bytes.toString(CryptoJS.enc.Utf8);
+        return decryptedId || null;
+    } catch (error) {
+        console.error("Error al desencriptar ID:", error);
+        return null;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -17,32 +32,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 // Cargar nombre completo del usuario en el input
-const id = localStorage.getItem('id');
+const id = getDecryptedUserId();
 const token = localStorage.getItem('token');
-fetch(`http://localhost:8081/api/usuarios/${id}`, {
+fetch(`https://laperlacentrocomercial.dyndns.org/api/usuarios/${id}`, {
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + token
     }
 })
-.then(response => {
-    if (!response.ok) {
-        throw new Error('No se pudo obtener la información del usuario');
-    }
-    return response.json();
-})
-.then(data => {
-    const nombreCompleto = `${data.nombre} ${data.apellidoPaterno} ${data.apellidoMaterno}`;
-    document.getElementById('usuarioEgreso').value = nombreCompleto;
-})
-.catch(error => {
-    console.error('Error al cargar el usuario:', error);
-    Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No se pudo cargar el nombre del usuario.'
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('No se pudo obtener la información del usuario');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const nombreCompleto = `${data.nombre} ${data.apellidoPaterno} ${data.apellidoMaterno}`;
+        document.getElementById('usuarioEgreso').value = nombreCompleto;
+    })
+    .catch(error => {
+        console.error('Error al cargar el usuario:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo cargar el nombre del usuario.'
+        });
     });
-});
 
 document.getElementById('success').addEventListener('click', function (e) {
     e.preventDefault();
@@ -63,7 +78,7 @@ document.getElementById('success').addEventListener('click', function (e) {
     }
 
     // Obtener ID del usuario y token del localStorage
-    const idUsuario = localStorage.getItem('id');
+    const idUsuario = getDecryptedUserId();
     const token = localStorage.getItem('token');
 
     if (!idUsuario || !token) {
@@ -84,7 +99,7 @@ document.getElementById('success').addEventListener('click', function (e) {
     };
 
     // Enviar la solicitud POST
-    fetch('http://localhost:8081/api/pagos/registrar', {
+    fetch('https://laperlacentrocomercial.dyndns.org/api/pagos/registrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -92,29 +107,32 @@ document.getElementById('success').addEventListener('click', function (e) {
         },
         body: JSON.stringify(datos)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la solicitud');
-        }
-        return response.json();
-    })
-    .then(data => {
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: '¡Egreso agregado correctamente!'
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '¡Egreso agregado correctamente!'
+            }).then(() => {
+                // Limpiar el formulario si deseas
+                document.getElementById('formAgregarEgresoGeneral').reset();
+                // Recargar la página
+                location.reload();
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al agregar el egreso.'
+            });
         });
-        // Limpiar el formulario si deseas
-        document.getElementById('formAgregarEgresoGeneral').reset();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error al agregar el egreso.'
-        });
-    });
 });
 
 // Botón cancelar con confirmación usando SweetAlert

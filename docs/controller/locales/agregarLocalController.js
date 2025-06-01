@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -34,7 +34,7 @@ document.getElementById('formAgregarLocal').addEventListener('submit', function 
     } else {
         // Obtenemos el token del localStorage
         const token = localStorage.getItem("token");
-        const id = localStorage.getItem("id");
+        const id = getDecryptedUserId();
         
         // Crear el objeto JSON con los datos del formulario
         const data = {
@@ -45,7 +45,7 @@ document.getElementById('formAgregarLocal').addEventListener('submit', function 
         };
 
         // Hacer la solicitud POST al backend
-        fetch('http://localhost:8081/api/locales/registrar', {
+        fetch('https://laperlacentrocomercial.dyndns.org/api/locales/registrar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

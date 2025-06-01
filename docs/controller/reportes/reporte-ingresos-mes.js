@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener datos del localStorage
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const id = getDecryptedUserId();
     const rol = localStorage.getItem("rol");
     const estado = localStorage.getItem("estado");
 
@@ -42,7 +42,7 @@ const token = localStorage.getItem('token');
                 const [anio, mes] = mesCompleto.split('-'); // Separar año y mes
 
 
-                fetch(`http://localhost:8081/api/reportes/generar/reporteIngresos/mes?mes=${mes}&anio=${anio}`, {
+                fetch(`https://laperlacentrocomercial.dyndns.org/api/reportes/generar/reporteIngresos/mes?mes=${mes}&anio=${anio}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const token = localStorage.getItem('token');
                     return;
                 }
 
-                const idUsuario = localStorage.getItem('id');
+                const idUsuario = getDecryptedUserId();
 
                 const datos = {
                     idUsuario: idUsuario,
@@ -111,7 +111,7 @@ const token = localStorage.getItem('token');
                 formData.append('datos', JSON.stringify(datos));
                 formData.append('pdf', pdfBlob, 'reporte.pdf');
 
-                fetch('http://localhost:8081/api/reportes/guardar', {
+                fetch('https://laperlacentrocomercial.dyndns.org/api/reportes/guardar', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

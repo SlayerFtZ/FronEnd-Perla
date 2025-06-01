@@ -11,7 +11,7 @@
         return;
     }
 
-    fetch("http://localhost:8081/api/notifications", {
+    fetch("https://laperlacentrocomercial.dyndns.org/api/notifications", {
         headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
@@ -59,7 +59,7 @@
 
         // Marcar como leída al hacer clic
         li.querySelector("a").addEventListener("click", () => {
-            fetch(`http://localhost:8081/api/notifications/${notif.id}/mark-read`, {
+            fetch(`https://laperlacentrocomercial.dyndns.org/api/notifications/${notif.id}/mark-read`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
