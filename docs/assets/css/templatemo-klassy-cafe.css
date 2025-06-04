@@ -1039,15 +1039,15 @@ menu
 .card {
   margin: 0 auto;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 450px;
   overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
 }
 .card-Contacto {
-  background-image: url(../../images/logo-full.jpeg);
-  width: 80%; /* La imagen será el 80% del ancho del contenedor */
+  background-image: url(../../images/logo-fullLargo.jpg);
+  width: 100%; /* La imagen será el 80% del ancho del contenedor */
   height: auto; /* Mantiene la proporción original */
   object-fit: contain; /* Para asegurar que la imagen no se distorsione */
 }
@@ -2182,31 +2182,117 @@ responsive
 /* boton de redes */
 
 /* Contenedor para centralizar si se necesita */
-.btn-redes-container {
-    display: flex;
-    
-    align-items: start;
-}
-
 .btn-redes {
-    display: flex;
-    align-items: start;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* espacio entre texto e íconos */
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-
-.btn-text {
-    font-size: 16px;
-    font-weight: 500;
+.btn-redes .btn-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .social-icons {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-right: 30px;
+  align-items: center;
 }
 
-.social-icons a {
-    color: rgb(255, 255, 255);
-    font-size: 20px;
+.social-icons i {
+  font-size: 30px;
+  color: #ffffff;
+  margin-left: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
+.social-icons i:hover {
+  transform: scale(1.5);
+  color: #007bff; /* cambia de color al hacer hover */
+}
+
+/* ----- Estilo base de los botones Swiper ----- */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  background-color: rgba(255, 255, 255, 0.288) !important;
+  color: #fb5849 !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+}
+
+/* Posiciones en pantallas grandes */
+.swiper-button-prev {
+  left: 30px;
+}
+
+.swiper-button-next {
+  right: 30px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 24px !important;
+  color: inherit !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #fb5849 !important;
+  color: #fff !important;
+}
+
+/* ----- Contenedor del carrusel ----- */
+.menu-item-carousel.swiper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative; /* por si necesitas posicionar elementos hijos */
+}
+
+/* ----- RESPONSIVO ----- */
+@media (max-width: 850px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 18px;
+  }
+
+  .swiper-button-prev {
+  left: 30px !important;
+}
+
+.swiper-button-next {
+  right: 30px !important;
+}
+}
+
+@media (max-width: 768px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}
