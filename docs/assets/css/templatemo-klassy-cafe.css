@@ -1401,6 +1401,13 @@ background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 70A.jpg);
   object-fit: contain; /* Para asegurar que la imagen no se distorsione */
 }
 
+.card71{
+  background-image: url(../../assets/sourseLaperla/LOCALES/LOCAl\ 16\ BOUTIQUE\ AL-BRES.jpg);
+  width: 100%; /* La imagen será el 100% del ancho del contenedor */
+  height: auto; /* Mantiene la proporción original */
+  object-fit: contain; /* Para asegurar que la imagen no se distorsione */
+}
+
 
 .modal {
   display: none;
@@ -2234,7 +2241,7 @@ responsive
 }
 
 .btn-redes .btn-text {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #ffffff;
 }
