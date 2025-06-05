@@ -1187,8 +1187,11 @@ menu
 .card23 {
   background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 26\ _HELADOS_.jpg);
   width: 100%; /* La imagen será el 100% del ancho del contenedor */
-  height: auto; /* Mantiene la proporción original */
-  object-fit: contain; /* Para asegurar que la imagen no se distorsione */
+  height: 100%; /* Ocupa todo el alto del contenedor */
+  background-size: cover; /* Ajusta la imagen para cubrir el componente */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+  object-fit: cover; /* Para asegurar que la imagen cubra el área sin distorsión */
 }
 .card24 {
   background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 28\ _COLIBRI_.jpg);
@@ -1309,7 +1312,8 @@ menu
   width: 100%; /* La imagen será el 100% del ancho del contenedor */
   height: auto; /* Mantiene la proporción original */
   object-fit: contain; /* Para asegurar que la imagen no se distorsione */
-}.card44 {
+}
+.card44 {
   background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 46-71\ ROPA\ CASUAÑ\ CABALLERO.jpg);
   width: 100%; /* La imagen será el 100% del ancho del contenedor */
   height: auto; /* Mantiene la proporción original */
@@ -1351,12 +1355,7 @@ menu
   height: auto; /* Mantiene la proporción original */
   object-fit: contain; /* Para asegurar que la imagen no se distorsione */
 }
-.card51 {
-  background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 62-63\ NOVEDADES\ HOLLYWOOD.jpg);
-  width: 100%; /* La imagen será el 100% del ancho del contenedor */
-  height: auto; /* Mantiene la proporción original */
-  object-fit: contain; /* Para asegurar que la imagen no se distorsione */
-}
+
 .card52 {
   background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 65-65A\ _JOYERIA\ SALGADO_.jpg);
   width: 100%; /* La imagen será el 100% del ancho del contenedor */
@@ -1386,6 +1385,48 @@ menu
   width: 100%; /* La imagen será el 100% del ancho del contenedor */
   height: auto; /* Mantiene la proporción original */
   object-fit: contain; /* Para asegurar que la imagen no se distorsione */
+}
+
+.card69{
+background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 69\ cafeteria_maddona.gif);
+  width: 100%; /* La imagen será el 100% del ancho del contenedor */
+  height: auto; /* Mantiene la proporción original */
+  object-fit: contain; /* Para asegurar que la imagen no se distorsione */
+}
+
+.card70{
+background-image: url(../../assets/sourseLaperla/LOCALES/LOCAL\ 70A.jpg);
+  width: 100%; /* La imagen será el 100% del ancho del contenedor */
+  height: auto; /* Mantiene la proporción original */
+  object-fit: contain; /* Para asegurar que la imagen no se distorsione */
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal video {
+  display: block;
+  margin: 50px auto;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* ////////////////// */
@@ -1434,20 +1475,21 @@ menu
 
 .card:hover .info,
 .card:hover .info:before {
-  transform: translateY(170px) translateZ(0);
+  transform: translateY(200px) translateZ(0);
 }
 
 .title {
   margin: 0;
-  padding: 30px 30px 20px 30px;
+  padding: 30px 10px 10px 30px;
   font-size: 15px;
   font-weight: 700;
   color: #fff;
 }
 
 .description {
-  padding: 0px 30px;
+  padding: 0px 10px;
   color: #fff;
+  
 }
 
 #menu .price h6 {
@@ -2296,3 +2338,4 @@ responsive
     display: none !important;
   }
 }
+
