@@ -138,6 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const agregarUsuarioAcceso = document.getElementById("agregarUsuarioAcceso")
     const agregarPerfilSaludAcceso = document.getElementById("agregarPerfilSaludAcceso")
     const agregarEmergenciaAcceso = document.getElementById("agregarEmergenciaAcceso")
+
+    const consultarUsuariosAcceso = document.getElementById("consultarUsuariosAcceso")
+    const navegacionReparaciones = document.getElementById("navegacionReparaciones")
+    const navegacionReciboReparacion = document.getElementById("navegacionReciboReparacion")
     
 
     if (!rolesPermitidos.includes(userRole)) {
@@ -159,7 +163,9 @@ document.addEventListener("DOMContentLoaded", function () {
         navegacionReportesRentasMes?.style && (navegacionReportesRentasMes.style.display = "none");
         navegacionReportesIgresosJuegoPeriodo?.style && (navegacionReportesIgresosJuegoPeriodo.style.display = "none");
 
-
+        consultarUsuariosAcceso?.style && (consultarUsuariosAcceso.style.display = "none");
+        navegacionReparaciones?.style && (navegacionReparaciones.style.display = "none");
+        navegacionReciboReparacion?.style && (navegacionReciboReparacion.style.display = "none");
 
         agregarUsuarioAcceso?.style && (agregarUsuarioAcceso.style.display = "none");
         agregarPerfilSaludAcceso?.style && (agregarPerfilSaludAcceso.style.display = "none");
