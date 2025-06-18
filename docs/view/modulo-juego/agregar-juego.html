@@ -69,7 +69,7 @@
     </ul>
   </header>
 
-   <!-- Sidebar menu-->
+  <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
     <div class="app-sidebar__user">
@@ -100,9 +100,9 @@
               Agregar
               Usuarios</a></li>
 
-          <li><a class="treeview-item" href="../modulo-usuario/consultar-usuario.html" rel="noopener"><i
-                class="bi bi-search"></i>. Buscar
-              usuario</a></li>
+          <li id="consultarUsuariosAcceso"><a class="treeview-item" href="../modulo-usuario/consultar-usuario.html"
+              rel="noopener"><i class="bi bi-search"></i>. Buscar
+              usuario</a>
 
           <li id="agregarPerfilSaludAcceso"><a class="treeview-item"
               href="../modulo-usuario/agregar-perfil-salud.html"><i class="bi bi-person-heart"></i>.
@@ -191,7 +191,7 @@
       </li>
 
       <!-- Navegacion y menu para Reparaciones -->
-      <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+      <li class="treeview" id="navegacionReparaciones"><a class="app-menu__item" href="#" data-toggle="treeview"><i
             class="bi bi-house-gear-fill"></i><span class="app-menu__label">. Reparaciones</span><i
             class="treeview-indicator bi bi-chevron-right"></i></a>
         <ul class="treeview-menu">
@@ -210,7 +210,8 @@
             class="bi bi-file-earmark-pdf-fill"></i><span class="app-menu__label">. Reportes</span><i
             class="treeview-indicator bi bi-chevron-right"></i></a>
         <ul class="treeview-menu">
-          <li><a class="treeview-item" id="navegacionReporteConsultarAdmin" href="../modulo-reportes/consultar-reporte.html">
+          <li><a class="treeview-item" id="navegacionReporteConsultarAdmin"
+              href="../modulo-reportes/consultar-reporte.html">
               <i class="bi bi-stripe"></i>. Consultar Reporte
             </a></li>
 
@@ -218,36 +219,45 @@
               <i class="bi bi-stripe"></i>. Consultar Reporte Para Usuarios
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReporteJuegosAnio" href="../modulo-reportes/agregar-reporte-juegos-anio.html">
+          <li><a class="treeview-item" id="navegacionReporteJuegosAnio"
+              href="../modulo-reportes/agregar-reporte-juegos-anio.html">
               <i class="bi bi-stripe"></i>. Reporte Anual Juegos
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReporteIngresosMes" href="../modulo-reportes/agregar-reporte-ingresos-mes.html">
+          <li><a class="treeview-item" id="navegacionReporteIngresosMes"
+              href="../modulo-reportes/agregar-reporte-ingresos-mes.html">
               <i class="bi bi-stripe"></i>. Reporte Mensual Ingresos
 
-          <li><a class="treeview-item" id="navegacionReporteIngresosAnual" href="../modulo-reportes/agregar-reportes-ingresos-anio.html">
+          <li><a class="treeview-item" id="navegacionReporteIngresosAnual"
+              href="../modulo-reportes/agregar-reportes-ingresos-anio.html">
               <i class="bi bi-stripe"></i>. Reporte Anual Ingresos
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReporteEgresosMes" href="../modulo-reportes/agregar-reporte-egresos-mes.html">
+          <li><a class="treeview-item" id="navegacionReporteEgresosMes"
+              href="../modulo-reportes/agregar-reporte-egresos-mes.html">
               <i class="bi bi-stripe"></i>. Reporte Mensual Egresos
 
-          <li><a class="treeview-item" id="navegacionReporteEgresosAnio" href="../modulo-reportes/agregar-reporte-egresos-anio.html">
+          <li><a class="treeview-item" id="navegacionReporteEgresosAnio"
+              href="../modulo-reportes/agregar-reporte-egresos-anio.html">
               <i class="bi bi-stripe"></i>. Reporte Anual Egresos
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReporteRentasAnio" href="../modulo-reportes/agregar-reporte-rentas-anio.html">
+          <li><a class="treeview-item" id="navegacionReporteRentasAnio"
+              href="../modulo-reportes/agregar-reporte-rentas-anio.html">
               <i class="bi bi-stripe"></i>. Reporte Anual Rentas
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReportesRentasMes" href="../modulo-reportes/agregar-reporte-rentas-mes.html">
+          <li><a class="treeview-item" id="navegacionReportesRentasMes"
+              href="../modulo-reportes/agregar-reporte-rentas-mes.html">
               <i class="bi bi-stripe"></i>. Reporte Mensual Rentas
 
-          <li><a class="treeview-item" href="../modulo-reportes/agregar-recibo-reparacion.html">
+          <li><a class="treeview-item" id="navegacionReciboReparacion"
+              href="../modulo-reportes/agregar-recibo-reparacion.html">
               <i class="bi bi-stripe"></i>. Generar Recibo Repacion
             </a></li>
 
-          <li><a class="treeview-item" id="navegacionReportesIgresosJuegoPeriodo" href="../modulo-reportes/agregar-ingresos-juegos-periodo.html">
+          <li><a class="treeview-item" id="navegacionReportesIgresosJuegoPeriodo"
+              href="../modulo-reportes/agregar-ingresos-juegos-periodo.html">
               <i class="bi bi-stripe"></i>. Generar Ingreso Juegos
             </a></li>
         </ul>
@@ -255,7 +265,7 @@
 
 
       <!-- Navegacion y menu para Pagos extras -->
-      <li class="treeview" id="navegacionPagosExtra">  <a class="app-menu__item" href="#" data-toggle="treeview"><i
+      <li class="treeview" id="navegacionPagosExtra"> <a class="app-menu__item" href="#" data-toggle="treeview"><i
             class="bi bi-cash-coin"></i><span class="app-menu__label">. Pagos extras</span><i
             class="treeview-indicator bi bi-chevron-right"></i></a>
         <ul class="treeview-menu">

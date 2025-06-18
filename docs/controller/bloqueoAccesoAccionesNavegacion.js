@@ -82,7 +82,14 @@ document.addEventListener("DOMContentLoaded", function () {
         "/view/modulo-reportes/agregar-reporte-ingresos-mes.html",
         "/view/modulo-reportes/agregar-reporte-rentas-anio.html",
         "/view/modulo-reportes/agregar-reporte-rentas-mes.html",
-        "/view/modulo-reportes/agregar-reportes-ingresos-anio.html"
+        "/view/modulo-reportes/agregar-reportes-ingresos-anio.html",
+        "/view/modulo-reportes/agregar-recibo-reparacion.html",
+
+        "/view/modulo-usuario/consultar-usuario.html",
+        "/view/modulo-usuario/perfilUsuario-consultado.html",
+        "/view/modulo-reparaciones/agregar-reparacion.html",
+        "/view/modulo-reparaciones/consultar-reparacion.html"
+
     ];
 
     if (!token || !id || !encryptedRole || !estado) {
@@ -131,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const agregarUsuarioAcceso = document.getElementById("agregarUsuarioAcceso")
     const agregarPerfilSaludAcceso = document.getElementById("agregarPerfilSaludAcceso")
     const agregarEmergenciaAcceso = document.getElementById("agregarEmergenciaAcceso")
+    
 
     if (!rolesPermitidos.includes(userRole)) {
         navegacionJuegos?.style && (navegacionJuegos.style.display = "none");
@@ -150,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
         navegacionReporteRentasAnio?.style && (navegacionReporteRentasAnio.style.display = "none");
         navegacionReportesRentasMes?.style && (navegacionReportesRentasMes.style.display = "none");
         navegacionReportesIgresosJuegoPeriodo?.style && (navegacionReportesIgresosJuegoPeriodo.style.display = "none");
+
+
 
         agregarUsuarioAcceso?.style && (agregarUsuarioAcceso.style.display = "none");
         agregarPerfilSaludAcceso?.style && (agregarPerfilSaludAcceso.style.display = "none");
